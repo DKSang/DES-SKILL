@@ -7,100 +7,94 @@ description: Use when starting, resuming, auditing, or coordinating any data eng
 
 ## When To Use
 
-Use this skill whenever a user starts, resumes, audits, or coordinates a data engineering project with DES-SKILL installed.
-
-Use it before selecting any phase-specific DES-SKILL skill.
+Use this skill whenever a user starts, resumes, audits, or coordinates a data engineering project with DES-SKILL installed. Use it before selecting any phase-specific DES-SKILL skill.
 
 ## Purpose
 
-Act as the DES-SKILL router and workflow coordinator. Use this skill before selecting any other DES-SKILL skill.
+Act as the DES-SKILL router and workflow coordinator to ensure disciplined agent execution, scan for upstream dependencies, and guide the user through the project phases.
 
-## Core Rule
+## Conventions
 
-Do not jump directly to coding, pipeline implementation, table design, or tool selection until the required upstream artifacts exist or the minimum missing input is collected.
+- Bare paths (e.g. `steps/step-01-route.md`) resolve from the skill root.
+- `{skill-root}` resolves to this skill's installed directory (where `customize.toml` lives).
+- `{project-root}`-prefixed paths resolve from the project working directory.
+- `{skill-name}` resolves to the skill directory's basename.
 
-## Operating Loop
+## WORKFLOW ARCHITECTURE
 
-1. Read `.agents/des-skill/DES-WORKFLOW.md`.
-2. Read `.agents/des-skill/ARTIFACTS.md`.
-3. Read `.agents/des-skill/sprint-status/des-workflow-status.md` if it exists.
-4. Detect the current project phase from the user request and existing artifacts.
-5. Check whether required upstream artifacts exist and are good enough.
-6. If an upstream artifact is missing, produce that artifact first using the matching skill.
-7. If the current phase is ready, activate the matching DES-SKILL skill.
-8. Write the required artifact to the canonical path in `.agents/des-skill/ARTIFACTS.md`.
-9. Update `.agents/des-skill/sprint-status/des-workflow-status.md`.
-10. Summarize what changed, where the artifact was written, and which skill should run next.
+This uses **step-file architecture** for disciplined execution:
 
-## Phase Routing
+- **Micro-file Design**: Each step is self-contained and followed exactly.
+- **Just-In-Time Loading**: Only load the current step file.
+- **Sequential Enforcement**: Complete steps in order, no skipping.
+- **State Tracking**: Persist progress via spec frontmatter and status files.
+- **Append-Only Building**: Build artifacts incrementally.
 
-| Situation | Route To |
-| --- | --- |
-| Project idea is vague, tool-first, or missing business context | `de-business-discovery` |
-| Business context exists but decision questions are unclear | `de-business-questions` |
-| Questions exist but KPIs, SLA, grain, or metric ownership are unclear | `de-requirements-and-kpis` |
-| Data product scope or consumers are unclear | `de-data-product-definition` |
-| Data sources are unknown, risky, or not assessed | `de-data-source-assessment` |
-| Business concepts, entities, or relationships are unclear | `de-domain-modeling` |
-| Platform/tooling/layer architecture is undecided | `de-architecture-design` |
-| Source ingestion strategy is unclear | `de-ingestion-design` |
-| Raw/replayable dataset design is missing | `de-bronze-layer-design` |
-| Cleaned/conformed dataset design is missing | `de-silver-layer-design` |
-| Business-ready facts, dimensions, marts, or metrics are missing | `de-gold-layer-design` |
-| Producer/consumer guarantees are missing | `de-data-contracts` |
-| Transformation logic is not specified before coding | `de-transformation-design` |
-| Data quality rules, severity, or actions are unclear | `de-data-quality` |
-| Scheduling, dependencies, monitoring, alerts, or runbooks are missing | `de-orchestration-and-observability` |
-| Semantic model design is missing | `de-semantic-model-design` |
-| BI/API/AI/export serving design is missing | `de-serving-layer-design` |
-| Lineage, metadata, or catalog expectations are missing | `de-lineage-and-metadata` |
-| Ownership, security, retention, or governance is unclear | `de-governance-and-security` |
-| Cost or performance needs review | `de-cost-and-performance-optimization` |
-| Tests, CI/CD, release, rollback, or promotion are missing | `de-cicd-and-testing` |
-| Project needs go/no-go review | `de-project-evaluation` |
+### Step Processing Rules
 
-## Artifact Gate
+1. **READ COMPLETELY**: Read the entire step file before acting.
+2. **FOLLOW SEQUENCE**: Execute sections in order.
+3. **WAIT FOR INPUT**: Halt at checkpoints and wait for human.
+4. **LOAD NEXT**: When directed, read fully and follow the next step file.
 
-Before running a skill, check whether the expected upstream artifacts exist in `.agents/des-skill/output/`. If not, stop and create the earliest missing artifact.
+### Critical Rules (NO EXCEPTIONS)
 
-Use `.agents/des-skill/ARTIFACTS.md` as the source of truth for canonical output paths and template paths. If an older skill document mentions a legacy artifact filename, prefer the canonical filename in `ARTIFACTS.md`.
+- 🛑 **NEVER** load multiple step files simultaneously.
+- 📖 **ALWAYS** read entire step file before execution.
+- 🚫 **NEVER** skip steps or optimize the sequence.
+- 🎯 **ALWAYS** follow the exact instructions in the step file.
+- ⏸️ **ALWAYS** halt at menus and wait for user input.
 
-Minimum recommended order:
+## On Activation
 
-```text
-01-business-discovery.md
-02-business-questions.md
-03-requirements-and-kpis.md
-04-data-product-definition.md
-05-data-source-assessment.md
-06-domain-modeling.md
-07-architecture-design.md
-08-ingestion-design.md
-09-bronze-layer-design.md
-10-silver-layer-design.md
-11-gold-layer-design.md
-12-data-contracts.md
-13-transformation-design.md
-14-data-quality.md
-15-orchestration-and-observability.md
-16-semantic-model-design.md
-17-serving-layer-design.md
-18-lineage-and-metadata.md
-19-governance-and-security.md
-20-cost-and-performance-optimization.md
-21-cicd-and-testing.md
-22-project-evaluation.md
-```
+### Step 1: Resolve the Workflow Block
 
-## Status File
+Run: `python3 {project-root}/_des/scripts/resolve_customization.py --skill {skill-root} --key workflow`
 
-Use this file to keep agent sessions aligned:
+**If the script fails**, resolve the `workflow` block yourself by reading these three files in base → team → user order and applying the same structural merge rules as the resolver:
 
-`.agents/des-skill/sprint-status/des-workflow-status.md`
+1. `{skill-root}/customize.toml` — defaults
+2. `{project-root}/_des/custom/{skill-name}.toml` — team overrides
+3. `{project-root}/_des/custom/{skill-name}.user.toml` — personal overrides
 
-Use this template when creating the status file:
+Any missing file is skipped. Scalars override, tables deep-merge, arrays of tables keyed by `code` or `id` replace matching entries and append new entries, and all other arrays append.
 
-`.agents/des-skill/templates/workflow_status_template.md`
+### Step 2: Execute Prepend Steps
+
+Execute each entry in `{workflow.activation_steps_prepend}` in order before proceeding.
+
+### Step 3: Load Persistent Facts
+
+Treat every entry in `{workflow.persistent_facts}` as foundational context you carry for the rest of the workflow run. Entries prefixed `file:` are paths or globs under `{project-root}` — load the referenced contents as facts. All other entries are facts verbatim.
+
+### Step 4: Load Config
+
+Load config from `{project-root}/_des/des/config.yaml` or `{project-root}/_des/config.toml` and resolve:
+- `project_name`, `planning_artifacts`, `implementation_artifacts`, `user_name`
+- `communication_language`, `document_output_language`
+- If DES config is missing, fall back to:
+  - `user_name` = "User"
+  - `project_name` = "DES-Project"
+  - `communication_language` = "Vietnamese"
+  - `document_output_language` = "Vietnamese"
+
+- CLAUDE.md / memory files (load if exist).
+- Speak output in your agent style with the configured `communication_language`.
+- Generate all documents in `document_output_language`.
+
+### Step 5: Greet the User
+
+Greet `user_name`, speaking in `communication_language`.
+
+### Step 6: Execute Append Steps
+
+Execute each entry in `{workflow.activation_steps_append}` in order.
+
+Activation is complete. Begin the workflow by reading and executing the routing step.
+
+## Next Step
+
+Read fully and follow: `./steps/step-01-route.md`
 
 ## Quality Checklist
 

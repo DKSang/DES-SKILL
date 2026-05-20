@@ -8,10 +8,12 @@ function usage() {
   return [
     "Usage:",
     "  des-skill install [--dir <path>] [--scope project|user] [--force]",
+    "  des-skill init [--dir <path>] [--force]",
     "",
     "Defaults:",
     "  --scope project installs to .agents/skills",
-    "  --scope user installs to ~/.agents/skills"
+    "  --scope user installs to ~/.agents/skills",
+    "  init scaffolds a full DES-method workspace (_des, _des-output, .agents/skills, docs)"
   ].join("\n");
 }
 
@@ -185,11 +187,88 @@ function install(args) {
   };
 }
 
+function projectRootFor(args, targetDir) {
+  if (!args.dir) {
+    return process.cwd();
+  }
+
+  const skillsDir = path.resolve(targetDir);
+  const parent = path.dirname(skillsDir);
+
+  if (path.basename(skillsDir) === "skills" && path.basename(parent) === ".agents") {
+    return path.dirname(parent);
+  }
+
+  return path.dirname(skillsDir);
+}
+
+function initializeWorkspace(args) {
+  const root = packageRoot();
+  const targetDir = path.resolve(args.dir || defaultInstallDir(args.scope));
+  const projectRoot = projectRootFor(args, targetDir);
+
+  // 1. Scaffold _des
+  const desDir = path.join(projectRoot, "_des");
+  fs.mkdirSync(desDir, { recursive: true });
+
+  const configPath = path.join(desDir, "config.toml");
+  if (!fs.existsSync(configPath) || args.force) {
+    const configContent = [
+      "# DES-method project configuration",
+      "",
+      "[project]",
+      'name = "DES-Project"',
+      'communication_language = "Vietnamese"',
+      'document_output_language = "Vietnamese"',
+      "",
+      "[paths]",
+      'planning_artifacts = "_des-output/planning-artifacts"',
+      'implementation_artifacts = "_des-output/implementation-artifacts"'
+    ].join("\n") + "\n";
+    fs.writeFileSync(configPath, configContent);
+  }
+
+  // 2. Scaffold _des-output
+  const planningDir = path.join(projectRoot, "_des-output", "planning-artifacts");
+  const implementationDir = path.join(projectRoot, "_des-output", "implementation-artifacts");
+  fs.mkdirSync(planningDir, { recursive: true });
+  fs.mkdirSync(implementationDir, { recursive: true });
+
+  // 3. Scaffold docs
+  const docsDir = path.join(projectRoot, "docs");
+  fs.mkdirSync(docsDir, { recursive: true });
+
+  // 4. Install skills
+  const installResult = install(args);
+
+  return {
+    ...installResult,
+    projectRoot,
+    configPath,
+    planningDir,
+    implementationDir,
+    docsDir
+  };
+}
+
 function main(argv) {
   const args = parseArgs(argv);
 
   if (!args.command || args.command === "help") {
     console.log(usage());
+    return 0;
+  }
+
+  if (args.command === "init") {
+    const result = initializeWorkspace(args);
+    console.log(`Scaffolded BMad project at: ${result.projectRoot}`);
+    console.log(`Created default config: ${result.configPath}`);
+    console.log(`Created planning folder: ${result.planningDir}`);
+    console.log(`Created implementation folder: ${result.implementationDir}`);
+    console.log(`Created docs folder: ${result.docsDir}`);
+    console.log(`Installed ${result.skills.length} DES-SKILL skills to: ${result.targetDir}`);
+    console.log(`Installed DES-SKILL support workspace to: ${result.workspaceDir}`);
+    console.log(`Workflow status file ready at: ${result.statusPath}`);
     return 0;
   }
 
@@ -223,5 +302,7 @@ module.exports = {
   install,
   installSupportWorkspace,
   parseArgs,
-  workspaceDirFor
+  workspaceDirFor,
+  projectRootFor,
+  initializeWorkspace
 };

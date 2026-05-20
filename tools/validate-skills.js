@@ -35,11 +35,11 @@ function listSkillNames() {
 }
 
 function parseFrontmatter(content) {
-  const match = content.match(/^---\n([\s\S]*?)\n---/);
+  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   if (!match) return null;
 
   const fields = {};
-  for (const line of match[1].split("\n")) {
+  for (const line of match[1].split(/\r?\n/)) {
     const item = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
     if (item) fields[item[1]] = item[2].trim();
   }
@@ -80,6 +80,38 @@ function validateSkill(skillName) {
 
   if (!content.includes("## Handoff To The Next Skill") && skillName !== "using-des-skill") {
     fail(`${skillName} is missing handoff guidance`);
+  }
+
+  // Refactored skill checks
+  const customizePath = path.join(skillsDir, skillName, "customize.toml");
+  const stepsDir = path.join(skillsDir, skillName, "steps");
+
+  const hasCustomize = fs.existsSync(customizePath);
+  const hasSteps = fs.existsSync(stepsDir);
+
+  if (hasCustomize || hasSteps) {
+    if (!hasCustomize) {
+      fail(`${skillName} is a refactored skill but is missing customize.toml`);
+    } else {
+      try {
+        const tomlContent = read(customizePath);
+        if (!tomlContent.includes("[workflow]")) {
+          fail(`${skillName} customize.toml is missing [workflow] section`);
+        }
+      } catch (err) {
+        fail(`Failed to read customize.toml for ${skillName}: ${err.message}`);
+      }
+    }
+
+    if (!hasSteps) {
+      fail(`${skillName} is a refactored skill but is missing steps/ directory`);
+    } else {
+      const stepFiles = fs.readdirSync(stepsDir)
+        .filter((file) => file.startsWith("step-") && file.endsWith(".md"));
+      if (stepFiles.length === 0) {
+        fail(`${skillName} steps/ directory must contain at least one step-*.md file`);
+      }
+    }
   }
 }
 

@@ -33,16 +33,25 @@ const outputSpecs = [
 
 test("phase skills declare concrete output files", () => {
   for (const [skill, outputFile, template] of outputSpecs) {
-    const skillPath = path.join(repoRoot, "skills", skill, "SKILL.md");
+    const skillDir = path.join(repoRoot, "skills", skill);
+    const skillPath = path.join(skillDir, "SKILL.md");
     const content = fs.readFileSync(skillPath, "utf8");
 
-    assert.match(content, /## Output File/, `${skill} is missing Output File section`);
-    assert.match(content, new RegExp(`\\.agents/des-skill/output/${outputFile}`), `${skill} has wrong output file`);
+    const customizePath = path.join(skillDir, "customize.toml");
+    const isRefactored = fs.existsSync(customizePath);
 
-    if (template) {
-      assert.match(content, new RegExp(`\\.agents/des-skill/templates/${template}`), `${skill} has wrong template`);
+    if (isRefactored) {
+      assert.match(content, /## Output File/, `${skill} is missing Output File section`);
+      assert.match(content, /output_file/, `${skill} should reference output_file in Output File section`);
     } else {
-      assert.match(content, /Use the example output format below/, `${skill} should point to its example format`);
+      assert.match(content, /## Output File/, `${skill} is missing Output File section`);
+      assert.match(content, new RegExp(`\\.agents/des-skill/output/${outputFile}`), `${skill} has wrong output file`);
+
+      if (template) {
+        assert.match(content, new RegExp(`\\.agents/des-skill/templates/${template}`), `${skill} has wrong template`);
+      } else {
+        assert.match(content, /Use the example output format below/, `${skill} should point to its example format`);
+      }
     }
   }
 });

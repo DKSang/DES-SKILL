@@ -1,0 +1,23 @@
+# Workflow customization surface for using-des-skill.
+# Overrides merge per BMad structural rules.
+
+[workflow]
+# Steps to run before the standard activation
+activation_steps_prepend = []
+
+# Steps to run after greet but before the workflow begins
+activation_steps_append = []
+
+# Persistent facts the workflow keeps in mind for the whole run
+persistent_facts = [
+  "file:{project-root}/**/project-context.md",
+]
+
+# Scalar: executed when the workflow reaches its final step
+on_complete = ""
+
+[config]
+# Default status file path
+status_file = "{project-root}/_des-output/implementation-artifacts/des-workflow-status.md"
+workflow_map = "{project-root}/_des-output/implementation-artifacts/DES-WORKFLOW.md"
+artifacts_map = "{project-root}/_des-output/implementation-artifacts/ARTIFACTS.md"
