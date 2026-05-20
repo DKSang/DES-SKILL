@@ -1,6 +1,6 @@
 {
   "name": "@dksang/des-skill",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Installer for DES-SKILL Agent Skills.",
   "license": "MIT",
   "type": "commonjs",
