@@ -33,7 +33,7 @@ The npm installer creates:
 ```text
 .agents/
 ├── skills/
-│   ├── des-skill/
+│   ├── using-des-skill/
 │   ├── de-business-discovery/
 │   ├── de-ingestion-design/
 │   └── ...
@@ -53,7 +53,7 @@ The npm installer creates:
 Use GitHub CLI when you want to install one skill at a time:
 
 ```bash
-gh skill install DKSang/DES-SKILL de-business-discovery
+gh skill install DKSang/DES-SKILL using-des-skill
 ```
 
 If you run this without a skill name, GitHub CLI may prompt you to select one:
@@ -105,26 +105,52 @@ Project idea:
 [describe your project here]
 
 Please follow the DES-SKILL workflow:
-1. Start from DES-WORKFLOW.md.
-2. Detect the current project phase.
-3. Use the matching skill from the installed skills.
-4. Do not jump to coding before business context, requirements, data sources, architecture, and quality expectations are clear.
-5. Produce the required artifact using the templates/ directory.
-6. Recommend the next skill when the current artifact is complete.
+1. Start with using-des-skill.
+2. Read DES-WORKFLOW.md and des-workflow-status.md if it exists.
+3. Detect the current project phase.
+4. Check whether required upstream artifacts exist.
+5. Use the matching skill from the installed skills.
+6. Do not jump to coding before business context, requirements, data sources, architecture, and quality expectations are clear.
+7. Produce the required artifact using the templates/ directory.
+8. Update .agents/des-skill/sprint-status/des-workflow-status.md.
+9. Recommend the next skill when the current artifact is complete.
 ```
 
 Short version:
 
 ```text
-Install DES-SKILL, then start with DES-WORKFLOW.md.
+Install DES-SKILL, then start with using-des-skill.
 Act as a Data Engineering delivery agent.
-Detect the current phase, activate the matching skill, produce the required artifact from templates, and hand off to the next skill.
+Detect the current phase, check missing upstream artifacts, activate the matching skill, produce the required artifact from templates, update workflow status, and hand off to the next skill.
 Do not jump to coding until business context, KPIs, data sources, architecture, and quality expectations are clear.
 ```
 
 ## Workflow Entrypoint
 
-Use [DES-WORKFLOW.md](DES-WORKFLOW.md) as the main coordination entrypoint. It defines the recommended phase order and tells the agent when to activate each skill.
+Use [skills/using-des-skill/SKILL.md](skills/using-des-skill/SKILL.md) as the router skill and [DES-WORKFLOW.md](DES-WORKFLOW.md) as the phase map.
+
+Track progress in:
+
+```text
+.agents/des-skill/sprint-status/des-workflow-status.md
+```
+
+Create the status file from:
+
+```text
+.agents/des-skill/templates/workflow_status_template.md
+```
+
+## Validation
+
+Run repository checks before publishing or changing skills:
+
+```bash
+npm test
+npm run validate:skills
+```
+
+The validation script checks required skill files, frontmatter, key headings, package metadata, and workflow references.
 
 ## Operating Principle
 
@@ -134,6 +160,7 @@ Do not jump directly into coding. A production-oriented data project starts with
 
 | Skill | Main Artifact |
 | --- | --- |
+| `using-des-skill` | Workflow routing and status coordination |
 | `de-business-discovery` | Business discovery brief |
 | `de-business-questions` | Business question catalog |
 | `de-requirements-and-kpis` | Requirements and KPI catalog |
@@ -163,15 +190,15 @@ Do not jump directly into coding. A production-oriented data project starts with
 Create a git tag and npm release before recommending pinned installs:
 
 ```bash
-git tag v0.1.0
-git push origin v0.1.0
+git tag v0.1.1
+git push origin v0.1.1
 npm publish --access public
 ```
 
-Then publish the matching GitHub Release from the `v0.1.0` tag. Users can pin npm installs with:
+Then publish the matching GitHub Release from the `v0.1.1` tag. Users can pin npm installs with:
 
 ```bash
-npx @dksang/des-skill@0.1.0 install
+npx @dksang/des-skill@0.1.1 install
 ```
 
 ## Repository Metadata
