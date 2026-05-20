@@ -6,7 +6,7 @@ Use this workflow when starting or improving a data engineering project.
 
 You are using DES-SKILL. Start from this file.
 
-Do not jump to coding. Determine the current project phase, use the matching bundled phase guide, produce the required artifact from `templates/`, and hand off to the next phase.
+Do not jump to coding. Determine the current project phase, activate the matching skill, produce the required artifact from `templates/`, and hand off to the next skill.
 
 If a requested task depends on missing upstream artifacts, stop and produce the missing artifact first or ask for the minimum missing input.
 

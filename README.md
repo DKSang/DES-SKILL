@@ -10,22 +10,22 @@ It supports local-first development with SQL, Python, DuckDB, and dbt, and cloud
 
 ### Option 1: GitHub CLI
 
-Install the full skill pack:
+Install the full DES-SKILL pack:
 
 ```bash
 gh skill install DKSang/DES-SKILL
 ```
 
-Install a specific skill:
+The repository exposes a single installable skill, `des-skill`. If your GitHub CLI version still prompts when the skill argument is omitted, run the explicit no-prompt form:
 
 ```bash
-gh skill install DKSang/DES-SKILL de-business-discovery
+gh skill install DKSang/DES-SKILL des-skill
 ```
 
 Install a pinned release:
 
 ```bash
-gh skill install DKSang/DES-SKILL de-business-discovery@v0.1.0
+gh skill install DKSang/DES-SKILL --pin v0.1.0
 ```
 
 ### Option 2: One-command manual install
@@ -71,12 +71,12 @@ Project idea:
 [describe your project here]
 
 Please follow the DES-SKILL workflow:
-1. Start from DES-WORKFLOW.md.
-2. Detect the current project phase.
-3. Use the matching skill from the skills/ directory.
+1. Use the installed `des-skill` skill.
+2. Start from DES-WORKFLOW.md.
+3. Detect the current project phase.
 4. Do not jump to coding before business context, requirements, data sources, architecture, and quality expectations are clear.
 5. Produce the required artifact using the templates/ directory.
-6. Recommend the next skill when the current artifact is complete.
+6. Recommend the next phase when the current artifact is complete.
 ```
 
 Short version:
@@ -84,21 +84,21 @@ Short version:
 ```text
 Install DES-SKILL, then start with DES-WORKFLOW.md.
 Act as a Data Engineering delivery agent.
-Detect the current phase, activate the matching skill, produce the required artifact from templates, and hand off to the next skill.
+Detect the current phase, use the matching phase guide, produce the required artifact from templates, and hand off to the next phase.
 Do not jump to coding until business context, KPIs, data sources, architecture, and quality expectations are clear.
 ```
 
 ## Workflow Entrypoint
 
-Use [DES-WORKFLOW.md](DES-WORKFLOW.md) as the main coordination entrypoint. It defines the recommended phase order and tells the agent when to activate each skill.
+Use [DES-WORKFLOW.md](DES-WORKFLOW.md) as the main coordination entrypoint. It defines the recommended phase order and tells the agent when to use each bundled phase guide.
 
 ## Operating Principle
 
 Do not jump directly into coding. A production-oriented data project starts with business context, measurable outcomes, source readiness, architecture choices, quality expectations, and clear serving needs. Code should implement agreed artifacts, not replace discovery.
 
-## Skill Index
+## Phase Guide Index
 
-| Skill | Main Artifact |
+| Phase Guide | Main Artifact |
 | --- | --- |
 | `de-business-discovery` | Business discovery brief |
 | `de-business-questions` | Business question catalog |

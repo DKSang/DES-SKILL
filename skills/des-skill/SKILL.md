@@ -1,0 +1,57 @@
+---
+name: des-skill
+description: Use when starting, planning, reviewing, or delivering a data engineering project that needs business discovery, requirements, source assessment, architecture, medallion layers, quality, governance, CI/CD, or release readiness.
+---
+
+# DES-SKILL
+
+DES-SKILL is an end-to-end data engineering delivery workflow. Use it as the coordinating skill for projects that need a disciplined path from business discovery to release readiness.
+
+## Core Rule
+
+Do not jump directly into coding. Establish business context, measurable outcomes, source readiness, architecture choices, quality expectations, serving needs, ownership, and release criteria before implementation.
+
+## Workflow
+
+Start with `references/DES-WORKFLOW.md`.
+
+Determine the current project phase, then load the matching phase guide from `references/phase-skills/<phase-name>/PHASE.md`. Produce the expected artifact using the matching template from `assets/templates/`.
+
+If upstream artifacts are missing, stop and produce the missing artifact first or ask only for the minimum missing input.
+
+## Phase Order
+
+1. `de-business-discovery`
+2. `de-business-questions`
+3. `de-requirements-and-kpis`
+4. `de-data-product-definition`
+5. `de-data-source-assessment`
+6. `de-domain-modeling`
+7. `de-architecture-design`
+8. `de-ingestion-design`
+9. `de-bronze-layer-design`
+10. `de-silver-layer-design`
+11. `de-gold-layer-design`
+12. `de-data-contracts`
+13. `de-transformation-design`
+14. `de-data-quality`
+15. `de-orchestration-and-observability`
+16. `de-semantic-model-design`
+17. `de-serving-layer-design`
+18. `de-lineage-and-metadata`
+19. `de-governance-and-security`
+20. `de-cost-and-performance-optimization`
+21. `de-cicd-and-testing`
+22. `de-project-evaluation`
+
+## Bundled Resources
+
+- Phase guides: `references/phase-skills/*/PHASE.md`
+- Templates: `assets/templates/`
+- Checklists: `references/checklists/`
+- Workflow examples: `references/workflows/`
+- Project examples: `references/examples/`
+
+## Completion
+
+At the end of each phase, name the produced artifact, summarize unresolved assumptions, and recommend the next phase skill.
