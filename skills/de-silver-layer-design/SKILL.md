@@ -30,6 +30,18 @@ Design Silver datasets that normalize schemas, keys, types, timestamps, units, a
 6. Add lineage fields back to Bronze.
 7. Define Silver quality gates.
 
+## Output File
+
+Write the final artifact to:
+
+`.agents/des-skill/output/10-silver-layer-design.md`
+
+Use the matching template from:
+
+`.agents/des-skill/templates/silver_table_spec_template.md`
+
+After writing the file, summarize the file path and recommend the next skill.
+
 ## Required Outputs
 
 - Silver table specifications.

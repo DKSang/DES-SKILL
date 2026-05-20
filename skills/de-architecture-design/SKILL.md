@@ -32,6 +32,18 @@ Produce a practical architecture decision record that fits scale, freshness, tea
 6. Define serving layer options: Power BI, Superset, APIs, semantic models, feature store, AI agent.
 7. Document options considered, decisions, tradeoffs, and risks.
 
+## Output File
+
+Write the final artifact to:
+
+`.agents/des-skill/output/07-architecture-design.md`
+
+Use the matching template from:
+
+`.agents/des-skill/templates/architecture_decision_record_template.md`
+
+After writing the file, summarize the file path and recommend the next skill.
+
 ## Required Outputs
 
 - Architecture decision record.

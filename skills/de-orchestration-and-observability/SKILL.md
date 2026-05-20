@@ -31,6 +31,18 @@ Define how pipelines run, recover, alert, and prove they met data freshness and 
 6. Define runbooks for failure, rerun, replay, and backfill.
 7. Store operational metadata for audit.
 
+## Output File
+
+Write the final artifact to:
+
+`.agents/des-skill/output/15-orchestration-and-observability.md`
+
+Use the matching template from:
+
+`.agents/des-skill/templates/pipeline_spec_template.md`
+
+After writing the file, summarize the file path and recommend the next skill.
+
 ## Required Outputs
 
 - Pipeline specification.

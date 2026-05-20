@@ -31,6 +31,18 @@ Design a semantic model that centralizes metric definitions, dimensions, relatio
 6. Define row-level security and column-level restrictions.
 7. Choose semantic implementation pattern: Power BI model, dbt semantic layer, warehouse views, Looker-style model, Cube, MetricFlow, or platform-native semantic model.
 
+## Output File
+
+Write the final artifact to:
+
+`.agents/des-skill/output/16-semantic-model-design.md`
+
+Use the matching template from:
+
+`.agents/des-skill/templates/semantic_model_template.md`
+
+After writing the file, summarize the file path and recommend the next skill.
+
 ## Required Outputs
 
 - Semantic model specification.

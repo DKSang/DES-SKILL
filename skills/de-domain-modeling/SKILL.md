@@ -31,6 +31,18 @@ Create a conceptual domain model that explains the business world independently 
 6. Build a glossary for ambiguous terms and synonyms.
 7. Map business questions and data products to entities, events, and candidate facts or dimensions.
 
+## Output File
+
+Write the final artifact to:
+
+`.agents/des-skill/output/06-domain-modeling.md`
+
+Use the matching template from:
+
+`.agents/des-skill/templates/domain_model_template.md`
+
+After writing the file, summarize the file path and recommend the next skill.
+
 ## Required Outputs
 
 - Conceptual domain model.

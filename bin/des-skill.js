@@ -60,6 +60,29 @@ function defaultInstallDir(scope) {
   return path.join(process.cwd(), ".agents", "skills");
 }
 
+function defaultWorkspaceDir(scope) {
+  if (scope === "user") {
+    return path.join(os.homedir(), ".agents", "des-skill");
+  }
+
+  return path.join(process.cwd(), ".agents", "des-skill");
+}
+
+function workspaceDirFor(args, targetDir) {
+  if (!args.dir) {
+    return defaultWorkspaceDir(args.scope);
+  }
+
+  const skillsDir = path.resolve(targetDir);
+  const parent = path.dirname(skillsDir);
+
+  if (path.basename(skillsDir) === "skills" && path.basename(parent) === ".agents") {
+    return path.join(parent, "des-skill");
+  }
+
+  return path.join(path.dirname(skillsDir), "des-skill-support");
+}
+
 function packageRoot() {
   return path.resolve(__dirname, "..");
 }
@@ -89,9 +112,43 @@ function copySkill(root, skillName, targetDir, force) {
   fs.cpSync(source, target, { recursive: true });
 }
 
+function copyDirectoryIfExists(source, target, force) {
+  if (!fs.existsSync(source)) return;
+
+  if (fs.existsSync(target)) {
+    if (!force) return;
+    fs.rmSync(target, { recursive: true, force: true });
+  }
+
+  fs.cpSync(source, target, { recursive: true });
+}
+
+function installSupportWorkspace(root, workspaceDir, force) {
+  fs.mkdirSync(workspaceDir, { recursive: true });
+
+  for (const directory of ["output", "planning", "sprint-status"]) {
+    fs.mkdirSync(path.join(workspaceDir, directory), { recursive: true });
+  }
+
+  for (const directory of ["templates", "checklists", "workflows", "examples"]) {
+    copyDirectoryIfExists(
+      path.join(root, directory),
+      path.join(workspaceDir, directory),
+      force
+    );
+  }
+
+  const workflowSource = path.join(root, "DES-WORKFLOW.md");
+  const workflowTarget = path.join(workspaceDir, "DES-WORKFLOW.md");
+  if (fs.existsSync(workflowSource) && (force || !fs.existsSync(workflowTarget))) {
+    fs.copyFileSync(workflowSource, workflowTarget);
+  }
+}
+
 function install(args) {
   const root = packageRoot();
   const targetDir = path.resolve(args.dir || defaultInstallDir(args.scope));
+  const workspaceDir = path.resolve(workspaceDirFor(args, targetDir));
   const skills = discoverSkills(root);
 
   if (skills.length === 0) {
@@ -104,8 +161,11 @@ function install(args) {
     copySkill(root, skillName, targetDir, args.force);
   }
 
+  installSupportWorkspace(root, workspaceDir, args.force);
+
   return {
     targetDir,
+    workspaceDir,
     skills
   };
 }
@@ -124,6 +184,7 @@ function main(argv) {
 
   const result = install(args);
   console.log(`Installed ${result.skills.length} DES-SKILL skills to: ${result.targetDir}`);
+  console.log(`Installed DES-SKILL support workspace to: ${result.workspaceDir}`);
   return 0;
 }
 
@@ -140,7 +201,10 @@ if (require.main === module) {
 
 module.exports = {
   defaultInstallDir,
+  defaultWorkspaceDir,
   discoverSkills,
   install,
-  parseArgs
+  installSupportWorkspace,
+  parseArgs,
+  workspaceDirFor
 };

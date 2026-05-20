@@ -28,6 +28,26 @@ Overwrite existing installed skills:
 npx @dksang/des-skill install --force
 ```
 
+The npm installer creates:
+
+```text
+.agents/
+├── skills/
+│   ├── des-skill/
+│   ├── de-business-discovery/
+│   ├── de-ingestion-design/
+│   └── ...
+└── des-skill/
+    ├── output/
+    ├── planning/
+    ├── sprint-status/
+    ├── templates/
+    ├── checklists/
+    ├── workflows/
+    ├── examples/
+    └── DES-WORKFLOW.md
+```
+
 ### Option 2: GitHub CLI
 
 Use GitHub CLI when you want to install one skill at a time:

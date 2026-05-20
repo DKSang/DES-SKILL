@@ -31,6 +31,18 @@ Create governance and security controls that make the data platform trustworthy,
 6. Define change management for schemas, contracts, metrics, and pipelines.
 7. Define cost monitoring and usage review.
 
+## Output File
+
+Write the final artifact to:
+
+`.agents/des-skill/output/19-governance-and-security.md`
+
+Use the matching template from:
+
+`.agents/des-skill/templates/governance_checklist_template.md`
+
+After writing the file, summarize the file path and recommend the next skill.
+
 ## Required Outputs
 
 - Governance checklist.

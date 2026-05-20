@@ -30,6 +30,18 @@ Design Bronze datasets that preserve source truth, support audit and replay, and
 6. Document PII and sensitive fields.
 7. Define raw schema drift handling.
 
+## Output File
+
+Write the final artifact to:
+
+`.agents/des-skill/output/09-bronze-layer-design.md`
+
+Use the matching template from:
+
+`.agents/des-skill/templates/bronze_table_spec_template.md`
+
+After writing the file, summarize the file path and recommend the next skill.
+
 ## Required Outputs
 
 - Bronze table specifications.

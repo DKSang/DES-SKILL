@@ -33,6 +33,18 @@ Evaluate whether the data product is ready to operate, trusted by users, monitor
 7. Review CI/CD evidence and rollback readiness.
 8. Produce go, no-go, or conditional-go recommendation with remediation actions.
 
+## Output File
+
+Write the final artifact to:
+
+`.agents/des-skill/output/22-project-evaluation.md`
+
+Use the matching template from:
+
+`.agents/des-skill/templates/release_readiness_template.md`
+
+After writing the file, summarize the file path and recommend the next skill.
+
 ## Required Outputs
 
 - Release readiness review.

@@ -30,6 +30,18 @@ Define each deliverable as a data product with consumers, inputs, outputs, acces
 6. Define success criteria and adoption signals.
 7. Prioritize products for first delivery and future phases.
 
+## Output File
+
+Write the final artifact to:
+
+`.agents/des-skill/output/04-data-product-definition.md`
+
+Use the matching template from:
+
+`.agents/des-skill/templates/data_product_spec_template.md`
+
+After writing the file, summarize the file path and recommend the next skill.
+
 ## Required Outputs
 
 - Data product specification.

@@ -31,6 +31,18 @@ Create explicit data contracts so producers and consumers agree on schema, seman
 6. Define contract tests in SQL, Python, dbt, Great Expectations, Soda, or platform-native checks.
 7. Version the contract.
 
+## Output File
+
+Write the final artifact to:
+
+`.agents/des-skill/output/12-data-contracts.md`
+
+Use the matching template from:
+
+`.agents/des-skill/templates/data_contract_template.md`
+
+After writing the file, summarize the file path and recommend the next skill.
+
 ## Required Outputs
 
 - Data contract per critical dataset.

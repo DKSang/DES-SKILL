@@ -30,6 +30,18 @@ Create a business question catalog that connects stakeholder decisions to metric
 6. Flag ambiguous terms that need glossary definitions.
 7. Map each business question to candidate KPIs, data products, and domain entities.
 
+## Output File
+
+Write the final artifact to:
+
+`.agents/des-skill/output/02-business-questions.md`
+
+Use the matching template from:
+
+`.agents/des-skill/templates/business_questions_template.md`
+
+After writing the file, summarize the file path and recommend the next skill.
+
 ## Required Outputs
 
 - Business question catalog.

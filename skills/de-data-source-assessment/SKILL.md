@@ -30,6 +30,18 @@ Create a source inventory and readiness assessment that shows which systems can 
 6. Decide whether to accept, reject, defer, or replace each source.
 7. Document source gaps and mitigation options.
 
+## Output File
+
+Write the final artifact to:
+
+`.agents/des-skill/output/05-data-source-assessment.md`
+
+Use the matching template from:
+
+`.agents/des-skill/templates/data_source_inventory_template.md`
+
+After writing the file, summarize the file path and recommend the next skill.
+
 ## Required Outputs
 
 - Data source inventory.

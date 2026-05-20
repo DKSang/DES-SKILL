@@ -19,6 +19,8 @@ Determine the current project phase, then activate the matching installed phase 
 
 If upstream artifacts are missing, stop and produce the missing artifact first or ask only for the minimum missing input.
 
+Every phase skill declares its concrete output path under `.agents/des-skill/output/`. Write each final artifact to that file, then summarize the path and recommend the next skill.
+
 ## Phase Order
 
 1. `de-business-discovery`

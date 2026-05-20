@@ -31,6 +31,18 @@ Design Gold datasets that represent business processes, certified metrics, and a
 6. Define slowly changing dimension behavior where needed.
 7. Define consumer access and performance needs.
 
+## Output File
+
+Write the final artifact to:
+
+`.agents/des-skill/output/11-gold-layer-design.md`
+
+Use the matching template from:
+
+`.agents/des-skill/templates/gold_table_spec_template.md`
+
+After writing the file, summarize the file path and recommend the next skill.
+
 ## Required Outputs
 
 - Gold table specifications.

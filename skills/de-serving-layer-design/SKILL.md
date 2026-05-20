@@ -31,6 +31,16 @@ Design concrete serving channels with consumers, interfaces, access controls, fr
 6. Define validation against business questions and certified metrics.
 7. Define support owner and incident path.
 
+## Output File
+
+Write the final artifact to:
+
+`.agents/des-skill/output/17-serving-layer-design.md`
+
+Use the example output format below because this skill does not have a dedicated template file.
+
+After writing the file, summarize the file path and recommend the next skill.
+
 ## Required Outputs
 
 - Serving layer specification.

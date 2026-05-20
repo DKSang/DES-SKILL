@@ -31,6 +31,18 @@ Create a practical optimization plan that improves performance and cost without 
 6. Review dashboard/API access patterns and semantic model performance.
 7. Propose changes with expected impact, risk, validation method, and rollback plan.
 
+## Output File
+
+Write the final artifact to:
+
+`.agents/des-skill/output/20-cost-and-performance-optimization.md`
+
+Use the matching template from:
+
+`.agents/des-skill/templates/cost_performance_review_template.md`
+
+After writing the file, summarize the file path and recommend the next skill.
+
 ## Required Outputs
 
 - Cost and performance review.

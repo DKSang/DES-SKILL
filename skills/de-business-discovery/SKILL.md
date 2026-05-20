@@ -31,6 +31,18 @@ Create a practical business discovery brief that prevents premature coding and a
 6. Identify initial data products: dashboards, APIs, semantic models, files, reverse ETL, or AI agents.
 7. Record assumptions and open questions with owners.
 
+## Output File
+
+Write the final artifact to:
+
+`.agents/des-skill/output/01-business-discovery.md`
+
+Use the matching template from:
+
+`.agents/des-skill/templates/business_discovery_template.md`
+
+After writing the file, summarize the file path and recommend the next skill.
+
 ## Required Outputs
 
 - Business discovery brief.

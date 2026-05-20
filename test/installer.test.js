@@ -36,6 +36,30 @@ test("installs all top-level skills into the requested directory", () => {
   }
 });
 
+test("creates the project support workspace next to installed skills", () => {
+  const tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), "des-skill-test-"));
+  const target = path.join(tmpRoot, ".agents", "skills");
+
+  try {
+    execFileSync(process.execPath, [cliPath, "install", "--dir", target], {
+      cwd: tmpRoot,
+      encoding: "utf8"
+    });
+
+    const workspace = path.join(tmpRoot, ".agents", "des-skill");
+    assert.ok(fs.existsSync(path.join(workspace, "output")));
+    assert.ok(fs.existsSync(path.join(workspace, "planning")));
+    assert.ok(fs.existsSync(path.join(workspace, "sprint-status")));
+    assert.ok(fs.existsSync(path.join(workspace, "templates", "business_discovery_template.md")));
+    assert.ok(fs.existsSync(path.join(workspace, "checklists", "business_readiness_checklist.md")));
+    assert.ok(fs.existsSync(path.join(workspace, "workflows", "new-project-workflow.md")));
+    assert.ok(fs.existsSync(path.join(workspace, "examples", "example_iot_project.md")));
+    assert.ok(fs.existsSync(path.join(workspace, "DES-WORKFLOW.md")));
+  } finally {
+    fs.rmSync(tmpRoot, { recursive: true, force: true });
+  }
+});
+
 test("refuses to overwrite existing skills unless force is set", () => {
   const tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), "des-skill-test-"));
   const target = path.join(tmpRoot, "skills");

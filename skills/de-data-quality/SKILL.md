@@ -31,6 +31,18 @@ Create a data quality rule catalog and validation strategy that protects Bronze,
 6. Define quality result storage and reporting.
 7. Add regression tests for critical metrics.
 
+## Output File
+
+Write the final artifact to:
+
+`.agents/des-skill/output/14-data-quality.md`
+
+Use the matching template from:
+
+`.agents/des-skill/templates/data_quality_rule_template.md`
+
+After writing the file, summarize the file path and recommend the next skill.
+
 ## Required Outputs
 
 - Data quality rule catalog.

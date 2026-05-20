@@ -30,6 +30,18 @@ Translate business goals into measurable KPIs, reporting needs, data freshness t
 6. Identify metric certification needs and expected consumers.
 7. Document unresolved definitions that need business approval.
 
+## Output File
+
+Write the final artifact to:
+
+`.agents/des-skill/output/03-requirements-and-kpis.md`
+
+Use the matching template from:
+
+`.agents/des-skill/templates/kpi_catalog_template.md`
+
+After writing the file, summarize the file path and recommend the next skill.
+
 ## Required Outputs
 
 - KPI catalog.

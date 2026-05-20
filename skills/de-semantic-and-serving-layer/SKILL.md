@@ -28,6 +28,16 @@ Route combined semantic and serving requests into the two narrower skills so met
 3. Confirm that serving channels use certified semantic definitions.
 4. Confirm that access, freshness, and performance expectations are consistent across both artifacts.
 
+## Output File
+
+Write the final artifact to:
+
+`.agents/des-skill/output/16-17-semantic-and-serving-layer.md`
+
+Use the example output format below because this skill does not have a dedicated template file.
+
+After writing the file, summarize the file path and recommend the next skill.
+
 ## Required Outputs
 
 - Semantic model specification from `de-semantic-model-design`.

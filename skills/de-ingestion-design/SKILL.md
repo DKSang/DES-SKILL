@@ -30,6 +30,18 @@ Create ingestion specifications that make source collection repeatable, idempote
 6. Define metadata captured for audit and lineage.
 7. Specify failure alerts and owner.
 
+## Output File
+
+Write the final artifact to:
+
+`.agents/des-skill/output/08-ingestion-design.md`
+
+Use the matching template from:
+
+`.agents/des-skill/templates/ingestion_spec_template.md`
+
+After writing the file, summarize the file path and recommend the next skill.
+
 ## Required Outputs
 
 - Ingestion specification per source.

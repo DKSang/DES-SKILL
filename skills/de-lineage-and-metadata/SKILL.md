@@ -31,6 +31,18 @@ Create lineage and metadata artifacts that make the data platform explainable, a
 6. Identify downstream dependencies and blast radius for schema or logic changes.
 7. Decide which metadata is manual, generated, or tool-managed.
 
+## Output File
+
+Write the final artifact to:
+
+`.agents/des-skill/output/18-lineage-and-metadata.md`
+
+Use the matching template from:
+
+`.agents/des-skill/templates/lineage_metadata_template.md`
+
+After writing the file, summarize the file path and recommend the next skill.
+
 ## Required Outputs
 
 - Source-to-target lineage map.

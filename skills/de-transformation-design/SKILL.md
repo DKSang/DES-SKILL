@@ -31,6 +31,16 @@ Create an implementable transformation plan that maps inputs to outputs, defines
 6. Define tests for business rules and row-level expectations.
 7. Sequence transformations by dependencies.
 
+## Output File
+
+Write the final artifact to:
+
+`.agents/des-skill/output/13-transformation-design.md`
+
+Use the example output format below because this skill does not have a dedicated template file.
+
+After writing the file, summarize the file path and recommend the next skill.
+
 ## Required Outputs
 
 - Transformation design document.

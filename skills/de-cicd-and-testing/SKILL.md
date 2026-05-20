@@ -32,6 +32,16 @@ Define a CI/CD and testing strategy so data pipelines, transformations, contract
 6. Define deployment, rollback, and migration steps.
 7. Add release evidence requirements.
 
+## Output File
+
+Write the final artifact to:
+
+`.agents/des-skill/output/21-cicd-and-testing.md`
+
+Use the example output format below because this skill does not have a dedicated template file.
+
+After writing the file, summarize the file path and recommend the next skill.
+
 ## Required Outputs
 
 - CI/CD plan.
