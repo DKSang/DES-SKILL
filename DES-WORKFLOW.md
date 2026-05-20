@@ -1,14 +1,28 @@
 # DES-SKILL Workflow
 
-Use this workflow when starting or improving a data engineering project.
+Use this workflow when starting, resuming, or improving a data engineering project.
 
 ## Agent Instruction
 
-You are using DES-SKILL. Start from this file.
+You are using DES-SKILL. Start with `using-des-skill` as the workflow router.
 
-Do not jump to coding. Determine the current project phase, activate the matching skill, produce the required artifact from `templates/`, and hand off to the next skill.
+Do not jump to coding. Determine the current project phase, check upstream artifacts, activate the matching skill, produce the required artifact from `templates/`, update workflow status, and hand off to the next skill.
 
 If a requested task depends on missing upstream artifacts, stop and produce the missing artifact first or ask for the minimum missing input.
+
+## Workflow Status
+
+Track progress in:
+
+`.agents/des-skill/sprint-status/des-workflow-status.md`
+
+Create it from:
+
+`.agents/des-skill/templates/workflow_status_template.md`
+
+## Phase 0: Router
+
+0. `using-des-skill`
 
 ## Phase 1: Business & Requirements
 
