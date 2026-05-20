@@ -123,6 +123,21 @@ function copyDirectoryIfExists(source, target, force) {
   fs.cpSync(source, target, { recursive: true });
 }
 
+function copyFileIfExists(source, target, force) {
+  if (!fs.existsSync(source)) return false;
+  if (fs.existsSync(target) && !force) return false;
+
+  fs.mkdirSync(path.dirname(target), { recursive: true });
+  fs.copyFileSync(source, target);
+  return true;
+}
+
+function createWorkflowStatus(root, workspaceDir, force) {
+  const source = path.join(root, "templates", "workflow_status_template.md");
+  const target = path.join(workspaceDir, "sprint-status", "des-workflow-status.md");
+  return copyFileIfExists(source, target, force);
+}
+
 function installSupportWorkspace(root, workspaceDir, force) {
   fs.mkdirSync(workspaceDir, { recursive: true });
 
@@ -140,9 +155,9 @@ function installSupportWorkspace(root, workspaceDir, force) {
 
   const workflowSource = path.join(root, "DES-WORKFLOW.md");
   const workflowTarget = path.join(workspaceDir, "DES-WORKFLOW.md");
-  if (fs.existsSync(workflowSource) && (force || !fs.existsSync(workflowTarget))) {
-    fs.copyFileSync(workflowSource, workflowTarget);
-  }
+  copyFileIfExists(workflowSource, workflowTarget, force);
+
+  createWorkflowStatus(root, workspaceDir, force);
 }
 
 function install(args) {
@@ -166,6 +181,7 @@ function install(args) {
   return {
     targetDir,
     workspaceDir,
+    statusPath: path.join(workspaceDir, "sprint-status", "des-workflow-status.md"),
     skills
   };
 }
@@ -185,6 +201,7 @@ function main(argv) {
   const result = install(args);
   console.log(`Installed ${result.skills.length} DES-SKILL skills to: ${result.targetDir}`);
   console.log(`Installed DES-SKILL support workspace to: ${result.workspaceDir}`);
+  console.log(`Workflow status file ready at: ${result.statusPath}`);
   return 0;
 }
 
@@ -200,6 +217,7 @@ if (require.main === module) {
 }
 
 module.exports = {
+  createWorkflowStatus,
   defaultInstallDir,
   defaultWorkspaceDir,
   discoverSkills,
