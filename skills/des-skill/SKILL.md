@@ -15,7 +15,7 @@ Do not jump directly into coding. Establish business context, measurable outcome
 
 Start with `references/DES-WORKFLOW.md`.
 
-Determine the current project phase, then load the matching phase guide from `references/phase-skills/<phase-name>/PHASE.md`. Produce the expected artifact using the matching template from `assets/templates/`.
+Determine the current project phase, then activate the matching installed phase skill. Produce the expected artifact using the matching template from `assets/templates/` when a template is useful.
 
 If upstream artifacts are missing, stop and produce the missing artifact first or ask only for the minimum missing input.
 
@@ -46,7 +46,7 @@ If upstream artifacts are missing, stop and produce the missing artifact first o
 
 ## Bundled Resources
 
-- Phase guides: `references/phase-skills/*/PHASE.md`
+- Phase skills: install this pack with `npx @dksang/des-skill install` so each `de-*` skill is available directly.
 - Templates: `assets/templates/`
 - Checklists: `references/checklists/`
 - Workflow examples: `references/workflows/`

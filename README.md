@@ -8,27 +8,41 @@ It supports local-first development with SQL, Python, DuckDB, and dbt, and cloud
 
 ## Installation
 
-### Option 1: GitHub CLI
+### Option 1: npm installer
 
 Install the full DES-SKILL pack:
+
+```bash
+npx @dksang/des-skill install
+```
+
+Install into a custom directory:
+
+```bash
+npx @dksang/des-skill install --dir .agents/skills
+```
+
+Overwrite existing installed skills:
+
+```bash
+npx @dksang/des-skill install --force
+```
+
+### Option 2: GitHub CLI
+
+Use GitHub CLI when you want to install one skill at a time:
+
+```bash
+gh skill install DKSang/DES-SKILL de-business-discovery
+```
+
+If you run this without a skill name, GitHub CLI may prompt you to select one:
 
 ```bash
 gh skill install DKSang/DES-SKILL
 ```
 
-The repository exposes a single installable skill, `des-skill`. If your GitHub CLI version still prompts when the skill argument is omitted, run the explicit no-prompt form:
-
-```bash
-gh skill install DKSang/DES-SKILL des-skill
-```
-
-Install a pinned release:
-
-```bash
-gh skill install DKSang/DES-SKILL --pin v0.1.0
-```
-
-### Option 2: One-command manual install
+### Option 3: One-command manual install
 
 Install globally for agents that read `~/.agents/skills`:
 
@@ -44,7 +58,7 @@ Install into the current project:
 bash install.sh .agents/skills
 ```
 
-### Option 3: Manual copy
+### Option 4: Manual copy
 
 Project-local install:
 
@@ -71,12 +85,12 @@ Project idea:
 [describe your project here]
 
 Please follow the DES-SKILL workflow:
-1. Use the installed `des-skill` skill.
-2. Start from DES-WORKFLOW.md.
-3. Detect the current project phase.
+1. Start from DES-WORKFLOW.md.
+2. Detect the current project phase.
+3. Use the matching skill from the installed skills.
 4. Do not jump to coding before business context, requirements, data sources, architecture, and quality expectations are clear.
 5. Produce the required artifact using the templates/ directory.
-6. Recommend the next phase when the current artifact is complete.
+6. Recommend the next skill when the current artifact is complete.
 ```
 
 Short version:
@@ -84,21 +98,21 @@ Short version:
 ```text
 Install DES-SKILL, then start with DES-WORKFLOW.md.
 Act as a Data Engineering delivery agent.
-Detect the current phase, use the matching phase guide, produce the required artifact from templates, and hand off to the next phase.
+Detect the current phase, activate the matching skill, produce the required artifact from templates, and hand off to the next skill.
 Do not jump to coding until business context, KPIs, data sources, architecture, and quality expectations are clear.
 ```
 
 ## Workflow Entrypoint
 
-Use [DES-WORKFLOW.md](DES-WORKFLOW.md) as the main coordination entrypoint. It defines the recommended phase order and tells the agent when to use each bundled phase guide.
+Use [DES-WORKFLOW.md](DES-WORKFLOW.md) as the main coordination entrypoint. It defines the recommended phase order and tells the agent when to activate each skill.
 
 ## Operating Principle
 
 Do not jump directly into coding. A production-oriented data project starts with business context, measurable outcomes, source readiness, architecture choices, quality expectations, and clear serving needs. Code should implement agreed artifacts, not replace discovery.
 
-## Phase Guide Index
+## Skill Index
 
-| Phase Guide | Main Artifact |
+| Skill | Main Artifact |
 | --- | --- |
 | `de-business-discovery` | Business discovery brief |
 | `de-business-questions` | Business question catalog |
@@ -126,14 +140,19 @@ Do not jump directly into coding. A production-oriented data project starts with
 
 ## Release Pinning
 
-Create a release tag before recommending pinned installs:
+Create a git tag and npm release before recommending pinned installs:
 
 ```bash
 git tag v0.1.0
 git push origin v0.1.0
+npm publish --access public
 ```
 
-Then publish the matching GitHub Release from the `v0.1.0` tag.
+Then publish the matching GitHub Release from the `v0.1.0` tag. Users can pin npm installs with:
+
+```bash
+npx @dksang/des-skill@0.1.0 install
+```
 
 ## Repository Metadata
 
