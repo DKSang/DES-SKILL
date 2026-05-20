@@ -261,7 +261,7 @@ function main(argv) {
 
   if (args.command === "init") {
     const result = initializeWorkspace(args);
-    console.log(`Scaffolded BMad project at: ${result.projectRoot}`);
+    console.log(`Scaffolded DES project at: ${result.projectRoot}`);
     console.log(`Created default config: ${result.configPath}`);
     console.log(`Created planning folder: ${result.planningDir}`);
     console.log(`Created implementation folder: ${result.implementationDir}`);
