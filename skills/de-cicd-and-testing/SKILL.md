@@ -57,9 +57,12 @@ Define a CI/CD and testing strategy so data pipelines, transformations, contract
 
 ## Output File
 
+
+The output_file path is configured in `customize.toml`. Default:
+
 Write the final artifact to:
 
-`.agents/des-skill/output/21-cicd-and-testing.md`
+`{project-root}/_des-output/planning-artifacts/21-cicd-and-testing.md`
 
 Use the example output format below because this skill does not have a dedicated template file.
 

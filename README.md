@@ -1,12 +1,35 @@
 # DES-SKILL
 
+[![npm](https://img.shields.io/npm/v/@dksang/des-skill?color=0ea5e9&label=npm)](https://www.npmjs.com/package/@dksang/des-skill)
+[![License: MIT](https://img.shields.io/badge/license-MIT-22c55e.svg)](LICENSE)
+[![Tests](https://img.shields.io/badge/tests-6%2F6%20pass-22c55e)](test/)
+[![Skills](https://img.shields.io/badge/skills-22%20phases-7c3aed)](skills/)
+[![Step Files](https://img.shields.io/badge/step%20files-42-0ea5e9)](skills/)
+
 Reusable Agent Skills for end-to-end Data Engineering project delivery.
 
 This repository is a vendor-neutral Agent Skills pack for professional data engineering projects across domains such as agriculture, finance, retail, healthcare, logistics, SaaS analytics, and IoT.
 
 It supports local-first development with SQL, Python, DuckDB, and dbt, and cloud-first development with platforms such as Databricks, Snowflake, BigQuery, Microsoft Fabric, Azure Data Factory, Airflow, Dagster, Kafka, Great Expectations, Soda, Power BI, Superset, and GitHub Actions.
 
-## Installation
+## Quick Evaluation
+
+> **Dành cho người muốn đánh giá nhanh trước khi dùng.**
+
+DES-SKILL giải quyết vấn đề gì? Agent AI thường nhảy thẳng vào viết code khi được giao một data project. DES-SKILL buộc agent phải đi qua **22 phases có kiểm soát** — từ business discovery đến project evaluation — với **human-in-the-loop HALT** tại mọi điểm quyết định quan trọng.
+
+| Đặc điểm | DES-SKILL | Agent không có skill |
+| :--- | :--- | :--- |
+| Bắt đầu từ đâu | Business questions → KPI → Source → Architecture | Thường bắt đầu từ code |
+| Quyết định nghiệp vụ | HALT bắt buộc, chờ người dùng xác nhận | Agent tự quyết định |
+| Metric conflicts | Phải được business owner giải quyết | Engineer tự chọn một định nghĩa |
+| Grain declaration | Khai báo "Mỗi hàng là một ___" trước khi thiết kế bảng | Schema được copy từ source |
+| SLA classification | P1 Cứng / P2 Mềm / P3 Tùy chọn có hệ quả cụ thể | "refresh daily" không có thời gian cụ thể |
+| Output | Artifact có thể review và track (`.md` files có số thứ tự) | Code và comments |
+
+**Thử ngay**: Cài đặt và dùng prompt Quick Start bên dưới.
+
+
 
 ### Option 1: npm installer
 
@@ -28,24 +51,22 @@ Overwrite existing installed skills:
 npx @dksang/des-skill install --force
 ```
 
-The npm installer creates:
+The npm installer creates a project structure:
 
 ```text
+_des-output/
+├── planning-artifacts/     # 01-business-discovery.md → 06-domain-modeling.md
+└── implementation-artifacts/
+    ├── 07-architecture-design.md → ...
+    └── des-workflow-status.md
 .agents/
-├── skills/
-│   ├── using-des-skill/
-│   ├── de-business-discovery/
-│   ├── de-ingestion-design/
-│   └── ...
-└── des-skill/
-    ├── output/
-    ├── planning/
-    ├── sprint-status/
-    ├── templates/
-    ├── checklists/
-    ├── workflows/
-    ├── examples/
-    └── DES-WORKFLOW.md
+└── skills/
+    ├── using-des-skill/
+    ├── de-business-discovery/
+    │   ├── SKILL.md
+    │   ├── customize.toml
+    │   └── steps/
+    └── ...
 ```
 
 ### Option 2: GitHub CLI
@@ -121,9 +142,30 @@ Short version:
 ```text
 Install DES-SKILL, then start with using-des-skill.
 Act as a Data Engineering delivery agent.
-Detect the current phase, check missing upstream artifacts, activate the matching skill, produce the required artifact from templates, update workflow status, and hand off to the next skill.
+Detect the current phase, check missing upstream artifacts, activate the matching skill.
+Read the skill's step files one at a time — do NOT skip steps.
+Produce the required artifact from templates, update workflow status, and hand off.
 Do not jump to coding until business context, KPIs, data sources, architecture, and quality expectations are clear.
 ```
+
+## Architecture — Step-File Workflow
+
+Every phase skill uses **step-file architecture** for disciplined agent execution:
+
+```text
+skill/
+├── SKILL.md            # Activates On Activation protocol → loads step-01
+├── customize.toml      # Configures output_file, template, checklist paths
+└── steps/
+    ├── step-01-*.md    # Loaded first; HALT at decision points
+    ├── step-02-*.md    # Loaded only after step-01 completes
+    └── step-03-*.md    # Draft artifact + quality checklist + hand off
+```
+
+Key rules the agent follows:
+- **NEVER** load multiple step files at once
+- **ALWAYS** HALT at menus and wait for user input
+- **NEVER** proceed past unresolved metric conflicts, unsigned contracts, or unconfirmed irreversible decisions
 
 ## Workflow Entrypoint
 
@@ -225,3 +267,11 @@ dbt
 duckdb
 fabric
 ```
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for skill standards, step quality criteria, and PR process.
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for version history.

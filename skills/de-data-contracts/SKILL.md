@@ -58,13 +58,16 @@ Create explicit data contracts so producers and consumers agree on schema, seman
 
 ## Output File
 
+
+The output_file path is configured in `customize.toml`. Default:
+
 Write the final artifact to:
 
-`.agents/des-skill/output/12-data-contracts.md`
+`{project-root}/_des-output/planning-artifacts/12-data-contracts.md`
 
 Use the matching template from:
 
-`.agents/des-skill/templates/12-data-contracts-template.md`
+`{skill-root}/../../templates/12-data-contracts-template.md`
 
 After writing the file, summarize the file path and recommend the next skill.
 

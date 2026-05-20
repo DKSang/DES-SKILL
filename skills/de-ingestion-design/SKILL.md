@@ -49,13 +49,16 @@ Use this matrix to select the correct ingestion mode per source:
 
 ## Output File
 
+
+The output_file path is configured in `customize.toml`. Default:
+
 Write the final artifact to:
 
-`.agents/des-skill/output/08-ingestion-design.md`
+`{project-root}/_des-output/planning-artifacts/08-ingestion-design.md`
 
 Use the matching template from:
 
-`.agents/des-skill/templates/08-ingestion-design-template.md`
+`{skill-root}/../../templates/08-ingestion-design-template.md`
 
 After writing the file, summarize the file path and recommend the next skill.
 

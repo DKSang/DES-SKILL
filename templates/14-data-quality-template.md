@@ -1,30 +1,49 @@
 # Data Quality Rule Catalog
 
-This template is used during Phase 14 (Data Quality) to define and document data validation rules, detection thresholds, and failure response protocols for each layer of the Medallion architecture.
+Template này được dùng trong Phase 14 để định nghĩa validation rules, detection thresholds, và failure response protocols. Người dùng tự điền; xóa ví dụ khi hoàn thành.
+
+> **FDE Data Quality Dimensions**: Accuracy / Completeness / Timeliness / Validity / Uniqueness.
+> Mỗi layer trong Medallion architecture có focus khác nhau (xem bảng 1a bên dưới).
 
 ---
 
 ## 1. Quality Scope & Coverage
 
-*   **Pipeline / Domain**: (e.g., `sales_pipeline`, `customer_domain`)
-*   **Target Layers**: Bronze / Silver / Gold *(select all that apply)*
-*   **Rule Owner**: (Team or person accountable for quality outcomes)
-*   **Review Frequency**: (e.g., Reviewed every sprint, updated after each data incident)
+- **Pipeline / Domain**: (Ví dụ: `sales_pipeline`, `customer_domain`)
+- **Target Layers**: Bronze / Silver / Gold *(chọn tất cả các layer áp dụng)*
+- **Rule Owner**: (Team hoặc người chịu trách nhiệm cho DQ outcomes)
+- **Review Frequency**: (Ví dụ: Review mỗi sprint, cập nhật sau mỗi data incident)
+
+### 1a. FDE DQ Dimensions theo Layer
+
+| Layer | Focus DQ chính | Rules nên áp dụng | Rules KHOONG nên áp dụng |
+| :--- | :--- | :--- | :--- |
+| **Bronze** | **Timeliness** + **Completeness** | Volume check ±X%; ingestion lag < SLA; schema conformance | Business logic rules (chưa biết nghiệp vụ context) |
+| **Silver** | **Validity** + **Uniqueness** | Null PK check; dedup; format validation; FK integrity | Accuracy rules phụ thuộc vào Gold context |
+| **Gold** | **Accuracy** + **Completeness** | Business rule checks; metric cross-validation; grain integrity | Volume-only checks (đã dùng ở Bronze) |
+
+### 1b. Severity Classification (FDE)
+
+| Severity | Khi nào dùng | Failure Action | Ví dụ |
+| :--- | :--- | :--- | :--- |
+| **FAIL** | PK/FK violation; security breach; grain collapse | Pipeline dừng. Không ghi record. Incident ticket. | `order_id IS NULL`; PII exposed to wrong role |
+| **QUARANTINE** | Format error; business rule violation cho một số rows | Bad rows → `[layer]_quarantine/`; clean rows tiếp tục | Invalid email format; amount < 0 |
+| **WARN** | Timeliness drift; distribution shift; soft threshold | Load all rows. Log + Slack alert. Không dừng. | Ingestion lag > 15 phút; null_rate tăng từ 2% lên 8% |
 
 ---
 
 ## 2. Data Quality Rules
 
-Document validation rules across all 6 standard DQ dimensions:
+Với mỗi rule, điền đủ 9 cột — **không được để threshold trống** ("check for nulls" không đủ rõ; phải là "null_rate = 0%"):
 
-| Rule ID | Target Dataset | Column / Metric | DQ Dimension | Rule Description | Threshold / Condition | Severity (Critical / High / Low) | Failure Action (FAIL / QUARANTINE / WARN) | Rule Owner |
+| Rule ID | Target Dataset | Column / Metric | DQ Dimension | Rule Description | Threshold cụ thể | Severity | Failure Action | Rule Owner |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| DQ-001 | `orders_silver` | `order_id` | Uniqueness | No duplicate primary keys allowed | 0 duplicates | Critical | FAIL | data-platform-team |
-| DQ-002 | `orders_silver` | `total_amount` | Accuracy | Amount must be positive | > 0.00 | Critical | QUARANTINE | data-platform-team |
-| DQ-003 | `events_bronze` | `event_timestamp` | Timeliness | Record latency within SLA | Ingested within 15 min of event_time | High | WARN | streaming-team |
-| DQ-004 | `customers_silver` | `email` | Validity | Email format check | Matches `^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,}$` | High | QUARANTINE | — |
-| DQ-005 | `orders_silver` | `customer_id` | Completeness | FK must not be null | Null ratio = 0% | Critical | FAIL | — |
-| — | — | — | Consistency | Cross-table metric match | orders.total == sum(order_items.subtotal) | High | WARN | — |
+| DQ-001 | `orders_silver` | `order_id` | Uniqueness | Không có duplicate PK | 0 duplicates | FAIL | FAIL | data-platform-team |
+| DQ-002 | `orders_silver` | `total_amount` | Validity | Amount phải dương | > 0.00 | FAIL | QUARANTINE | data-platform-team |
+| DQ-003 | `events_bronze` | `event_timestamp` | Timeliness | Latency trong SLA | Ingested < 15 phút sau event_time | WARN | WARN | streaming-team |
+| DQ-004 | `customers_silver` | `email` | Validity | Format email hợp lệ | Khớp `^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,}$` | WARN | QUARANTINE | — |
+| DQ-005 | `orders_silver` | `customer_id` | Completeness | FK không được null | null_rate = 0% | FAIL | FAIL | — |
+| DQ-006 | `orders_gold` | `gross_revenue` | Accuracy | Revenue match Silver aggregate | orders_gold.revenue = SUM(orders_silver.amount) ±0.01% | FAIL | FAIL | finance-team |
 
 ---
 

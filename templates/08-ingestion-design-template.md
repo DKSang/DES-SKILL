@@ -1,35 +1,50 @@
 # Ingestion Design Document
 
-This design template is used during Phase 08 (Ingestion Design) to document target ingestion modes, watermarking, failure recovery policies, and audit logging columns.
+Template này được dùng trong Phase 08 để tài liệu hóa các pattern ingestion, watermark, chiến lược idempotency và xử lý lỗi. Người dùng tự điền; xóa ví dụ khi hoàn thành.
+
+> **Nguyên tắc FDE Bounded vs. Unbounded**:
+> - **Bounded data** (batch): Dữ liệu có điểm bắt đầu và kết thúc rõ ràng (daily snapshot, file export). Thích hợp với batch ingestion.
+> - **Unbounded data** (streaming): Dữ liệu liên tục, không có điểm kết thúc (event stream, CDC log). Yêu cầu watermark và late-arrival window để xử lý.
+> 
+> **Khi nào không cần Streaming**: Nếu Hard SLA > 5 phút, batch micro-batch là đủ và rẻ hơn nhiều.
 
 ---
 
 ## 1. Ingestion Pattern Inventory
 
-Document the ingestion pattern for each target entity:
+### Data Maturity vs. Ingestion Complexity (FDE)
 
-| Target Table | Source Entity | Ingestion Mode (Batch / CDC / Stream / Landing) | Frequency / Trigger Schedule | Primary Extraction Key (Watermark / Offset) | Expected Payload Format (JSON/Avro/Parquet) |
+| Data Maturity | Recommended Complexity | Anti-Pattern |
+| :--- | :--- | :--- |
+| Level 1 (Ad-hoc) | Batch incremental; 1-2 sources | Streaming trước khi batch hoạt động ổn định |
+| Level 2 (Scaling) | CDC cho CRUD; micro-batch cho event | CDC không có DLQ; không có retry logic |
+| Level 3 (Data-Led) | Streaming; exactly-once; schema registry | Phức tạp hóa Level 1 problem |
+
+### Per-Source Ingestion Pattern
+
+| Target Table | Source Entity | Mode (Batch / CDC / Stream / File) | Tần suất / Trigger | Watermark Key | Format |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| *sales_bronze* | *sales_db.orders* | *Log-based CDC* | *Continuous stream* | *LSN (Log Sequence Number)* | *Delta Lake (Parquet)* |
+| *sales_bronze* | *sales_db.orders* | *Log-based CDC* | *Continuous* | *LSN (Log Sequence Number)* | *Delta/Parquet* |
 | | | | | | |
 
 ---
 
-## 2. Extraction & Ingestion Mode Justification
+## 2. Rationale và Trade-offs Ingestion Mode
 
-Detail the engineering rationale for the chosen ingestion modes:
-*   **Latency vs. Cost Trade-offs**: (e.g., Why CDC was chosen over Batch; cost comparison of continuous streaming vs. hourly batch schedules)
-*   **Source Impact Minimization**: (e.g., Extracting from replica database, utilizing transaction log reads to prevent table lock conflicts on primary DB)
+- **Latency vs. Cost**: (Ví dụ: Tại sao chọn CDC thay vì Batch? CDC: real-time nhưng đắt hơn về ops. Batch: rẻ hơn nhưng có thể bỏ qua deletes.)
+- **Source Impact Minimization**: (Ví dụ: Đọc từ replica, tránh lock primary DB)
+- **Late-arrival handling**: (Với Unbounded data, window size cho late arrival là bao lâu? 5 phút? 1 giờ?)
 
 ---
 
-## 3. Idempotency & Write Strategy
+## 3. Idempotency và Write Strategy
 
-Ensure that pipelines can be re-executed for any time window without introducing duplicate rows:
-*   **Unique Merge Key**: (e.g., Primary Key or composite hash of columns)
-*   **Write Mode**: (e.g., Append-only, Partition Overwrite, or Upsert/Merge)
-*   **State / Checkpoint Storage**: (e.g., Where does the pipeline store the last successfully loaded offset or watermark? Airflow Variables, cloud state file, database table)
-*   **Deduplication Logic**: (e.g., deduplicate in Spark memory using row number rank before writing, or rely on target DB unique constraints)
+> **Exactly-once vs. At-least-once**: Streaming thường đảm bảo *at-least-once* (có thể duplicate). Để đạt *exactly-once*, cần idempotent MERGE key + checkpoint state storage.
+
+- **Unique Merge Key**: (Primary key hoặc composite hash của các cột nào?)
+- **Write Mode**: (Append-only / Partition Overwrite / Upsert-MERGE)
+- **State / Checkpoint Storage**: (Pipeline lưu watermark ở đâu? Airflow Variables / Cloud state file / DB table)
+- **Deduplication Logic**: (Deduplicate trong Spark bằng ROW_NUMBER() trước khi write, hay rely on target unique constraint?)
 
 ---
 

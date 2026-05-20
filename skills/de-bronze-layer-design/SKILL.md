@@ -54,13 +54,16 @@ Design Bronze datasets that preserve source truth, support audit and replay, and
 
 ## Output File
 
+
+The output_file path is configured in `customize.toml`. Default:
+
 Write the final artifact to:
 
-`.agents/des-skill/output/09-bronze-layer-design.md`
+`{project-root}/_des-output/planning-artifacts/09-bronze-layer-design.md`
 
 Use the matching template from:
 
-`.agents/des-skill/templates/09-bronze-layer-design-template.md`
+`{skill-root}/../../templates/09-bronze-layer-design-template.md`
 
 After writing the file, summarize the file path and recommend the next skill.
 

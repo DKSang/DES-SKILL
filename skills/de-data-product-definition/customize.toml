@@ -1,0 +1,17 @@
+# Workflow customization surface for de-data-product-definition.
+
+[workflow]
+activation_steps_prepend = []
+activation_steps_append = []
+
+persistent_facts = [
+  "file:{project-root}/**/project-context.md",
+]
+
+on_complete = ""
+
+[config]
+output_file = "{project-root}/_des-output/planning-artifacts/04-data-product-definition.md"
+template_file = "{skill-root}/../../templates/04-data-product-definition-template.md"
+checklist_file = "{skill-root}/../../checklists/data_product_checklist.md"
+status_file = "{project-root}/_des-output/implementation-artifacts/des-workflow-status.md"

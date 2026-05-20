@@ -1,0 +1,17 @@
+# Workflow customization surface for de-cost-and-performance-optimization.
+
+[workflow]
+activation_steps_prepend = []
+activation_steps_append = []
+
+persistent_facts = [
+  "file:{project-root}/**/project-context.md",
+]
+
+on_complete = ""
+
+[config]
+output_file = "{project-root}/_des-output/planning-artifacts/20-cost-and-performance-optimization.md"
+template_file = "{skill-root}/../../templates/20-cost-and-performance-optimization-template.md"
+checklist_file = "{skill-root}/../../checklists/storage_design_checklist.md"
+status_file = "{project-root}/_des-output/implementation-artifacts/des-workflow-status.md"

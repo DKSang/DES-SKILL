@@ -1,8 +1,10 @@
 # Domain Modeling
 
-This template is used during Phase 06 (Domain Modeling) to define the business domain boundaries, core entities, relationships, and analytical grain decisions that will shape the Silver and Gold layer designs.
+Template này được dùng trong Phase 06 để định nghĩa business domain boundaries, core entities, relationships, và grain decisions. Người dùng tự điền; xóa ví dụ khi hoàn thành.
 
-> **Domain Modeling Principle**: Model the business, not the source system. Entities and relationships should reflect how the business thinks about data — not how the database schema was designed.
+> **Nguyên tắc FDE**: Model the business, not the source system. Entities and relationships reflect how the business thinks — not how the database schema was designed.
+
+> **FDE Bounded Context**: Một domain chỉ model các khái niệm trong phạm vi của nó. Order domain KHÔNG bao gồm Payment processing hay Warehouse inventory — đó là domain khác với model riêng.
 
 ---
 
@@ -40,16 +42,24 @@ Define the primary business concepts the domain works with — in business langu
 
 ---
 
-## 4. Analytical Grain Decisions
+## 4. Quyết Định Grain Phân Tích
 
-Define the lowest level of detail required for analytical queries in each dataset:
+> **FDE Grain Rule**: Khai báo grain bằng câu hoàn chỉnh: **"Mỗi hàng trong bảng này là một [X]"**. Nếu không viết được câu này, grain chưa đủ rõ để thiết kế bảng.
 
-| Dataset / Subject Area | Proposed Grain | Rationale | Known Edge Cases / Open Issues |
+| Dataset | Grain ("Mỗi hàng là một ___") | Rationale | Edge Cases |
 | :--- | :--- | :--- | :--- |
-| Orders Fact | One row per unique `order_id` | Finance reports at order level; BI team confirmed | Multi-currency orders use USD-converted total — FX rate applied at order date |
-| Order Lines Fact | One row per `order_id + product_sku` | Product-level analysis (returns, revenue by SKU) required by catalog team | Bundles / kits must be split to line items |
-| Customer Dim | One row per customer per version (SCD2) | Address and segment changes must be historically tracked | GDPR deletion must cascade to all historical SCD2 rows |
-| Daily Sales Summary | One row per `date + region + segment` | Pre-aggregated for dashboard performance | Must exclude cancelled orders before aggregation |
+| Orders Fact | Một `order_id` duy nhất | Finance báo cáo ở mức đơn hàng | Multi-currency: dùng USD-converted at order date |
+| Order Lines Fact | Một `order_id + product_sku` | Phân tích theo SKU cần thiết | Bundles phải split ra line items |
+| Customer Dim | Một khách hàng theo từng phiên bản (SCD2) | Lịch sử địa chỉ và phân khúc phải được track | GDPR deletion phải cascade toàn bộ SCD2 rows |
+| Daily Sales Summary | Một `date + region + segment` | Pre-aggregated cho dashboard | Phải exclude cancelled orders trước aggregation |
+
+## 4b. Lựa Chọn Modeling Pattern (FDE)
+
+| Pattern | Phù hợp khi nào | Không phù hợp khi | Trade-off |
+| :--- | :--- | :--- | :--- |
+| **Kimball (Dimensional)** | BI reporting, query đơn giản, team quen Star Schema | Cần ML features, streaming, flexible schema | Cần upfront design; ETL phức tạp |
+| **Inmon (Normalized)** | Single version of truth; enterprise-wide consistency | BI team cần query trực tiếp; team nhỏ | Query chậm; join phức tạp; khó duyệt |
+| **One Big Table (OBT)** | Dashboard đơn giản; BI tool không hỗ trợ join | Data volume lớn; nhiều use cases khác nhau | Redundancy cao; khó maintain consistency |
 
 ---
 

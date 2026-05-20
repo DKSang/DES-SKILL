@@ -57,13 +57,16 @@ Every dataset must be evaluated against all 6 dimensions:
 
 ## Output File
 
+
+The output_file path is configured in `customize.toml`. Default:
+
 Write the final artifact to:
 
-`.agents/des-skill/output/14-data-quality.md`
+`{project-root}/_des-output/planning-artifacts/14-data-quality.md`
 
 Use the matching template from:
 
-`.agents/des-skill/templates/14-data-quality-template.md`
+`{skill-root}/../../templates/14-data-quality-template.md`
 
 After writing the file, summarize the file path and recommend the next skill.
 

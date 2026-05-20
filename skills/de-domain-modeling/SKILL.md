@@ -13,6 +13,37 @@ Use after data product and source assessment, before architecture and Gold desig
 
 Create a conceptual domain model using business language — independently of tools, vendors, and raw source layouts — that anchors all downstream modeling decisions.
 
+## Conventions
+
+- Bare paths (e.g. `steps/step-01-identify-entities.md`) resolve from the skill root.
+- `{skill-root}` resolves to this skill's installed directory.
+- `{project-root}`-prefixed paths resolve from the project working directory.
+
+## WORKFLOW ARCHITECTURE
+
+This uses **step-file architecture** for disciplined execution:
+
+- **Sequential Enforcement**: Complete steps in order, no skipping.
+- **Human-in-the-Loop**: HALT mandatory at grain declaration and M:M bridge confirmation.
+
+### Critical Rules (NO EXCEPTIONS)
+
+- 🛑 **NEVER** load multiple step files simultaneously.
+- ⏸️ **ALWAYS** halt at menus and wait for user input.
+- 🚫 **NEVER** proceed without confirmed grain — grain ambiguity causes incorrect Gold tables.
+
+## On Activation
+
+Run: `python3 {project-root}/_des/scripts/resolve_customization.py --skill {skill-root} --key workflow`
+
+If script fails, read in order: `{skill-root}/customize.toml` → team override → user override.
+
+Load config from `{project-root}/_des/des/config.yaml`. Greet `user_name`. Activation complete.
+
+## Next Step
+
+Read fully and follow: `./steps/step-01-identify-entities.md`
+
 ## Inputs Required
 
 - Business question catalog (`02-business-questions.md`).
@@ -41,24 +72,22 @@ Create a conceptual domain model using business language — independently of to
 
 ## Step-By-Step Process
 
-1. Identify core **Entities** (things that persist) and **Events** (things that happen) using the classification matrix.
-2. For each Event, declare grain: "one row per [what]" (e.g., "one row per order_line_item").
-3. Define relationships with cardinality: one-to-one, one-to-many, many-to-many.
-4. For many-to-many relationships, design bridge/junction entities.
-5. Identify slowly changing attributes on Entities (e.g., customer address, product price).
-6. Build the business glossary — resolve all conflicting names to one canonical term.
-7. Map each domain concept to its source system candidate.
-8. Map entities/events to Gold fact/dimension candidates and business questions.
+Refer to the individual step files in the `steps/` folder:
+1. `steps/step-01-identify-entities.md` — Xác định entity/event, khai báo grain (HALT để xác nhận).
+2. `steps/step-02-model-relationships.md` — Xây dựng quan hệ, xử lý M:M, xác định SCD (HALT bắt buộc tại M:M).
+3. `steps/step-03-draft-and-handoff.md` — Soạn thảo domain model, glossary, kiểm tra chất lượng, bàn giao.
 
 ## Output File
 
+The output_file path is configured in customize.toml. Default:
+
 Write the final artifact to:
 
-`.agents/des-skill/output/06-domain-modeling.md`
+`{project-root}/_des-output/planning-artifacts/06-domain-modeling.md`
 
 Use the matching template from:
 
-`.agents/des-skill/templates/06-domain-modeling-template.md`
+`{skill-root}/../../templates/06-domain-modeling-template.md`
 
 After writing the file, summarize the file path and recommend the next skill.
 

@@ -55,17 +55,19 @@ Classify every identified risk before issuing the recommendation:
 7. Classify all identified risks using the Risk Severity Classification.
 8. Issue recommendation: **Go** / **No-Go** / **Conditional-Go** (with explicit conditions to resolve).
 
-## Output Files
+## Output File
+
+The output_file path is configured in `customize.toml`. Default:
 
 Write the final artifacts to:
 
-- `.agents/des-skill/output/22-project-evaluation.md`
-- `.agents/des-skill/output/23-data-lifecycle-review.md` *(for quarterly post-production reviews)*
+- `{project-root}/_des-output/planning-artifacts/22-project-evaluation.md`
+- `{project-root}/_des-output/planning-artifacts/23-data-lifecycle-review.md` *(for quarterly post-production reviews)*
 
 Use the matching templates from:
 
-- `.agents/des-skill/templates/22-project-evaluation-template.md`
-- `.agents/des-skill/templates/23-data-lifecycle-review-template.md`
+- `{skill-root}/../../templates/22-project-evaluation-template.md`
+- `{skill-root}/../../templates/23-data-lifecycle-review-template.md`
 
 After writing the files, summarize the recommendation and any P1/P2 items requiring resolution.
 

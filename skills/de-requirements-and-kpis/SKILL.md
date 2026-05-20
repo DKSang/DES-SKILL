@@ -13,6 +13,37 @@ Use after business discovery and before source assessment or architecture. Use w
 
 Translate business goals into measurable KPIs with certified formulas, reporting requirements with explicit grains, and SLA commitments that the data platform must meet.
 
+## Conventions
+
+- Bare paths (e.g. `steps/step-01-collect-requirements.md`) resolve from the skill root.
+- `{skill-root}` resolves to this skill's installed directory.
+- `{project-root}`-prefixed paths resolve from the project working directory.
+
+## WORKFLOW ARCHITECTURE
+
+This uses **step-file architecture** for disciplined execution:
+
+- **Sequential Enforcement**: Complete steps in order, no skipping.
+- **Human-in-the-Loop**: HALT at decision points — especially metric conflicts.
+
+### Critical Rules (NO EXCEPTIONS)
+
+- 🛑 **NEVER** load multiple step files simultaneously.
+- ⏸️ **ALWAYS** halt at menus and wait for user input.
+- 🚫 **NEVER** proceed past metric conflicts without business owner resolution.
+
+## On Activation
+
+Run: `python3 {project-root}/_des/scripts/resolve_customization.py --skill {skill-root} --key workflow`
+
+If script fails, read in order: `{skill-root}/customize.toml` → team override → user override.
+
+Load config from `{project-root}/_des/des/config.yaml`. Greet `user_name`. Activation complete.
+
+## Next Step
+
+Read fully and follow: `./steps/step-01-collect-requirements.md`
+
 ## Inputs Required
 
 - Business discovery brief (`01-business-discovery.md`).
@@ -44,23 +75,22 @@ A KPI is ready to build only when it passes all 5 criteria:
 
 ## Step-By-Step Process
 
-1. Convert each business goal / question into one or more measurable KPIs.
-2. Run every KPI through the KPI Quality Gate (5 criteria above).
-3. Resolve all metric definition conflicts — get sign-off from the business owner.
-4. Separate Hard SLAs from Soft SLAs and Preferences using the Decision Matrix.
-5. Define freshness, availability, latency, and historical retention per data product.
-6. Identify metric certification requirements (who approves a metric before it's published).
-7. Document unresolved definitions as blocking open questions with an owner and due date.
+Refer to the individual step files in the `steps/` folder:
+1. `steps/step-01-collect-requirements.md` — Thu thập KPI ứng viên với 5 tiêu chí, phân loại SLA (P1/P2/P3).
+2. `steps/step-02-resolve-conflicts.md` — Phát hiện và giải quyết xung đột định nghĩa metric (HALT bắt buộc).
+3. `steps/step-03-draft-and-handoff.md` — Soạn thảo KPI catalog, kiểm tra chất lượng, ghi artifact, bàn giao.
 
 ## Output File
 
+The output_file path is configured in customize.toml. Default:
+
 Write the final artifact to:
 
-`.agents/des-skill/output/03-requirements-and-kpis.md`
+`{project-root}/_des-output/planning-artifacts/03-requirements-and-kpis.md`
 
 Use the matching template from:
 
-`.agents/des-skill/templates/03-requirements-and-kpis-template.md`
+`{skill-root}/../../templates/03-requirements-and-kpis-template.md`
 
 After writing the file, summarize the file path and recommend the next skill.
 

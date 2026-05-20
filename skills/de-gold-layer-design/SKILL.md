@@ -54,13 +54,16 @@ Design Gold datasets that represent business processes as analytical models (fac
 
 ## Output File
 
+
+The output_file path is configured in `customize.toml`. Default:
+
 Write the final artifact to:
 
-`.agents/des-skill/output/11-gold-layer-design.md`
+`{project-root}/_des-output/planning-artifacts/11-gold-layer-design.md`
 
 Use the matching template from:
 
-`.agents/des-skill/templates/11-gold-layer-design-template.md`
+`{skill-root}/../../templates/11-gold-layer-design-template.md`
 
 After writing the file, summarize the file path and recommend the next skill.
 

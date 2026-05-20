@@ -1,0 +1,17 @@
+# Workflow customization surface for de-governance-and-security.
+
+[workflow]
+activation_steps_prepend = []
+activation_steps_append = []
+
+persistent_facts = [
+  "file:{project-root}/**/project-context.md",
+]
+
+on_complete = ""
+
+[config]
+output_file = "{project-root}/_des-output/planning-artifacts/19-governance-and-security.md"
+template_file = "{skill-root}/../../templates/19-governance-and-security-template.md"
+checklist_file = "{skill-root}/../../checklists/governance_checklist.md"
+status_file = "{project-root}/_des-output/implementation-artifacts/des-workflow-status.md"

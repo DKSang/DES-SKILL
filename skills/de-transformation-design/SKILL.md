@@ -57,9 +57,12 @@ Create an implementable transformation plan that maps inputs to outputs, defines
 
 ## Output File
 
+
+The output_file path is configured in `customize.toml`. Default:
+
 Write the final artifact to:
 
-`.agents/des-skill/output/13-transformation-design.md`
+`{project-root}/_des-output/planning-artifacts/13-transformation-design.md`
 
 Use the example output format below because this skill does not have a dedicated template file.
 

@@ -54,13 +54,16 @@ Design Silver datasets that normalize schemas, types, timestamps, business codes
 
 ## Output File
 
+
+The output_file path is configured in `customize.toml`. Default:
+
 Write the final artifact to:
 
-`.agents/des-skill/output/10-silver-layer-design.md`
+`{project-root}/_des-output/planning-artifacts/10-silver-layer-design.md`
 
 Use the matching template from:
 
-`.agents/des-skill/templates/10-silver-layer-design-template.md`
+`{skill-root}/../../templates/10-silver-layer-design-template.md`
 
 After writing the file, summarize the file path and recommend the next skill.
 

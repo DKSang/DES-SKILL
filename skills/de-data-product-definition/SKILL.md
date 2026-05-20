@@ -13,6 +13,36 @@ Use after business questions and KPI requirements. Use before source assessment 
 
 Define each deliverable as a data product with consumers, inputs, outputs, access policy, quality expectations, and measurable value — not just a table or pipeline.
 
+## Conventions
+
+- Bare paths (e.g. `steps/step-01-classify-products.md`) resolve from the skill root.
+- `{skill-root}` resolves to this skill's installed directory.
+- `{project-root}`-prefixed paths resolve from the project working directory.
+
+## WORKFLOW ARCHITECTURE
+
+This uses **step-file architecture** for disciplined execution:
+
+- **Sequential Enforcement**: Complete steps in order, no skipping.
+- **Human-in-the-Loop**: HALT at phase boundary decisions.
+
+### Critical Rules (NO EXCEPTIONS)
+
+- 🛑 **NEVER** load multiple step files simultaneously.
+- ⏸️ **ALWAYS** halt at menus and wait for user input.
+
+## On Activation
+
+Run: `python3 {project-root}/_des/scripts/resolve_customization.py --skill {skill-root} --key workflow`
+
+If script fails, read in order: `{skill-root}/customize.toml` → team override → user override.
+
+Load config from `{project-root}/_des/des/config.yaml`. Greet `user_name`. Activation complete.
+
+## Next Step
+
+Read fully and follow: `./steps/step-01-classify-products.md`
+
 ## Inputs Required
 
 - Business question catalog (`02-business-questions.md`).
@@ -36,24 +66,22 @@ Define each deliverable as a data product with consumers, inputs, outputs, acces
 
 ## Step-By-Step Process
 
-1. Identify all candidate data products; classify using the Decision Matrix.
-2. Name each product using domain business language (not table names).
-3. Define consumers — team, role, system — and the business decision they enable.
-4. Define inputs (source datasets) and outputs (schema, format, interface).
-5. Define owner (accountable individual), steward (data accuracy), and SLA.
-6. Define access policy and PII/classification level.
-7. Define measurable success criteria and adoption signals.
-8. Prioritize: Phase 1 (MVP) vs. Phase 2+ (deferred).
+Refer to the individual step files in the `steps/` folder:
+1. `steps/step-01-classify-products.md` — Liệt kê và phân loại data product theo Decision Matrix, tách Phase 1/2+.
+2. `steps/step-02-define-products.md` — Định nghĩa spec chi tiết: consumer, owner, SLA, access policy, tiêu chí thành công.
+3. `steps/step-03-draft-and-handoff.md` — Soạn thảo artifact, kiểm tra chất lượng, ghi artifact, bàn giao.
 
 ## Output File
 
+The output_file path is configured in customize.toml. Default:
+
 Write the final artifact to:
 
-`.agents/des-skill/output/04-data-product-definition.md`
+`{project-root}/_des-output/planning-artifacts/04-data-product-definition.md`
 
 Use the matching template from:
 
-`.agents/des-skill/templates/04-data-product-definition-template.md`
+`{skill-root}/../../templates/04-data-product-definition-template.md`
 
 After writing the file, summarize the file path and recommend the next skill.
 

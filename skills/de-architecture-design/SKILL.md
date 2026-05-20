@@ -53,17 +53,19 @@ Examples: Storage format choice = **Irreversible**. Cluster size = **Reversible*
 7. Check all Six Undercurrents (see Undercurrent Coverage below).
 8. Document options considered, decisions, tradeoffs, and risks per ADR.
 
-## Output Files
+## Output File
+
+The output_file path is configured in `customize.toml`. Default:
 
 Write the final artifacts to:
 
-- `.agents/des-skill/output/07-architecture-design.md` (primary)
-- `.agents/des-skill/output/07b-architecture-decision-records.md` (one ADR per major decision)
+- `{project-root}/_des-output/planning-artifacts/07-architecture-design.md` (primary)
+- `{project-root}/_des-output/planning-artifacts/07b-architecture-decision-records.md` (one ADR per major decision)
 
 Use the matching templates from:
 
-- `.agents/des-skill/templates/07-architecture-design-template.md`
-- `.agents/des-skill/templates/07b-architecture-decision-record-template.md`
+- `{skill-root}/../../templates/07-architecture-design-template.md`
+- `{skill-root}/../../templates/07b-architecture-decision-record-template.md`
 
 After writing the files, summarize paths and recommend the next skill.
 

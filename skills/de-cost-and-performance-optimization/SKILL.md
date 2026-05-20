@@ -50,13 +50,16 @@ Create a practical, evidence-based optimization plan that improves performance a
 
 ## Output File
 
+
+The output_file path is configured in `customize.toml`. Default:
+
 Write the final artifact to:
 
-`.agents/des-skill/output/20-cost-and-performance-optimization.md`
+`{project-root}/_des-output/planning-artifacts/20-cost-and-performance-optimization.md`
 
 Use the matching template from:
 
-`.agents/des-skill/templates/20-cost-and-performance-optimization-template.md`
+`{skill-root}/../../templates/20-cost-and-performance-optimization-template.md`
 
 After writing the file, summarize the file path and recommend the next skill.
 

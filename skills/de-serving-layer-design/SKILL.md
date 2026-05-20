@@ -52,9 +52,12 @@ Design the consumer-facing serving interface that delivers certified data produc
 
 ## Output File
 
+
+The output_file path is configured in `customize.toml`. Default:
+
 Write the final artifact to:
 
-`.agents/des-skill/output/17-serving-layer-design.md`
+`{project-root}/_des-output/planning-artifacts/17-serving-layer-design.md`
 
 Use the example output format below because this skill does not have a dedicated template file.
 

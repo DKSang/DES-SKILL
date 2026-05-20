@@ -1,6 +1,8 @@
 # Requirements and KPI Catalog
 
-This template is used during Phase 03 (Requirements and KPIs) to formally define and certify the business metrics, reporting requirements, and non-functional requirements (NFRs) that the data platform must satisfy.
+Template này được dùng trong Phase 03 để xác định và cấp phép các business metrics, yêu cầu reporting, và non-functional requirements. Người dùng tự điền; xóa ví dụ khi hoàn thành.
+
+> **Nguyên tắc**: Mọi mâu thuẫn mế́̆ trước khi viết bất kỳ dòng code nào — HALT bắt buộc tại bước này.
 
 ---
 
@@ -13,13 +15,16 @@ This template is used during Phase 03 (Requirements and KPIs) to formally define
 
 ## 2. Certified KPI Catalog
 
-Define each KPI with a single, agreed business definition before any technical implementation begins:
+Xác định mỗi KPI với một định nghĩa nghiệp vụ được đồng thuận trước khi implement. **Không được phép viết code khi còn Conflicting Definitions chưa được giải quyết.**
 
-| KPI Name | Certified Definition | Formula | Grain | Data Owner | Freshness SLA | Source System Candidate | Conflicting Definitions (to resolve) |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `Gross Revenue` | Sum of all non-cancelled order totals in USD | `SUM(total_amount_usd) WHERE status != 'CANCELLED'` | Daily / Regional / Product | finance-director | Available by 7AM daily | `sales_db.orders` | Finance calls it "Net Sales"; Sales calls it "Bookings" — align terminology first |
-| `Active Customers` | Customers with ≥1 non-cancelled order in the last 30 calendar days | `COUNT(DISTINCT customer_id) WHERE order_date >= TODAY()-30` | Monthly snapshot | product-owner | Refreshed daily | `sales_db.orders` | Some reports use 60-day window — confirm canonical window |
-| `Average Order Value` | Mean revenue per confirmed order | `[Gross Revenue] / COUNT(DISTINCT order_id)` | Daily | product-owner | Available by 7AM daily | Derived from `orders` | — |
+| Tên KPI | Định nghĩa Certified | Công thức | Grain | Data Owner | Freshness SLA | Nguồn | Loại Output | Conflicting Definitions |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `Gross Revenue` | Tổng giá trị đơn hàng chưa hủy, đơn vị USD | `SUM(total_amount_usd) WHERE status != 'CANCELLED'` | Hằng ngày / Region | finance-director | Có mặt by 7AM | `sales_db.orders` | Analytical | Finance: "Net Sales"; Sales: "Bookings" — đồng bộ trước |
+| `Active Customers` | Khách có ≥1 đơn chưa hủy trong 30 ngày | `COUNT(DISTINCT customer_id) WHERE order_date >= TODAY()-30` | Monthly snapshot | product-owner | Hằng ngày | `sales_db.orders` | Analytical | Marketing dùng 60-ngày; Product dùng 30-ngày — cần canonical window |
+| `Order Fill Rate` (thời gian thực) | Tỷ lệ đơn được giao đúng hạn | `COUNT(on_time) / COUNT(all_orders)` | Hằng ngày | ops-team | Streaming, lag < 5 phút | `fulfillment_events` | Operational | — |
+
+> **Loại Output (FDE Serving)**: Analytical (batch, BI dashboard) / Operational (real-time API, reverse ETL, feature store).
+> Chọn loại đúng trước khi quyết định ingestion mode — Operational output yêu cầu streaming; Analytical thường đủ với batch.
 
 ---
 
@@ -37,15 +42,23 @@ Define the deliverables each stakeholder expects:
 
 ## 4. Non-Functional Requirements (NFRs)
 
-| NFR Type | Requirement | Target Metric | Priority | Rationale |
+### Phân loại SLA theo FDE
+
+| Loại SLA | Định nghĩa | Hệ quả kỹ thuận |
+| :--- | :--- | :--- |
+| **P1 Hard SLA** | Vi phạm = impact nghiệp vụ trực tiếp (báo cáo sáng cho CFO lúc 8AM) | Pipeline FAIL phải alert on-call ngay lập tức |
+| **P2 Soft SLA** | Vi phạm = khó chịu nhưng không dừng business (dashboard thường bị trễ 30 phút) | Alert Slack, tự sửa trong 2 giờ |
+| **P3 Best-effort** | Vi phạm = OK trong ngưỡng cho phép | Log-only, review hằng sprint |
+
+| NFR Type | Yêu cầu | Target Metric | SLA Class | Rationale |
 | :--- | :--- | :--- | :--- | :--- |
-| **Freshness** | Gold layer data refreshed on schedule | Available by 7AM daily | High | Sales team reviews dashboards during morning standups |
-| **Latency** | BI dashboard query response time | < 5 sec for standard filters | High | Poor performance = users stop trusting the tool |
-| **Availability** | Data platform uptime | 99.5% monthly | High | Executive reports generated Monday 8AM — downtime unacceptable |
-| **Retention** | Customer data retention period | 3 years (GDPR compliant) | Critical | Legal compliance requirement |
-| **Security** | PII columns masked for non-authorized roles | 0 PII columns exposed to `analyst-group` | Critical | GDPR and internal data policy |
-| **Scalability** | Pipeline handles 2x data volume growth | No SLA breach at 2x current volume | Medium | Business is growing 30% YoY |
-| **Cost** | Monthly cloud infrastructure cost | < $3,000/month | Medium | Budget approved for this project |
+| **Freshness** | Gold layer data làm mới đúng giờ | By 7AM hằng ngày | P1 Hard | Sales review dashboard buổi sáng |
+| **Latency** | Query response time BI | < 5 giây với bộ lọc chuẩn | P2 Soft | Performance kém = mất tin tưởng |
+| **Availability** | Platform uptime | 99.5% monthly | P1 Hard | Executive reports Monday 8AM |
+| **Retention** | Retention period dữ liệu khách hàng | 3 năm (GDPR) | P1 Hard | Legal compliance |
+| **Security** | PII columns masked for non-authorized | 0 PII exposed to `analyst-group` | P1 Hard | GDPR + data policy |
+| **Scalability** | Pipeline xử lý 2x volume | Không vi phạm SLA | P3 Best-effort | Business growth 30% YoY |
+| **Cost** | Monthly cloud infra cost | < $3,000/tháng | P2 Soft | Budget được duyệt |
 
 ---
 

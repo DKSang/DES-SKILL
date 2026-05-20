@@ -13,6 +13,59 @@ Use after business discovery and before KPI design. Use when goals are known but
 
 Create a business question catalog that connects stakeholder decisions to metrics, entities, sources, data products, and model design — ensuring every analytical output is tied to a real business decision.
 
+## Conventions
+
+- Bare paths (e.g. `steps/step-01-convert-decisions.md`) resolve from the skill root.
+- `{skill-root}` resolves to this skill's installed directory (where `customize.toml` lives).
+- `{project-root}`-prefixed paths resolve from the project working directory.
+- `{skill-name}` resolves to the skill directory's basename.
+
+## WORKFLOW ARCHITECTURE
+
+This uses **step-file architecture** for disciplined execution:
+
+- **Micro-file Design**: Each step is self-contained and followed exactly.
+- **Just-In-Time Loading**: Only load the current step file.
+- **Sequential Enforcement**: Complete steps in order, no skipping.
+- **State Tracking**: Persist progress via workflow status file.
+- **Human-in-the-Loop**: HALT at decision points and wait for confirmation.
+
+### Critical Rules (NO EXCEPTIONS)
+
+- 🛑 **NEVER** load multiple step files simultaneously.
+- 📖 **ALWAYS** read entire step file before execution.
+- 🚫 **NEVER** skip steps or optimize the sequence.
+- ⏸️ **ALWAYS** halt at menus and wait for user input.
+
+## On Activation
+
+### Step 1: Resolve the Workflow Block
+
+Run: `python3 {project-root}/_des/scripts/resolve_customization.py --skill {skill-root} --key workflow`
+
+**If the script fails**, resolve the `workflow` block by reading in order:
+1. `{skill-root}/customize.toml` — defaults
+2. `{project-root}/_des/custom/{skill-name}.toml` — team overrides
+3. `{project-root}/_des/custom/{skill-name}.user.toml` — personal overrides
+
+### Step 2: Load Persistent Facts
+
+Treat every entry in `{workflow.persistent_facts}` as foundational context. Entries prefixed `file:` — load the referenced contents.
+
+### Step 3: Load Config
+
+Load config from `{project-root}/_des/des/config.yaml` and resolve:
+- `project_name`, `user_name`, `communication_language`, `document_output_language`
+- Fall back to Vietnamese if config is missing.
+
+### Step 4: Greet and Begin
+
+Greet `user_name`. Activation complete.
+
+## Next Step
+
+Read fully and follow: `./steps/step-01-convert-decisions.md`
+
 ## Inputs Required
 
 - Business discovery brief (`01-business-discovery.md`).
@@ -34,23 +87,22 @@ Use this classification to guide the analytical architecture: Descriptive/Diagno
 
 ## Step-By-Step Process
 
-1. List every stakeholder decision documented in the discovery brief.
-2. Convert each decision into one or more answerable business questions.
-3. For each question, define: audience, decision enabled, priority, grain, time window, and output type (use Decision Matrix).
-4. Identify required measures, dimensions, entities, and filter conditions.
-5. Flag ambiguous terms (e.g., "Revenue", "Active User", "Churn") that need glossary resolution.
-6. Verify: can the question be answered with existing or acquirable source data?
-7. Map each business question to candidate KPIs, data products, and domain entities.
+Refer to the individual step files in the `steps/` folder:
+1. `steps/step-01-convert-decisions.md` — Chuyển quyết định kinh doanh thành câu hỏi nghiệp vụ có grain và loại phân tích.
+2. `steps/step-02-validate-and-enrich.md` — Xác thực khả năng trả lời, phát hiện thuật ngữ mơ hồ, ánh xạ KPI ứng viên.
+3. `steps/step-03-draft-and-handoff.md` — Soạn thảo catalog, kiểm tra chất lượng, ghi artifact, bàn giao.
 
 ## Output File
 
+The output_file path is configured in customize.toml. Default:
+
 Write the final artifact to:
 
-`.agents/des-skill/output/02-business-questions.md`
+`{project-root}/_des-output/planning-artifacts/02-business-questions.md`
 
 Use the matching template from:
 
-`.agents/des-skill/templates/02-business-questions-template.md`
+`{skill-root}/../../templates/02-business-questions-template.md`
 
 After writing the file, summarize the file path and recommend the next skill.
 

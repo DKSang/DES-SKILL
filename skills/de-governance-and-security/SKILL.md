@@ -55,13 +55,16 @@ Create governance and security controls that make the data platform trustworthy,
 
 ## Output File
 
+
+The output_file path is configured in `customize.toml`. Default:
+
 Write the final artifact to:
 
-`.agents/des-skill/output/19-governance-and-security.md`
+`{project-root}/_des-output/planning-artifacts/19-governance-and-security.md`
 
 Use the matching template from:
 
-`.agents/des-skill/templates/19-governance-and-security-template.md`
+`{skill-root}/../../templates/19-governance-and-security-template.md`
 
 After writing the file, summarize the file path and recommend the next skill.
 

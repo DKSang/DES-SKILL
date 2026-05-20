@@ -1,29 +1,44 @@
 # Architecture Design Document
 
-This template is used during Phase 07 (Architecture Design) to document the overall system design, technology choices, tradeoffs, and data flow for the data engineering solution.
+Template này được dùng trong Phase 07 để tài liệu hóa kiến trúc hệ thống, lựa chọn công nghệ, và Architectural Decision Records (ADRs). Người dùng tự điền; xóa ví dụ khi hoàn thành.
+
+> **Nguyên tắc FDE**: Phân biệt rõ quyết định **One-way door** (khó đảo ngược — cần coi trọng) và **Two-way door** (dễ đảo ngược — quyết định nhanh). Chọn công cụ vì lý do kỹ thuật/nghiệp vụ, không phải vì phổ biến.
 
 ---
 
-## 1. Context & Business Requirements
+## 1. Bối Cảnh và Yêu Cầu Nghiệp Vụ
 
-*   **Project / Domain**: (e.g., `sales_analytics_platform`)
-*   **Data Maturity Level of Organization**: Level 1 (Ad-hoc) / Level 2 (Scaling) / Level 3 (Data-Led) *(Choose one — this shapes recommended complexity)*
-*   **Business SLA**: (e.g., dashboards refreshed hourly; ML features updated daily; reports delivered by 8AM)
-*   **Team Constraints**: (e.g., 2 data engineers, strong Python/SQL skills, no Scala/JVM experience)
-*   **Scale Estimates**: (e.g., 50M events/day, 200GB raw/day, 3 years data history = ~200TB total)
+- **Dự án / Domain**: (Ví dụ: `sales_analytics_platform`)
+- **Data Maturity Level hiện tại**:
+
+| Level | Dấu hiệu | Kinh nghiệm cần | Anti-Pattern |
+| :--- | :--- | :--- | :--- |
+| **Level 1** (Ad-hoc) | Analytics thủ công, 1-2 nguồn, monolithic DB | Xây batch pipeline cơ bản | Over-engineer streaming trước khi batch chạy ổn |
+| **Level 2** (Scaling) | Nhiều nguồn, orchestration DAG, DQ issues | Formal ingestion, RBAC, DAG + DQ | Thiếu DQ check, silent failure |
+| **Level 3** (Data-Led) | Real-time, data mesh, ML trong production | Automate contracts, FinOps, dev platform | Tool-first architecture; bỏ qua metadata |
+
+- **Business SLA**: (Ví dụ: dashboard làm mới hằng giờ; ML features cập nhật hằng ngày; báo cáo by 8AM)
+- **Team Constraints**: (Ví dụ: 2 data engineers, Python/SQL mạnh, không có Scala/JVM)
+- **Scale Estimates**: (Ví dụ: 50M events/ngày, 200GB raw/ngày, 3 năm lịch sử = ~200TB)
+- **Development Path**: Local-first (DuckDB/dbt local) / Cloud-first / Hybrid
 
 ---
 
-## 2. Architecture Decision Summary
+## 2. Tóm Tắt Quyết định Kiến Trúc
 
-| Decision Area | Choice Made | Reversibility (Easy / Hard) | Key Rationale | Primary Trade-off |
+> **FDE Reversibility Framework**: Gán nhãn cho mọi quyết định lớn:
+> - **Two-way door** (có thể đảo ngược dễ dàng) → Quyết định nhanh, không cần phân tích sâu.
+> - **One-way door** (khó thay đổi sau — dữ liệu migration, vendor lock-in) → Yêu cầu team approval; tài liệu hóa alternatives.
+
+| Decision Area | Lựa chọn | Reversibility | Rationale | Trade-off chính |
 | :--- | :--- | :--- | :--- | :--- |
-| Storage Platform | *e.g., Azure ADLS Gen2* | Hard (platform lock-in) | Cost-effective object storage, native Delta Lake support | Egress costs if migrating to another cloud |
-| Compute Engine | *e.g., Databricks / dbt + Snowflake* | Medium | Managed Spark; familiar to the team | Higher cost vs. self-managed clusters |
-| Ingestion Tool | *e.g., Azure Data Factory + Kafka* | Medium | Fully managed pipelines + real-time streaming | Kafka requires ops expertise |
-| Orchestration | *e.g., Apache Airflow on AKS* | Easy | OSS, portable DAGs | Self-hosted maintenance burden |
-| Transformation | *e.g., dbt Core* | Easy | SQL-native, version controlled, testable | Requires Spark for large-scale transforms |
-| Serving | *e.g., Power BI + FastAPI* | Easy | Analyst-familiar BI; API for operational consumers | Multiple serving tools to maintain |
+| Storage Platform | *Ví dụ: Azure ADLS Gen2* | **One-way door** (platform lock-in) | Cost-effective, native Delta Lake | Egress cost nếu migrate |
+| Compute Engine | *Ví dụ: Databricks / dbt + Snowflake* | Two-way door | Managed Spark; familiar | Chi phí cao hơn self-managed |
+| Ingestion Tool | *Ví dụ: ADF + Kafka* | Two-way door | Managed pipelines + streaming | Kafka cần ops expertise |
+| Orchestration | *Ví dụ: Airflow* | Two-way door | OSS, portable DAGs | Self-hosted burden |
+| Transformation | *Ví dụ: dbt Core* | Two-way door | SQL-native, version controlled | Spark cho large-scale |
+| Storage Format | *Ví dụ: Delta Lake* | **One-way door** (full rewrite để migrate) | ACID transactions, time travel | Vên dối nếu cần Iceberg |
+| Serving | *Ví dụ: Power BI + FastAPI* | Two-way door | Analyst-familiar; API cho operational | Nhiều serving tools |
 
 ---
 

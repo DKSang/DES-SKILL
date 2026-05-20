@@ -57,13 +57,16 @@ Define a semantic model that acts as a single source of truth for certified metr
 
 ## Output File
 
+
+The output_file path is configured in `customize.toml`. Default:
+
 Write the final artifact to:
 
-`.agents/des-skill/output/16-semantic-model-design.md`
+`{project-root}/_des-output/planning-artifacts/16-semantic-model-design.md`
 
 Use the matching template from:
 
-`.agents/des-skill/templates/16-semantic-model-design-template.md`
+`{skill-root}/../../templates/16-semantic-model-design-template.md`
 
 After writing the file, summarize the file path and recommend the next skill.
 

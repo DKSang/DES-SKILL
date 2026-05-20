@@ -1,0 +1,19 @@
+[skill]
+name = "de-architecture-review"
+version = "1.0.0"
+phase = "architecture"
+input_templates = ["07-architecture-design-template.md", "07b-architecture-decision-record-template.md"]
+output_template = "07b-architecture-review-template.md"
+
+[workflow]
+
+  [workflow.persistent_facts]
+  fde_maturity_levels = """
+  Level 1 (Ad-hoc): Batch cơ bản, 1-2 nguồn. Anti-pattern: streaming trước khi batch ổn định.
+  Level 2 (Scaling): Orchestration, DQ, RBAC. Anti-pattern: thiếu DQ, silent failure.
+  Level 3 (Data-Led): Streaming, data contracts, FinOps. Anti-pattern: tool-first, bỏ metadata.
+  """
+  fde_six_undercurrents = "Security, Data Management, DataOps, Data Architecture, Orchestration, Software Engineering"
+  fde_reversibility = "One-way door: storage platform, storage format, cloud vendor. Two-way door: tools, transformation, serving."
+
+  output_file = "{project-root}/_des-output/planning-artifacts/07b-architecture-review.md"

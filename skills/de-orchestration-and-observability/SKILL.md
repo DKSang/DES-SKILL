@@ -54,17 +54,19 @@ Define how pipelines run, recover, alert, and prove they met data freshness and 
 7. Write runbooks for the 3 most common failure scenarios.
 8. Define backfill procedure and validate idempotency.
 
-## Output Files
+## Output File
+
+The output_file path is configured in `customize.toml`. Default:
 
 Write the final artifacts to:
 
-- `.agents/des-skill/output/15-orchestration-and-observability.md` (main design)
-- `.agents/des-skill/output/15b-pipeline-specs.md` (one spec per pipeline)
+- `{project-root}/_des-output/planning-artifacts/15-orchestration-and-observability.md` (main design)
+- `{project-root}/_des-output/planning-artifacts/15b-pipeline-specs.md` (one spec per pipeline)
 
 Use the matching templates from:
 
-- `.agents/des-skill/templates/15-orchestration-and-observability-template.md`
-- `.agents/des-skill/templates/15b-pipeline-spec-template.md`
+- `{skill-root}/../../templates/15-orchestration-and-observability-template.md`
+- `{skill-root}/../../templates/15b-pipeline-spec-template.md`
 
 After writing the files, summarize paths and recommend the next skill.
 

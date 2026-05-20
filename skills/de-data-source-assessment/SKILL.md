@@ -13,6 +13,37 @@ Use after KPIs and requirements are known. Use before ingestion or architecture 
 
 Create a source inventory and readiness assessment that shows which systems can support the data product, where risks remain, and what agreements must be in place before building.
 
+## Conventions
+
+- Bare paths (e.g. `steps/step-01-enumerate-sources.md`) resolve from the skill root.
+- `{skill-root}` resolves to this skill's installed directory.
+- `{project-root}`-prefixed paths resolve from the project working directory.
+
+## WORKFLOW ARCHITECTURE
+
+This uses **step-file architecture** for disciplined execution:
+
+- **Sequential Enforcement**: Complete steps in order, no skipping.
+- **Human-in-the-Loop**: HALT mandatory — source access and CDC log retention must be confirmed by humans, not assumed.
+
+### Critical Rules (NO EXCEPTIONS)
+
+- 🛑 **NEVER** load multiple step files simultaneously.
+- ⏸️ **ALWAYS** halt at menus and wait for user input.
+- 🚫 **NEVER** assume CDC is possible without confirming log retention period.
+
+## On Activation
+
+Run: `python3 {project-root}/_des/scripts/resolve_customization.py --skill {skill-root} --key workflow`
+
+If script fails, read in order: `{skill-root}/customize.toml` → team override → user override.
+
+Load config from `{project-root}/_des/des/config.yaml`. Greet `user_name`. Activation complete.
+
+## Next Step
+
+Read fully and follow: `./steps/step-01-enumerate-sources.md`
+
 ## Inputs Required
 
 - KPI catalog and requirements from `03-requirements-and-kpis.md`.
@@ -46,13 +77,15 @@ Use these rules to select the right characterization strategy per source:
 
 ## Output File
 
+The output_file path is configured in `customize.toml`. Default:
+
 Write the final artifact to:
 
-`.agents/des-skill/output/05-data-source-assessment.md`
+`{project-root}/_des-output/planning-artifacts/05-data-source-assessment.md`
 
 Use the matching template from:
 
-`.agents/des-skill/templates/05-data-source-assessment-template.md`
+`{skill-root}/../../templates/05-data-source-assessment-template.md`
 
 After writing the file, summarize the file path and recommend the next skill.
 
