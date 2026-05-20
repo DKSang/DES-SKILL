@@ -8,17 +8,19 @@
     "des-skill": "bin/des-skill.js"
   },
   "files": [
-    "bin/",
-    "skills/",
-    "templates/",
-    "checklists/",
-    "workflows/",
-    "examples/",
-    "tools/validate-skills.js",
-    "DES-WORKFLOW.md",
-    "README.md",
-    "LICENSE"
-  ],
+  "bin/",
+  "skills/",
+  "templates/",
+  "checklists/",
+  "workflows/",
+  "examples/",
+  "tools/validate-skills.js",
+  "tools/validate-artifacts.js",
+  "DES-WORKFLOW.md",
+  "ARTIFACTS.md",
+  "README.md",
+  "LICENSE"
+],
   "scripts": {
     "test": "node --test",
     "validate:skills": "node tools/validate-skills.js"
