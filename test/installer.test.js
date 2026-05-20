@@ -30,7 +30,7 @@ test("installs all top-level skills into the requested directory", () => {
     assert.ok(fs.existsSync(path.join(target, "using-des-skill", "SKILL.md")));
     assert.ok(fs.existsSync(path.join(target, "de-business-discovery", "SKILL.md")));
     assert.ok(fs.existsSync(path.join(target, "de-ingestion-design", "SKILL.md")));
-    assert.ok(fs.existsSync(path.join(target, "des-skill", "SKILL.md")));
+    assert.equal(fs.existsSync(path.join(target, "des-skill", "SKILL.md")), false);
     assert.equal(fs.existsSync(path.join(target, ".gh-skill-install-test")), false);
   } finally {
     fs.rmSync(tmpRoot, { recursive: true, force: true });

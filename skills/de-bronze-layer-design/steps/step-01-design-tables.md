@@ -2,27 +2,65 @@
 
 ## Quy tắc
 - Trả lời bằng `communication_language` đã cấu hình.
-- HALT tại checkpoint và chờ người dùng xác nhận.
+- Bronze giữ source truth để replay/audit; không áp dụng business logic hoặc drop raw fields.
+- HALT nếu serialization format hoặc partition strategy làm mất replay guarantee, tạo quá nhiều small files, hoặc lock-in không được chấp nhận.
 
 ## Hướng dẫn
 
 ### 1. Nạp artifact đầu vào
-Đọc: Source assessment (05), Ingestion design (08).
+Đọc: Source assessment (05), Ingestion design (08), Architecture decision (07), Governance/Security nếu đã có.
 
-### 2. Thiết kế Bronze table cho mỗi nguồn
-- Giữ nguyên raw schema từ nguồn — KHÔNG transform
-- Thêm metadata columns: _ingested_at, _source_id, _batch_id, _file_path (nếu file)
-- Quyết định serialization format: Parquet / Delta / Iceberg
-- Quyết định partition strategy: by ingestion date
-- Retention policy: bao lâu giữ raw data?
+### 2. Chọn serialization/table format
 
-### 3. FDE Checklist
-- [ ] Compute và Storage tách biệt
-- [ ] Partition cardinality phù hợp (không quá high)
-- [ ] Serialization format match với downstream query pattern
+| Requirement | Parquet | Delta Lake | Iceberg | Avro/JSON landing |
+| :--- | :---: | :---: | :---: | :---: |
+| Columnar analytics scan | 5 | 5 | 5 | 1 |
+| ACID/table evolution | 1 | 5 | 5 | 1 |
+| Multi-engine portability | 4 | 3 | 5 | 3 |
+| Streaming/schema registry fit | 2 | 4 | 4 | 5 |
+| Operational simplicity | 5 | 3 | 3 | 4 |
+| Time travel/replay | 1 | 5 | 5 | 2 |
+| **Total** |  |  |  |  |
 
-### 4. Menu tương tác
+Guidance:
+- Use raw JSON/Avro only for landing when exact payload fidelity is required; convert to columnar Bronze for analytics.
+- Use Delta/Iceberg when replay, schema evolution, ACID writes, or time travel are required.
+- Use plain Parquet only for append-only, low-governance, simple batch workloads.
+
+### 3. Partition and file layout
+
+| Design item | Default | HALT if |
+| :--- | :--- | :--- |
+| Partition key | `ingestion_date` | Proposed key is high-cardinality (`user_id`, UUID, order_id) |
+| Target file size | 100MB-1GB compressed | Expected files are consistently < 50MB |
+| Clustering/Z-order | top 1-3 frequent filters only | Clustering every column or no query pattern evidence |
+| Replay write mode | append + run metadata, or partition overwrite for replay window | Re-run can duplicate records without dedup key |
+
+### 4. Bronze schema and metadata
+
+| Source | Bronze table/path | Format | Partition | Metadata columns | Retention | PII access |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+
+Mandatory metadata:
+- `des_ingestion_timestamp`
+- `des_source_system`
+- `des_source_offset`
+- `des_pipeline_run_id`
+- `des_payload_hash`
+
+### 5. HALT — Bronze replay and storage review
+
+Trình bày:
+
+| Source | Format | Partition | Replay safe? | Small-file risk | Retention | Blocking gap |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+
+Menu:
 - **[C] Tiếp tục**: Chuyển sang soạn thảo.
+- **[F] Sửa format**: Chọn lại Parquet/Delta/Iceberg/landing format.
+- **[P] Sửa partition/file layout**: Giảm cardinality hoặc small-file risk.
+- **[R] Sửa replay/retention**: Bổ sung replay và lifecycle policy.
 
 HALT và chờ người dùng chọn.
+
 - On **[C]**: Chuyển sang `./step-02-draft-and-handoff.md`.

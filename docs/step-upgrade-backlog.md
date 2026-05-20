@@ -53,3 +53,20 @@
 | `de-data-product-definition` | Phase 1/2+ separation + per-product spec gate + SLA consistency check |
 | `de-domain-modeling` | HALT grain declaration + M:M bridge enforcement + SCD identification |
 | `de-data-source-assessment` | FDE write pattern classification + CDC log retention check |
+| `de-architecture-design` | Tier 1 batch: one-way-door ADR HALT + reversibility taxonomy + storage/deployment scoring matrix |
+| `de-ingestion-design` | Tier 1 batch: bounded/unbounded classification + checkpoint/idempotency/DLQ gate |
+| `de-gold-layer-design` | Tier 1 batch: Kimball/Inmon/OBT scoring + grain re-declaration + conformed dimension gate |
+| `de-transformation-design` | Tier 1 batch: full-refresh vs incremental strategy + idempotency + late/delete handling gate |
+| `de-data-quality` | Tier 1 batch: Bronze/Silver/Gold DQ dimension policy + anomaly formula + owner/action HALT |
+| `de-semantic-model-design` | Tier 2 batch: single metric authority enforcement + semantic layer pattern + RLS test gate |
+| `de-lineage-and-metadata` | Tier 2 batch: column-level lineage for PII/metrics + catalog steward gate + schema registry compatibility |
+| `de-governance-and-security` | Tier 2 batch: PII-in-Gold HALT + PDPD/regulatory scope + masking/tokenization/access control gate |
+| `de-data-contracts` | Tier 2 batch: semver breaking-change policy + consumer-driven contract tests + notification/deprecation gate |
+| `de-orchestration-and-observability` | Tier 2 batch: sensor-vs-schedule decision + retry backoff formula + SLA/alert/runbook gate |
+| `de-bronze-layer-design` | Tier 3 batch: Parquet/Delta/Iceberg scoring + partition/file-layout + replay/retention gate |
+| `de-silver-layer-design` | Tier 3 batch: SCD Type 2 MERGE key design + dedup/late/delete/quarantine gate |
+| `de-serving-layer-design` | Tier 3 batch: serving interface decision + caching/materialization tree + semantic/access gate |
+| `de-cost-and-performance-optimization` | Tier 3 batch: FinOps capacity model + ROI priority + correctness/rollback gate |
+| `de-cicd-and-testing` | Tier 3 batch: contract-test enforcement + promotion/secrets/rollback release gate |
+| `de-project-evaluation` | Tier 3 batch: adoption metrics + evidence-based Go/No-Go + remediation gate |
+| `de-semantic-and-serving-layer` | Routing-only skill kept intentionally unchanged |

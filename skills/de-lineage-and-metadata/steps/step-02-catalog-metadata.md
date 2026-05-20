@@ -2,22 +2,60 @@
 
 ## Quy tắc
 - Trả lời bằng `communication_language` đã cấu hình.
-- HALT tại checkpoint và chờ người dùng xác nhận.
+- Không catalog dataset bằng tên kỹ thuật trống nghĩa; mỗi dataset/column phải có business definition và steward.
+- HALT nếu schema registry compatibility mode chưa rõ cho streaming/event contracts.
 
 ## Hướng dẫn
 
-### 1. Với mỗi dataset, định nghĩa metadata
-- Business definition (ngôn ngữ nghiệp vụ)
-- Technical owner và business steward
-- PII classification (nếu có)
-- Certification status (Draft / Certified / Deprecated)
-- Last updated, update frequency
+### 1. Dataset catalog entry
 
-### 2. Schema registry
-Nếu dùng streaming: confirm schema registry setup và compatibility mode.
+Với mỗi dataset managed:
 
-### 3. Menu tương tác
+| Dataset | Business definition | Classification | Certification | Business steward | Technical steward | SLA |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+
+Certification values:
+- Draft: chưa dùng production.
+- Certified: được owner duyệt cho consumer chính thức.
+- Deprecated: còn tồn tại nhưng có migration path.
+
+### 2. Column metadata
+
+| Dataset | Column | Business meaning | Data type | Sensitivity | Lineage link | Quality rule |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+
+Không chấp nhận column description kiểu "ID column" nếu business key/entity không rõ.
+
+### 3. Schema registry setup
+
+Nếu có streaming/events/API contracts:
+
+| Stream/API | Schema format | Registry | Compatibility mode | Breaking change owner |
+| :--- | :--- | :--- | :--- | :--- |
+| (topic) | Avro/JSON Schema/Protobuf | Confluent/Fabric/custom | BACKWARD/FORWARD/FULL/NONE | owner |
+
+Decision guide:
+- BACKWARD: consumer cũ đọc được schema mới; thường dùng cho event evolution.
+- FULL: backward + forward; dùng khi nhiều consumer độc lập và deploy không đồng bộ.
+- NONE: chỉ cho prototype; không dùng production contract.
+
+### 4. Metadata completeness gate
+
+| Gate | Pass condition |
+| :--- | :--- |
+| Dataset ownership | Every managed dataset has business + technical steward |
+| Column definitions | Every exposed column has business meaning |
+| Classification | Every dataset/column has sensitivity label |
+| Lineage link | PII and certified metrics link to column-level lineage |
+| Schema registry | Streaming/event datasets have compatibility mode |
+
+Nếu gate fail, HALT.
+
+### 5. Menu tương tác
 - **[C] Tiếp tục**: Xác nhận metadata, chuyển sang soạn thảo.
+- **[O] Bổ sung owner/steward**: Không tiếp tục nếu dataset managed thiếu owner.
+- **[S] Sửa schema registry**: Chọn compatibility mode trước khi bàn giao.
 
 HALT và chờ người dùng chọn.
+
 - On **[C]**: Chuyển sang `./step-03-draft-and-handoff.md`.
