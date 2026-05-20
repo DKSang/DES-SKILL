@@ -2,9 +2,9 @@
 
 [![npm](https://img.shields.io/npm/v/@dksang/des-skill?color=0ea5e9&label=npm)](https://www.npmjs.com/package/@dksang/des-skill)
 [![License: MIT](https://img.shields.io/badge/license-MIT-22c55e.svg)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-6%2F6%20pass-22c55e)](test/)
-[![Skills](https://img.shields.io/badge/skills-22%20phases-7c3aed)](skills/)
-[![Step Files](https://img.shields.io/badge/step%20files-42-0ea5e9)](skills/)
+[![Tests](https://img.shields.io/badge/tests-8%2F8%20pass-22c55e)](test/)
+[![Skills](https://img.shields.io/badge/skills-32-7c3aed)](skills/)
+[![Step Files](https://img.shields.io/badge/step%20files-89-0ea5e9)](skills/)
 
 Reusable Agent Skills for end-to-end Data Engineering project delivery.
 
@@ -226,6 +226,19 @@ Do not jump directly into coding. A production-oriented data project starts with
 | `de-cost-and-performance-optimization` | Cost and performance review |
 | `de-cicd-and-testing` | CI/CD and test plan |
 | `de-project-evaluation` | Release readiness review |
+
+## Support Skill Index
+
+These optional skills help move from approved planning artifacts into implementation, review, verification, and retrospective work. They follow a BMad-style support loop: brainstorm change, plan implementation, build from artifacts, review, verify with fresh evidence, then capture follow-up.
+
+| Skill | Main Artifact |
+| --- | --- |
+| `de-brainstorm-change` | Change brief |
+| `de-implementation-planning` | Implementation plan |
+| `de-build-from-artifacts` | Implementation log |
+| `de-review-implementation` | Review report |
+| `de-verify-delivery` | Verification report |
+| `de-implementation-retrospective` | Implementation retrospective |
 
 ## Release Pinning
 

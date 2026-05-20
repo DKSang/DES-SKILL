@@ -80,6 +80,23 @@ Track the current state of each undercurrent across all active phases:
 
 ---
 
+## Implementation Support Progress
+
+Use this section when moving from planning artifacts into implementation work. These support skills are optional and can be used whenever enough planning context exists. Keep the status current so build, review, verification, and retrospective work can resume safely across sessions.
+
+| Support Artifact | Skill | Status | Notes |
+| :--- | :--- | :--- | :--- |
+| `change-brief.md` | `de-brainstorm-change` | Not Started | Scope change, new feature, or incident follow-up |
+| `implementation-plan.md` | `de-implementation-planning` | Not Started | Tasks mapped to planning artifacts |
+| `implementation-log.md` | `de-build-from-artifacts` | Not Started | Files changed, tests run, deviations |
+| `review-report.md` | `de-review-implementation` | Not Started | Findings against artifacts/contracts/DQ/security |
+| `verification-report.md` | `de-verify-delivery` | Not Started | Fresh command evidence |
+| `implementation-retrospective.md` | `de-implementation-retrospective` | Not Started | Lessons, artifact drift, follow-up backlog |
+
+**Status values**: `Not Started` → `In Progress` → `Done` → `Blocked (reason)` → `Skipped (reason)`
+
+---
+
 ## Key Decisions Log
 
 | Date | Phase | Decision Made | Rationale | Reversibility | Artifact Reference |

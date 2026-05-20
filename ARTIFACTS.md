@@ -29,10 +29,24 @@ If an older skill document mentions a legacy artifact filename, prefer the canon
 | 21 | `de-cicd-and-testing` | `.agents/des-skill/output/21-cicd-and-testing.md` | `.agents/des-skill/templates/21-cicd-and-testing-template.md` |
 | 22 | `de-project-evaluation` | `.agents/des-skill/output/22-project-evaluation.md` | `.agents/des-skill/templates/22-project-evaluation-template.md` |
 
+## Support Artifact Map
+
+Support artifacts are produced when implementation work starts from approved DES planning artifacts. They are deliberately separate from phase artifacts so code work, review findings, fresh evidence, and retrospective follow-up can be audited without rewriting upstream planning artifacts.
+
+| Support Skill | Output |
+| --- | --- |
+| `de-brainstorm-change` | `_des-output/implementation-artifacts/change-brief.md` |
+| `de-implementation-planning` | `_des-output/implementation-artifacts/implementation-plan.md` |
+| `de-build-from-artifacts` | `_des-output/implementation-artifacts/implementation-log.md` |
+| `de-review-implementation` | `_des-output/implementation-artifacts/review-report.md` |
+| `de-verify-delivery` | `_des-output/implementation-artifacts/verification-report.md` |
+| `de-implementation-retrospective` | `_des-output/implementation-artifacts/implementation-retrospective.md` |
+
 ## Rules
 
 - Write artifacts to the canonical output path.
 - Use the canonical template path.
 - Update `.agents/des-skill/sprint-status/des-workflow-status.md` after each artifact.
+- Keep implementation support artifacts under `_des-output/implementation-artifacts/`.
 - Do not skip earlier artifacts unless they already exist and are good enough.
 - If a skill-specific `SKILL.md` conflicts with this table, this table wins.

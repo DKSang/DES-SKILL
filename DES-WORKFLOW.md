@@ -61,6 +61,23 @@ Create it from:
 21. `de-cicd-and-testing`
 22. `de-project-evaluation`
 
+## Support Skills
+
+Use these skills outside the numbered phase flow when implementation work, change handling, review, verification, or retrospective capture is needed. They do not replace phases 01-22; they consume approved phase artifacts and preserve traceability from planning to code and delivery evidence.
+
+Recommended support loop:
+
+`de-brainstorm-change` -> `de-implementation-planning` -> `de-build-from-artifacts` -> `de-review-implementation` -> `de-verify-delivery` -> `de-implementation-retrospective`
+
+| Skill | Use When |
+| :--- | :--- |
+| `de-brainstorm-change` | Explore a new change request, feature, incident follow-up, or scope adjustment before implementation planning |
+| `de-implementation-planning` | Convert approved DES artifacts into a concrete implementation plan |
+| `de-build-from-artifacts` | Implement code, config, tests, or docs from an approved implementation plan |
+| `de-review-implementation` | Review changed files against planning artifacts, contracts, DQ, and security expectations |
+| `de-verify-delivery` | Run final verification and record command evidence before completion or release claims |
+| `de-implementation-retrospective` | Capture lessons, artifact drift, technical debt, and follow-up backlog after delivery |
+
 ## Compatibility Skill
 
 `de-semantic-and-serving-layer` is retained as a compatibility bridge for projects that combine semantic modeling and serving design in one step. Prefer `de-semantic-model-design` and `de-serving-layer-design` for new work.

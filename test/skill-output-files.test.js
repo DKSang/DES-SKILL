@@ -31,6 +31,24 @@ const outputSpecs = [
   ["de-semantic-and-serving-layer", "16-17-semantic-and-serving-layer.md", null]
 ];
 
+const supportOutputSpecs = [
+  ["de-brainstorm-change", "change-brief.md"],
+  ["de-implementation-planning", "implementation-plan.md"],
+  ["de-build-from-artifacts", "implementation-log.md"],
+  ["de-review-implementation", "review-report.md"],
+  ["de-verify-delivery", "verification-report.md"],
+  ["de-implementation-retrospective", "implementation-retrospective.md"]
+];
+
+const supportWorkflowRequirements = {
+  "de-brainstorm-change": ["HALT", "affected artifacts", "decision log"],
+  "de-implementation-planning": ["readiness", "acceptance criteria", "artifact traceability"],
+  "de-build-from-artifacts": ["status", "implementation log", "HALT"],
+  "de-review-implementation": ["findings", "severity", "artifact compliance"],
+  "de-verify-delivery": ["fresh", "evidence", "completion claim"],
+  "de-implementation-retrospective": ["artifact drift", "follow-up", "next workflow"]
+};
+
 
 test("phase skills declare concrete output files", () => {
   for (const [skill, outputFile, template] of outputSpecs) {
@@ -53,6 +71,46 @@ test("phase skills declare concrete output files", () => {
       } else {
         assert.match(content, /Use the example output format below/, `${skill} should point to its example format`);
       }
+    }
+  }
+});
+
+test("support skills declare implementation artifact outputs", () => {
+  for (const [skill, outputFile] of supportOutputSpecs) {
+    const skillDir = path.join(repoRoot, "skills", skill);
+    const skillPath = path.join(skillDir, "SKILL.md");
+    const customizePath = path.join(skillDir, "customize.toml");
+
+    assert.ok(fs.existsSync(skillPath), `${skill} is missing SKILL.md`);
+    assert.ok(fs.existsSync(customizePath), `${skill} is missing customize.toml`);
+
+    const skillContent = fs.readFileSync(skillPath, "utf8");
+    const customizeContent = fs.readFileSync(customizePath, "utf8");
+
+    assert.match(skillContent, /## Output File/, `${skill} is missing Output File section`);
+    assert.match(skillContent, /implementation-artifacts/, `${skill} should describe implementation artifact output`);
+    assert.match(customizeContent, new RegExp(`_des-output/implementation-artifacts/${outputFile}`), `${skill} has wrong support output file`);
+  }
+});
+
+test("support skills use BMad-style multi-step guardrails", () => {
+  for (const [skill] of supportOutputSpecs) {
+    const skillDir = path.join(repoRoot, "skills", skill);
+    const skillPath = path.join(skillDir, "SKILL.md");
+    const stepsDir = path.join(skillDir, "steps");
+    const skillContent = fs.readFileSync(skillPath, "utf8");
+    const stepFiles = fs.readdirSync(stepsDir).filter((name) => /^step-\d{2}-.+\.md$/.test(name));
+    const combinedStepContent = stepFiles
+      .map((name) => fs.readFileSync(path.join(stepsDir, name), "utf8"))
+      .join("\n");
+    const searchable = `${skillContent}\n${combinedStepContent}`.toLowerCase();
+
+    assert.ok(stepFiles.length >= 3, `${skill} should have at least 3 workflow steps`);
+    assert.match(skillContent, /## Workflow Architecture/, `${skill} should describe workflow architecture`);
+    assert.match(skillContent, /## Execution Rules/, `${skill} should define execution rules`);
+
+    for (const phrase of supportWorkflowRequirements[skill]) {
+      assert.ok(searchable.includes(phrase.toLowerCase()), `${skill} is missing guardrail phrase: ${phrase}`);
     }
   }
 });
