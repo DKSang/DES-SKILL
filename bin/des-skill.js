@@ -153,9 +153,8 @@ function installSupportWorkspace(root, workspaceDir, force) {
     );
   }
 
-  const workflowSource = path.join(root, "DES-WORKFLOW.md");
-  const workflowTarget = path.join(workspaceDir, "DES-WORKFLOW.md");
-  copyFileIfExists(workflowSource, workflowTarget, force);
+  copyFileIfExists(path.join(root, "DES-WORKFLOW.md"), path.join(workspaceDir, "DES-WORKFLOW.md"), force);
+  copyFileIfExists(path.join(root, "ARTIFACTS.md"), path.join(workspaceDir, "ARTIFACTS.md"), force);
 
   createWorkflowStatus(root, workspaceDir, force);
 }
