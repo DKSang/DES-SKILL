@@ -27,6 +27,7 @@ test("installs all top-level skills into the requested directory", () => {
       encoding: "utf8"
     });
 
+    assert.ok(fs.existsSync(path.join(target, "using-des-skill", "SKILL.md")));
     assert.ok(fs.existsSync(path.join(target, "de-business-discovery", "SKILL.md")));
     assert.ok(fs.existsSync(path.join(target, "de-ingestion-design", "SKILL.md")));
     assert.ok(fs.existsSync(path.join(target, "des-skill", "SKILL.md")));
@@ -50,11 +51,15 @@ test("creates the project support workspace next to installed skills", () => {
     assert.ok(fs.existsSync(path.join(workspace, "output")));
     assert.ok(fs.existsSync(path.join(workspace, "planning")));
     assert.ok(fs.existsSync(path.join(workspace, "sprint-status")));
-    assert.ok(fs.existsSync(path.join(workspace, "templates", "business_discovery_template.md")));
+    assert.ok(fs.existsSync(path.join(workspace, "sprint-status", "des-workflow-status.md")));
+    assert.ok(fs.existsSync(path.join(workspace, "templates", "01-business-discovery-template.md")));
+    assert.ok(fs.existsSync(path.join(workspace, "templates", "22-project-evaluation-template.md")));
+    assert.ok(fs.existsSync(path.join(workspace, "templates", "workflow_status_template.md")));
     assert.ok(fs.existsSync(path.join(workspace, "checklists", "business_readiness_checklist.md")));
     assert.ok(fs.existsSync(path.join(workspace, "workflows", "new-project-workflow.md")));
     assert.ok(fs.existsSync(path.join(workspace, "examples", "example_iot_project.md")));
     assert.ok(fs.existsSync(path.join(workspace, "DES-WORKFLOW.md")));
+    assert.ok(fs.existsSync(path.join(workspace, "ARTIFACTS.md")));
   } finally {
     fs.rmSync(tmpRoot, { recursive: true, force: true });
   }
