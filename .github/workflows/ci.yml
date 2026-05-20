@@ -1,25 +1,13 @@
 name: CI
-
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-
+on: [push, pull_request]
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      - name: Run installer tests
-        run: npm test
-
-      - name: Validate skills and artifact map
-        run: npm run validate:skills
+      - run: npm test
+      - run: npm run validate:skills
+      - run: node tools/validate-artifacts.js
