@@ -14,12 +14,14 @@
     "checklists/",
     "workflows/",
     "examples/",
+    "tools/validate-skills.js",
     "DES-WORKFLOW.md",
     "README.md",
     "LICENSE"
   ],
   "scripts": {
-    "test": "node --test"
+    "test": "node --test",
+    "validate:skills": "node tools/validate-skills.js"
   },
   "engines": {
     "node": ">=18"
