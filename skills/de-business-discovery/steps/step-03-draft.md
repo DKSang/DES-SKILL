@@ -25,18 +25,29 @@ Verify the drafted brief against the `business_readiness_checklist.md` checklist
 
 Output a brief checklist validation report.
 
-### 4. Write Final Output File
+### 4. Configured checklist gate
+
+Trước khi ghi file hoặc update workflow status:
+- Resolve checklist_file từ customize.toml.
+- Load toàn bộ checklist file đã cấu hình.
+- Kiểm tra draft artifact theo từng checklist item.
+- Ghi checklist validation report ngắn với trạng thái Pass / Needs Work / Blocked.
+- Nếu có item Blocked hoặc thiếu evidence bắt buộc, HALT và không mark phase completed.
+- Chỉ cho phép override nếu người dùng xác nhận rõ ràng và ghi override vào artifact/status.
+
+
+### 5. Write Final Output File
 Save the finalized brief to the configured output path:
 - File Path: `{project-root}/_des-output/planning-artifacts/01-business-discovery.md` (or the customized path from `customize.toml`).
 
 Create parent directories recursively if they do not exist.
 
-### 5. Update Status File
+### 6. Update Status File
 Update the status tracking file:
 - File Path: `{project-root}/_des-output/implementation-artifacts/des-workflow-status.md` (or as configured).
 Mark `de-business-discovery` as `Completed`.
 
-### 6. Interactive Handoff Menu
+### 7. Interactive Handoff Menu
 Present the final brief path and show this menu:
 
 - **[C] Complete and Handoff**: Finalize the current step and output the command to trigger the next skill (`de-business-questions`).

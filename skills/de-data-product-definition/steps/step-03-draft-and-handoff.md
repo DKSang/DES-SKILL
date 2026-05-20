@@ -25,13 +25,24 @@
 - [ ] Phase 2+ products được tách biệt — không mixed vào Phase 1 scope
 - [ ] Dependency thứ tự triển khai được ghi rõ
 
-### 4. Ghi artifact và cập nhật trạng thái
+### 4. Configured checklist gate
+
+Trước khi ghi file hoặc update workflow status:
+- Resolve checklist_file từ customize.toml.
+- Load toàn bộ checklist file đã cấu hình.
+- Kiểm tra draft artifact theo từng checklist item.
+- Ghi checklist validation report ngắn với trạng thái Pass / Needs Work / Blocked.
+- Nếu có item Blocked hoặc thiếu evidence bắt buộc, HALT và không mark phase completed.
+- Chỉ cho phép override nếu người dùng xác nhận rõ ràng và ghi override vào artifact/status.
+
+
+### 5. Ghi artifact và cập nhật trạng thái
 
 - Lưu vào: `{project-root}/_des-output/planning-artifacts/04-data-product-definition.md`
 - Cập nhật: `{project-root}/_des-output/implementation-artifacts/des-workflow-status.md`
 - Đánh dấu `de-data-product-definition` là `Đã hoàn thành`
 
-### 5. Menu bàn giao
+### 6. Menu bàn giao
 
 - **[C] Hoàn thành và Bàn giao**
 - **[R] Soạn lại**

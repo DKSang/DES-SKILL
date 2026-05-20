@@ -23,7 +23,8 @@ function skillExists(skillName) {
 }
 
 function parseRows(content) {
-  return content.split("\n")
+  const parts = content.split("## Optional Phase Artifacts");
+  return parts[0].split("\n")
     .filter((line) => /^\| \d{2} \| `/.test(line))
     .map((line) => {
       const cells = line.split("|").map((cell) => cell.trim());

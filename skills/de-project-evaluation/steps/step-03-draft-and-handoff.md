@@ -40,13 +40,24 @@ Artifact phải có:
 
 Nếu gate fail, HALT và không update status completed.
 
-### 4. Ghi file và cập nhật trạng thái
+### 4. Configured checklist gate
+
+Trước khi ghi file hoặc update workflow status:
+- Resolve checklist_file từ customize.toml.
+- Load toàn bộ checklist file đã cấu hình.
+- Kiểm tra draft artifact theo từng checklist item.
+- Ghi checklist validation report ngắn với trạng thái Pass / Needs Work / Blocked.
+- Nếu có item Blocked hoặc thiếu evidence bắt buộc, HALT và không mark phase completed.
+- Chỉ cho phép override nếu người dùng xác nhận rõ ràng và ghi override vào artifact/status.
+
+
+### 5. Ghi file và cập nhật trạng thái
 Nếu gate pass:
 - Lưu vào `22-project-evaluation.md`.
 - Nếu là lifecycle review, lưu thêm `23-data-lifecycle-review.md`.
 - Update workflow status: completed only for GO or accepted Conditional-Go; otherwise mark remediation required.
 
-### 5. Menu bàn giao
+### 6. Menu bàn giao
 - **[C] Hoàn thành**: Project evaluation complete. Nếu GO -> bắt đầu Phase 2 với `de-business-discovery`.
 - **[R] Soạn lại**: Quay lại step-01.
 - **[P] Lập remediation plan**: Nếu NO-GO hoặc Conditional-Go còn action.

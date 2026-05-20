@@ -43,12 +43,23 @@ Nếu gate fail, HALT và không update status completed.
 | PII/secured outputs |  |
 | Refresh/cache dependencies |  |
 
-### 4. Ghi file và cập nhật trạng thái
+### 4. Configured checklist gate
+
+Trước khi ghi file hoặc update workflow status:
+- Resolve checklist_file từ customize.toml.
+- Load toàn bộ checklist file đã cấu hình.
+- Kiểm tra draft artifact theo từng checklist item.
+- Ghi checklist validation report ngắn với trạng thái Pass / Needs Work / Blocked.
+- Nếu có item Blocked hoặc thiếu evidence bắt buộc, HALT và không mark phase completed.
+- Chỉ cho phép override nếu người dùng xác nhận rõ ràng và ghi override vào artifact/status.
+
+
+### 5. Ghi file và cập nhật trạng thái
 Nếu gate pass:
 - Lưu vào `17-serving-layer-design.md`.
 - Update workflow status cho Phase 17 là completed.
 
-### 5. Menu bàn giao
+### 6. Menu bàn giao
 - **[C] Hoàn thành**: Gợi ý `de-lineage-and-metadata`.
 - **[R] Soạn lại**: Quay lại step-01.
 - **[G] Bổ sung gate còn thiếu**: Hoàn thiện SLA/access/monitoring/onboarding.

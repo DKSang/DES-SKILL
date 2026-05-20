@@ -229,6 +229,8 @@ Key rules the agent follows:
 
 Use [skills/using-des-skill/SKILL.md](skills/using-des-skill/SKILL.md) as the router skill, [DES-WORKFLOW.md](DES-WORKFLOW.md) as the phase map, and [ARTIFACTS.md](ARTIFACTS.md) as the canonical artifact map.
 
+The router supports four adaptive workflow modes: `Quick Fix`, `Standard Feature`, `Enterprise Data Product`, and `Correct Course` (see [docs/workflow-modes.md](docs/workflow-modes.md)). It also maps responsibilities using the [docs/personas.md](docs/personas.md) layer.
+
 Track progress in:
 
 ```text
@@ -262,13 +264,6 @@ Run repository checks before publishing or changing skills:
 npm test
 npm run validate:skills
 node tools/validate-artifacts.js
-node tools/audit-checklist-usage.js
-```
-
-Use strict checklist auditing when you want missing checklist calls to fail the run:
-
-```bash
-node tools/audit-checklist-usage.js --strict
 ```
 
 The validation scripts check installer behavior, required skill files, frontmatter, key headings, package metadata, workflow references, artifact maps, templates, and configured checklist usage.

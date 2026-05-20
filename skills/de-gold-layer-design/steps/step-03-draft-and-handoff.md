@@ -56,14 +56,25 @@ Chuẩn bị thông tin cho `de-data-contracts`:
 | Breaking-change sensitive fields |  |
 | Security/RLS assumptions |  |
 
-### 5. Ghi file và cập nhật trạng thái
+### 5. Configured checklist gate
+
+Trước khi ghi file hoặc update workflow status:
+- Resolve checklist_file từ customize.toml.
+- Load toàn bộ checklist file đã cấu hình.
+- Kiểm tra draft artifact theo từng checklist item.
+- Ghi checklist validation report ngắn với trạng thái Pass / Needs Work / Blocked.
+- Nếu có item Blocked hoặc thiếu evidence bắt buộc, HALT và không mark phase completed.
+- Chỉ cho phép override nếu người dùng xác nhận rõ ràng và ghi override vào artifact/status.
+
+
+### 6. Ghi file và cập nhật trạng thái
 
 Nếu gate pass:
 - Lưu vào `11-gold-layer-design.md`
 - Update workflow status cho Phase 11 là completed
 - Ghi rõ any non-blocking risks hoặc follow-up questions
 
-### 6. Menu bàn giao
+### 7. Menu bàn giao
 
 - **[C] Hoàn thành**: Gợi ý `de-data-contracts`.
 - **[R] Soạn lại**: Quay lại step-01.
