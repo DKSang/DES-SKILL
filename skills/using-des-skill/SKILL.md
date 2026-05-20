@@ -13,6 +13,27 @@ Use this skill whenever a user starts, resumes, audits, or coordinates a data en
 
 Act as the DES-SKILL router and workflow coordinator to ensure disciplined agent execution, scan for upstream dependencies, and guide the user through the project phases.
 
+## Workflow Modes
+
+DES-SKILL uses adaptive workflow modes so small work does not require full lifecycle ceremony, while high-risk data products still receive full governance.
+
+| Mode | Use When | Default Route |
+| :--- | :--- | :--- |
+| Quick Fix | Small bug, doc correction, narrow test/config change, or low-risk cleanup | `de-build-from-artifacts` -> `de-verify-delivery`; add `de-review-implementation` when behavior changes |
+| Standard Feature | One cohesive data feature, pipeline change, model change, or contract/DQ update | `de-brainstorm-change` if unclear -> `de-implementation-planning` -> `de-build-from-artifacts` -> `de-review-implementation` -> `de-verify-delivery` |
+| Enterprise Data Product | New data product, cross-team delivery, regulated data, compliance risk, or irreversible architecture choice | Complete required phase artifacts 01-22, then run support skills |
+| Correct Course | Approved artifacts conflict with repo reality, review findings, verification failures, incident facts, or new constraints | `de-brainstorm-change` -> affected phase skill update -> `de-implementation-planning` |
+
+The router must name the selected mode, explain the reason, list missing upstream artifacts, and identify the next skill before implementation starts.
+
+## Persona Layer
+
+DES-SKILL uses personas to define responsibility boundaries for each skill. Read `docs/personas.md` when routing if available.
+
+The router must identify the primary persona and persona skill for the selected artifact/support skill, state what that persona owns, and name any cross-persona handoff. Persona changes responsibility boundaries only; it must not change quality gates, document language, or evidence requirements.
+
+Example: activate `de-persona-data-architect` for stance, then use `de-ingestion-design` for the artifact.
+
 ## Conventions
 
 - Bare paths (e.g. `steps/step-01-route.md`) resolve from the skill root.
@@ -104,6 +125,9 @@ Read fully and follow: `./steps/step-01-route.md`
 - [ ] The workflow status is updated after each completed artifact.
 - [ ] The next skill is recommended.
 - [ ] The agent explains blockers instead of guessing.
+- [ ] The selected workflow mode is explicit: Quick Fix, Standard Feature, Enterprise Data Product, or Correct Course.
+- [ ] The selected persona is explicit and matches `docs/personas.md`.
+- [ ] Missing artifacts require HALT or explicit override before build work.
 
 ## Anti-Patterns to Avoid
 

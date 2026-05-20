@@ -6,9 +6,39 @@ Use this workflow when starting, resuming, or improving a data engineering proje
 
 You are using DES-SKILL. Start with `using-des-skill` as the workflow router.
 
-Do not jump to coding. Determine the current project phase, check upstream artifacts, activate the matching skill, produce the required artifact from `templates/`, update workflow status, and hand off to the next skill.
+Do not jump to coding. Determine the workflow mode, current project phase, upstream artifacts, matching skill, required output artifact, status update, and next handoff.
 
 If a requested task depends on missing upstream artifacts, stop and produce the missing artifact first or ask for the minimum missing input.
+
+## Adaptive Workflow Modes
+
+Use the lightest mode that still protects artifact traceability and delivery evidence. See `docs/workflow-modes.md` for detailed rules.
+
+| Mode | Use When | Default Route |
+| :--- | :--- | :--- |
+| Quick Fix | Small bug, doc correction, narrow test/config change, or low-risk cleanup | `de-build-from-artifacts` -> `de-verify-delivery`; add `de-review-implementation` when behavior changes |
+| Standard Feature | One cohesive data feature, pipeline change, model change, or contract/DQ update | `de-brainstorm-change` if unclear -> `de-implementation-planning` -> `de-build-from-artifacts` -> `de-review-implementation` -> `de-verify-delivery` |
+| Enterprise Data Product | New data product, cross-team delivery, regulated data, compliance risk, or irreversible architecture choice | Complete required phase artifacts 01-22, then run support skills |
+| Correct Course | Approved artifacts conflict with repo reality, review findings, verification failures, incident facts, or new constraints | `de-brainstorm-change` -> affected phase skill update -> `de-implementation-planning` |
+
+## Persona Layer
+
+Use `docs/personas.md` to map each skill to a primary responsibility. Personas are responsibility boundaries, not roleplay tone.
+
+The router should report the selected persona, persona skill, mode, and artifact/support skill. If the work crosses responsibility boundaries, name the handoff instead of merging responsibilities into one vague agent role.
+
+| Persona | Persona Skill | Typical Ownership |
+| :--- | :--- | :--- |
+| Workflow Coordinator | `de-persona-workflow-coordinator` | routing, mode selection, status, handoff |
+| Data Product Analyst | `de-persona-data-product-analyst` | business context, questions, KPIs, product definition |
+| Source & Domain Analyst | `de-persona-source-domain-analyst` | source readiness, source behavior, domain model |
+| Data Architect | `de-persona-data-architect` | architecture, ingestion, layers, contracts, transformations |
+| Data Quality Engineer | `de-persona-data-quality-engineer` | DQ rules, orchestration, observability |
+| Analytics Engineer | `de-persona-analytics-engineer` | semantic model and serving layer |
+| Governance Reviewer | `de-persona-governance-reviewer` | lineage, metadata, privacy, security |
+| DataOps Engineer | `de-persona-dataops-engineer` | cost, performance, CI/CD, release readiness |
+| Implementation Developer | `de-persona-implementation-developer` | implementation planning and build work |
+| Delivery Reviewer | `de-persona-delivery-reviewer` | review, verification, retrospective |
 
 ## Workflow Status
 
@@ -68,6 +98,8 @@ Use these skills outside the numbered phase flow when implementation work, chang
 Recommended support loop:
 
 `de-brainstorm-change` -> `de-implementation-planning` -> `de-build-from-artifacts` -> `de-review-implementation` -> `de-verify-delivery` -> `de-implementation-retrospective`
+
+`de-implementation-planning` produces both `implementation-plan.md` and `implementation-story.md`. The story packet is the executable dev handoff for `de-build-from-artifacts`.
 
 | Skill | Use When |
 | :--- | :--- |

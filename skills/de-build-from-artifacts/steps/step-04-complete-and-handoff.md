@@ -11,4 +11,12 @@ Required handoff:
 - Deviations and unresolved risks.
 - Review notes for `de-review-implementation`.
 
-Status can be ready-for-review only when planned scope is implemented or accepted blockers are documented.
+Also update `implementation-story.md` allowed sections:
+
+- Set Status to Ready for Review, Blocked, or Complete.
+- Check completed Tasks / Subtasks.
+- Add Dev Agent Record completion notes and deviations.
+- Update File List with every new, modified, or deleted file.
+- Add Change Log entry.
+
+Status can be ready-for-review only when planned scope is implemented, file list is complete, evidence is fresh, and accepted blockers are documented.

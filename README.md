@@ -2,8 +2,8 @@
 
 [![npm](https://img.shields.io/npm/v/@dksang/des-skill?color=0ea5e9&label=npm)](https://www.npmjs.com/package/@dksang/des-skill)
 [![License: MIT](https://img.shields.io/badge/license-MIT-22c55e.svg)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-8%2F8%20pass-22c55e)](test/)
-[![Skills](https://img.shields.io/badge/skills-32-7c3aed)](skills/)
+[![Tests](https://img.shields.io/badge/tests-21%2F21%20pass-22c55e)](test/)
+[![Skills](https://img.shields.io/badge/skills-42-7c3aed)](skills/)
 [![Step Files](https://img.shields.io/badge/step%20files-89-0ea5e9)](skills/)
 
 Reusable Agent Skills for end-to-end Data Engineering project delivery.
@@ -129,12 +129,13 @@ Please follow the DES-SKILL workflow:
 1. Start with using-des-skill.
 2. Read DES-WORKFLOW.md and des-workflow-status.md if it exists.
 3. Detect the current project phase.
-4. Check whether required upstream artifacts exist.
-5. Use the matching skill from the installed skills.
-6. Do not jump to coding before business context, requirements, data sources, architecture, and quality expectations are clear.
-7. Produce the required artifact using the templates/ directory.
-8. Update .agents/des-skill/sprint-status/des-workflow-status.md.
-9. Recommend the next skill when the current artifact is complete.
+4. Select the workflow mode: Quick Fix, Standard Feature, Enterprise Data Product, or Correct Course.
+5. Check whether required upstream artifacts exist.
+6. Use the matching skill from the installed skills.
+7. Do not jump to coding before business context, requirements, data sources, architecture, and quality expectations are clear.
+8. Produce the required artifact using the templates/ directory.
+9. Update .agents/des-skill/sprint-status/des-workflow-status.md.
+10. Recommend the next skill when the current artifact is complete.
 ```
 
 Short version:
@@ -170,6 +171,19 @@ Key rules the agent follows:
 ## Workflow Entrypoint
 
 Use [skills/using-des-skill/SKILL.md](skills/using-des-skill/SKILL.md) as the router skill and [DES-WORKFLOW.md](DES-WORKFLOW.md) as the phase map.
+
+The router supports four adaptive workflow modes:
+
+| Mode | Use When |
+| --- | --- |
+| Quick Fix | Small bug, doc correction, narrow test/config change, or low-risk cleanup |
+| Standard Feature | One cohesive data feature, pipeline change, model change, or contract/DQ update |
+| Enterprise Data Product | New production data product, regulated data, cross-team work, or irreversible architecture choice |
+| Correct Course | Existing artifacts conflict with repo reality, review findings, verification failures, incidents, or new constraints |
+
+See [docs/workflow-modes.md](docs/workflow-modes.md) for routing rules.
+
+The router also uses persona skills so each artifact skill has a clear responsibility boundary. Example: activate `de-persona-data-architect` for stance, then use `de-ingestion-design` for the artifact. See [docs/personas.md](docs/personas.md).
 
 Track progress in:
 
@@ -234,11 +248,18 @@ These optional skills help move from approved planning artifacts into implementa
 | Skill | Main Artifact |
 | --- | --- |
 | `de-brainstorm-change` | Change brief |
-| `de-implementation-planning` | Implementation plan |
+| `de-implementation-planning` | Implementation plan + implementation story |
 | `de-build-from-artifacts` | Implementation log |
 | `de-review-implementation` | Review report |
 | `de-verify-delivery` | Verification report |
 | `de-implementation-retrospective` | Implementation retrospective |
+
+Implementation support uses two delivery gates:
+
+- `checklists/implementation-readiness-checklist.md` before build handoff.
+- `checklists/definition-of-done-checklist.md` before ready-for-review, complete, release, or completion claims.
+
+Build/review/verify support also enforces red-green-refactor for behavior changes, layered findings-first review, and fresh evidence before completion claims.
 
 ## Release Pinning
 

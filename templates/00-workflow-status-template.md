@@ -15,8 +15,27 @@
 | **Data Maturity Level** | Level 1 / Level 2 / Level 3 |
 | **Current Phase** | (e.g., `09 - Bronze Layer Design`) |
 | **Active Skill** | (e.g., `de-bronze-layer-design`) |
+| **Workflow Mode** | Quick Fix / Standard Feature / Enterprise Data Product / Correct Course |
+| **Active Persona** | Workflow Coordinator / Data Product Analyst / Source & Domain Analyst / Data Architect / Data Quality Engineer / Analytics Engineer / Governance Reviewer / DataOps Engineer / Implementation Developer / Delivery Reviewer |
 | **Next Recommended Skill** | (e.g., `de-silver-layer-design`) |
 | **Last Updated** | YYYY-MM-DD |
+
+---
+
+## Workflow Mode Decision
+
+| Mode | Status | Reason | Required Next Skill / Gate |
+| :--- | :--- | :--- | :--- |
+| Quick Fix | Not Selected | Small bug, doc correction, narrow test/config change, or low-risk cleanup | `de-build-from-artifacts` -> `de-verify-delivery` |
+| Standard Feature | Not Selected | One cohesive data feature, pipeline change, model change, or contract/DQ update | `de-implementation-planning` before build |
+| Enterprise Data Product | Not Selected | New production data product, regulated data, cross-team work, or irreversible decision | Required phase artifacts 01-22 |
+| Correct Course | Not Selected | Artifact conflict, review blocker, verification failure, incident fact, or scope change | `de-brainstorm-change` then affected phase update |
+
+**Selected Mode**:
+
+**Explicit Override Granted?** Yes / No / N/A
+
+**Mode Blockers**:
 
 ---
 
@@ -88,12 +107,24 @@ Use this section when moving from planning artifacts into implementation work. T
 | :--- | :--- | :--- | :--- |
 | `change-brief.md` | `de-brainstorm-change` | Not Started | Scope change, new feature, or incident follow-up |
 | `implementation-plan.md` | `de-implementation-planning` | Not Started | Tasks mapped to planning artifacts |
+| `implementation-story.md` | `de-implementation-planning` | Not Started | Executable dev packet with ACs, tasks, guardrails, file list, change log |
 | `implementation-log.md` | `de-build-from-artifacts` | Not Started | Files changed, tests run, deviations |
 | `review-report.md` | `de-review-implementation` | Not Started | Findings against artifacts/contracts/DQ/security |
 | `verification-report.md` | `de-verify-delivery` | Not Started | Fresh command evidence |
 | `implementation-retrospective.md` | `de-implementation-retrospective` | Not Started | Lessons, artifact drift, follow-up backlog |
 
 **Status values**: `Not Started` → `In Progress` → `Done` → `Blocked (reason)` → `Skipped (reason)`
+
+---
+
+## Implementation Readiness / Definition of Done
+
+| Gate | Checklist | Status | Notes |
+| :--- | :--- | :--- | :--- |
+| Implementation Readiness | `checklists/implementation-readiness-checklist.md` | Not Started | Must pass before `de-build-from-artifacts` unless risk is explicitly accepted |
+| Definition of Done | `checklists/definition-of-done-checklist.md` | Not Started | Must support ready-for-review, complete, release, or completion claim |
+
+**Gate status values**: `Not Started` -> `Pass` -> `Blocked` -> `Ready with Accepted Risk` -> `Partial`
 
 ---
 

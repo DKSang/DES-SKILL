@@ -11,7 +11,7 @@ Use after planning artifacts or a `change-brief.md` are approved and before impl
 
 ## Purpose
 
-Create an implementation plan that is detailed enough for a developer agent to execute without inventing requirements. The plan links every task to source artifacts, defines readiness gates, and blocks work when critical inputs are missing.
+Create an implementation plan and implementation story packet that are detailed enough for a developer agent to execute without inventing requirements. The plan links every task to source artifacts, defines readiness gates, and blocks work when critical inputs are missing.
 
 ## Workflow Architecture
 
@@ -19,8 +19,8 @@ This skill follows a BMad-style story/readiness pattern adapted to DES artifacts
 
 1. `step-01-discover-inputs.md` gathers artifacts, repo context, prior implementation logs, and change briefs.
 2. `step-02-check-readiness.md` validates completeness, conflicts, dependencies, and missing decisions.
-3. `step-03-draft-implementation-plan.md` writes tasks, acceptance criteria, test plan, file boundaries, and rollback.
-4. `step-04-final-validation.md` checks that the plan is executable and ready for `de-build-from-artifacts`.
+3. `step-03-draft-implementation-plan.md` writes tasks, acceptance criteria, test plan, file boundaries, rollback, and the `implementation-story.md` dev packet.
+4. `step-04-final-validation.md` checks that the plan and implementation story are executable and ready for `de-build-from-artifacts`.
 
 ## Execution Rules
 
@@ -29,6 +29,8 @@ This skill follows a BMad-style story/readiness pattern adapted to DES artifacts
 - Missing acceptance criteria, contracts, test data, owners, or rollback strategy are readiness blockers.
 - If artifacts conflict, HALT and route back to `de-brainstorm-change` or the affected phase skill.
 - Prefer smaller executable tasks over broad "implement pipeline" work items.
+- Produce `implementation-story.md` from `templates/implementation-story-template.md` when build work is expected.
+- Apply the readiness gate in `checklists/implementation-readiness-checklist.md`; blocked readiness prevents build handoff.
 
 ## Inputs Required
 
@@ -44,6 +46,14 @@ The output_file path is configured in `customize.toml`. Default:
 
 `{project-root}/_des-output/implementation-artifacts/implementation-plan.md`
 
+This skill also produces the executable implementation story packet:
+
+`{project-root}/_des-output/implementation-artifacts/implementation-story.md`
+
+Template:
+
+`templates/implementation-story-template.md`
+
 ## Required Output Sections
 
 - Planning status and readiness decision.
@@ -53,6 +63,7 @@ The output_file path is configured in `customize.toml`. Default:
 - Test, validation, and evidence plan.
 - Rollback, migration, and operational safety notes.
 - Review checkpoints and handoff instructions.
+- Implementation story sections: Status, Source Artifact Map, Acceptance Criteria, Tasks / Subtasks, Dev Notes, Data Engineering Guardrails, Test Plan, Dev Agent Record, File List, Review Findings, Change Log.
 
 ## Quality Checklist
 
@@ -61,6 +72,8 @@ The output_file path is configured in `customize.toml`. Default:
 - [ ] Readiness blockers are explicit.
 - [ ] File boundaries and non-goals prevent scope creep.
 - [ ] Verification commands are listed before coding starts.
+- [ ] `implementation-story.md` is ready for dev and contains no unowned blockers.
+- [ ] `checklists/implementation-readiness-checklist.md` passes or accepted risks are recorded.
 
 ## Anti-Patterns to Avoid
 

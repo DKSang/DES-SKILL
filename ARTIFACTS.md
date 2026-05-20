@@ -37,6 +37,7 @@ Support artifacts are produced when implementation work starts from approved DES
 | --- | --- |
 | `de-brainstorm-change` | `_des-output/implementation-artifacts/change-brief.md` |
 | `de-implementation-planning` | `_des-output/implementation-artifacts/implementation-plan.md` |
+| `de-implementation-planning` | `_des-output/implementation-artifacts/implementation-story.md` |
 | `de-build-from-artifacts` | `_des-output/implementation-artifacts/implementation-log.md` |
 | `de-review-implementation` | `_des-output/implementation-artifacts/review-report.md` |
 | `de-verify-delivery` | `_des-output/implementation-artifacts/verification-report.md` |

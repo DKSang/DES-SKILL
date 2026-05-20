@@ -24,8 +24,10 @@ Create an evidence-backed verification report. This skill blocks false completio
 - Do not claim done until verification commands have been run in the current workspace.
 - Fresh means current command output from this session, not a previous log unless explicitly labeled historical.
 - Failed, skipped, or blocked commands must remain visible.
+- Stale evidence and failing evidence are blockers for a supported completion claim.
 - Review blockers must be resolved, accepted by the user, or called out as release blockers.
 - If evidence does not support the completion claim, HALT and route back to `de-build-from-artifacts`.
+- Use `checklists/definition-of-done-checklist.md` before supporting any completion claim.
 
 ## Inputs Required
 
@@ -57,6 +59,7 @@ The output_file path is configured in `customize.toml`. Default:
 - [ ] Review blockers are resolved or explicitly accepted.
 - [ ] Completion claim matches evidence.
 - [ ] Next workflow action is clear.
+- [ ] Definition of Done is supported, partial, or blocked with reasons.
 
 ## Anti-Patterns to Avoid
 
@@ -66,6 +69,8 @@ The output_file path is configured in `customize.toml`. Default:
 | Summarizing without command names | Evidence cannot be reproduced |
 | Ignoring skipped checks | Missing evidence becomes hidden risk |
 | Verifying only code, not artifacts | Delivery may violate DES acceptance criteria |
+| Treating stale evidence as fresh | Completion claim may describe a previous state |
+| Treating failing evidence as partial success | Known failures must block or be explicitly accepted |
 
 ## Handoff To The Next Skill
 

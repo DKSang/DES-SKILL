@@ -12,6 +12,7 @@
   "skills/",
   "templates/",
   "checklists/",
+  "docs/",
   "workflows/",
   "examples/",
   "tools/validate-skills.js",

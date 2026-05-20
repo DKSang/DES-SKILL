@@ -18,7 +18,7 @@ Find bugs, contract breaks, missing tests, security/DQ/lineage gaps, and deviati
 This skill adapts BMad code-review layering for DES work.
 
 1. `step-01-gather-context.md` loads changed files, implementation log, plan, artifacts, and evidence.
-2. `step-02-run-review-layers.md` performs artifact compliance, blind bug hunting, edge-case, and operations review.
+2. `step-02-run-review-layers.md` performs Artifact Compliance Reviewer, Blind Bug Hunter, Edge-Case and Data Failure Reviewer, Governance/Security Reviewer, and Test/Evidence Auditor passes.
 3. `step-03-triage-findings.md` orders findings by severity and removes weak noise.
 4. `step-04-write-review-report.md` writes the review report and recommendation.
 
@@ -29,6 +29,8 @@ This skill adapts BMad code-review layering for DES work.
 - Check artifact compliance separately from code correctness.
 - Do not approve if acceptance criteria, data contracts, DQ rules, security requirements, or verification evidence are missing.
 - No implementation changes in this skill unless the user explicitly asks to fix findings after review.
+- Findings first means the report starts with ordered findings before summary or praise.
+- For high-risk work, use subagent review when available: one subagent for artifact compliance and one for code/data behavior. If subagents are unavailable, run the same layers sequentially.
 
 ## Inputs Required
 
@@ -60,6 +62,7 @@ The output_file path is configured in `customize.toml`. Default:
 - [ ] Severity is justified by user/data/operational impact.
 - [ ] Artifact compliance is checked, not assumed.
 - [ ] Missing tests and unresolved risks are explicit.
+- [ ] Review layers include Artifact Compliance Reviewer, Blind Bug Hunter, Edge-Case and Data Failure Reviewer, Governance/Security Reviewer, and Test/Evidence Auditor.
 
 ## Anti-Patterns to Avoid
 

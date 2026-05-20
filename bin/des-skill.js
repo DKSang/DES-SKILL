@@ -147,7 +147,7 @@ function installSupportWorkspace(root, workspaceDir, force) {
     fs.mkdirSync(path.join(workspaceDir, directory), { recursive: true });
   }
 
-  for (const directory of ["templates", "checklists", "workflows", "examples"]) {
+  for (const directory of ["templates", "checklists", "docs", "workflows", "examples"]) {
     copyDirectoryIfExists(
       path.join(root, directory),
       path.join(workspaceDir, directory),

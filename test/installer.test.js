@@ -56,6 +56,7 @@ test("creates the project support workspace next to installed skills", () => {
     assert.ok(fs.existsSync(path.join(workspace, "templates", "22-project-evaluation-template.md")));
     assert.ok(fs.existsSync(path.join(workspace, "templates", "00-workflow-status-template.md")));
     assert.ok(fs.existsSync(path.join(workspace, "checklists", "business_readiness_checklist.md")));
+    assert.ok(fs.existsSync(path.join(workspace, "docs", "workflow-modes.md")));
     assert.ok(fs.existsSync(path.join(workspace, "workflows", "new-project-workflow.md")));
     assert.ok(fs.existsSync(path.join(workspace, "examples", "example_iot_project.md")));
     assert.ok(fs.existsSync(path.join(workspace, "DES-WORKFLOW.md")));
