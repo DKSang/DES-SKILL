@@ -1,87 +1,87 @@
-# DES-SKILL Personas
+# Các Vai Trò DES-SKILL (DES-SKILL Personas)
 
-DES-SKILL personas define responsibility boundaries. They are not roleplay tone. A persona tells the agent what it owns, what it must protect, and which artifacts it is accountable for.
+Các vai trò (personas) trong DES-SKILL xác định ranh giới trách nhiệm. Chúng không phải là giọng điệu nhập vai. Một persona chỉ ra cho agent biết nó sở hữu những gì, nó phải bảo vệ những gì và chịu trách nhiệm về những artifact nào.
 
-## Persona Summary
+## Tóm tắt Vai Trò (Persona Summary)
 
-| Persona | Persona Skill | Owns | Must Protect |
+| Persona | Persona Skill | Phạm vi sở hữu (Owns) | Trách nhiệm bảo vệ (Must Protect) |
 | --- | --- | --- | --- |
-| Workflow Coordinator | `de-persona-workflow-coordinator` | routing, mode selection, status, handoff | no phase skipping, no hidden blockers |
-| Data Product Analyst | `de-persona-data-product-analyst` | business context, analytical questions, KPIs, product definition | measurable outcomes, metric ownership, stakeholder alignment |
-| Source & Domain Analyst | `de-persona-source-domain-analyst` | source behavior, source readiness, domain model | source grain, ownership, change behavior, entity relationships |
-| Data Architect | `de-persona-data-architect` | architecture, ingestion, layers, contracts, transformations | reversibility, data contracts, grains, layer boundaries |
-| Data Quality Engineer | `de-persona-data-quality-engineer` | DQ rules, orchestration, observability, quality gates | timeliness, accuracy, validity, completeness, uniqueness, operational response |
-| Analytics Engineer | `de-persona-analytics-engineer` | semantic model and serving layer | metric consistency, serving ergonomics, access behavior |
-| Governance Reviewer | `de-persona-governance-reviewer` | lineage, metadata, privacy, governance, security | PII handling, auditability, policy compliance |
-| DataOps Engineer | `de-persona-dataops-engineer` | cost, performance, CI/CD, release readiness, project evaluation | deployment safety, rollback, FinOps, operational evidence |
-| Implementation Developer | `de-persona-implementation-developer` | implementation planning and build work | artifact traceability, scoped changes, tests, file list |
-| Delivery Reviewer | `de-persona-delivery-reviewer` | review, verification, retrospective | findings-first review, fresh evidence, artifact drift follow-up |
+| Workflow Coordinator | `de-persona-workflow-coordinator` | routing, mode selection, status, handoff | không bỏ qua phase, không che giấu blocker |
+| Data Product Analyst | `de-persona-data-product-analyst` | business context, analytical questions, KPIs, product definition | kết quả đo lường được, sở hữu metric, đồng thuận của stakeholder |
+| Source & Domain Analyst | `de-persona-source-domain-analyst` | hành vi nguồn, độ sẵn sàng nguồn, domain model | source grain, ownership, hành vi thay đổi, quan hệ thực thể |
+| Data Architect | `de-persona-data-architect` | kiến trúc, ingestion, các lớp dữ liệu, contracts, transformations | tính khả đảo (reversibility), data contracts, grains, ranh giới lớp dữ liệu |
+| Data Quality Engineer | `de-persona-data-quality-engineer` | DQ rules, orchestration, observability, quality gates | tính kịp thời, độ chính xác, tính hợp lệ, tính đầy đủ, tính duy nhất, phản hồi vận hành |
+| Analytics Engineer | `de-persona-analytics-engineer` | semantic model và serving layer | tính nhất quán của metric, độ tinh gọn của serving layer, hành vi truy cập |
+| Governance Reviewer | `de-persona-governance-reviewer` | lineage, metadata, quyền riêng tư, governance, bảo mật | xử lý PII, khả năng audit, tuân thủ chính sách |
+| DataOps Engineer | `de-persona-dataops-engineer` | chi phí, hiệu năng, CI/CD, độ sẵn sàng release, đánh giá dự án | an toàn triển khai, khả năng rollback, FinOps, bằng chứng vận hành |
+| Implementation Developer | `de-persona-implementation-developer` | lập kế hoạch triển khai và công việc build | tính truy vết artifact, thay đổi trong phạm vi, tests, danh sách file |
+| Delivery Reviewer | `de-persona-delivery-reviewer` | review, xác thực, retrospective | review ưu tiên phát hiện lỗi, bằng chứng mới, theo dõi thiết kế lệch (drift) |
 
-## Skill-To-Persona Map
+## Bản đồ Ánh xạ Skill sang Persona (Skill-To-Persona Map)
 
-| Skill | Primary Persona | Responsibility |
+| Skill | Primary Persona | Trách nhiệm (Responsibility) |
 | --- | --- | --- |
-| `using-des-skill` | Workflow Coordinator | Select mode, route skill, enforce upstream gates, update status |
-| `de-persona-workflow-coordinator` | Workflow Coordinator | Load routing stance, lifecycle lens, and handoff rules |
-| `de-persona-data-product-analyst` | Data Product Analyst | Load business/product stance and maturity lens |
-| `de-persona-source-domain-analyst` | Source & Domain Analyst | Load source generation and domain grain lens |
-| `de-persona-data-architect` | Data Architect | Load architecture, storage, ingestion, layer, contract, and transformation lens |
-| `de-persona-data-quality-engineer` | Data Quality Engineer | Load DataOps, DQ, observability, and operational response lens |
-| `de-persona-analytics-engineer` | Analytics Engineer | Load semantic, serving, access, and consumer lens |
-| `de-persona-governance-reviewer` | Governance Reviewer | Load security, lineage, metadata, and policy lens |
-| `de-persona-dataops-engineer` | DataOps Engineer | Load CI/CD, release, cost, performance, and operational evidence lens |
-| `de-persona-implementation-developer` | Implementation Developer | Load implementation stance and artifact traceability boundaries |
-| `de-persona-delivery-reviewer` | Delivery Reviewer | Load review, verification, evidence, and retrospective stance |
-| `de-business-discovery` | Data Product Analyst | Capture business context, stakeholders, decisions, constraints |
-| `de-business-questions` | Data Product Analyst | Translate business needs into analytical questions and grains |
-| `de-requirements-and-kpis` | Data Product Analyst | Define requirements, KPIs, SLAs, metric ownership |
-| `de-data-product-definition` | Data Product Analyst | Define data product purpose, users, boundaries, success criteria |
-| `de-data-source-assessment` | Source & Domain Analyst | Assess source systems, write behavior, schema, ownership, readiness |
-| `de-domain-modeling` | Source & Domain Analyst | Model entities, relationships, grain, SCD and bridge needs |
-| `de-architecture-design` | Data Architect | Select architecture, storage/deployment patterns, ADRs |
-| `de-architecture-review` | Data Architect | Review architecture decisions, reversibility, risks, gaps |
-| `de-ingestion-design` | Data Architect | Design batch/streaming/CDC ingestion, checkpoints, DLQ, idempotency |
-| `de-bronze-layer-design` | Data Architect | Define raw landing structure, serialization, replay, retention |
-| `de-silver-layer-design` | Data Architect | Define conformed cleansed model, keys, dedup, late/delete handling |
-| `de-gold-layer-design` | Data Architect | Define analytical marts, facts/dimensions, OBT/Kimball choices |
-| `de-data-contracts` | Data Architect | Define producer/consumer contracts, schema policy, compatibility |
-| `de-contract-review` | Data Architect | Review contract completeness, breaking changes, consumer impact |
-| `de-transformation-design` | Data Architect | Define transformation strategy, incremental logic, idempotency |
-| `de-data-quality` | Data Quality Engineer | Define DQ rules, thresholds, owners, actions, anomaly baselines |
-| `de-orchestration-and-observability` | Data Quality Engineer | Define orchestration, retries, monitoring, alerts, runbooks |
-| `de-semantic-model-design` | Analytics Engineer | Define certified metrics, semantic layer, RLS, metric authority |
-| `de-serving-layer-design` | Analytics Engineer | Define serving interfaces, caching, access patterns, consumer fit |
-| `de-semantic-and-serving-layer` | Analytics Engineer | Compatibility bridge for combined semantic and serving workflows |
-| `de-lineage-and-metadata` | Governance Reviewer | Define lineage, metadata, catalog stewardship, schema registry |
-| `de-governance-and-security` | Governance Reviewer | Define privacy, PII, masking/tokenization, access controls |
-| `de-cost-and-performance-optimization` | DataOps Engineer | Evaluate cost, performance, capacity, ROI, rollback |
-| `de-cicd-and-testing` | DataOps Engineer | Define CI/CD, promotion, contract tests, release gates |
-| `de-project-evaluation` | DataOps Engineer | Evaluate release readiness, adoption, value, lifecycle follow-up |
-| `de-brainstorm-change` | Workflow Coordinator | Clarify change, impact, options, blockers, correct-course path |
-| `de-implementation-planning` | Implementation Developer | Convert artifacts into implementation plan and executable tasks |
-| `de-build-from-artifacts` | Implementation Developer | Implement scoped changes from artifacts with evidence and logs |
-| `de-review-implementation` | Delivery Reviewer | Review changes against artifacts, contracts, DQ, security, evidence |
-| `de-verify-delivery` | Delivery Reviewer | Run fresh verification and decide whether completion is supported |
-| `de-implementation-retrospective` | Delivery Reviewer | Capture artifact drift, debt, lessons, follow-up backlog |
+| `using-des-skill` | Workflow Coordinator | Chọn mode, route skill, thực thi gate thượng nguồn, cập nhật trạng thái |
+| `de-persona-workflow-coordinator` | Workflow Coordinator | Nạp góc nhìn định tuyến, lăng kính lifecycle, và các quy tắc bàn giao |
+| `de-persona-data-product-analyst` | Data Product Analyst | Nạp góc nhìn nghiệp vụ/sản phẩm và lăng kính độ trưởng thành dự án |
+| `de-persona-source-domain-analyst` | Source & Domain Analyst | Nạp góc nhìn sinh dữ liệu nguồn và lăng kính hạt dữ liệu (grain) domain |
+| `de-persona-data-architect` | Data Architect | Nạp góc nhìn kiến trúc, lưu trữ, ingestion, các lớp dữ liệu, contract, và chuyển đổi |
+| `de-persona-data-quality-engineer` | Data Quality Engineer | Nạp góc nhìn DataOps, DQ, khả năng quan sát, và phản hồi vận hành |
+| `de-persona-analytics-engineer` | Analytics Engineer | Nạp góc nhìn semantic model, serving layer, quyền truy cập, và người tiêu dùng dữ liệu |
+| `de-persona-governance-reviewer` | Governance Reviewer | Nạp góc nhìn bảo mật, lineage, metadata, và chính sách |
+| `de-persona-dataops-engineer` | DataOps Engineer | Nạp góc nhìn CI/CD, release, chi phí, hiệu năng, và bằng chứng vận hành |
+| `de-persona-implementation-developer` | Implementation Developer | Nạp góc nhìn triển khai và các ranh giới truy vết thiết kế artifact |
+| `de-persona-delivery-reviewer` | Delivery Reviewer | Nạp góc nhìn review, verify, bằng chứng bàn giao, và đúc rút kinh nghiệm |
+| `de-business-discovery` | Data Product Analyst | Ghi nhận bối cảnh nghiệp vụ, stakeholder, các quyết định và ràng buộc |
+| `de-business-questions` | Data Product Analyst | Chuyển dịch nhu cầu nghiệp vụ thành các câu hỏi phân tích và grain tương ứng |
+| `de-requirements-and-kpis` | Data Product Analyst | Định nghĩa các yêu cầu, KPIs, SLAs, và người sở hữu metric |
+| `de-data-product-definition` | Data Product Analyst | Định nghĩa mục đích data product, người dùng, ranh giới và tiêu chí thành công |
+| `de-data-source-assessment` | Source & Domain Analyst | Đánh giá hệ thống nguồn, ghi nhận hành vi ghi, schema, ownership, độ sẵn sàng |
+| `de-domain-modeling` | Source & Domain Analyst | Mô hình hóa thực thể, các quan hệ, grain, nhu cầu SCD và bridge tables |
+| `de-architecture-design` | Data Architect | Lựa chọn kiến trúc, các mẫu lưu trữ/triển khai, ghi nhận các ADR |
+| `de-architecture-review` | Data Architect | Review các quyết định kiến trúc, khả năng đảo ngược, rủi ro, lỗ hổng |
+| `de-ingestion-design` | Data Architect | Thiết kế batch/streaming/CDC ingestion, checkpoint, DLQ, tính lũy đẳng |
+| `de-bronze-layer-design` | Data Architect | Định nghĩa cấu trúc landing raw, serialization, replay, lưu trữ |
+| `de-silver-layer-design` | Data Architect | Định nghĩa model đã chuẩn hóa và làm sạch, keys, dedup, xử lý bản ghi muộn/xóa |
+| `de-gold-layer-design` | Data Architect | Định nghĩa marts phân tích, facts/dimensions, lựa chọn OBT/Kimball |
+| `de-data-contracts` | Data Architect | Định nghĩa hợp đồng giữa producer/consumer, chính sách schema, tính tương thích |
+| `de-contract-review` | Data Architect | Review tính đầy đủ của contract, các thay đổi đột ngột (breaking changes), ảnh hưởng consumer |
+| `de-transformation-design` | Data Architect | Định nghĩa chiến lược transform, logic incremental, tính lũy đẳng |
+| `de-data-quality` | Data Quality Engineer | Định nghĩa quy tắc DQ, ngưỡng lỗi (thresholds), owner, hành động xử lý, baseline dị thường |
+| `de-orchestration-and-observability` | Data Quality Engineer | Định nghĩa bộ điều phối (orchestration), thử lại, giám sát, cảnh báo, runbooks |
+| `de-semantic-model-design` | Analytics Engineer | Định nghĩa certified metrics, semantic layer, RLS, cơ quan quản lý metric |
+| `de-serving-layer-design` | Analytics Engineer | Định nghĩa giao diện serving, caching, access patterns, độ phù hợp người tiêu dùng |
+| `de-semantic-and-serving-layer` | Analytics Engineer | Cầu nối tương thích cho các workflow kết hợp semantic và serving |
+| `de-lineage-and-metadata` | Governance Reviewer | Định nghĩa lineage, metadata, quản trị catalog, schema registry |
+| `de-governance-and-security` | Governance Reviewer | Định nghĩa quyền riêng tư, PII, masking/tokenization, kiểm soát truy cập |
+| `de-cost-and-performance-optimization` | DataOps Engineer | Đánh giá chi phí, hiệu năng, tài nguyên dự phòng, ROI, khả năng rollback |
+| `de-cicd-and-testing` | DataOps Engineer | Định nghĩa CI/CD, thăng cấp môi trường, các contract tests, release gates |
+| `de-project-evaluation` | DataOps Engineer | Đánh giá độ sẵn sàng release, mức độ tiếp nhận, giá trị, theo dõi sau triển khai |
+| `de-brainstorm-change` | Workflow Coordinator | Làm rõ yêu cầu thay đổi, ảnh hưởng, các phương án, blockers, lộ trình sửa hướng đi |
+| `de-implementation-planning` | Implementation Developer | Chuyển đổi các artifact thành kế hoạch triển khai và các task thực thi cụ thể |
+| `de-build-from-artifacts` | Implementation Developer | Triển khai các thay đổi được khoanh vùng từ các artifact kèm theo bằng chứng và log |
+| `de-review-implementation` | Delivery Reviewer | Review các thay đổi so với các artifact thiết kế, contracts, DQ, bảo mật, bằng chứng |
+| `de-verify-delivery` | Delivery Reviewer | Chạy kiểm thử xác thực mới và quyết định có hỗ trợ hoàn thành hay không |
+| `de-implementation-retrospective` | Delivery Reviewer | Ghi nhận lệch thiết kế (drift), nợ kỹ thuật (debt), bài học, tồn đọng theo dõi |
 
-## Router Rules
+## Quy tắc của Bộ Định Tuyến (Router Rules)
 
-1. Select workflow mode first.
-2. Activate the persona skill for the recommended responsibility.
-3. Select the artifact/support skill that produces the work.
-4. State what the persona owns for this step.
-5. If a request crosses personas, name the handoff instead of merging responsibilities.
-6. Persona changes responsibility boundaries only; it must not lower quality gates or change document language.
+1. Chọn chế độ quy trình (workflow mode) trước tiên.
+2. Kích hoạt persona skill tương ứng với trách nhiệm được khuyến nghị.
+3. Chọn artifact/support skill thực hiện công việc.
+4. Nêu rõ những gì persona sở hữu đối với bước này.
+5. Nếu yêu cầu vượt qua ranh giới trách nhiệm của nhiều persona, hãy nêu rõ việc bàn giao (handoff) thay vì gộp các trách nhiệm lại.
+6. Persona chỉ thay đổi ranh giới trách nhiệm; tuyệt đối không được hạ thấp các gate chất lượng hoặc thay đổi ngôn ngữ tài liệu.
 
-## Cross-Persona Handoffs
+## Bàn Giao Giữa Các Persona (Cross-Persona Handoffs)
 
-| From | To | Trigger |
+| Từ (From) | Đến (To) | Điều kiện kích hoạt (Trigger) |
 | --- | --- | --- |
-| Data Product Analyst | Source & Domain Analyst | Business questions and KPI grain are clear enough to assess sources |
-| Source & Domain Analyst | Data Architect | Source behavior and domain grain are understood |
-| Data Architect | Data Quality Engineer | Pipeline/layer design needs quality gates and operational monitoring |
-| Data Quality Engineer | Analytics Engineer | Trusted data is ready for semantic or serving design |
-| Analytics Engineer | Governance Reviewer | Serving layer exposes sensitive data, certified metrics, or access policies |
-| Governance Reviewer | DataOps Engineer | Design is ready for release, cost, CI/CD, and operational validation |
-| Implementation Developer | Delivery Reviewer | Changes are implemented and ready for independent review |
-| Delivery Reviewer | Workflow Coordinator | Verification or retrospective requires routing to the next cycle |
+| Data Product Analyst | Source & Domain Analyst | Các câu hỏi nghiệp vụ và grain của KPI đủ rõ ràng để đánh giá nguồn dữ liệu |
+| Source & Domain Analyst | Data Architect | Đã hiểu rõ hành vi nguồn dữ liệu và grain của domain |
+| Data Architect | Data Quality Engineer | Thiết kế pipeline/lớp dữ liệu cần có các quality gates và giám sát vận hành |
+| Data Quality Engineer | Analytics Engineer | Dữ liệu đáng tin cậy đã sẵn sàng cho thiết kế semantic hoặc serving |
+| Analytics Engineer | Governance Reviewer | Serving layer để lộ dữ liệu nhạy cảm, certified metrics, hoặc các chính sách truy cập |
+| Governance Reviewer | DataOps Engineer | Thiết kế đã sẵn sàng để phát hành, đánh giá chi phí, CI/CD, và xác thực vận hành |
+| Implementation Developer | Delivery Reviewer | Các thay đổi đã được triển khai xong và sẵn sàng cho việc review độc lập |
+| Delivery Reviewer | Workflow Coordinator | Bước xác thực hoặc retrospective yêu cầu định tuyến lại sang chu kỳ tiếp theo |

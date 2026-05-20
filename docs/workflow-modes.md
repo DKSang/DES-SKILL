@@ -1,71 +1,71 @@
-# DES-SKILL Workflow Modes
+# Các Chế độ Quy trình DES-SKILL (DES-SKILL Workflow Modes)
 
-DES-SKILL supports four adaptive workflow modes. Use the lightest mode that still protects artifact traceability, data quality, security, and delivery evidence.
+DES-SKILL hỗ trợ bốn chế độ quy trình thích ứng. Hãy sử dụng chế độ nhẹ nhàng nhất có thể nhưng vẫn đảm bảo tính truy vết của thiết kế (traceability), chất lượng dữ liệu (data quality), bảo mật (security), và bằng chứng bàn giao (delivery evidence).
 
-## Mode Summary
+## Tóm tắt Chế độ (Mode Summary)
 
 | Mode | Use When | Required Path |
 | --- | --- | --- |
-| Quick Fix | Small bug, doc correction, narrow test/config change, or low-risk repo cleanup | `de-build-from-artifacts` -> `de-verify-delivery`; add `de-review-implementation` when behavior changes |
-| Standard Feature | One cohesive data feature, pipeline change, model change, or contract/DQ update | `de-brainstorm-change` if scope is unclear -> `de-implementation-planning` -> `de-build-from-artifacts` -> `de-review-implementation` -> `de-verify-delivery` |
-| Enterprise Data Product | New data product, cross-team delivery, regulated data, compliance risk, or irreversible architecture choice | Complete required phase artifacts 01-22, then run the support loop |
-| Correct Course | Approved artifacts conflict with repo reality, review findings, verification failures, incident facts, or new business constraints | `de-brainstorm-change` -> affected phase skill update -> `de-implementation-planning` |
+| Quick Fix | Lỗi nhỏ, sửa tài liệu, thay đổi test/config hẹp, hoặc dọn dẹp repo ít rủi ro | `de-build-from-artifacts` -> `de-verify-delivery`; thêm `de-review-implementation` khi có thay đổi hành vi code |
+| Standard Feature | Một tính năng dữ liệu gắn kết, thay đổi pipeline, thay đổi model, hoặc cập nhật contract/DQ | `de-brainstorm-change` nếu phạm vi chưa rõ ràng -> `de-implementation-planning` -> `de-build-from-artifacts` -> `de-review-implementation` -> `de-verify-delivery` |
+| Enterprise Data Product | Sản phẩm dữ liệu mới, bàn giao liên team, dữ liệu có kiểm soát, rủi ro tuân thủ, hoặc quyết định kiến trúc khó đảo ngược | Hoàn thành tất cả các artifact bắt buộc từ phase 01-22, sau đó chạy luồng hỗ trợ (support loop) |
+| Correct Course | Các artifact đã duyệt xung đột với thực tế repo, phát hiện lỗi khi review/verify, sự cố thực tế, hoặc ràng buộc mới | `de-brainstorm-change` -> cập nhật phase skill bị ảnh hưởng -> `de-implementation-planning` |
 
-## Mode Selection Rules
+## Quy tắc Chọn Chế độ (Mode Selection Rules)
 
 ### Quick Fix
 
-Choose Quick Fix only when all conditions are true:
+Chỉ chọn Quick Fix khi tất cả các điều kiện sau đây đều thỏa mãn:
 
-- The change is narrow and reversible.
-- No business metric, source grain, data contract, PII policy, or architecture decision changes.
-- Existing artifacts already explain the behavior being changed, or the user gives an explicit override.
-- Verification can be completed with local commands or artifact inspection.
+- Thay đổi có phạm vi hẹp và dễ dàng khôi phục (reversible).
+- Không làm thay đổi chỉ số nghiệp vụ (business metric), source grain, hợp đồng dữ liệu (data contract), chính sách PII, hoặc quyết định kiến trúc.
+- Các artifact hiện tại đã giải thích đầy đủ hành vi đang thay đổi, hoặc người dùng xác nhận ghi đè rõ ràng (explicit override).
+- Việc xác thực có thể hoàn thành bằng các lệnh local hoặc kiểm tra thủ công artifact.
 
-HALT and route to Standard Feature if the fix touches contracts, DQ thresholds, lineage, security, orchestration semantics, or consumer-facing datasets.
+**DỪNG LẠI (HALT)** và chuyển hướng sang Standard Feature nếu thay đổi chạm tới data contract, ngưỡng chất lượng DQ, lineage, bảo mật, logic điều phối (orchestration semantics), hoặc các tập dữ liệu cung cấp trực tiếp cho người dùng (consumer-facing datasets).
 
 ### Standard Feature
 
-Choose Standard Feature when the work has one shippable goal but needs planning before code. This is the default implementation mode for normal DES work.
+Chọn Standard Feature khi công việc có một mục tiêu bàn giao cụ thể nhưng cần lập kế hoạch rõ ràng trước khi viết code. Đây là chế độ mặc định cho các công việc triển khai thông thường trong DES.
 
-Required gates:
+Các gate bắt buộc:
 
-- Source artifact or change brief exists.
-- Acceptance criteria are testable.
-- Files/modules likely to change are identified.
-- Validation commands are known or blockers are recorded.
+- Có source artifact hoặc change brief.
+- Tiêu chí nghiệm thu (acceptance criteria) có thể kiểm thử được.
+- Xác định được các file/module có khả năng bị thay đổi.
+- Biết rõ các câu lệnh xác thực (validation commands) hoặc ghi nhận lại các trở ngại (blockers).
 
 ### Enterprise Data Product
 
-Choose Enterprise Data Product when the work creates or materially changes a production data product, shared metric layer, governed dataset, external contract, or multi-team pipeline.
+Chọn Enterprise Data Product khi công việc tạo mới hoặc thay đổi lớn một sản phẩm dữ liệu production, lớp metric dùng chung, tập dữ liệu có kiểm soát, hợp đồng dữ liệu bên ngoài, hoặc pipeline liên quan đến nhiều team.
 
-Required gates:
+Các gate bắt buộc:
 
-- Upstream phase artifacts are complete enough for the target phase.
-- Irreversible decisions have explicit approval.
-- Security, governance, lineage, DQ, observability, and CI/CD implications are not skipped.
+- Các artifact thượng nguồn đầy đủ cho phase mục tiêu.
+- Các quyết định khó đảo ngược (irreversible decisions) có sự phê duyệt rõ ràng từ người dùng.
+- Không bỏ qua các ảnh hưởng liên quan đến bảo mật (security), quản trị (governance), lineage, DQ, khả năng quan sát (observability), và CI/CD.
 
 ### Correct Course
 
-Choose Correct Course when implementation evidence shows the plan is wrong or stale.
+Chọn Correct Course khi bằng chứng thực thi cho thấy kế hoạch hiện tại bị sai hoặc đã cũ.
 
-Triggers:
+Các trường hợp kích hoạt (Triggers):
 
-- Artifact conflicts with code reality.
-- Review or verification exposes missing requirements.
-- Source system behavior changed.
-- A release blocker invalidates the current plan.
-- User changes scope after planning.
+- Thiết kế trong artifact xung đột với thực tế code.
+- Kết quả review hoặc verify phát hiện ra các yêu cầu bị thiếu sót.
+- Hành vi của hệ thống nguồn thay đổi.
+- Xuất hiện lỗi chặn phát hành (release blocker) làm vô hiệu hóa kế hoạch hiện tại.
+- Người dùng thay đổi phạm vi nghiệp vụ sau khi đã lập kế hoạch.
 
-Correct Course produces or updates a change brief first, then routes to the affected phase skill or implementation planning.
+Correct Course sẽ tạo mới hoặc cập nhật change brief trước tiên, sau đó chuyển hướng sang phase skill bị ảnh hưởng hoặc lập kế hoạch triển khai.
 
-## Router Output
+## Đầu ra của Router (Router Output)
 
-The router should always report:
+Bộ định tuyến (router) phải luôn báo cáo:
 
-- Selected mode.
-- Why that mode fits.
-- Required upstream artifacts.
-- Missing artifacts or blockers.
-- Recommended next skill.
-- Whether an explicit override is required.
+- Chế độ được chọn (Selected mode).
+- Lý do tại sao chế độ đó phù hợp.
+- Các artifact thượng nguồn bắt buộc (Required upstream artifacts).
+- Các artifact còn thiếu hoặc các trở ngại (blockers).
+- Skill khuyến nghị tiếp theo.
+- Có yêu cầu xác nhận ghi đè rõ ràng hay không.

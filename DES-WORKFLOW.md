@@ -1,33 +1,33 @@
-# DES-SKILL Workflow
+# Quy trình làm việc DES-WORKFLOW (DES-SKILL Workflow)
 
-Use this workflow when starting, resuming, or improving a data engineering project.
+Sử dụng quy trình này khi bắt đầu, tiếp tục hoặc cải thiện một dự án data engineering.
 
-## Agent Instruction
+## Hướng dẫn cho Agent (Agent Instruction)
 
-You are using DES-SKILL. Start with `using-des-skill` as the workflow router.
+Bạn đang sử dụng DES-SKILL. Bắt đầu với `using-des-skill` đóng vai trò là bộ định tuyến quy trình (workflow router).
 
-Do not jump to coding. Determine the workflow mode, current project phase, upstream artifacts, matching skill, required output artifact, status update, and next handoff.
+Tuyệt đối KHÔNG nhảy vào viết code ngay lập tức. Xác định chế độ quy trình (workflow mode), phase hiện tại của dự án, các artifact thượng nguồn (upstream artifacts), skill phù hợp (matching skill), artifact đầu ra yêu cầu (required output artifact), cập nhật trạng thái (status update), và bước bàn giao tiếp theo (next handoff).
 
-If a requested task depends on missing upstream artifacts, stop and produce the missing artifact first or ask for the minimum missing input.
+Nếu một task được yêu cầu phụ thuộc vào các artifact thượng nguồn còn thiếu, DỪNG LẠI và tạo các artifact thiếu đó trước, hoặc yêu cầu người dùng cung cấp thông tin đầu vào tối thiểu còn thiếu.
 
-## Adaptive Workflow Modes
+## Các Chế độ Quy trình Thích ứng (Adaptive Workflow Modes)
 
-Use the lightest mode that still protects artifact traceability and delivery evidence. See `docs/workflow-modes.md` for detailed rules.
+Sử dụng chế độ nhẹ nhàng nhất có thể nhưng vẫn đảm bảo tính truy vết của artifact (traceability) và bằng chứng bàn giao (delivery evidence). Xem `docs/workflow-modes.md` để biết thêm quy tắc chi tiết.
 
 | Mode | Use When | Default Route |
 | :--- | :--- | :--- |
-| Quick Fix | Small bug, doc correction, narrow test/config change, or low-risk cleanup | `de-build-from-artifacts` -> `de-verify-delivery`; add `de-review-implementation` when behavior changes |
-| Standard Feature | One cohesive data feature, pipeline change, model change, or contract/DQ update | `de-brainstorm-change` if unclear -> `de-implementation-planning` -> `de-build-from-artifacts` -> `de-review-implementation` -> `de-verify-delivery` |
-| Enterprise Data Product | New data product, cross-team delivery, regulated data, compliance risk, or irreversible architecture choice | Complete required phase artifacts 01-22, then run support skills |
-| Correct Course | Approved artifacts conflict with repo reality, review findings, verification failures, incident facts, or new constraints | `de-brainstorm-change` -> affected phase skill update -> `de-implementation-planning` |
+| Quick Fix | Lỗi nhỏ, sửa đổi tài liệu, thay đổi test/config phạm vi hẹp, hoặc dọn dẹp repo ít rủi ro | `de-build-from-artifacts` -> `de-verify-delivery`; thêm `de-review-implementation` nếu có thay đổi hành vi code |
+| Standard Feature | Một tính năng dữ liệu gắn kết, thay đổi pipeline, thay đổi model, hoặc cập nhật contract/DQ | `de-brainstorm-change` nếu phạm vi chưa rõ ràng -> `de-implementation-planning` -> `de-build-from-artifacts` -> `de-review-implementation` -> `de-verify-delivery` |
+| Enterprise Data Product | Sản phẩm dữ liệu mới hoặc thay đổi lớn, bàn giao giữa các team, dữ liệu có kiểm soát, rủi ro tuân thủ, hoặc quyết định kiến trúc khó đảo ngược | Hoàn thành các artifact yêu cầu từ Phase 01-22, sau đó chạy support loop |
+| Correct Course | Các artifact đã duyệt xung đột với thực tế repo, phát hiện lỗi khi review/verify, sự cố thực tế, hoặc ràng buộc mới | `de-brainstorm-change` -> cập nhật phase skill bị ảnh hưởng -> `de-implementation-planning` |
 
-## Persona Layer
+## Lớp Persona Layer (Data Engineering Personas)
 
-Use `docs/personas.md` to map each skill to a primary responsibility. Personas are responsibility boundaries, not roleplay tone.
+Sử dụng `docs/personas.md` để ánh xạ mỗi skill tới một trách nhiệm chính (primary responsibility). Personas là ranh giới trách nhiệm, không phải là giọng điệu nhập vai.
 
-The router should report the selected persona, persona skill, mode, and artifact/support skill. If the work crosses responsibility boundaries, name the handoff instead of merging responsibilities into one vague agent role.
+Router cần báo cáo persona được chọn, persona skill, mode, và artifact/support skill tương ứng. Nếu công việc vượt qua ranh giới trách nhiệm, hãy nêu rõ việc bàn giao (handoff) thay vì gộp các trách nhiệm vào một vai trò agent mơ hồ.
 
-| Persona | Persona Skill | Typical Ownership |
+| Persona | Persona Skill | Phạm vi sở hữu (Typical Ownership) |
 | :--- | :--- | :--- |
 | Workflow Coordinator | `de-persona-workflow-coordinator` | routing, mode selection, status, handoff |
 | Data Product Analyst | `de-persona-data-product-analyst` | business context, questions, KPIs, product definition |
@@ -40,33 +40,43 @@ The router should report the selected persona, persona skill, mode, and artifact
 | Implementation Developer | `de-persona-implementation-developer` | implementation planning and build work |
 | Delivery Reviewer | `de-persona-delivery-reviewer` | review, verification, retrospective |
 
-## Workflow Status
+## Cổng kiểm soát Checklist (Configured Checklist Gate)
 
-Track progress in:
+Trước khi ghi file thiết kế hoặc cập nhật trạng thái quy trình, Agent bắt buộc phải đi qua cổng kiểm soát chất lượng sau:
+- Xác định file checklist (`checklist_file`) được khai báo trong `customize.toml` của skill hiện tại.
+- Tải toàn bộ nội dung file checklist đã cấu hình.
+- Đối chiếu bản thảo thiết kế (draft artifact) với từng tiêu chí kiểm tra (checklist item).
+- Ghi lại báo cáo validation ngắn gọn chứa trạng thái kiểm tra: `Pass` (Đạt) / `Needs Work` (Cần bổ sung) / `Blocked` (Bị chặn).
+- Nếu phát hiện có tiêu chí bị `Blocked` hoặc thiếu bằng chứng (evidence) bắt buộc, Agent phải **DỪNG LẠI (HALT)** và không đánh dấu phase hiện tại là hoàn thành (`completed`).
+- Việc bỏ qua chốt chặn (override) chỉ được chấp nhận nếu người dùng xác nhận rõ ràng và hành động ghi đè này được lưu vết trong artifact hoặc báo cáo trạng thái.
+
+## Trạng thái Quy trình (Workflow Status)
+
+Theo dõi tiến độ trong file:
 
 `.agents/des-skill/sprint-status/des-workflow-status.md`
 
-Create it from:
+Tạo file này từ template:
 
-`.agents/des-skill/templates/workflow_status_template.md`
+`.agents/des-skill/templates/00-workflow-status-template.md`
 
 ## Phase 0: Router
 
 0. `using-des-skill`
 
-## Phase 1: Business & Requirements
+## Phase 1: Business & Requirements (Nghiệp vụ & Yêu cầu)
 
 1. `de-business-discovery`
 2. `de-business-questions`
 3. `de-requirements-and-kpis`
 4. `de-data-product-definition`
 
-## Phase 2: Data & Domain
+## Phase 2: Data & Domain (Dữ liệu & Domain)
 
 5. `de-data-source-assessment`
 6. `de-domain-modeling`
 
-## Phase 3: Architecture & Layers
+## Phase 3: Architecture & Layers (Kiến trúc & Các Lớp Dữ liệu)
 
 7. `de-architecture-design`
 8. `de-ingestion-design`
@@ -74,14 +84,14 @@ Create it from:
 10. `de-silver-layer-design`
 11. `de-gold-layer-design`
 
-## Phase 4: Quality, Contracts, Orchestration
+## Phase 4: Quality, Contracts, Orchestration (Chất lượng, Hợp đồng dữ liệu & Điều phối)
 
 12. `de-data-contracts`
 13. `de-transformation-design`
 14. `de-data-quality`
 15. `de-orchestration-and-observability`
 
-## Phase 5: Serving, Governance, Delivery
+## Phase 5: Serving, Governance, Delivery (Cung cấp, Quản trị & Bàn giao)
 
 16. `de-semantic-model-design`
 17. `de-serving-layer-design`
@@ -91,25 +101,25 @@ Create it from:
 21. `de-cicd-and-testing`
 22. `de-project-evaluation`
 
-## Support Skills
+## Các Skill Hỗ trợ (Support Skills)
 
-Use these skills outside the numbered phase flow when implementation work, change handling, review, verification, or retrospective capture is needed. They do not replace phases 01-22; they consume approved phase artifacts and preserve traceability from planning to code and delivery evidence.
+Sử dụng các skill này bên ngoài luồng phase có đánh số khi cần thực hiện công việc triển khai code, xử lý thay đổi, review, verify, hoặc ghi nhận retrospective. Chúng không thay thế các phase từ 01-22; chúng sử dụng các artifact đã duyệt từ các phase đó và bảo vệ tính truy vết từ bước lập kế hoạch đến code thực tế và bằng chứng bàn giao.
 
-Recommended support loop:
+Luồng hỗ trợ khuyến nghị (Recommended support loop):
 
 `de-brainstorm-change` -> `de-implementation-planning` -> `de-build-from-artifacts` -> `de-review-implementation` -> `de-verify-delivery` -> `de-implementation-retrospective`
 
-`de-implementation-planning` produces both `implementation-plan.md` and `implementation-story.md`. The story packet is the executable dev handoff for `de-build-from-artifacts`.
+Skill `de-implementation-planning` tạo ra cả `implementation-plan.md` và `implementation-story.md`. File story là gói tài liệu thực thi để bàn giao cho `de-build-from-artifacts`.
 
-| Skill | Use When |
+| Skill hỗ trợ | Khi nào sử dụng |
 | :--- | :--- |
-| `de-brainstorm-change` | Explore a new change request, feature, incident follow-up, or scope adjustment before implementation planning |
-| `de-implementation-planning` | Convert approved DES artifacts into a concrete implementation plan |
-| `de-build-from-artifacts` | Implement code, config, tests, or docs from an approved implementation plan |
-| `de-review-implementation` | Review changed files against planning artifacts, contracts, DQ, and security expectations |
-| `de-verify-delivery` | Run final verification and record command evidence before completion or release claims |
-| `de-implementation-retrospective` | Capture lessons, artifact drift, technical debt, and follow-up backlog after delivery |
+| `de-brainstorm-change` | Khám phá yêu cầu thay đổi mới, tính năng mới, xử lý sự cố, hoặc điều chỉnh scope trước khi lập kế hoạch triển khai |
+| `de-implementation-planning` | Chuyển đổi các artifact DES đã duyệt thành một kế hoạch triển khai (implementation plan) cụ thể |
+| `de-build-from-artifacts` | Triển khai code, cấu hình, test, hoặc tài liệu từ một kế hoạch triển khai đã duyệt |
+| `de-review-implementation` | Review các file thay đổi so với artifact thiết kế, hợp đồng dữ liệu, DQ, và các kỳ vọng bảo mật |
+| `de-verify-delivery` | Chạy bước xác thực cuối cùng và ghi lại bằng chứng dòng lệnh (command evidence) trước khi đánh dấu hoàn thành hoặc yêu cầu phát hành |
+| `de-implementation-retrospective` | Đúc rút kinh nghiệm, ghi nhận độ lệch thiết kế (artifact drift), nợ kỹ thuật (technical debt), và tồn đọng (backlog) sau bàn giao |
 
-## Compatibility Skill
+## Khả năng tương thích ngược (Compatibility Skill)
 
-`de-semantic-and-serving-layer` is retained as a compatibility bridge for projects that combine semantic modeling and serving design in one step. Prefer `de-semantic-model-design` and `de-serving-layer-design` for new work.
+Skill `de-semantic-and-serving-layer` được giữ lại như một cầu nối tương thích cho các dự án kết hợp thiết kế semantic model và serving layer trong cùng một bước. Khuyến khích sử dụng các skill riêng biệt `de-semantic-model-design` and `de-serving-layer-design` cho các công việc mới.
