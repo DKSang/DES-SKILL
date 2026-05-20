@@ -189,8 +189,9 @@ Please follow the DES-SKILL workflow:
 5. Use the matching skill from the installed skills.
 6. Do not jump to coding before business context, requirements, data sources, architecture, and quality expectations are clear.
 7. Produce the required artifact using the templates/ directory.
-8. Update .agents/des-skill/sprint-status/des-workflow-status.md.
-9. Recommend the next skill when the current artifact is complete.
+8. Run the configured checklist_file before marking the artifact Done.
+9. Update .agents/des-skill/sprint-status/des-workflow-status.md.
+10. Recommend the next skill when the current artifact is complete.
 ```
 
 Short version:
@@ -200,7 +201,7 @@ Install DES-SKILL, then start with using-des-skill.
 Act as a Data Engineering delivery agent.
 Detect the current phase, check missing upstream artifacts, activate the matching skill.
 Read the skill's step files one at a time — do NOT skip steps.
-Produce the required artifact from templates, update workflow status, and hand off.
+Produce the required artifact from templates, run the configured checklist_file, update workflow status, and hand off.
 Do not jump to coding until business context, KPIs, data sources, architecture, and quality expectations are clear.
 ```
 
@@ -221,7 +222,8 @@ skill/
 Key rules the agent follows:
 - **NEVER** load multiple step files at once
 - **ALWAYS** HALT at menus and wait for user input
-- **NEVER** proceed past unresolved metric conflicts, unsigned contracts, or unconfirmed irreversible decisions
+- **ALWAYS** run the configured checklist file before marking an artifact Done
+- **NEVER** proceed past unresolved metric conflicts, unsigned contracts, missing evidence, or failed checklist gates
 
 ## Workflow Entrypoint
 
@@ -260,9 +262,16 @@ Run repository checks before publishing or changing skills:
 npm test
 npm run validate:skills
 node tools/validate-artifacts.js
+node tools/audit-checklist-usage.js
 ```
 
-The validation scripts check installer behavior, required skill files, frontmatter, key headings, package metadata, workflow references, artifact maps, and templates.
+Use strict checklist auditing when you want missing checklist calls to fail the run:
+
+```bash
+node tools/audit-checklist-usage.js --strict
+```
+
+The validation scripts check installer behavior, required skill files, frontmatter, key headings, package metadata, workflow references, artifact maps, templates, and configured checklist usage.
 
 ## Operating Principle
 
