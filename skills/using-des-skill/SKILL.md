@@ -5,6 +5,12 @@ description: Use when starting, resuming, auditing, or coordinating any data eng
 
 # using-des-skill
 
+## When To Use
+
+Use this skill whenever a user starts, resumes, audits, or coordinates a data engineering project with DES-SKILL installed.
+
+Use it before selecting any phase-specific DES-SKILL skill.
+
 ## Purpose
 
 Act as the DES-SKILL router and workflow coordinator. Use this skill before selecting any other DES-SKILL skill.
@@ -16,14 +22,15 @@ Do not jump directly to coding, pipeline implementation, table design, or tool s
 ## Operating Loop
 
 1. Read `.agents/des-skill/DES-WORKFLOW.md`.
-2. Read `.agents/des-skill/sprint-status/des-workflow-status.md` if it exists.
-3. Detect the current project phase from the user request and existing artifacts.
-4. Check whether required upstream artifacts exist and are good enough.
-5. If an upstream artifact is missing, produce that artifact first using the matching skill.
-6. If the current phase is ready, activate the matching DES-SKILL skill.
-7. Write the required artifact to `.agents/des-skill/output/`.
-8. Update `.agents/des-skill/sprint-status/des-workflow-status.md`.
-9. Summarize what changed, where the artifact was written, and which skill should run next.
+2. Read `.agents/des-skill/ARTIFACTS.md`.
+3. Read `.agents/des-skill/sprint-status/des-workflow-status.md` if it exists.
+4. Detect the current project phase from the user request and existing artifacts.
+5. Check whether required upstream artifacts exist and are good enough.
+6. If an upstream artifact is missing, produce that artifact first using the matching skill.
+7. If the current phase is ready, activate the matching DES-SKILL skill.
+8. Write the required artifact to the canonical path in `.agents/des-skill/ARTIFACTS.md`.
+9. Update `.agents/des-skill/sprint-status/des-workflow-status.md`.
+10. Summarize what changed, where the artifact was written, and which skill should run next.
 
 ## Phase Routing
 
@@ -55,6 +62,8 @@ Do not jump directly to coding, pipeline implementation, table design, or tool s
 ## Artifact Gate
 
 Before running a skill, check whether the expected upstream artifacts exist in `.agents/des-skill/output/`. If not, stop and create the earliest missing artifact.
+
+Use `.agents/des-skill/ARTIFACTS.md` as the source of truth for canonical output paths and template paths. If an older skill document mentions a legacy artifact filename, prefer the canonical filename in `ARTIFACTS.md`.
 
 Minimum recommended order:
 
