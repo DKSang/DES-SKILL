@@ -98,11 +98,21 @@ Read fully and follow: `./steps/step-01-clarify.md`
 - Known data products or reports.
 - Known constraints, deadlines, or systems.
 
+## Decision Matrix — Discovery Scope
+
+| Situation | Action |
+| :--- | :--- |
+| Project idea is vague ("we need a dashboard") | Run full 3-step discovery before any technical discussion |
+| Stakeholder names a specific tool first ("we need Spark") | Acknowledge tool; pivot to business problem — tool choice deferred to Phase 7 |
+| Multiple conflicting stakeholders | Document each stakeholder separately; surface conflicts as open questions |
+| Tight deadline, minimal time for discovery | Run abbreviated Step 1 only; flag assumptions explicitly; accept risk of rework |
+| Existing project with partial artifacts | Resume from the earliest incomplete phase — do not re-run completed phases |
+
 ## Step-By-Step Process
 
 Refer to the individual step files in the `steps/` folder:
-1. `steps/step-01-clarify.md` - Clarify business domain, problems, and decisions.
-2. `steps/step-02-scope.md` - Define scope, operational constraints, and data products.
+1. `steps/step-01-clarify.md` - Clarify business domain, problems, decisions, and stakeholders.
+2. `steps/step-02-scope.md` - Define scope, non-scope, operational constraints, and data products.
 3. `steps/step-03-draft.md` - Draft and compile the final business brief, quality check, and handoff.
 
 ## Output File
@@ -119,22 +129,36 @@ Write the final artifact to the configured `output_file` path (default: `{projec
 
 ## Quality Checklist
 
-- The problem is stated without tool names.
-- Every stakeholder has a decision or workflow.
-- Scope is narrow enough for a first delivery.
-- Open questions have owners or next actions.
-- No implementation technology is selected yet unless it is a hard constraint.
+- [ ] The problem is stated without tool names or implementation assumptions.
+- [ ] Every stakeholder has a named decision or workflow they own.
+- [ ] Scope is narrow enough for a first delivery (Phase 1 only).
+- [ ] Open questions have owners and next actions — not left as "TBD".
+- [ ] No implementation technology is selected unless it is a confirmed hard constraint.
 
-## Common Mistakes To Avoid
+## Anti-Patterns to Avoid
 
-- Starting with Spark, dbt, Airflow, or cloud services before understanding the business decision.
-- Treating a dashboard request as the business problem.
-- Ignoring non-functional constraints.
-- Accepting vague users such as "the business" without naming roles.
+| Anti-Pattern | Why It Fails |
+| :--- | :--- |
+| Starting with Spark, dbt, or cloud services before understanding the business | Leads to technical solutions to the wrong problem; rework guaranteed |
+| Treating a dashboard request as the business problem | A dashboard is an output, not a problem; the real problem is the decision the dashboard enables |
+| Ignoring non-functional constraints (deadlines, budget, compliance) | Constraints discovered late invalidate already-made architecture decisions |
+| Accepting "the business" as a stakeholder | Too vague; no accountability; no sign-off authority |
+| Skipping discovery for "simple" projects | Simple projects that skip discovery become complex projects with wrong requirements |
+
+## Undercurrent Coverage
+
+| Undercurrent | Action Required at This Phase |
+| :--- | :--- |
+| Security | Identify any regulatory constraints (GDPR, HIPAA, PCI) early — these constrain architecture |
+| Data Management | Document known data quality problems and ownership gaps surfaced by stakeholders |
+| DataOps | Note any CI/CD or operational maturity constraints that affect delivery approach |
+| Data Architecture | Capture any hard platform constraints ("must use Azure", "existing Databricks contract") |
+| Orchestration | Note business calendar events (fiscal year end, peak seasons) that affect pipeline schedules |
+| Software Engineering | Identify team skill gaps that will constrain technology choices in Phase 7 |
 
 ## Handoff To The Next Skill
 
-Next use `de-business-questions` to translate the discovery brief into business questions that guide data product, model, and metric design.
+Next use `de-business-questions` to translate the discovery brief into concrete, answerable business questions that guide data product, domain model, and metric design.
 
 ## Example Output Format
 

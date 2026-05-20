@@ -98,17 +98,32 @@ Read fully and follow: `./steps/step-01-route.md`
 
 ## Quality Checklist
 
-- The selected skill matches the current project phase.
-- Missing upstream artifacts are handled before downstream work.
-- The output path is explicit.
-- The workflow status is updated after each completed artifact.
-- The next skill is recommended.
-- The agent explains blockers instead of guessing.
+- [ ] The selected skill matches the current project phase.
+- [ ] Missing upstream artifacts are handled before downstream work.
+- [ ] The output path is explicit.
+- [ ] The workflow status is updated after each completed artifact.
+- [ ] The next skill is recommended.
+- [ ] The agent explains blockers instead of guessing.
 
-## Common Mistakes To Avoid
+## Anti-Patterns to Avoid
 
-- Treating DES-SKILL as a prompt library instead of a gated workflow.
-- Skipping business discovery because a tool or platform has already been chosen.
-- Designing Bronze/Silver/Gold tables before assessing source grain, ownership, and quality.
-- Writing pipeline code before transformation logic, quality rules, and contract expectations are clear.
-- Forgetting to update workflow status after producing an artifact.
+| Anti-Pattern | Why It Fails |
+| :--- | :--- |
+| Treating DES-SKILL as a prompt library instead of a gated workflow | Ungated use produces inconsistent, phase-skipped outputs |
+| Skipping business discovery because a tool or platform is already chosen | Architecture constraints do not substitute for business requirements |
+| Designing Bronze/Silver/Gold tables before source grain and ownership are assessed | Table design built on assumed grain produces wrong analytical models |
+| Writing pipeline code before transformation logic and contracts are clear | Implicit contracts break without warning; code must implement agreed artifacts |
+| Forgetting to update workflow status after producing an artifact | Session continuity breaks; the agent cannot resume accurately |
+
+## Undercurrent Coverage
+
+As the router, this skill ensures undercurrent checks are triggered at every phase transition:
+
+| Undercurrent | Router Responsibility |
+| :--- | :--- |
+| Security | Confirm governance and security phase is completed before serving layer goes live |
+| Data Management | Confirm catalog, lineage, and contract phases are not skipped for production data products |
+| DataOps | Confirm CI/CD and DQ phases are completed before project evaluation |
+| Data Architecture | Confirm architecture ADR is complete before any layer design phase begins |
+| Orchestration | Confirm orchestration spec is complete before serving layer design |
+| Software Engineering | Confirm transformation design and tests are complete before CI/CD phase |

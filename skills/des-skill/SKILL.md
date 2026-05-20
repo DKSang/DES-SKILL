@@ -72,11 +72,28 @@ At the end of each phase, name the produced artifact, summarize unresolved assum
 - No coding is performed without an approved upstream design artifact.
 - Deliverables are validated against the quality checklists.
 
-## Common Mistakes To Avoid
+## Anti-Patterns to Avoid
 
-- Skipping business context to write pipelines first.
-- Implementing transformations without data quality gates.
-- Not defining clear schemas and data contracts for downstream consumers.
+| Anti-Pattern | Why It Fails |
+| :--- | :--- |
+| Skipping business context to write pipelines first | Technical solutions without business alignment produce unused or wrong outputs |
+| Implementing transformations without quality gates | Data errors reach consumers silently; trust in the platform erodes |
+| Coding without data contracts for downstream consumers | Implicit contracts break without warning; consumers have no recourse |
+| Jumping to Phase 3 without completed Phase 1–2 artifacts | Architecture decisions made without source assessment are speculative and high-risk |
+| Treating DES-SKILL phases as optional steps to skip | Each phase gate prevents a class of production failure |
+
+## Undercurrent Coverage
+
+Every phase skill in DES-SKILL is anchored to the 6 Undercurrents from *Fundamentals of Data Engineering*:
+
+| Undercurrent | Phases Where It Is Enforced |
+| :--- | :--- |
+| Security | Phases 1, 5, 7, 12, 19, 22 |
+| Data Management | Phases 6, 10, 11, 12, 18, 19 |
+| DataOps | Phases 8, 13, 14, 15, 21, 22 |
+| Data Architecture | Phases 7, 9, 10, 11, 16 |
+| Orchestration | Phases 8, 14, 15, 19, 20 |
+| Software Engineering | Phases 7, 8, 13, 14, 21, 22 |
 
 ## Handoff To The Next Skill
 

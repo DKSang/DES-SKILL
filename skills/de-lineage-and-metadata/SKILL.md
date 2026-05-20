@@ -1,35 +1,57 @@
 ---
 name: de-lineage-and-metadata
-description: Use when documenting source-to-target lineage, column-level lineage, dataset ownership, catalog metadata, transformation lineage, or metric lineage.
+description: Use when documenting data lineage, registering datasets in a catalog, assigning stewardship, and ensuring metadata completeness for governance and trust.
 ---
 
 # de-lineage-and-metadata
 
 ## When To Use
 
-Use after serving design and before governance finalization. Use when users need to know where data came from, how it changed, who owns it, and which downstream assets depend on it.
+Use after serving layer design, before governance and security. Use whenever dataset traceability, metric trust, or regulatory audit requirements are identified.
 
 ## Purpose
 
-Create lineage and metadata artifacts that make the data platform explainable, auditable, searchable, and safer to change.
+Document column-level lineage from source to serving, register all managed datasets in the data catalog with certified metadata, and assign stewards for long-term accountability.
 
 ## Inputs Required
 
-- Source inventory.
-- Ingestion, transformation, and pipeline specs.
-- Bronze, Silver, Gold, semantic, and serving specs.
-- Data contracts and metric definitions.
-- Tooling context such as dbt docs, OpenLineage, DataHub, Purview, Collibra, Fabric, Databricks, Snowflake, or BigQuery if used.
+- All layer design artifacts (Bronze, Silver, Gold, Serving).
+- Source-to-target transformation maps (`13-transformation-design.md`).
+- PII classification from data contracts and governance design.
+- Business glossary from domain modeling.
+
+## Decision Matrix — Lineage Granularity
+
+| Requirement | Lineage Level | Implementation |
+| :--- | :--- | :--- |
+| Regulatory compliance (GDPR, HIPAA, SOX) | **Column-level** — mandatory | OpenLineage + Marquez, Unity Catalog lineage, dbt lineage |
+| Business trust, metric certification | **Table-level + transformation logic** | dbt docs graph, Catalog with transformation notes |
+| Impact analysis (schema change blast radius) | **Dataset-level dependency graph** | dbt DAG, Airflow task dependency map |
+| Exploratory / low-risk internal datasets | **Dataset-level only** | Manual catalog entry sufficient |
+
+**Default**: Always implement at least **table-level lineage**. Column-level is required for any dataset containing PII or certified metrics.
+
+## Stewardship Model
+
+Two distinct roles must be assigned per dataset:
+
+| Role | Responsibility | Who |
+| :--- | :--- | :--- |
+| **Business Steward** | Data accuracy, business definition correctness | Business analyst or product owner |
+| **Technical Steward** | Pipeline health, schema evolution, incident response | Data engineer or platform engineer |
 
 ## Step-By-Step Process
 
-1. Document dataset-level lineage from sources to Bronze, Silver, Gold, semantic model, and serving channels.
-2. Document column-level lineage for critical fields and metrics.
-3. Capture transformation logic references and pipeline ownership.
-4. Define catalog metadata: description, owner, steward, classification, tags, freshness, SLA, quality status, and consumers.
-5. Define metric lineage from business definition to Gold fields and source columns.
-6. Identify downstream dependencies and blast radius for schema or logic changes.
-7. Decide which metadata is manual, generated, or tool-managed.
+1. For each critical metric and PII dataset, trace column-level lineage from source to serving.
+2. Document transformation steps at each lineage hop (e.g., "SHA-256 hash applied at Silver layer").
+3. Register all Silver and Gold datasets in the corporate data catalog with:
+   - Business description (non-technical, plain language)
+   - Column definitions and business glossary links
+   - Classification label (Public/Internal/Confidential/PII/Regulated)
+   - Owner, Business Steward, Technical Steward
+4. Verify 5 mandatory audit columns are present on all managed datasets.
+5. Record schema change history: DDL change date, change type, approval.
+6. Configure lineage tool integration (OpenLineage emit, dbt docs, Unity Catalog lineage).
 
 ## Output File
 
@@ -39,45 +61,48 @@ Write the final artifact to:
 
 Use the matching template from:
 
-`.agents/des-skill/templates/lineage_metadata_template.md`
+`.agents/des-skill/templates/18-lineage-and-metadata-template.md`
 
 After writing the file, summarize the file path and recommend the next skill.
 
 ## Required Outputs
 
-- Source-to-target lineage map.
-- Column-level lineage for critical fields.
-- Metric lineage map.
-- Data catalog metadata table.
-- Dependency and impact analysis notes.
+- Column-level lineage for all PII and certified metric columns.
+- Table-level lineage DAG for all managed datasets.
+- Catalog entries for all Silver and Gold datasets.
+- Stewardship assignments (Business + Technical) per dataset.
+- Schema change history log.
 
 ## Quality Checklist
 
-- Critical business metrics trace to source fields.
-- Dataset owners and consumers are recorded.
-- Sensitive fields have metadata classification.
-- Lineage covers serving assets, not only tables.
-- Change impact can be assessed from the artifact.
+- [ ] Column-level lineage is documented for all PII columns and certified metrics.
+- [ ] Every Silver and Gold dataset is registered in the data catalog with a business description.
+- [ ] Every column has a catalog entry with business meaning (not just column name).
+- [ ] Business Steward and Technical Steward are named for every managed dataset.
+- [ ] All 5 audit columns present: `des_ingestion_timestamp`, `des_source_system`, `des_source_offset`, `des_pipeline_run_id`, `des_payload_hash`.
+- [ ] Schema change history records all DDL changes with dates and approvals.
 
-## Common Mistakes To Avoid
+## Anti-Patterns to Avoid
 
-- Treating lineage as a diagram only.
-- Ignoring column-level lineage for certified metrics.
-- Forgetting dashboards, APIs, and AI agents as downstream consumers.
-- Maintaining metadata manually when tooling can generate it reliably.
+| Anti-Pattern | Why It Fails |
+| :--- | :--- |
+| Only documenting table-level lineage for PII datasets | Regulators require column-level proof of where PII flows; table-level is insufficient |
+| Catalog entries with empty column descriptions | Empty catalog = no trust; analysts query data blindly; errors proliferate |
+| No steward assigned | Datasets without owners degrade silently; incidents have no response path |
+| Manual lineage documentation only | Manual docs go stale immediately after the next pipeline change; use automated tools |
+| Treating schema change history as optional | Audit and debugging require knowing exactly when a column was added or changed |
+
+## Undercurrent Coverage
+
+| Undercurrent | Action Required at This Phase |
+| :--- | :--- |
+| Security | PII column lineage is required evidence for GDPR Article 30 Records of Processing |
+| Data Management | This is the core data management phase — catalog, lineage, stewardship, and metadata all documented here |
+| DataOps | Lineage tool configured to emit lineage events automatically on every pipeline run |
+| Data Architecture | Lineage architecture (OpenLineage, Unity Catalog, dbt docs) selected and integrated |
+| Orchestration | Lineage events emitted by orchestration tasks automatically via OpenLineage integration |
+| Software Engineering | Catalog entry updates are part of the PR checklist for any new or modified dataset |
 
 ## Handoff To The Next Skill
 
-Next use `de-governance-and-security` to turn lineage and metadata into access, ownership, retention, privacy, and change-control policies.
-
-## Example Output Format
-
-```markdown
-# Lineage And Metadata
-## Dataset Lineage
-| Source | Bronze | Silver | Gold | Semantic | Serving |
-## Column Lineage
-| Output Field | Transformation | Input Fields | Owner |
-## Catalog Metadata
-## Dependency Impact Notes
-```
+Next use `de-governance-and-security` to turn lineage and metadata into access control, retention enforcement, privacy controls, and change-management policies.

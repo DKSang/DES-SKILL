@@ -80,7 +80,7 @@ if [[ -f "${SOURCE_DIR}/ARTIFACTS.md" ]]; then
   cp "${SOURCE_DIR}/ARTIFACTS.md" "${WORKSPACE_DIR}/ARTIFACTS.md"
 fi
 
-STATUS_TEMPLATE="${SOURCE_DIR}/templates/workflow_status_template.md"
+STATUS_TEMPLATE="${SOURCE_DIR}/templates/00-workflow-status-template.md"
 STATUS_TARGET="${WORKSPACE_DIR}/sprint-status/des-workflow-status.md"
 if [[ -f "${STATUS_TEMPLATE}" && ! -f "${STATUS_TARGET}" ]]; then
   cp "${STATUS_TEMPLATE}" "${STATUS_TARGET}"

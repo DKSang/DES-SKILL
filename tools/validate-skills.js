@@ -72,10 +72,15 @@ function validateSkill(skillName) {
     fail(`${skillName} description should start with "Use when"`);
   }
 
-  for (const heading of ["## When To Use", "## Purpose", "## Quality Checklist", "## Common Mistakes To Avoid"]) {
+  for (const heading of ["## When To Use", "## Purpose", "## Quality Checklist"]) {
     if (!content.includes(heading)) {
       fail(`${skillName} is missing heading: ${heading}`);
     }
+  }
+
+  // Accept either old or new heading name for mistakes/anti-patterns section
+  if (!content.includes("## Common Mistakes To Avoid") && !content.includes("## Anti-Patterns to Avoid")) {
+    fail(`${skillName} is missing heading: ## Common Mistakes To Avoid (or ## Anti-Patterns to Avoid)`);
   }
 
   if (!content.includes("## Handoff To The Next Skill") && skillName !== "using-des-skill") {

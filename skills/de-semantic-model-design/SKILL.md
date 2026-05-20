@@ -1,35 +1,59 @@
 ---
 name: de-semantic-model-design
-description: Use when defining certified metrics, dimensions, hierarchies, business glossary, metric ownership, semantic relationships, or row-level security for analytics.
+description: Use when defining certified metrics, KPI hierarchies, dimensions, relationships, filters, and business glossary in a semantic or metrics layer before BI or AI consumers.
 ---
 
 # de-semantic-model-design
 
 ## When To Use
 
-Use after Gold model design and orchestration readiness. Use before dashboard, API, AI agent, or feature serving design when consistent metrics and business semantics are required.
+Use after Gold layer design and before serving layer or BI consumer configuration. Use when multiple consumers (dashboards, APIs, AI agents) must share a single certified metric definition.
 
 ## Purpose
 
-Design a semantic model that centralizes metric definitions, dimensions, relationships, hierarchies, ownership, and security rules.
+Define a semantic model that acts as a single source of truth for certified metrics and business dimensions — ensuring every consumer sees the same numbers with the same formula, grain, and filters.
 
 ## Inputs Required
 
-- Gold table specifications.
-- KPI and metric catalog.
-- Domain model and glossary.
-- Consumer and data product definitions.
-- Governance and security constraints.
+- Gold table specifications (`11-gold-layer-design.md`).
+- KPI catalog with certified formulas (`03-requirements-and-kpis.md`).
+- Data product consumer requirements (`04-data-product-definition.md`).
+- Business glossary from domain modeling.
+
+## Decision Matrix — Semantic Layer Tool Selection
+
+| Scenario | Recommended Tool | When to Override |
+| :--- | :--- | :--- |
+| Microsoft Fabric / Power BI ecosystem | **Fabric Semantic Model (Power BI Dataset)** | — |
+| dbt Cloud or dbt Core users | **dbt Metrics + MetricFlow** | Use Cube if multiple BI tools need the same metrics |
+| Multi-BI tool environment (Power BI + Tableau + Superset) | **Cube.dev** | dbt Metrics if team is already dbt-native |
+| Standalone self-serve analytics | **Apache Superset Datasets** | Cube for cross-tool consistency |
+| AI agent grounding / LLM context | **Structured context layer** (JSON/YAML metric definitions) | — |
+
+**Default**: If the team uses dbt, start with **dbt Metrics + MetricFlow**. Avoid building metric logic in each BI tool separately — this creates divergent definitions.
+
+## Decision Matrix — Metric Type Classification
+
+| Metric Type | Definition | Example | Aggregation |
+| :--- | :--- | :--- | :--- |
+| **Simple** | Single aggregation over one measure | Total Revenue = SUM(amount) | SUM, COUNT, AVG, MIN, MAX |
+| **Ratio** | Division of two simple metrics | Conversion Rate = Orders / Sessions | Non-additive — compute separately |
+| **Derived** | Formula combining multiple metrics | Gross Margin = (Revenue - COGS) / Revenue | Non-additive — compute in semantic layer |
+| **Cumulative** | Running aggregation over time | YTD Revenue | Window function |
+| **Period-over-Period** | Comparison between two time periods | MoM Revenue Growth % | Requires date dimension hierarchy |
+
+**Rule**: Ratio and Derived metrics must NEVER be materialized in Gold tables — they must live in the semantic layer to remain accurate when consumers apply filters.
 
 ## Step-By-Step Process
 
-1. Identify certified metrics and their formulas.
-2. Define dimensions, hierarchies, filters, and drill paths.
-3. Define relationships between semantic entities.
-4. Map metrics to Gold tables and source lineage.
-5. Define metric owner, certification status, and change process.
-6. Define row-level security and column-level restrictions.
-7. Choose semantic implementation pattern: Power BI model, dbt semantic layer, warehouse views, Looker-style model, Cube, MetricFlow, or platform-native semantic model.
+1. List all certified metrics from the KPI catalog; classify each using the Metric Type matrix.
+2. Define Simple metrics first (SUM/COUNT/AVG on Gold measures).
+3. Derive Ratio and Derived metrics in the semantic layer — not in Gold SQL.
+4. Define dimensions available for slicing: date hierarchy, geography, product category, etc.
+5. Define relationships between semantic entities (metrics, dimensions, filters).
+6. Choose semantic layer tool using the Decision Matrix.
+7. Define row-level security (RLS) rules at the semantic layer for multi-tenant access.
+8. Document business glossary entries linked to each metric.
 
 ## Output File
 
@@ -39,44 +63,48 @@ Write the final artifact to:
 
 Use the matching template from:
 
-`.agents/des-skill/templates/semantic_model_template.md`
+`.agents/des-skill/templates/16-semantic-model-design-template.md`
 
 After writing the file, summarize the file path and recommend the next skill.
 
 ## Required Outputs
 
-- Semantic model specification.
-- Certified metric catalog.
-- Dimension and hierarchy catalog.
-- Semantic relationship map.
-- Security rules for semantic access.
+- Certified metric catalog with type classification and formula.
+- Dimension catalog with hierarchy definitions.
+- Semantic layer tool selection with rationale.
+- RLS rules for multi-tenant or regional access.
+- Metric-to-Gold-table lineage map.
 
 ## Quality Checklist
 
-- Each certified metric has one definition and owner.
-- Metrics include grain, filters, and allowed dimensions.
-- Semantic entities map to Gold tables.
-- Security rules are explicit.
-- Dashboards and APIs can reuse the model without redefining metrics.
+- [ ] Every metric has a single certified definition — no duplicate metric definitions across BI tools.
+- [ ] Ratio and Derived metrics are defined in the semantic layer, not in Gold SQL.
+- [ ] Date dimension has all required hierarchy levels (day → week → month → quarter → year).
+- [ ] RLS rules are tested with role-specific test accounts.
+- [ ] Every metric links back to its Gold source table via lineage documentation.
+- [ ] Business glossary entries link to corresponding metric definitions.
 
-## Common Mistakes To Avoid
+## Anti-Patterns to Avoid
 
-- Repeating metric formulas in every dashboard.
-- Certifying metrics without ownership.
-- Ignoring hierarchy and drill behavior.
-- Exposing unrestricted sensitive dimensions.
+| Anti-Pattern | Why It Fails |
+| :--- | :--- |
+| Defining ratio metrics in Gold SQL (e.g., `conversion_rate` column) | Applying filters at query time changes the denominator; ratio becomes wrong |
+| Building metric logic in each BI tool separately | Different BI tools produce different numbers; no single source of truth |
+| Skipping the semantic layer for "simple" dashboards | Simple dashboards grow; retrofitting a semantic layer later is expensive |
+| No RLS at the semantic layer | Regional or tenant data exposed to wrong consumers |
+| Certified metrics without an owner | Definition drifts over time; no accountability when dashboards diverge |
+
+## Undercurrent Coverage
+
+| Undercurrent | Action Required at This Phase |
+| :--- | :--- |
+| Security | RLS policies enforce data access boundaries at the semantic layer |
+| Data Management | Certified metric definitions registered in catalog with owner sign-off |
+| DataOps | Semantic model schema tested in CI/CD (e.g., MetricFlow tests) |
+| Data Architecture | Semantic layer is an architectural boundary — all BI consumers query it, not Gold directly |
+| Orchestration | Semantic model refresh is triggered after Gold refresh completes |
+| Software Engineering | Metric definitions are version-controlled in YAML/schema files; reviewed in PRs |
 
 ## Handoff To The Next Skill
 
-Next use `de-serving-layer-design` to expose the semantic model and trusted data products through dashboards, APIs, exports, feature stores, reverse ETL, or AI agents.
-
-## Example Output Format
-
-```markdown
-# Semantic Model
-## Certified Metrics
-| Metric | Definition | Grain | Dimensions | Owner | Source Gold Table |
-## Dimensions And Hierarchies
-## Relationships
-## Security Rules
-```
+Next use `de-serving-layer-design` to configure the final consumer-facing serving assets (dashboards, APIs, exports) that query the semantic model.

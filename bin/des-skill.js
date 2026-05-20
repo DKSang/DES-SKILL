@@ -135,7 +135,7 @@ function copyFileIfExists(source, target, force) {
 }
 
 function createWorkflowStatus(root, workspaceDir, force) {
-  const source = path.join(root, "templates", "workflow_status_template.md");
+  const source = path.join(root, "templates", "00-workflow-status-template.md");
   const target = path.join(workspaceDir, "sprint-status", "des-workflow-status.md");
   return copyFileIfExists(source, target, force);
 }
