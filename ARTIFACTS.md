@@ -29,6 +29,17 @@ If an older skill document mentions a legacy artifact filename, prefer the canon
 | 21 | `de-cicd-and-testing` | `.agents/des-skill/output/21-cicd-and-testing.md` | `.agents/des-skill/templates/21-cicd-and-testing-template.md` |
 | 22 | `de-project-evaluation` | `.agents/des-skill/output/22-project-evaluation.md` | `.agents/des-skill/templates/22-project-evaluation-template.md` |
 
+## Optional Phase Artifacts
+
+These artifacts extend a parent phase when the project needs deeper evidence, repeatable design records, or release-specific sign-off. They are optional but should be tracked in workflow status when used.
+
+| Artifact | Parent Skill | Output Artifact | Template |
+| --- | --- | --- | --- |
+| 07b | `de-architecture-design` | `.agents/des-skill/output/07b-architecture-decision-records.md` | `.agents/des-skill/templates/07b-architecture-decision-records-template.md` |
+| 15b | `de-orchestration-and-observability` | `.agents/des-skill/output/15b-pipeline-specs.md` | `.agents/des-skill/templates/15b-pipeline-specs-template.md` |
+| 21b | `de-cicd-and-testing` | `.agents/des-skill/output/21b-release-readiness.md` | `.agents/des-skill/templates/21b-release-readiness-template.md` |
+| 23 | `de-project-evaluation` | `.agents/des-skill/output/23-data-lifecycle-review.md` | `.agents/des-skill/templates/23-data-lifecycle-review-template.md` |
+
 ## Support Artifact Map
 
 Support artifacts are produced when implementation work starts from approved DES planning artifacts. They are deliberately separate from phase artifacts so code work, review findings, fresh evidence, and retrospective follow-up can be audited without rewriting upstream planning artifacts.
@@ -47,6 +58,7 @@ Support artifacts are produced when implementation work starts from approved DES
 
 - Write artifacts to the canonical output path.
 - Use the canonical template path.
+- Use optional phase artifacts only when the parent phase needs deeper supporting evidence.
 - Update `.agents/des-skill/sprint-status/des-workflow-status.md` after each artifact.
 - Keep implementation support artifacts under `_des-output/implementation-artifacts/`.
 - Do not skip earlier artifacts unless they already exist and are good enough.
