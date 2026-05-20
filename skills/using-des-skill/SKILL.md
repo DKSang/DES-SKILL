@@ -34,6 +34,25 @@ The router must identify the primary persona and persona skill for the selected 
 
 Example: activate `de-persona-data-architect` for stance, then use `de-ingestion-design` for the artifact.
 
+## Global Checklist Gate
+
+Every artifact-producing skill must use its configured checklist before marking work as complete.
+
+When a selected skill has `customize.toml`, the router must resolve the `[config]` block and identify:
+- `output_file`
+- `template_file` when present
+- `checklist_file`
+- `status_file`
+
+Before any skill writes an artifact or updates status to `Done`, the active agent must:
+1. Load the configured `checklist_file`.
+2. Run the draft artifact against every checklist item.
+3. Produce a short checklist validation report with Pass / Needs Work / Blocked results.
+4. HALT if any checklist item is blocked or if required evidence is missing.
+5. Only update workflow status after the checklist gate passes or the user explicitly records an override.
+
+If a skill has no `checklist_file`, the router must treat that as a workflow gap and ask whether to continue with an explicit override.
+
 ## Conventions
 
 - Bare paths (e.g. `steps/step-01-route.md`) resolve from the skill root.
@@ -122,6 +141,7 @@ Read fully and follow: `./steps/step-01-route.md`
 - [ ] The selected skill matches the current project phase.
 - [ ] Missing upstream artifacts are handled before downstream work.
 - [ ] The output path is explicit.
+- [ ] The configured checklist file is loaded and run before status is updated.
 - [ ] The workflow status is updated after each completed artifact.
 - [ ] The next skill is recommended.
 - [ ] The agent explains blockers instead of guessing.
@@ -137,6 +157,7 @@ Read fully and follow: `./steps/step-01-route.md`
 | Skipping business discovery because a tool or platform is already chosen | Architecture constraints do not substitute for business requirements |
 | Designing Bronze/Silver/Gold tables before source grain and ownership are assessed | Table design built on assumed grain produces wrong analytical models |
 | Writing pipeline code before transformation logic and contracts are clear | Implicit contracts break without warning; code must implement agreed artifacts |
+| Forgetting to run configured checklist files | The artifact may look complete while failing phase readiness requirements |
 | Forgetting to update workflow status after producing an artifact | Session continuity breaks; the agent cannot resume accurately |
 
 ## Undercurrent Coverage
