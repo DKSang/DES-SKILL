@@ -35,7 +35,7 @@ Use the detailed HALT checkpoints in `steps/`: readiness HALT in step 01, phase 
 ## Inputs Required
 
 - Dataset inventory (all Silver and Gold datasets).
-- Data contracts (`12-data-contracts.md`).
+- Data contracts (`12-data-contract-specification.md`).
 - Semantic and serving design.
 - Applicable regulatory frameworks (GDPR, CCPA, HIPAA, PCI-DSS).
 - Organization roles and ownership model.

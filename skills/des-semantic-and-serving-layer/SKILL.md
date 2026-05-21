@@ -90,7 +90,7 @@ After writing the file, summarize the file path and recommend the next skill.
 
 ## Handoff To The Next Skill
 
-Next use `des-lineage-and-metadata` to document source-to-serving lineage, column-level PII lineage, ownership, and data catalog metadata.
+Next use `des-lineage-metadata-design` to document source-to-serving lineage, column-level PII lineage, ownership, and data catalog metadata.
 
 ## Example Output Format
 

@@ -257,7 +257,7 @@ const phaseGates = {
       "D: avoids false confidence but leaves a known gap"
     ]
   },
-  "des-orchestration-and-observability": {
+  "des-orchestration-observability": {
     title: "Failure Response Ownership",
     why: "A schedule or alert is not useful without owner, response time, retry behavior, escalation path, and recovery steps.",
     decision: "Approve failure response for each pipeline or job.",
@@ -313,7 +313,7 @@ const phaseGates = {
       "E: requires strong semantic, lineage, and safety controls"
     ]
   },
-  "des-lineage-and-metadata": {
+  "des-lineage-metadata-design": {
     title: "Critical Lineage Completeness",
     why: "Consumer-facing outputs must have source-to-serving lineage before they can be called release-ready.",
     decision: "Approve lineage completeness for each output from Source to Bronze to Silver to Gold to Semantic/Serving to Consumer.",

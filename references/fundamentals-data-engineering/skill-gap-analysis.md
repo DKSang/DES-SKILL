@@ -46,7 +46,7 @@ The primary gap is that while `DES-SKILL` covers 22 lifecycle phases, the indivi
 *   **Book Standard**: Governance requires metadata cataloging, explicit column-level lineage, compliance mapping (PII/GDPR), and data deletion/retention lifecycle policies.
 *   **Vulnerability**: Non-compliance with data privacy laws and difficulty tracking data flow path during upstream source schema changes.
 *   **Target File(s)**:
-    - [ ] `templates/18-lineage-and-metadata-template.md` (Update structure)
+    - [ ] `templates/18-lineage-metadata-specification-template.md` (Update structure)
     - [ ] `templates/19-governance-and-security-template.md` (Update structure)
 
 ---

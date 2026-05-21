@@ -1,4 +1,72 @@
-# Workflow customization surface for des-data-contracts.
+skill_id = "des-data-contracts"
+phase = 12
+phase_name = "Data Contracts"
+
+output_file = ".agents/des-skill/output/12-data-contract-specification.md"
+template_file = ".agents/des-skill/templates/12-data-contract-specification-template.md"
+checklist_file = ".agents/des-skill/checklists/12-data-contracts-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-transformation-design"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/01-business-discovery-brief.md",
+  ".agents/des-skill/output/02-business-question-catalog.md",
+  ".agents/des-skill/output/03-requirements-and-kpi-catalog.md",
+  ".agents/des-skill/output/04-data-product-specification.md",
+  ".agents/des-skill/output/05-data-source-inventory.md",
+  ".agents/des-skill/output/06-conceptual-domain-model.md",
+  ".agents/des-skill/output/07-architecture-decision-record.md",
+  ".agents/des-skill/output/08-ingestion-specification.md",
+  ".agents/des-skill/output/09-bronze-layer-specification.md",
+  ".agents/des-skill/output/10-silver-layer-specification.md",
+  ".agents/des-skill/output/11-gold-layer-specification.md"
+]
+
+required_sections = [
+  "Data Contract Summary",
+  "Contract Scope",
+  "Contract Design Principles",
+  "Contract Inventory",
+  "Producer and Consumer Mapping",
+  "Contract Level",
+  "Dataset and Output Identity",
+  "Business Meaning and Grain",
+  "Schema Expectations",
+  "Field Level Expectations",
+  "Metric and KPI Expectations",
+  "Freshness and SLA Expectations",
+  "Quality Expectations",
+  "Volume and Completeness Expectations",
+  "Security and Access Expectations",
+  "Lineage and Metadata Expectations",
+  "Compatibility and Versioning Policy",
+  "Change Management Policy",
+  "Deprecation Policy",
+  "Incident and Escalation Policy",
+  "Acceptance and Validation Criteria",
+  "Contract Ownership and Approval",
+  "Risks",
+  "Assumptions",
+  "Open Questions",
+  "Next Skill Recommendation"
+]
+
+halt_required_decisions = [
+  "upstream_gold_context",
+  "contract_required_outputs",
+  "contract_level",
+  "producer_consumer_owner",
+  "schema_expectation",
+  "grain_expectation",
+  "freshness_sla",
+  "quality_thresholds",
+  "security_access_policy",
+  "metric_definition_alignment",
+  "versioning_change_policy",
+  "incident_escalation_policy",
+  "acceptance_validation_criteria"
+]
 
 [workflow]
 activation_steps_prepend = []
@@ -9,9 +77,3 @@ persistent_facts = [
 ]
 
 on_complete = ""
-
-[config]
-output_file = "{project-root}/_des-output/planning-artifacts/12-data-contracts.md"
-template_file = "{skill-root}/../../templates/12-data-contracts-template.md"
-checklist_file = "{skill-root}/../../checklists/governance_checklist.md"
-status_file = "{project-root}/_des-output/implementation-artifacts/des-workflow-status.md"

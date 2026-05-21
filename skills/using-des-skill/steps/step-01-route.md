@@ -31,17 +31,17 @@ Scan the resolved output folder (default `.agents/des-skill/output/` or `{planni
 05-data-source-assessment.md
 06-conceptual-domain-model.md
 07-architecture-design.md
-08-ingestion-design.md
+08-ingestion-specification.md
 09-bronze-layer-design.md
 10-silver-layer-design.md
 11-gold-layer-design.md
-12-data-contracts.md
-13-transformation-design.md
-14-data-quality.md
-15-orchestration-and-observability.md
+12-data-contract-specification.md
+13-transformation-specification.md
+14-data-quality-specification.md
+15-orchestration-observability-specification.md
 16-semantic-model-design.md
 17-serving-layer-design.md
-18-lineage-and-metadata.md
+18-lineage-metadata-specification.md
 19-governance-and-security.md
 20-cost-and-performance-optimization.md
 21-cicd-and-testing.md
@@ -91,9 +91,9 @@ If `docs/personas.md` is missing, use this fallback:
 | Data Product Analyst | `des-persona-data-product-analyst` | `des-business-discovery`, `des-business-questions`, `des-requirements-and-kpis`, `des-data-product-definition` |
 | Source & Domain Analyst | `des-persona-source-domain-analyst` | `des-data-source-assessment`, `des-domain-modeling` |
 | Data Architect | `des-persona-data-architect` | `des-architecture-design`, `des-architecture-review`, `des-ingestion-design`, `des-bronze-layer-design`, `des-silver-layer-design`, `des-gold-layer-design`, `des-data-contracts`, `des-contract-review`, `des-transformation-design` |
-| Data Quality Engineer | `des-persona-data-quality-engineer` | `des-data-quality`, `des-orchestration-and-observability` |
+| Data Quality Engineer | `des-persona-data-quality-engineer` | `des-data-quality`, `des-orchestration-observability` |
 | Analytics Engineer | `des-persona-analytics-engineer` | `des-semantic-model-design`, `des-serving-layer-design`, `des-semantic-and-serving-layer` |
-| Governance Reviewer | `des-persona-governance-reviewer` | `des-lineage-and-metadata`, `des-governance-and-security` |
+| Governance Reviewer | `des-persona-governance-reviewer` | `des-lineage-metadata-design`, `des-governance-and-security` |
 | DataOps Engineer | `des-persona-dataops-engineer` | `des-cost-and-performance-optimization`, `des-cicd-and-testing`, `des-project-evaluation` |
 | Implementation Developer | `des-persona-implementation-developer` | `des-create-epic`, `des-sprint-planning`, `des-create-story`, `des-check-implementation-readiness`, `des-implementation-planning`, `des-dev-story` |
 | Delivery Reviewer | `des-persona-delivery-reviewer` | `des-code-review`, `des-verify-delivery`, `des-retrospective` |

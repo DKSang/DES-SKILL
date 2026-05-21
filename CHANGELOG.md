@@ -41,9 +41,9 @@ Mỗi skill giờ có `customize.toml` + `steps/` directory để enforce sequen
 - 17 skills còn lại: scaffold steps với đầy đủ menu tương tác và HALT placeholders
   - `des-ingestion-design`, `des-bronze-layer-design`, `des-silver-layer-design`
   - `des-gold-layer-design`, `des-data-contracts`, `des-transformation-design`
-  - `des-data-quality`, `des-orchestration-and-observability`
+  - `des-data-quality`, `des-orchestration-observability`
   - `des-semantic-model-design`, `des-serving-layer-design`, `des-semantic-and-serving-layer`
-  - `des-lineage-and-metadata`, `des-governance-and-security`
+  - `des-lineage-metadata-design`, `des-governance-security-design`
   - `des-cost-and-performance-optimization`, `des-cicd-and-testing`, `des-project-evaluation`
 
 ### Changed

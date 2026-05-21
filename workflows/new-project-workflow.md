@@ -44,7 +44,7 @@ Do not skip upstream skills unless the required artifact already exists and is g
 | Producers/consumers need clear guarantees | `des-data-contracts` | Define schema, freshness, quality and change contract |
 | You are ready to implement transformations | `des-transformation-design` | Define source-to-target logic and tests |
 | Trust, correctness, or freshness is unclear | `des-data-quality` | Define quality checks and failure actions |
-| Pipelines need scheduling and monitoring | `des-orchestration-and-observability` | Define DAGs, alerts, runbooks, observability |
+| Pipelines need scheduling and monitoring | `des-orchestration-observability` | Define DAGs, alerts, runbooks, observability |
 | Data must be consumed by BI/API/AI agents | `des-semantic-and-serving-layer` | Design semantic model and serving channels |
 | Access, privacy, lineage, retention matter | `des-governance-and-security` | Define owners, access, classification, lineage |
 | You need safe deployments | `des-cicd-and-testing` | Define tests, environments, release, rollback |

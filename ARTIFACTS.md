@@ -13,18 +13,18 @@ If an older skill document mentions a legacy artifact filename, prefer the canon
 | 05 | `des-data-source-assessment` | `.agents/des-skill/output/05-data-source-assessment.md` | `.agents/des-skill/templates/05-data-source-assessment-template.md` |
 | 06 | `des-domain-modeling` | `.agents/des-skill/output/06-domain-modeling.md` | `.agents/des-skill/templates/06-domain-modeling-template.md` |
 | 07 | `des-architecture-design` | `.agents/des-skill/output/07-architecture-decision-record.md` | `.agents/des-skill/templates/07-architecture-decision-record-template.md` |
-| 08 | `des-ingestion-design` | `.agents/des-skill/output/08-ingestion-design.md` | `.agents/des-skill/templates/08-ingestion-design-template.md` |
+| 08 | `des-ingestion-design` | `.agents/des-skill/output/08-ingestion-specification.md` | `.agents/des-skill/templates/08-ingestion-specification-template.md` |
 | 09 | `des-bronze-layer-design` | `.agents/des-skill/output/09-bronze-layer-design.md` | `.agents/des-skill/templates/09-bronze-layer-design-template.md` |
 | 10 | `des-silver-layer-design` | `.agents/des-skill/output/10-silver-layer-design.md` | `.agents/des-skill/templates/10-silver-layer-design-template.md` |
 | 11 | `des-gold-layer-design` | `.agents/des-skill/output/11-gold-layer-design.md` | `.agents/des-skill/templates/11-gold-layer-design-template.md` |
-| 12 | `des-data-contracts` | `.agents/des-skill/output/12-data-contracts.md` | `.agents/des-skill/templates/12-data-contracts-template.md` |
-| 13 | `des-transformation-design` | `.agents/des-skill/output/13-transformation-design.md` | `.agents/des-skill/templates/13-transformation-design-template.md` |
-| 14 | `des-data-quality` | `.agents/des-skill/output/14-data-quality.md` | `.agents/des-skill/templates/14-data-quality-template.md` |
-| 15 | `des-orchestration-and-observability` | `.agents/des-skill/output/15-orchestration-and-observability.md` | `.agents/des-skill/templates/15-orchestration-and-observability-template.md` |
-| 16 | `des-semantic-model-design` | `.agents/des-skill/output/16-semantic-model-design.md` | `.agents/des-skill/templates/16-semantic-model-design-template.md` |
-| 17 | `des-serving-layer-design` | `.agents/des-skill/output/17-serving-layer-design.md` | `.agents/des-skill/templates/17-serving-layer-design-template.md` |
-| 18 | `des-lineage-and-metadata` | `.agents/des-skill/output/18-lineage-and-metadata.md` | `.agents/des-skill/templates/18-lineage-and-metadata-template.md` |
-| 19 | `des-governance-and-security` | `.agents/des-skill/output/19-governance-and-security.md` | `.agents/des-skill/templates/19-governance-and-security-template.md` |
+| 12 | `des-data-contracts` | `.agents/des-skill/output/12-data-contract-specification.md` | `.agents/des-skill/templates/12-data-contract-specification-template.md` |
+| 13 | `des-transformation-design` | `.agents/des-skill/output/13-transformation-specification.md` | `.agents/des-skill/templates/13-transformation-specification-template.md` |
+| 14 | `des-data-quality` | `.agents/des-skill/output/14-data-quality-specification.md` | `.agents/des-skill/templates/14-data-quality-specification-template.md` |
+| 15 | `des-orchestration-observability` | `.agents/des-skill/output/15-orchestration-observability-specification.md` | `.agents/des-skill/templates/15-orchestration-observability-specification-template.md` |
+| 16 | `des-semantic-model-design` | `.agents/des-skill/output/16-semantic-model-specification.md` | `.agents/des-skill/templates/16-semantic-model-specification-template.md` |
+| 17 | `des-serving-layer-design` | `.agents/des-skill/output/17-serving-layer-specification.md` | `.agents/des-skill/templates/17-serving-layer-specification-template.md` |
+| 18 | `des-lineage-metadata-design` | `.agents/des-skill/output/18-lineage-metadata-specification.md` | `.agents/des-skill/templates/18-lineage-metadata-specification-template.md` |
+| 19 | `des-governance-security-design` | `.agents/des-skill/output/19-governance-security-specification.md` | `.agents/des-skill/templates/19-governance-security-specification-template.md` |
 | 20 | `des-cost-and-performance-optimization` | `.agents/des-skill/output/20-cost-and-performance-optimization.md` | `.agents/des-skill/templates/20-cost-and-performance-optimization-template.md` |
 | 21 | `des-cicd-and-testing` | `.agents/des-skill/output/21-cicd-and-testing.md` | `.agents/des-skill/templates/21-cicd-and-testing-template.md` |
 | 22 | `des-project-evaluation` | `.agents/des-skill/output/22-project-evaluation.md` | `.agents/des-skill/templates/22-project-evaluation-template.md` |
@@ -36,7 +36,7 @@ These artifacts extend a parent phase when the project needs deeper evidence, re
 | Artifact | Parent Skill | Output Artifact | Template |
 | --- | --- | --- | --- |
 | 07b | `des-architecture-design` | `.agents/des-skill/output/07b-architecture-decision-records.md` | `.agents/des-skill/templates/07b-architecture-decision-records-template.md` |
-| 15b | `des-orchestration-and-observability` | `.agents/des-skill/output/15b-pipeline-specs.md` | `.agents/des-skill/templates/15b-pipeline-specs-template.md` |
+| 15b | `des-orchestration-observability` | `.agents/des-skill/output/15b-pipeline-specs.md` | `.agents/des-skill/templates/15b-pipeline-specs-template.md` |
 | 21b | `des-cicd-and-testing` | `.agents/des-skill/output/21b-release-readiness.md` | `.agents/des-skill/templates/21b-release-readiness-template.md` |
 | 23 | `des-project-evaluation` | `.agents/des-skill/output/23-data-lifecycle-review.md` | `.agents/des-skill/templates/23-data-lifecycle-review-template.md` |
 

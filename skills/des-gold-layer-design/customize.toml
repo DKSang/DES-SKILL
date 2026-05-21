@@ -1,4 +1,68 @@
-# Workflow customization surface for des-gold-layer-design.
+skill_id = "des-gold-layer-design"
+phase = 11
+phase_name = "Gold Layer Design"
+
+output_file = ".agents/des-skill/output/11-gold-layer-specification.md"
+template_file = ".agents/des-skill/templates/11-gold-layer-specification-template.md"
+checklist_file = ".agents/des-skill/checklists/11-gold-layer-design-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-data-contracts"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/01-business-discovery-brief.md",
+  ".agents/des-skill/output/02-business-question-catalog.md",
+  ".agents/des-skill/output/03-requirements-and-kpi-catalog.md",
+  ".agents/des-skill/output/04-data-product-specification.md",
+  ".agents/des-skill/output/05-data-source-inventory.md",
+  ".agents/des-skill/output/06-conceptual-domain-model.md",
+  ".agents/des-skill/output/07-architecture-decision-record.md",
+  ".agents/des-skill/output/08-ingestion-specification.md",
+  ".agents/des-skill/output/09-bronze-layer-specification.md",
+  ".agents/des-skill/output/10-silver-layer-specification.md"
+]
+
+required_sections = [
+  "Gold Layer Summary",
+  "Gold Scope",
+  "Gold Design Principles",
+  "Business Question to Gold Mapping",
+  "Requirement and KPI to Gold Mapping",
+  "Silver to Gold Mapping",
+  "Gold Dataset Inventory",
+  "Gold Output Type",
+  "Consumer and Serving Alignment",
+  "Grain and Aggregation Rules",
+  "Metric and KPI Definitions Used",
+  "Dimension Fact Aggregate and Output Model Decisions",
+  "Filtering and Slicing Expectations",
+  "History and Slowly Changing Behavior",
+  "Freshness and SLA Expectations",
+  "Gold Boundary Data Quality Rules",
+  "Access Control and Security Handling",
+  "Contract Expectations",
+  "Lineage and Traceability",
+  "Performance and Cost Considerations",
+  "Risks",
+  "Assumptions",
+  "Open Questions",
+  "Next Skill Recommendation"
+]
+
+halt_required_decisions = [
+  "upstream_silver_context",
+  "gold_dataset_boundary",
+  "business_question_mapping",
+  "consumer_serving_alignment",
+  "metric_definition_alignment",
+  "grain_aggregation_rule",
+  "modeling_pattern",
+  "history_scd_behavior",
+  "freshness_sla",
+  "gold_quality_rules",
+  "access_security_policy",
+  "lineage_traceability"
+]
 
 [workflow]
 activation_steps_prepend = []
@@ -9,9 +73,3 @@ persistent_facts = [
 ]
 
 on_complete = ""
-
-[config]
-output_file = "{project-root}/_des-output/planning-artifacts/11-gold-layer-design.md"
-template_file = "{skill-root}/../../templates/11-gold-layer-design-template.md"
-checklist_file = "{skill-root}/../../checklists/serving_checklist.md"
-status_file = "{project-root}/_des-output/implementation-artifacts/des-workflow-status.md"

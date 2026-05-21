@@ -1,4 +1,67 @@
-# Workflow customization surface for des-ingestion-design.
+skill_id = "des-ingestion-design"
+phase = 8
+phase_name = "Ingestion Design"
+
+output_file = ".agents/des-skill/output/08-ingestion-specification.md"
+template_file = ".agents/des-skill/templates/08-ingestion-specification-template.md"
+checklist_file = ".agents/des-skill/checklists/08-ingestion-design-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-bronze-layer-design"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/01-business-discovery-brief.md",
+  ".agents/des-skill/output/02-business-question-catalog.md",
+  ".agents/des-skill/output/03-requirements-and-kpi-catalog.md",
+  ".agents/des-skill/output/04-data-product-specification.md",
+  ".agents/des-skill/output/05-data-source-inventory.md",
+  ".agents/des-skill/output/06-conceptual-domain-model.md",
+  ".agents/des-skill/output/07-architecture-decision-record.md"
+]
+
+required_sections = [
+  "Ingestion Summary",
+  "Ingestion Scope",
+  "Source-to-Ingestion Mapping",
+  "Ingestion Pattern per Source",
+  "Batch Streaming and Event Decision",
+  "Frequency and Trigger",
+  "Bounded and Unbounded Data Classification",
+  "Access and Extraction Method",
+  "Incremental and Checkpoint Strategy",
+  "Idempotency Strategy",
+  "Replay and Backfill Strategy",
+  "Late Arriving Data Handling",
+  "Ordering and Deduplication Expectations",
+  "Payload and Serialization Expectations",
+  "Schema Drift and Evolution Policy",
+  "Error Handling and Quarantine",
+  "Security and Credential Handling",
+  "Source Impact Rate Limits and Throttling",
+  "Landing Target Expectations",
+  "Ingestion Metadata Expectations",
+  "Monitoring Evidence and Audit Expectations",
+  "Operational Dependencies",
+  "Risks",
+  "Assumptions",
+  "Open Questions",
+  "Next Skill Recommendation"
+]
+
+halt_required_decisions = [
+  "upstream_architecture_context",
+  "source_access_status",
+  "ingestion_pattern",
+  "batch_streaming_event_choice",
+  "frequency_trigger",
+  "incremental_checkpoint_strategy",
+  "idempotency_strategy",
+  "replay_backfill_strategy",
+  "schema_drift_policy",
+  "sensitive_data_handling",
+  "error_handling_recovery",
+  "api_or_source_limit"
+]
 
 [workflow]
 activation_steps_prepend = []
@@ -9,9 +72,3 @@ persistent_facts = [
 ]
 
 on_complete = ""
-
-[config]
-output_file = "{project-root}/_des-output/planning-artifacts/08-ingestion-design.md"
-template_file = "{skill-root}/../../templates/08-ingestion-design-template.md"
-checklist_file = "{skill-root}/../../checklists/ingestion_pattern_checklist.md"
-status_file = "{project-root}/_des-output/implementation-artifacts/des-workflow-status.md"

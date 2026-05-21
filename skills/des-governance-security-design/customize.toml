@@ -1,0 +1,77 @@
+skill_id = "des-governance-security-design"
+phase = 19
+phase_name = "Governance and Security Design"
+
+output_file = ".agents/des-skill/output/19-governance-security-specification.md"
+template_file = ".agents/des-skill/templates/19-governance-security-specification-template.md"
+checklist_file = ".agents/des-skill/checklists/19-governance-security-design-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-cost-and-performance-optimization"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/04-data-product-specification.md",
+  ".agents/des-skill/output/05-data-source-inventory.md",
+  ".agents/des-skill/output/09-bronze-layer-specification.md",
+  ".agents/des-skill/output/10-silver-layer-specification.md",
+  ".agents/des-skill/output/11-gold-layer-specification.md",
+  ".agents/des-skill/output/12-data-contract-specification.md",
+  ".agents/des-skill/output/16-semantic-model-specification.md",
+  ".agents/des-skill/output/17-serving-layer-specification.md",
+  ".agents/des-skill/output/18-lineage-metadata-specification.md"
+]
+
+required_sections = [
+  "Governance and Security Summary",
+  "Governance Scope",
+  "Governance Design Principles",
+  "Data Classification Policy",
+  "Asset Sensitivity Inventory",
+  "Field Level Sensitivity Handling",
+  "Access Control Model",
+  "Role and Persona Access Matrix",
+  "Row Level Security Policy",
+  "Column Level Security Policy",
+  "Masking Tokenization and Anonymization Policy",
+  "Encryption and Secret Handling Expectations",
+  "Privacy and Consent Considerations",
+  "Retention Lifecycle and Deletion Policy",
+  "Data Sharing and External Access Policy",
+  "API Application and AI Agent Access Policy",
+  "Reverse ETL Governance",
+  "Audit Logging and Access Monitoring",
+  "Approval Workflow and Exception Handling",
+  "Ownership Stewardship and Accountability",
+  "Compliance and Regulatory Considerations",
+  "Incident Response and Escalation",
+  "Risks",
+  "Assumptions",
+  "Open Questions",
+  "Next Skill Recommendation"
+]
+
+halt_required_decisions = [
+  "upstream_lineage_metadata_context",
+  "governance_scope",
+  "data_classification",
+  "sensitive_field_handling",
+  "access_control_model",
+  "role_persona_access",
+  "row_column_security",
+  "masking_tokenization_policy",
+  "retention_deletion_policy",
+  "external_sharing_policy",
+  "ai_agent_access_policy",
+  "reverse_etl_governance",
+  "audit_monitoring_policy",
+  "approval_exception_policy",
+  "compliance_requirement"
+]
+
+[workflow]
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = [
+  "file:{project-root}/**/project-context.md",
+]
+on_complete = ""

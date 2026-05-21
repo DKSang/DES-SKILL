@@ -1,6 +1,6 @@
 ---
 name: des-domain-modeling
-description: Use this skill to identify the core business concepts, entities, events, relationships, grains, terminology, ownership, source alignment, and ambiguity risks before modeling tables.
+description: Use when identifying the core business concepts, entities, events, relationships, grains, terminology, ownership, source alignment, and ambiguity risks before modeling tables.
 ---
 
 # des-domain-modeling

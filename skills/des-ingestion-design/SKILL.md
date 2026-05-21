@@ -1,127 +1,207 @@
 ---
 name: des-ingestion-design
-description: Use when designing batch, streaming, API, file, CDC, database, or event ingestion pipelines before implementing source-to-raw data movement.
+description: Use when creating the Ingestion Specification for any data engineering project.
 ---
 
 # des-ingestion-design
 
-## When To Use
-
-Use after architecture design and source assessment are complete, before Bronze layer design. Use when each source needs an ingestion mode, schedule, destination, retry policy, and backfill plan.
-
 ## Purpose
 
-Create ingestion specifications that make source collection repeatable, idempotent, observable, and aligned with freshness SLA requirements.
+Use this skill to create the Ingestion Specification for any data engineering project.
 
-## HALT Policy
+This skill defines how data will move from source systems into the data platform at the ingestion boundary. It covers ingestion pattern, frequency, access method, bounded/unbounded data behavior, batch/streaming choice, push/pull/polling strategy, incremental strategy, idempotency, checkpointing, replay, backfill, schema drift handling, error handling, security, operational controls, and ingestion observability expectations.
 
-This skill must stop when a required decision cannot be safely inferred.
+The goal is to design ingestion intentionally before Bronze/storage layer design or pipeline implementation begins.
 
-The agent must not continue if any of these are unresolved:
+## When To Use
 
-- required upstream artifacts are missing or inconsistent;
-- business owner, metric owner, source owner, or release owner is unclear;
-- business priority, consumer, or project intent is ambiguous;
-- source of truth, access, quality, legal use, cost, or ownership is unknown;
-- KPI formula, grain, freshness, SLA, threshold, or acceptance criteria is ambiguous;
-- architecture, storage, compute, deployment, or engine trade-off needs approval;
-- data contract owner, consumer impact, schema version, or breaking-change policy is missing;
-- DQ severity, threshold, remediation, alerting, or escalation is unknown;
-- security, access, retention, environment, secret, or release evidence is missing.
+Use this skill when:
 
-Use the detailed HALT checkpoints in `steps/`: readiness HALT in step 01, phase decision HALT in step 02, and validation HALT in the final step. HALT asks for a decision, not permission to continue.
+- Phase 7 Architecture Decision Record exists;
+- candidate sources and source risks are known;
+- the project needs to ingest data from databases, APIs, files, SaaS tools, streams, logs, third-party datasets, spreadsheets, sensors, data sharing feeds, or existing platforms;
+- ingestion pattern, frequency, incremental logic, replay, backfill, schema drift, or failure handling is unclear;
+- the user asks to build or implement ingestion pipelines;
+- the workflow router selects Phase 8.
 
+Do not use this skill to design detailed Bronze table schemas, Silver/Gold transformations, semantic models, dashboards, APIs, full orchestration workflows, data contracts in full, or implementation code.
 
-## Inputs Required
+## Required Inputs
 
-- Source assessment (`05-data-source-assessment.md`) with confirmed write patterns.
-- Architecture decision record (`07-architecture-design.md`).
-- Freshness and SLA requirements (`03-requirements-and-kpi-catalog.md`).
-- Access credentials paths, schemas, and sample payloads.
+The agent should look for:
 
-## Decision Matrix
+- `.agents/des-skill/output/01-business-discovery-brief.md`;
+- `.agents/des-skill/output/02-business-question-catalog.md`;
+- `.agents/des-skill/output/03-requirements-and-kpi-catalog.md`;
+- `.agents/des-skill/output/04-data-product-specification.md`;
+- `.agents/des-skill/output/05-data-source-inventory.md`;
+- `.agents/des-skill/output/06-conceptual-domain-model.md`;
+- `.agents/des-skill/output/07-architecture-decision-record.md`;
+- workflow status file, if present;
+- P1/P2 source systems;
+- approved architecture layer strategy;
+- approved batch/streaming/event strategy;
+- source access status;
+- source freshness and reliability expectations;
+- source schema change behavior;
+- source security/privacy classification;
+- product freshness/SLA expectations;
+- cost and team capability constraints.
 
-Use this matrix to select the correct ingestion mode per source:
-
-| Business Latency SLA | Source Write Pattern | Recommended Mode | When to Override |
-| :--- | :--- | :--- | :--- |
-| > 1 hour (daily/hourly batch) | Insert-only or CRUD | **Batch Incremental** (watermark-based) | Never choose streaming for batch-friendly SLAs |
-| > 1 hour with deletes | CRUD (orders, accounts) | **Log-based CDC** | Use snapshot if log retention is unavailable |
-| < 5 minutes | Events, clickstream | **Event Streaming** (Kafka / Kinesis) | Batch if downstream analytics don't need real-time |
-| One-time historical load | Any | **Full Backfill** | Document as idempotent and time-bounded |
-| File arrives on schedule | File drop (S3, SFTP) | **File Arrival Sensor** + manifest | Use checksum manifest to detect duplicates |
-
-**Default rule**: Choose **batch** unless business SLA explicitly requires < 5 min latency. Streaming adds operational complexity that must be justified.
-
-## Step-By-Step Process
-
-1. For each source, confirm ingestion mode using the Decision Matrix above.
-2. Define schedule or trigger (cron, upstream sensor, event).
-3. Specify destination path (Bronze table or landing zone directory).
-4. Define **watermark column** and checkpoint storage location.
-5. Design **idempotency strategy**: Partition Overwrite / Upsert-Merge / Append with dedup.
-6. Specify retry policy: max retries, delay strategy (exponential backoff + jitter), timeout.
-7. Define Dead Letter Queue (DLQ) path for malformed or failed records.
-8. Specify the 5 mandatory audit metadata columns added by the pipeline.
-9. Define backfill procedure and estimated backfill duration.
-10. Assign alert channel and pipeline owner.
+If the Architecture Decision Record is missing or too weak, stop and ask whether to route back to `des-architecture-design`.
 
 ## Output File
-
 
 The output_file path is configured in `customize.toml`. Default:
 
 Write the final artifact to:
 
-`{project-root}/_des-output/planning-artifacts/08-ingestion-design.md`
+`.agents/des-skill/output/08-ingestion-specification.md`
 
 Use the matching template from:
 
-`{skill-root}/../../templates/08-ingestion-design-template.md`
+`.agents/des-skill/templates/08-ingestion-specification-template.md`
 
 After writing the file, summarize the file path and recommend the next skill.
 
 ## Required Outputs
 
-- Ingestion mode decision per source (with rationale).
-- Schedule / trigger specification.
-- Idempotency and watermark strategy.
-- Retry policy with backoff spec.
-- DLQ path and 5 audit metadata columns.
-- Backfill plan and estimated duration.
+The artifact must capture:
+
+- Ingestion Summary
+- Ingestion Scope (In scope / Out of scope)
+- Source-to-Ingestion Mapping
+- Ingestion Pattern per Source
+- Batch Streaming and Event Decision
+- Frequency and Trigger
+- Bounded and Unbounded Data Classification
+- Access and Extraction Method
+- Incremental and Checkpoint Strategy
+- Idempotency Strategy
+- Replay and Backfill Strategy
+- Late Arriving Data Handling
+- Ordering and Deduplication Expectations
+- Payload and Serialization Expectations
+- Schema Drift and Evolution Policy
+- Error Handling and Quarantine
+- Security and Credential Handling
+- Source Impact Rate Limits and Throttling
+- Landing Target Expectations
+- Ingestion Metadata Expectations
+- Monitoring Evidence and Audit Expectations
+- Operational Dependencies
+- Risks
+- Assumptions
+- Open Questions
+- Next Skill Recommendation
+
+## On Activation
+
+1. Read this `SKILL.md` completely.
+2. Read `customize.toml`.
+3. Identify `output_file`, `template_file`, `checklist_file`, `status_file`, and required upstream artifacts.
+4. Load only `steps/step-01-context-and-readiness.md`.
+5. Do not load step-02 or step-03 until the current step explicitly instructs you to continue.
+6. Stop at every `HALT` point and wait for user input.
+7. Do not invent source access, incremental keys, replay behavior, freshness guarantees, schema drift policy, credentials, or failure handling.
+8. Do not design detailed Bronze/Silver/Gold schemas, transformations, semantic models, dashboards, APIs, full orchestration workflows, or code.
+9. Before marking the artifact as Done, run the configured checklist and update workflow status.
+
+## Process Overview
+
+The detailed execution procedure lives in `steps/`.
+
+At a high level, this skill will:
+
+1. Confirm upstream architecture, source, product, and requirement context.
+2. Identify sources in ingestion scope.
+3. Classify each source by bounded/unbounded data and generation pattern.
+4. Choose ingestion pattern per source.
+5. Define frequency, trigger, incremental/checkpoint/idempotency strategy.
+6. Define replay, backfill, late-arriving data, ordering, and deduplication expectations.
+7. Define schema drift, payload, serialization, error handling, and security controls.
+8. Define ingestion evidence and observability expectations.
+9. Ask HALT questions for unresolved ingestion decisions.
+10. Draft the Ingestion Specification.
+11. Run the checklist, update workflow status, and recommend the next skill.
+
+Do not execute this overview directly. Follow the step files.
+
+## Guardrails
+
+The agent must not:
+
+- assume ingestion is just copying data;
+- use streaming when batch satisfies the approved freshness requirement;
+- choose CDC unless source access and operational impact are understood;
+- assume API limits, pagination, authentication, or schema behavior;
+- assume file delivery is reliable without evidence;
+- ignore replay, backfill, and idempotency;
+- ignore schema drift and source change behavior;
+- ignore error handling and quarantine/dead-letter needs;
+- ignore credential and secret handling;
+- design detailed storage/table schemas before Bronze layer design;
+- mark the artifact Done if P1 sources have no ingestion pattern, frequency, access status, idempotency, or failure handling.
+
+## HALT Policy
+
+This skill must stop when an ingestion design decision cannot be safely inferred.
+
+Stop especially when:
+
+- upstream architecture or source context is missing;
+- source access is not approved;
+- ingestion pattern is unclear;
+- batch versus streaming/event choice is unclear;
+- frequency/freshness is unclear;
+- incremental key or checkpoint logic is unknown;
+- idempotency behavior is unclear;
+- replay/backfill behavior is unclear;
+- schema drift policy is unknown;
+- source contains sensitive or regulated data;
+- API quota, rate limit, file delivery, CDC impact, or source reliability may block ingestion;
+- error handling and recovery expectations are missing.
+
+## Conventions
+
+- Bare paths such as `steps/step-01-context-and-readiness.md` resolve from the skill root.
+- `{skill-root}` resolves to this skill's installed directory.
+- `{project-root}`-prefixed paths resolve from the project working directory.
+- Document output language follows project config.
+
+## WORKFLOW ARCHITECTURE
+
+This uses step-file architecture for disciplined execution:
+
+- read only the current step file;
+- execute steps in order;
+- stop at every HALT checkpoint;
+- keep unresolved decisions as open questions, not assumptions;
+- run the configured checklist before status advances.
 
 ## Quality Checklist
 
-- [ ] Streaming is only chosen when business SLA requires < 5 min latency.
-- [ ] All pipelines use scheduler date variables — zero hardcoded `datetime.now()` calls.
-- [ ] Idempotency strategy is documented: re-running produces the same Bronze output.
-- [ ] Retry uses exponential backoff with jitter — not fixed delay.
-- [ ] DLQ path is defined with failure metadata preserved.
-- [ ] All 5 audit columns (`des_ingestion_timestamp`, `des_source_system`, `des_source_offset`, `des_pipeline_run_id`, `des_payload_hash`) are present.
-- [ ] Backfill is safe: running for any historical date window produces correct output.
+- [ ] Each P1/P2 source has a defined ingestion pattern and frequency.
+- [ ] Ingestion mode (batch vs. streaming vs. event) matches approved downstream freshness SLA.
+- [ ] Extraction method and security access mechanism are fully documented.
+- [ ] Incremental checkpoint key/strategy is defined or marked not applicable.
+- [ ] Idempotency strategy for safe rerun and deduplication is specified.
+- [ ] Replay and backfill mechanism is defined for historical recovery.
+- [ ] Schema drift policy and error quarantine/dead-letter rules are set.
+- [ ] Security access role, secrets storage, and PII handling are resolved.
+- [ ] Landing target and expected metadata fields are specified.
+- [ ] The artifact does not design detailed Bronze table schemas, Silver/Gold layer schemas, or write pipeline implementation code.
 
 ## Anti-Patterns to Avoid
 
 | Anti-Pattern | Why It Fails |
 | :--- | :--- |
-| Using `datetime.now()` as ingestion date | Non-deterministic; breaks backfills and causes wrong partition writes |
-| Fixed retry delays without jitter | Concurrent retries all fire simultaneously, overwhelming the source |
-| No DLQ — bad records silently dropped | Data loss is invisible; root cause impossible to debug later |
-| Streaming chosen for batch-friendly SLA | Adds Kafka/Kinesis ops overhead, cost, and complexity with no business benefit |
-| Querying production DB primary directly | Read load degrades source OLTP performance; use read replica |
-| Appending without dedup on CDC sources | Reprocessed CDC events create duplicate rows in Bronze |
-
-## Undercurrent Coverage
-
-| Undercurrent | Action Required at This Phase |
-| :--- | :--- |
-| Security | Credentials via secrets manager only; least-privilege service account |
-| Data Management | 5 mandatory audit columns added to all Bronze targets |
-| DataOps | Idempotent pipelines enable safe retries and CI/CD re-deployments |
-| Data Architecture | Ingestion mode must match source write pattern (CRUD → CDC, not append) |
-| Orchestration | Retry, timeout, and DLQ specs defined before orchestration design phase |
-| Software Engineering | No hardcoded dates, credentials, or table names in pipeline code |
+| Treating ingestion as just copying files/tables | Ignores critical controls like idempotency, replay, and schema drift |
+| Choosing streaming for everything to be modern | Streaming adds massive complexity, cost, and ordering concerns without business justification |
+| CDC without knowing DB load or ownership constraints | CDC setup can degrade production database performance and block due to admin privileges |
+| Skipping idempotency or replay design in the MVP | Leaves the pipeline fragile to failure, leading to duplicate records or missing data gaps |
+| Designing physical schemas and writing code prematurely | Designs block agility before architecture boundaries and ingestion strategies are locked |
 
 ## Handoff To The Next Skill
 
-Next use `des-bronze-layer-design` to specify the raw landing table structure, partition design, metadata columns, and schema drift policy.
+Recommend `des-bronze-layer-design` only after the Ingestion Specification is complete or explicitly marked Draft with open questions and accepted risks.

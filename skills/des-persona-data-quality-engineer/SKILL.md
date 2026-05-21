@@ -53,4 +53,4 @@ Use DataOps as the primary lens. Data quality must be connected to automated tes
 
 ## Handoff To The Next Skill
 
-Use `des-data-quality` or `des-orchestration-and-observability` as the artifact skill.
+Use `des-data-quality` or `des-orchestration-observability` as the artifact skill.

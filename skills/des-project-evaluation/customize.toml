@@ -1,17 +1,83 @@
-# Workflow customization surface for des-project-evaluation.
+skill_id = "des-project-evaluation"
+phase = 22
+phase_name = "Project Evaluation"
+
+output_file = ".agents/des-skill/output/22-project-evaluation-report.md"
+template_file = ".agents/des-skill/templates/22-project-evaluation-report-template.md"
+checklist_file = ".agents/des-skill/checklists/22-project-evaluation-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "workflow-complete-or-next-iteration"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/01-business-discovery-brief.md",
+  ".agents/des-skill/output/02-business-question-catalog.md",
+  ".agents/des-skill/output/03-requirements-and-kpi-catalog.md",
+  ".agents/des-skill/output/04-data-product-specification.md",
+  ".agents/des-skill/output/05-data-source-inventory.md",
+  ".agents/des-skill/output/06-conceptual-domain-model.md",
+  ".agents/des-skill/output/07-architecture-decision-record.md",
+  ".agents/des-skill/output/08-ingestion-specification.md",
+  ".agents/des-skill/output/09-bronze-layer-specification.md",
+  ".agents/des-skill/output/10-silver-layer-specification.md",
+  ".agents/des-skill/output/11-gold-layer-specification.md",
+  ".agents/des-skill/output/12-data-contract-specification.md",
+  ".agents/des-skill/output/13-transformation-specification.md",
+  ".agents/des-skill/output/14-data-quality-specification.md",
+  ".agents/des-skill/output/15-orchestration-observability-specification.md",
+  ".agents/des-skill/output/16-semantic-model-specification.md",
+  ".agents/des-skill/output/17-serving-layer-specification.md",
+  ".agents/des-skill/output/18-lineage-metadata-specification.md",
+  ".agents/des-skill/output/19-governance-security-specification.md",
+  ".agents/des-skill/output/20-cost-performance-optimization-specification.md",
+  ".agents/des-skill/output/21-cicd-testing-specification.md"
+]
+
+required_sections = [
+  "Project Evaluation Summary",
+  "Evaluation Scope",
+  "Evaluation Design Principles",
+  "Business Goal Evaluation",
+  "Business Question Coverage",
+  "Requirement and KPI Evaluation",
+  "Data Product Delivery Evaluation",
+  "Source and Ingestion Evaluation",
+  "Bronze Silver Gold Layer Evaluation",
+  "Contract Evaluation",
+  "Transformation Evaluation",
+  "Data Quality Evaluation",
+  "Orchestration and Observability Evaluation",
+  "Semantic and Serving Evaluation",
+  "Lineage and Metadata Evaluation",
+  "Governance and Security Evaluation",
+  "Cost and Performance Evaluation",
+  "CI CD and Testing Evaluation",
+  "Stakeholder Feedback",
+  "Usage and Adoption Evidence",
+  "Readiness Scorecard",
+  "Risks and Known Limitations",
+  "Lessons Learned",
+  "Next Iteration Recommendations",
+  "Final Decision and Handoff"
+]
+
+halt_required_decisions = [
+  "upstream_artifact_completeness",
+  "evaluation_scope",
+  "success_criteria_availability",
+  "release_evidence_availability",
+  "quality_test_result_availability",
+  "stakeholder_feedback_availability",
+  "usage_adoption_evidence",
+  "readiness_decision",
+  "blocking_risk_decision",
+  "next_iteration_priority"
+]
 
 [workflow]
 activation_steps_prepend = []
 activation_steps_append = []
-
 persistent_facts = [
   "file:{project-root}/**/project-context.md",
 ]
-
 on_complete = ""
-
-[config]
-output_file = "{project-root}/_des-output/planning-artifacts/22-project-evaluation.md"
-template_file = "{skill-root}/../../templates/22-project-evaluation-template.md"
-checklist_file = "{skill-root}/../../checklists/business_readiness_checklist.md"
-status_file = "{project-root}/_des-output/implementation-artifacts/des-workflow-status.md"

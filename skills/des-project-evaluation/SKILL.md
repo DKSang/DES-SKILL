@@ -1,133 +1,178 @@
 ---
 name: des-project-evaluation
-description: Use when reviewing a data engineering project for production readiness, release approval, quality gaps, operational risks, or continuous improvement planning.
+description: Use when creating the Project Evaluation Report to evaluate project success against business goals, technical readiness, and adoption evidence.
 ---
 
 # des-project-evaluation
 
-## When To Use
-
-Use at the end of a project phase, before production release, after an incident, or during a platform maturity review.
-
 ## Purpose
 
-Evaluate whether the data product is ready to operate, trusted by users, monitored, governed, and maintainable — and produce an evidence-based Go / No-Go / Conditional-Go recommendation.
+Use this skill to create the Project Evaluation Report for any data engineering project.
+
+This skill evaluates whether the project achieved its business goals, answered the approved business questions, delivered required data products, met KPI/SLA/quality/security/cost expectations, and created a sustainable path for future improvement.
+
+The goal is to close the data engineering lifecycle with evidence, stakeholder feedback, lessons learned, risks, and next-iteration recommendations.
+
+## When To Use
+
+Use this skill when:
+
+- Phase 21 CI/CD and Testing Specification exists;
+- the project needs release review, final evaluation, retrospective, or handoff;
+- stakeholders need to know whether the data product is ready, useful, trusted, and maintainable;
+- the project team needs to identify lessons learned and next iteration priorities;
+- the workflow router selects Phase 22.
+
+Do not use this skill to redesign the full platform, implement fixes, write deployment code, or create new phase artifacts directly.
+
+## Required Inputs
+
+The agent should look for:
+
+- `.agents/des-skill/output/01-business-discovery-brief.md`;
+- `.agents/des-skill/output/02-business-question-catalog.md`;
+- `.agents/des-skill/output/03-requirements-and-kpi-catalog.md`;
+- `.agents/des-skill/output/04-data-product-specification.md`;
+- `.agents/des-skill/output/05-data-source-inventory.md`;
+- `.agents/des-skill/output/06-conceptual-domain-model.md`;
+- `.agents/des-skill/output/07-architecture-decision-record.md`;
+- `.agents/des-skill/output/08-ingestion-specification.md`;
+- `.agents/des-skill/output/09-bronze-layer-specification.md`;
+- `.agents/des-skill/output/10-silver-layer-specification.md`;
+- `.agents/des-skill/output/11-gold-layer-specification.md`;
+- `.agents/des-skill/output/12-data-contract-specification.md`;
+- `.agents/des-skill/output/13-transformation-specification.md`;
+- `.agents/des-skill/output/14-data-quality-specification.md`;
+- `.agents/des-skill/output/15-orchestration-observability-specification.md`;
+- `.agents/des-skill/output/16-semantic-model-specification.md`;
+- `.agents/des-skill/output/17-serving-layer-specification.md`;
+- `.agents/des-skill/output/18-lineage-metadata-specification.md`;
+- `.agents/des-skill/output/19-governance-security-specification.md`;
+- `.agents/des-skill/output/20-cost-performance-optimization-specification.md`;
+- `.agents/des-skill/output/21-cicd-testing-specification.md`;
+- workflow status file, if present;
+- release evidence;
+- test results;
+- quality results;
+- operational metrics;
+- cost/performance metrics;
+- stakeholder feedback;
+- adoption/usage evidence;
+- open risks and known limitations.
+
+If Phase 21 or release evidence is missing, stop and ask whether to continue as Draft or route back to `des-cicd-testing`.
+
+## Output
+
+Create or update:
+
+```text
+.agents/des-skill/output/22-project-evaluation-report.md
+```
+
+The artifact must capture:
+
+* project evaluation summary;
+* evaluation scope and non-scope;
+* business goal evaluation;
+* business question coverage;
+* requirement and KPI evaluation;
+* data product delivery evaluation;
+* source and ingestion evaluation;
+* Bronze/Silver/Gold layer evaluation;
+* contract evaluation;
+* transformation evaluation;
+* data quality evaluation;
+* orchestration and observability evaluation;
+* semantic and serving evaluation;
+* lineage and metadata evaluation;
+* governance and security evaluation;
+* cost and performance evaluation;
+* CI/CD and testing evaluation;
+* stakeholder feedback;
+* usage and adoption evidence;
+* readiness scorecard;
+* risks and known limitations;
+* lessons learned;
+* next iteration recommendations;
+* final decision and handoff.
+
+## On Activation
+
+1. Read this `SKILL.md` completely.
+2. Read `customize.toml`.
+3. Identify `output_file`, `template_file`, `checklist_file`, `status_file`, and required upstream artifacts.
+4. Load only `steps/step-01-context-and-readiness.md`.
+5. Do not load step-02 or step-03 until the current step explicitly instructs you to continue.
+6. Stop at every `HALT` point and wait for user input.
+7. Do not invent test results, stakeholder feedback, adoption metrics, quality pass rates, cost savings, or release evidence.
+8. Do not mark the project successful without evidence.
+9. Do not hide unresolved risks.
+10. Before marking the artifact as Done, run the configured checklist and update workflow status.
+
+## Guardrails
+
+The agent must not:
+
+* treat completion of artifacts as proof of business success;
+* claim business value without business evidence;
+* claim quality readiness without quality results;
+* claim production readiness without release evidence;
+* claim adoption without usage or stakeholder evidence;
+* ignore known limitations;
+* hide open questions;
+* recommend production release if blocking security, quality, contract, or CI/CD issues remain;
+* skip lessons learned and feedback loop.
 
 ## HALT Policy
 
-This skill must stop when a required decision cannot be safely inferred.
+This skill must stop when evaluation cannot be made safely.
 
-The agent must not continue if any of these are unresolved:
+Stop especially when:
 
-- required upstream artifacts are missing or inconsistent;
-- business owner, metric owner, source owner, or release owner is unclear;
-- business priority, consumer, or project intent is ambiguous;
-- source of truth, access, quality, legal use, cost, or ownership is unknown;
-- KPI formula, grain, freshness, SLA, threshold, or acceptance criteria is ambiguous;
-- architecture, storage, compute, deployment, or engine trade-off needs approval;
-- data contract owner, consumer impact, schema version, or breaking-change policy is missing;
-- DQ severity, threshold, remediation, alerting, or escalation is unknown;
-- security, access, retention, environment, secret, or release evidence is missing.
-
-Use the detailed HALT checkpoints in `steps/`: readiness HALT in step 01, phase decision HALT in step 02, and validation HALT in the final step. HALT asks for a decision, not permission to continue.
-
-
-## Inputs Required
-
-- All prior project artifacts (01–21).
-- CI/CD test results and staging run logs.
-- Data quality rule pass/fail results.
-- Pipeline run evidence (duration, row counts, DQ pass rates).
-- User acceptance feedback from consumer teams.
-- Known risks and open incidents.
-
-## Decision Matrix — Go / No-Go Classification
-
-| Evaluation Area | Go Criteria | No-Go Trigger |
-| :--- | :--- | :--- |
-| **Business acceptance** | Business consumer has reviewed and accepted outputs | Consumer has not reviewed; outputs do not match accepted metric definitions |
-| **Data quality** | Zero FAIL-severity DQ violations in last 3 staging runs | Any FAIL-severity DQ violation unresolved |
-| **Pipeline reliability** | P90 runtime within SLA in staging | SLA breached in staging; no remediation plan |
-| **Security** | No credentials in code; RBAC/RLS tested | Credential scan fails; PII exposed in serving layer |
-| **Rollback** | Rollback plan tested and < 30 min estimated | No rollback plan or rollback untested |
-| **Consumer onboarding** | All consumer teams notified and onboarded | Consumers unaware of go-live; no onboarding guide |
-
-## Risk Severity Classification
-
-Classify every identified risk before issuing the recommendation:
-
-| Severity | Definition | Action Required |
-| :--- | :--- | :--- |
-| **P1 — Blocker** | Will cause data loss, security breach, or hard SLA failure | Must be resolved before Go |
-| **P2 — High** | Will cause significant degradation but not catastrophic | Must have a documented remediation plan with owner and deadline |
-| **P3 — Medium** | Will cause minor issues or user confusion | Document in backlog; not a go/no-go gate |
-| **P4 — Low** | Minor improvement opportunity | Log in continuous improvement backlog |
-
-## Step-By-Step Process
-
-1. Collect evidence for each evaluation area in the Decision Matrix.
-2. Review business acceptance: does output match agreed KPI definitions?
-3. Check data quality: run final staging DQ suite; review all FAIL and WARN results.
-4. Check orchestration: P90 runtime in staging; retry behavior; DLQ status.
-5. Check security: credential scan; RBAC/RLS test results; PII exposure audit.
-6. Check rollback readiness: rollback plan tested; estimated duration documented.
-7. Classify all identified risks using the Risk Severity Classification.
-8. Issue recommendation: **Go** / **No-Go** / **Conditional-Go** (with explicit conditions to resolve).
-
-## Output File
-
-The output_file path is configured in `customize.toml`. Default:
-
-Write the final artifacts to:
-
-- `{project-root}/_des-output/planning-artifacts/22-project-evaluation.md`
-- `{project-root}/_des-output/planning-artifacts/23-data-lifecycle-review.md` *(for quarterly post-production reviews)*
-
-Use the matching templates from:
-
-- `{skill-root}/../../templates/22-project-evaluation-template.md`
-- `{skill-root}/../../templates/23-data-lifecycle-review-template.md`
-
-After writing the files, summarize the recommendation and any P1/P2 items requiring resolution.
-
-## Required Outputs
-
-- Evidence-based evaluation against all 6 Go/No-Go criteria.
-- Risk register with severity classification and owner per risk.
-- Remediation plan for all P1 and P2 risks.
-- Explicit recommendation: Go / No-Go / Conditional-Go.
-- Continuous improvement backlog (P3/P4 items).
+* upstream phase artifacts are missing;
+* business success criteria are missing;
+* release evidence is missing;
+* quality/test results are missing;
+* stakeholder feedback is missing;
+* usage/adoption evidence is missing;
+* open risks affect release readiness;
+* production readiness decision is requested without evidence.
 
 ## Quality Checklist
 
-- [ ] Recommendation is **evidence-based** — not based on effort or schedule pressure.
-- [ ] Every P1 risk has a named owner and a hard deadline.
-- [ ] All FAIL-severity DQ violations are resolved or have an accepted Conditional-Go plan.
-- [ ] Business consumer has explicitly confirmed acceptance (email, meeting note, or sign-off document).
-- [ ] Credential scan is clean — no secrets in code or CI/CD logs.
-- [ ] Rollback plan is tested and estimated duration is documented.
+- [ ] Project evaluation scope is clearly defined.
+- [ ] Evaluation principles focus on evidence-based value.
+- [ ] Business goals and question coverage are evaluated against evidence.
+- [ ] Data product delivery and layer correctness are reviewed.
+- [ ] Contract, quality, and operational readiness are scored.
+- [ ] Governance, security, and metadata completeness are validated.
+- [ ] Stakeholder feedback and adoption evidence are documented or marked missing.
+- [ ] Readiness scorecard provides a transparent view of project status.
+- [ ] Lessons learned and next iteration recommendations are included.
+- [ ] Final readiness decision is supported by documented evidence.
 
 ## Anti-Patterns to Avoid
 
 | Anti-Pattern | Why It Fails |
 | :--- | :--- |
-| Declaring Go because pipelines ran once in staging | One successful run does not prove reliability; SLA must be sustained across multiple runs |
-| Ignoring WARN-severity DQ violations at release | WARNs at release often become FATALs in production as data volume grows |
-| Releasing without consumer team notification | Consumers discover unexpected changes; trust in data platform erodes |
-| Releasing without rollback coverage | First production incident requires manual data repair; estimated days of downtime |
-| Treating this as a checklist exercise | Evaluation must include actual evidence (run logs, test results, DQ pass rates) |
+| Claiming success based on doc completion | Artifacts are means to an end; business value requires evidence of impact/usage. |
+| Hiding unresolved P1 risks | Misleads stakeholders about production readiness; leads to post-release failures. |
+| Treating missing evidence as "success" | Leads to false confidence; "Unknown" is the correct status for missing data. |
+| Skipping the retrospective/feedback loop | Wastes the opportunity to improve the next iteration or project. |
+| Recommending release with security blockers | Violates safety mandates and compliance requirements. |
 
 ## Undercurrent Coverage
 
 | Undercurrent | Action Required at This Phase |
 | :--- | :--- |
-| Security | Credential scan results, RBAC/RLS test evidence, PII audit output are Go/No-Go inputs |
-| Data Management | Catalog entries, lineage documentation, and stewardship assignments verified complete |
-| DataOps | CI/CD pipeline run log and test results are primary evidence for the evaluation |
-| Data Architecture | Architecture validation: no one-way-door decisions made without alternatives considered |
-| Orchestration | Runbook tested; on-call rotation confirmed; SLA monitors live |
-| Software Engineering | Code review history verified; all production changes reviewed; no untested code paths |
+| Security | Evaluates final governance compliance and access control readiness. |
+| Data Management | Reviews metadata, lineage, and stewardship completeness. |
+| DataOps | Assesses CI/CD effectiveness, release evidence, and operational stability. |
+| Data Architecture | Evaluates if the implemented architecture meets business and technical goals. |
+| Orchestration | Reviews run history, alerting accuracy, and recovery reliability. |
+| Software Engineering | Final check of test coverage, code review quality, and release discipline. |
 
 ## Handoff To The Next Skill
 
-For a new iteration, return to `des-business-discovery` or the earliest skill affected by the change request. For quarterly post-production review, use `23-data-lifecycle-review-template.md`.
+Next recommend either `workflow-complete` to close the project or route to the specific phase needed for the next iteration (e.g., `des-business-discovery` for new scope or `des-ingestion-design` for source improvements).

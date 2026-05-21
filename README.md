@@ -291,12 +291,12 @@ Tuyệt đối không nhảy trực tiếp vào viết code. Một dự án dữ
 | `des-data-contracts` | Hợp đồng dữ liệu (Data contracts) |
 | `des-transformation-design` | Thiết kế chuyển đổi (Transformation design) |
 | `des-data-quality` | Danh mục quy tắc chất lượng dữ liệu (Data quality rule catalog) |
-| `des-orchestration-and-observability` | Đặc tả điều phối và giám sát pipeline |
+| `des-orchestration-observability` | Đặc tả điều phối và giám sát pipeline |
 | `des-semantic-model-design` | Đặc tả mô hình semantic (Semantic model specification) |
 | `des-serving-layer-design` | Đặc tả lớp cung cấp dữ liệu (Serving layer specification) |
 | `des-semantic-and-serving-layer` | Cầu nối tương thích cho các công việc semantic và serving |
-| `des-lineage-and-metadata` | Danh mục lineage và metadata |
-| `des-governance-and-security` | Checklist quản trị dữ liệu (Governance checklist) |
+| `des-lineage-metadata-design` | Danh mục lineage và metadata |
+| `des-governance-security-design` | Checklist quản trị dữ liệu (Governance checklist) |
 | `des-cost-and-performance-optimization` | Đánh giá chi phí và hiệu năng |
 | `des-cicd-and-testing` | Kế hoạch CI/CD và kiểm thử |
 | `des-project-evaluation` | Đánh giá độ sẵn sàng release |

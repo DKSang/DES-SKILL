@@ -1,17 +1,82 @@
-# Workflow customization surface for des-cost-and-performance-optimization.
+skill_id = "des-cost-and-performance-optimization"
+phase = 20
+phase_name = "Cost and Performance Optimization"
+
+output_file = ".agents/des-skill/output/20-cost-performance-optimization-specification.md"
+template_file = ".agents/des-skill/templates/20-cost-performance-optimization-specification-template.md"
+checklist_file = ".agents/des-skill/checklists/20-cost-performance-optimization-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-cicd-and-testing"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/07-architecture-decision-record.md",
+  ".agents/des-skill/output/08-ingestion-specification.md",
+  ".agents/des-skill/output/09-bronze-layer-specification.md",
+  ".agents/des-skill/output/10-silver-layer-specification.md",
+  ".agents/des-skill/output/11-gold-layer-specification.md",
+  ".agents/des-skill/output/12-data-contract-specification.md",
+  ".agents/des-skill/output/13-transformation-specification.md",
+  ".agents/des-skill/output/14-data-quality-specification.md",
+  ".agents/des-skill/output/15-orchestration-observability-specification.md",
+  ".agents/des-skill/output/16-semantic-model-specification.md",
+  ".agents/des-skill/output/17-serving-layer-specification.md",
+  ".agents/des-skill/output/18-lineage-metadata-specification.md",
+  ".agents/des-skill/output/19-governance-security-specification.md"
+]
+
+required_sections = [
+  "Cost and Performance Summary",
+  "Optimization Scope",
+  "Optimization Design Principles",
+  "Workload Inventory",
+  "Cost Driver Inventory",
+  "Performance Driver Inventory",
+  "Baseline Measurement Plan",
+  "Storage Optimization Strategy",
+  "Compute Optimization Strategy",
+  "Ingestion Optimization Strategy",
+  "Transformation Optimization Strategy",
+  "Query and Semantic Model Optimization Strategy",
+  "Serving Performance Strategy",
+  "Orchestration Runtime Optimization",
+  "Data Quality Cost and Performance Considerations",
+  "Caching and Materialization Strategy",
+  "Partitioning Clustering and File Sizing Expectations",
+  "Incremental Processing and Recomputation Strategy",
+  "Retention Lifecycle and Storage Tiering",
+  "Cost Monitoring and Budget Guardrails",
+  "Performance Monitoring and SLOs",
+  "Scalability and Capacity Planning",
+  "Trade Off Decisions",
+  "Risks",
+  "Assumptions",
+  "Open Questions",
+  "Next Skill Recommendation"
+]
+
+halt_required_decisions = [
+  "upstream_governance_operations_context",
+  "optimization_scope",
+  "workload_priority",
+  "baseline_measurement",
+  "cost_budget_constraint",
+  "performance_sla_target",
+  "storage_optimization",
+  "compute_optimization",
+  "query_serving_optimization",
+  "caching_materialization",
+  "quality_cost_tradeoff",
+  "retention_storage_tiering",
+  "cost_monitoring_guardrails",
+  "scalability_capacity_plan",
+  "tradeoff_approval"
+]
 
 [workflow]
 activation_steps_prepend = []
 activation_steps_append = []
-
 persistent_facts = [
   "file:{project-root}/**/project-context.md",
 ]
-
 on_complete = ""
-
-[config]
-output_file = "{project-root}/_des-output/planning-artifacts/20-cost-and-performance-optimization.md"
-template_file = "{skill-root}/../../templates/20-cost-and-performance-optimization-template.md"
-checklist_file = "{skill-root}/../../checklists/storage_design_checklist.md"
-status_file = "{project-root}/_des-output/implementation-artifacts/des-workflow-status.md"

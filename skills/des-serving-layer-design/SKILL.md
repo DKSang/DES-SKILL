@@ -1,136 +1,183 @@
 ---
 name: des-serving-layer-design
-description: Use when designing the consumer-facing serving layer including dashboards, APIs, exports, reverse ETL, AI agent tools, and feature serving for ML.
+description: Use when designing how data products are served to consumers via dashboards, APIs, ML datasets, reverse ETL, data sharing, or AI agents.
 ---
 
 # des-serving-layer-design
 
-## When To Use
-
-Use after semantic model design and before production deployment. Use when data products need to be accessed by BI tools, applications, AI agents, ML systems, or operational systems.
-
 ## Purpose
 
-Design the consumer-facing serving interface that delivers certified data products with the correct access pattern, performance, and SLA — matching each consumer type to the optimal serving mechanism.
+Use this skill to create the Serving Layer Specification for any data engineering project.
 
-## HALT Policy
+This skill defines how trusted data products, Gold outputs, semantic models, metrics, APIs, ML datasets, exports, reverse ETL feeds, dashboards, or AI/data-agent interfaces will be served to consumers.
 
-This skill must stop when a required decision cannot be safely inferred.
+The goal is to design the consumption layer clearly before building dashboards, APIs, apps, ML features, exports, or operational activation workflows.
 
-The agent must not continue if any of these are unresolved:
+## When To Use
 
-- required upstream artifacts are missing or inconsistent;
-- business owner, metric owner, source owner, or release owner is unclear;
-- business priority, consumer, or project intent is ambiguous;
-- source of truth, access, quality, legal use, cost, or ownership is unknown;
-- KPI formula, grain, freshness, SLA, threshold, or acceptance criteria is ambiguous;
-- architecture, storage, compute, deployment, or engine trade-off needs approval;
-- data contract owner, consumer impact, schema version, or breaking-change policy is missing;
-- DQ severity, threshold, remediation, alerting, or escalation is unknown;
-- security, access, retention, environment, secret, or release evidence is missing.
+Use this skill when:
 
-Use the detailed HALT checkpoints in `steps/`: readiness HALT in step 01, phase decision HALT in step 02, and validation HALT in the final step. HALT asks for a decision, not permission to continue.
+- Phase 16 Semantic Model Specification exists;
+- Gold outputs need to be exposed to consumers;
+- the project needs dashboards, reports, self-service BI, semantic models, APIs, ML/AI datasets, reverse ETL, exports, embedded analytics, data sharing, or AI-agent access;
+- serving latency, access, performance, freshness display, feedback loop, usage monitoring, or consumer experience is unclear;
+- the workflow router selects Phase 17.
 
+Do not use this skill to implement dashboards, APIs, ML pipelines, reverse ETL jobs, UI screens, semantic model code, orchestration code, or CI/CD workflows.
 
-## Inputs Required
+## Required Inputs
 
-- Semantic model design (`16-semantic-model-design.md`).
-- Data product definitions (`04-data-product-specification.md`).
-- Consumer SLA requirements (`03-requirements-and-kpi-catalog.md`).
-- Access control policy (`19-governance-and-security.md`).
+The agent should look for:
 
-## Decision Matrix — Serving Interface Selection
+- `.agents/des-skill/output/01-business-discovery-brief.md`;
+- `.agents/des-skill/output/02-business-question-catalog.md`;
+- `.agents/des-skill/output/03-requirements-and-kpi-catalog.md`;
+- `.agents/des-skill/output/04-data-product-specification.md`;
+- `.agents/des-skill/output/07-architecture-decision-record.md`;
+- `.agents/des-skill/output/11-gold-layer-specification.md`;
+- `.agents/des-skill/output/12-data-contract-specification.md`;
+- `.agents/des-skill/output/14-data-quality-specification.md`;
+- `.agents/des-skill/output/15-orchestration-observability-specification.md`;
+- `.agents/des-skill/output/16-semantic-model-specification.md`;
+- workflow status file, if present;
+- serving direction from architecture;
+- consumer personas;
+- Gold outputs;
+- semantic models;
+- contracts;
+- freshness/SLA expectations;
+- security/access requirements;
+- quality/trust status;
+- usage and feedback expectations.
 
-| Consumer Type | Recommended Serving Interface | Key Design Consideration |
-| :--- | :--- | :--- |
-| Business analysts, self-serve BI | **Power BI / Looker / Superset** connecting to Semantic Layer | Partition pruning; pre-aggregated Gold for performance |
-| Applications requiring real-time lookup | **REST API** (FastAPI, Azure Function) with cache | Response time SLA; cache TTL; rate limiting |
-| ML model training | **Feature Store** (Feast, Databricks Feature Store) | Point-in-time correctness to prevent label leakage |
-| Operational system sync (CRM, CDP) | **Reverse ETL** (Hightouch, Census) | Dedup and upsert logic; API rate limit awareness |
-| AI agent / LLM grounding | **Vector store** (Azure AI Search, Pinecone) or **Structured context** | Chunking strategy; metadata filtering |
-| File delivery to partners | **SFTP drop / Azure Blob Export** | PGP encryption; delivery manifest; SLA confirmation |
-
-## Decision Matrix — Query Performance Strategy
-
-| Problem | Solution |
-| :--- | :--- |
-| Dashboard P90 > 10 sec | Add partition pruning; create pre-aggregated Gold summary table |
-| API P99 > 500ms | Add Redis cache with appropriate TTL; use read replica |
-| High concurrent dashboard user load | Enable query result caching in BI tool; add connection pooling |
-| Feature serving P99 > 100ms | Pre-compute and materialize features in Feature Store; avoid on-demand joins |
-
-## Step-By-Step Process
-
-1. Map each data product to its consumer type using the Decision Matrix.
-2. Choose the serving interface per consumer type.
-3. Design the access pattern for each interface (query filters, API endpoints, export schedule).
-4. Define performance targets and the optimization strategy per interface.
-5. Confirm RBAC and RLS rules are applied at the serving layer.
-6. Define monitoring: P50/P90/P99 response time, error rate, cache hit rate.
-7. Document consumer onboarding guide (how to connect, what the data means, known limitations).
+If the Semantic Model Specification is missing or too weak, stop and ask whether to route back to `des-semantic-model-design`.
 
 ## Output File
 
+Create or update:
 
-The output_file path is configured in `customize.toml`. Default:
+```text
+.agents/des-skill/output/17-serving-layer-specification.md
+```
 
-Write the final artifact to:
+The artifact must capture:
 
-`{project-root}/_des-output/planning-artifacts/17-serving-layer-design.md`
+* serving layer summary;
+* serving scope and non-scope;
+* serving design principles;
+* consumer and persona mapping;
+* serving channel inventory;
+* Gold/Semantic-to-serving mapping;
+* serving pattern decision;
+* dashboard/reporting expectations;
+* self-service analytics expectations;
+* API/application-serving expectations;
+* ML/AI dataset serving expectations;
+* reverse ETL/export expectations;
+* data sharing/federation expectations;
+* AI/data-agent access expectations;
+* access control and security model;
+* freshness and quality visibility;
+* performance and latency expectations;
+* caching and materialization expectations;
+* feedback loop and issue reporting;
+* usage monitoring and adoption signals;
+* ownership and support model;
+* risks;
+* assumptions;
+* open questions;
+* next skill recommendation.
 
-Use the example output format below because this skill does not have a dedicated template file.
+## On Activation
 
-After writing the file, summarize the file path and recommend the next skill.
+1. Read this `SKILL.md` completely.
+2. Read `customize.toml`.
+3. Identify `output_file`, `template_file`, `checklist_file`, `status_file`, and required upstream artifacts.
+4. Load only `steps/step-01-context-and-readiness.md`.
+5. Do not load step-02 or step-03 until the current step explicitly instructs you to continue.
+6. Stop at every `HALT` point and wait for user input.
+7. Do not invent consumers, serving channels, access rules, latency expectations, or support ownership.
+8. Do not build dashboards, APIs, apps, ML jobs, reverse ETL jobs, semantic code, or deployment workflows.
+9. Before marking the artifact as Done, run the configured checklist and update workflow status.
 
-## Required Outputs
+## Process Overview
 
-- Consumer-to-interface mapping.
-- Performance targets and optimization strategy per interface.
-- Access control confirmation (RBAC/RLS applied at serving layer).
-- Consumer onboarding guide outline.
-- Monitoring signals per interface.
+The detailed execution procedure lives in `steps/`.
+
+At a high level, this skill will:
+
+1. Confirm upstream semantic, Gold, contract, quality, architecture, and consumer context.
+2. Identify serving consumers and their jobs to be done.
+3. Inventory serving channels and map Gold/Semantic objects to them.
+4. Define channel-specific expectations (dashboards, APIs, ML, Reverse ETL, Sharing, Agents).
+5. Define access control, freshness/quality indicators, and performance expectations.
+6. Define feedback loops, usage monitoring, and support ownership.
+7. Ask HALT questions for unresolved serving decisions.
+8. Draft the Serving Layer Specification.
+9. Run the checklist, update workflow status, and recommend the next skill.
+
+Do not execute this overview directly. Follow the step files.
+
+## Guardrails
+
+The agent must not:
+
+* treat serving as dashboard-only;
+* expose raw or unstable data directly to consumers without approval;
+* expose Draft metrics as Certified;
+* bypass semantic model or contracts where they are required;
+* ignore access/security restrictions;
+* ignore freshness and quality visibility;
+* ignore feedback loop from users;
+* design reverse ETL without guardrails and monitoring;
+* design federated queries against production systems without source impact review;
+* mark serving design Done if P1 outputs lack consumer, channel, access, freshness, quality, ownership, and support expectations.
+
+## HALT Policy
+
+This skill must stop when a serving decision cannot be safely inferred.
+
+Stop especially when:
+
+* semantic model or Gold output context is missing;
+* serving channel is unclear;
+* consumer/persona is unclear;
+* access/security is unresolved;
+* freshness/latency expectation is unclear;
+* quality/trust status is unclear;
+* reverse ETL feedback loop risk exists;
+* API/application contract is unclear;
+* ML/AI usage requires feature/label expectations;
+* support owner or feedback process is missing.
+
+Detailed HALT checkpoints are defined in `steps/`.
 
 ## Quality Checklist
 
-- [ ] Every data product has a serving interface matched to its consumer type.
-- [ ] Dashboard P90 latency target is met in staging load test.
-- [ ] API rate limiting and authentication are configured.
-- [ ] PII is confirmed absent from all serving layer outputs — or access-controlled via RLS.
-- [ ] Consumer onboarding guide exists for all consumer teams.
-- [ ] No direct Gold or Silver table access for BI consumers — semantic layer is the entry point.
+- [ ] Serving scope and principles are defined.
+- [ ] Consumer/persona mapping is documented.
+- [ ] Serving channel inventory is created.
+- [ ] Gold/Semantic-to-serving mapping is documented.
+- [ ] Serving pattern decision is documented per output.
+- [ ] Access control and security model is documented.
+- [ ] Freshness and quality visibility is defined.
+- [ ] Performance/latency expectations are documented.
+- [ ] Feedback loop and issue reporting process is documented.
+- [ ] Usage monitoring and adoption signals are defined.
+- [ ] Ownership and support model is documented.
+- [ ] Artifact does not implement dashboards, APIs, or pipelines.
 
 ## Anti-Patterns to Avoid
 
 | Anti-Pattern | Why It Fails |
 | :--- | :--- |
-| Giving BI consumers direct SQL access to Gold tables | Bypasses semantic layer; metric definitions diverge across tools |
-| Building custom API for data a Semantic Layer could serve | Doubles maintenance burden; creates inconsistent metric definitions |
-| No caching for high-frequency API endpoints | Repeated identical queries overwhelm the warehouse; latency spikes under load |
-| ML training reading from Gold directly without point-in-time joins | Label leakage: features from the future contaminate the model |
-| File exports without delivery manifest | Partner cannot verify completeness; missing files go undetected |
-
-## Undercurrent Coverage
-
-| Undercurrent | Action Required at This Phase |
-| :--- | :--- |
-| Security | RLS enforced at semantic layer; API authentication configured; file exports encrypted |
-| Data Management | Consumer onboarding guide includes data dictionary and known limitations |
-| DataOps | Serving layer performance tested in staging before production; automated regression tests |
-| Data Architecture | Serving interface choice (API vs. BI vs. reverse ETL) is architectural; documented in ADR if non-standard |
-| Orchestration | Serving layer refresh triggered by upstream Gold refresh completion |
-| Software Engineering | API versioning strategy defined; breaking changes follow semantic versioning |
+| Serving as dashboard-only | Ignores operational, ML, and API consumption needs |
+| Exposing unvalidated data | Damages user trust and business reliability |
+| Bypassing security/governance | Violates privacy and compliance requirements |
+| Ignoring user feedback loops | Prevents product improvement and usage understanding |
+| Designing reverse ETL without guardrails | Risks data corruption in operational systems |
+| Designing visuals instead of serving layer | Prematurely locks design into visual detail |
 
 ## Handoff To The Next Skill
 
-Next use `des-lineage-and-metadata` to document column-level lineage, register all datasets in the catalog, and assign stewardship.
-
-## Example Output Format
-
-```markdown
-# Serving Layer Design
-| Data Product | Consumer Type | Interface | Access Pattern | P90 Target | Auth Method |
-| Regional Revenue Dashboard | BI Analysts | Power BI → Semantic Model | Filter by region, week | < 5 sec | OAuth 2.0 / RBAC |
-## Performance Optimization Plan
-## Consumer Onboarding Guides
-## Monitoring Signals
-```
+Recommend `des-lineage-metadata-design` only after the Serving Layer Specification is complete or explicitly marked Draft with open questions and accepted risk.

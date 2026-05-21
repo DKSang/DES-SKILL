@@ -1,4 +1,77 @@
-# Workflow customization surface for des-transformation-design.
+skill_id = "des-transformation-design"
+phase = 13
+phase_name = "Transformation Design"
+
+output_file = ".agents/des-skill/output/13-transformation-specification.md"
+template_file = ".agents/des-skill/templates/13-transformation-specification-template.md"
+checklist_file = ".agents/des-skill/checklists/13-transformation-design-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-data-quality"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/01-business-discovery-brief.md",
+  ".agents/des-skill/output/02-business-question-catalog.md",
+  ".agents/des-skill/output/03-requirements-and-kpi-catalog.md",
+  ".agents/des-skill/output/04-data-product-specification.md",
+  ".agents/des-skill/output/05-data-source-inventory.md",
+  ".agents/des-skill/output/06-conceptual-domain-model.md",
+  ".agents/des-skill/output/07-architecture-decision-record.md",
+  ".agents/des-skill/output/08-ingestion-specification.md",
+  ".agents/des-skill/output/09-bronze-layer-specification.md",
+  ".agents/des-skill/output/10-silver-layer-specification.md",
+  ".agents/des-skill/output/11-gold-layer-specification.md",
+  ".agents/des-skill/output/12-data-contract-specification.md"
+]
+
+required_sections = [
+  "Transformation Summary",
+  "Transformation Scope",
+  "Transformation Design Principles",
+  "Transformation Inventory",
+  "Layer to Layer Transformation Mapping",
+  "Dependency Graph",
+  "Input and Output Dataset Mapping",
+  "Transformation Grain",
+  "Business Rules",
+  "Cleaning and Conformance Rules",
+  "Join and Relationship Rules",
+  "Deduplication and Survivorship Rules",
+  "SCD and History Handling",
+  "Aggregation and Metric Calculation Rules",
+  "Incremental Processing Strategy",
+  "Backfill and Replay Strategy",
+  "Late Arriving and Corrected Data Handling",
+  "Error Handling and Quarantine Behavior",
+  "Validation and Test Expectations",
+  "Contract Alignment",
+  "Lineage and Metadata Expectations",
+  "Performance and Cost Considerations",
+  "Security and Privacy Handling",
+  "Implementation Boundary",
+  "Risks",
+  "Assumptions",
+  "Open Questions",
+  "Next Skill Recommendation"
+]
+
+halt_required_decisions = [
+  "upstream_contract_context",
+  "transformation_scope",
+  "input_output_mapping",
+  "transformation_grain",
+  "business_rule_ambiguity",
+  "join_relationship_rule",
+  "metric_aggregation_rule",
+  "dedup_survivorship_rule",
+  "scd_history_behavior",
+  "incremental_processing_strategy",
+  "backfill_replay_strategy",
+  "late_corrected_data_behavior",
+  "error_quarantine_behavior",
+  "validation_test_expectation",
+  "contract_alignment"
+]
 
 [workflow]
 activation_steps_prepend = []
@@ -9,9 +82,3 @@ persistent_facts = [
 ]
 
 on_complete = ""
-
-[config]
-output_file = "{project-root}/_des-output/planning-artifacts/13-transformation-design.md"
-# template_file = ""  # This skill uses its example output format
-checklist_file = "{skill-root}/../../checklists/transformation_design_checklist.md"
-status_file = "{project-root}/_des-output/implementation-artifacts/des-workflow-status.md"

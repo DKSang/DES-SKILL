@@ -10,14 +10,15 @@
 ## 1. Nạp Data Contract Document
 
 Tìm và nạp contract từ:
-1. `{project-root}/_des-output/planning-artifacts/12-data-contracts.md`
-2. File do người dùng chỉ định
+1. `{project-root}/.agents/des-skill/output/12-data-contract-specification.md`
+2. `{project-root}/_des-output/planning-artifacts/12-data-contract-specification.md`
+3. File do người dùng chỉ định
 
 Nếu không tìm thấy, **HALT** và hỏi: "Vui lòng cung cấp đường dẫn đến Data Contract cần review."
 
 Cũng nạp (nếu có):
-- `{project-root}/_des-output/planning-artifacts/05-data-source-assessment.md` — cross-check SLAs
-- `{project-root}/_des-output/planning-artifacts/03-requirements-and-kpi-catalog.md` — cross-check freshness
+- `{project-root}/.agents/des-skill/output/05-data-source-inventory.md` hoặc `{project-root}/_des-output/planning-artifacts/05-data-source-assessment.md` — cross-check SLAs
+- `{project-root}/.agents/des-skill/output/03-requirements-and-kpi-catalog.md` hoặc `{project-root}/_des-output/planning-artifacts/03-requirements-and-kpi-catalog.md` — cross-check freshness
 
 ---
 

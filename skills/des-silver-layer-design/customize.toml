@@ -1,4 +1,72 @@
-# Workflow customization surface for des-silver-layer-design.
+skill_id = "des-silver-layer-design"
+phase = 10
+phase_name = "Silver Layer Design"
+
+output_file = ".agents/des-skill/output/10-silver-layer-specification.md"
+template_file = ".agents/des-skill/templates/10-silver-layer-specification-template.md"
+checklist_file = ".agents/des-skill/checklists/10-silver-layer-design-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-gold-layer-design"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/01-business-discovery-brief.md",
+  ".agents/des-skill/output/02-business-question-catalog.md",
+  ".agents/des-skill/output/03-requirements-and-kpi-catalog.md",
+  ".agents/des-skill/output/04-data-product-specification.md",
+  ".agents/des-skill/output/05-data-source-inventory.md",
+  ".agents/des-skill/output/06-conceptual-domain-model.md",
+  ".agents/des-skill/output/07-architecture-decision-record.md",
+  ".agents/des-skill/output/08-ingestion-specification.md",
+  ".agents/des-skill/output/09-bronze-layer-specification.md"
+]
+
+required_sections = [
+  "Silver Layer Summary",
+  "Silver Scope",
+  "Silver Design Principles",
+  "Bronze to Silver Mapping",
+  "Silver Dataset Inventory",
+  "Domain Entity and Event Alignment",
+  "Conceptual to Logical Mapping",
+  "Grain and Identity Rules",
+  "Key Strategy",
+  "Deduplication and Survivorship Rules",
+  "Conformance and Standardization Rules",
+  "Data Type Normalization",
+  "Timezone and Temporal Normalization",
+  "Unit and Currency Normalization",
+  "Code Status and Category Mapping",
+  "Null and Missing Value Handling",
+  "Schema Evolution Handling",
+  "Source of Truth and Cross Source Reconciliation",
+  "Silver Boundary Data Quality Rules",
+  "Rejected and Quarantined Record Handling",
+  "Privacy and Security Handling",
+  "Lineage and Traceability",
+  "Refresh and Incremental Behavior",
+  "Risks",
+  "Assumptions",
+  "Open Questions",
+  "Next Skill Recommendation"
+]
+
+halt_required_decisions = [
+  "upstream_bronze_context",
+  "silver_dataset_boundary",
+  "domain_alignment",
+  "grain_identity_rule",
+  "key_strategy",
+  "source_of_truth_reconciliation",
+  "deduplication_survivorship",
+  "timezone_temporal_mapping",
+  "unit_currency_mapping",
+  "code_status_mapping",
+  "null_missing_handling",
+  "silver_quality_rules",
+  "sensitive_data_handling",
+  "lineage_traceability"
+]
 
 [workflow]
 activation_steps_prepend = []
@@ -9,9 +77,3 @@ persistent_facts = [
 ]
 
 on_complete = ""
-
-[config]
-output_file = "{project-root}/_des-output/planning-artifacts/10-silver-layer-design.md"
-template_file = "{skill-root}/../../templates/10-silver-layer-design-template.md"
-checklist_file = "{skill-root}/../../checklists/transformation_design_checklist.md"
-status_file = "{project-root}/_des-output/implementation-artifacts/des-workflow-status.md"

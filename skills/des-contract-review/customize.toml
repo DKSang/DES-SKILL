@@ -2,7 +2,7 @@
 name = "des-contract-review"
 version = "1.0.0"
 phase = "contracts"
-input_templates = ["12-data-contracts-template.md"]
+input_templates = ["12-data-contract-specification-template.md"]
 output_template = "12b-contract-review-template.md"
 
 [workflow]

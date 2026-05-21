@@ -72,7 +72,7 @@ Greet `user_name`. Activation complete.
 
 ## Inputs Required
 
-- Data Contract document (`12-data-contracts.md` hoặc tương đương).
+- Data Contract document (`12-data-contract-specification.md` hoặc tương đương).
 - Source Assessment (`05-data-source-assessment.md`) để cross-check SLAs.
 - KPI Catalog (`03-requirements-and-kpi-catalog.md`) để cross-check freshness requirements.
 - Bronze Layer Design (`09-bronze-layer-design.md`) nếu có.

@@ -1,4 +1,66 @@
-# Workflow customization surface for des-bronze-layer-design.
+skill_id = "des-bronze-layer-design"
+phase = 9
+phase_name = "Bronze Layer Design"
+
+output_file = ".agents/des-skill/output/09-bronze-layer-specification.md"
+template_file = ".agents/des-skill/templates/09-bronze-layer-specification-template.md"
+checklist_file = ".agents/des-skill/checklists/09-bronze-layer-design-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-silver-layer-design"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/01-business-discovery-brief.md",
+  ".agents/des-skill/output/02-business-question-catalog.md",
+  ".agents/des-skill/output/03-requirements-and-kpi-catalog.md",
+  ".agents/des-skill/output/04-data-product-specification.md",
+  ".agents/des-skill/output/05-data-source-inventory.md",
+  ".agents/des-skill/output/06-conceptual-domain-model.md",
+  ".agents/des-skill/output/07-architecture-decision-record.md",
+  ".agents/des-skill/output/08-ingestion-specification.md"
+]
+
+required_sections = [
+  "Bronze Layer Summary",
+  "Bronze Scope",
+  "Bronze Design Principles",
+  "Source to Bronze Mapping",
+  "Bronze Dataset Inventory",
+  "Raw Preservation Strategy",
+  "Storage Format Decision",
+  "File and Table Organization",
+  "Partitioning Strategy",
+  "Mandatory Metadata Columns",
+  "Ingestion Audit Metadata",
+  "Schema Drift and Evolution Handling",
+  "Replay and Backfill Support",
+  "Idempotency and Deduplication Boundary",
+  "Quarantine and Rejected Data Handling",
+  "Retention and Lifecycle Policy",
+  "Access Control and Sensitivity Classification",
+  "Bronze Boundary Data Quality Expectations",
+  "Lineage and Traceability Expectations",
+  "Operational Evidence Requirements",
+  "Risks",
+  "Assumptions",
+  "Open Questions",
+  "Next Skill Recommendation"
+]
+
+halt_required_decisions = [
+  "upstream_ingestion_context",
+  "bronze_dataset_boundary",
+  "raw_preservation_strategy",
+  "storage_format",
+  "partitioning_strategy",
+  "mandatory_metadata",
+  "schema_drift_policy",
+  "replay_backfill_support",
+  "retention_lifecycle_policy",
+  "sensitive_raw_access_policy",
+  "quarantine_policy",
+  "bronze_boundary_quality"
+]
 
 [workflow]
 activation_steps_prepend = []
@@ -9,9 +71,3 @@ persistent_facts = [
 ]
 
 on_complete = ""
-
-[config]
-output_file = "{project-root}/_des-output/planning-artifacts/09-bronze-layer-design.md"
-template_file = "{skill-root}/../../templates/09-bronze-layer-design-template.md"
-checklist_file = "{skill-root}/../../checklists/storage_design_checklist.md"
-status_file = "{project-root}/_des-output/implementation-artifacts/des-workflow-status.md"

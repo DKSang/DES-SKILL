@@ -1,17 +1,74 @@
-# Workflow customization surface for des-serving-layer-design.
+skill_id = "des-serving-layer-design"
+phase = 17
+phase_name = "Serving Layer Design"
+
+output_file = ".agents/des-skill/output/17-serving-layer-specification.md"
+template_file = ".agents/des-skill/templates/17-serving-layer-specification-template.md"
+checklist_file = ".agents/des-skill/checklists/17-serving-layer-design-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-lineage-metadata-design"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/01-business-discovery-brief.md",
+  ".agents/des-skill/output/02-business-question-catalog.md",
+  ".agents/des-skill/output/03-requirements-and-kpi-catalog.md",
+  ".agents/des-skill/output/04-data-product-specification.md",
+  ".agents/des-skill/output/07-architecture-decision-record.md",
+  ".agents/des-skill/output/11-gold-layer-specification.md",
+  ".agents/des-skill/output/12-data-contract-specification.md",
+  ".agents/des-skill/output/14-data-quality-specification.md",
+  ".agents/des-skill/output/15-orchestration-observability-specification.md",
+  ".agents/des-skill/output/16-semantic-model-specification.md"
+]
+
+required_sections = [
+  "Serving Layer Summary",
+  "Serving Scope",
+  "Serving Design Principles",
+  "Consumer and Persona Mapping",
+  "Serving Channel Inventory",
+  "Gold and Semantic to Serving Mapping",
+  "Serving Pattern Decision",
+  "Dashboard and Reporting Expectations",
+  "Self Service Analytics Expectations",
+  "API and Application Serving Expectations",
+  "ML and AI Dataset Serving Expectations",
+  "Reverse ETL and Export Expectations",
+  "Data Sharing and Federation Expectations",
+  "AI and Data Agent Access Expectations",
+  "Access Control and Security Model",
+  "Freshness and Quality Visibility",
+  "Performance and Latency Expectations",
+  "Caching and Materialization Expectations",
+  "Feedback Loop and Issue Reporting",
+  "Usage Monitoring and Adoption Signals",
+  "Ownership and Support Model",
+  "Risks",
+  "Assumptions",
+  "Open Questions",
+  "Next Skill Recommendation"
+]
+
+halt_required_decisions = [
+  "upstream_semantic_serving_context",
+  "serving_scope",
+  "consumer_persona",
+  "serving_channel",
+  "access_security_model",
+  "freshness_quality_visibility",
+  "performance_latency_expectation",
+  "api_application_contract",
+  "ml_ai_serving_expectation",
+  "reverse_etl_guardrails",
+  "data_sharing_federation_risk",
+  "feedback_support_owner"
+]
 
 [workflow]
 activation_steps_prepend = []
 activation_steps_append = []
-
 persistent_facts = [
   "file:{project-root}/**/project-context.md",
 ]
-
 on_complete = ""
-
-[config]
-output_file = "{project-root}/_des-output/planning-artifacts/17-serving-layer-design.md"
-# template_file = ""  # This skill uses its example output format
-checklist_file = "{skill-root}/../../checklists/serving_checklist.md"
-status_file = "{project-root}/_des-output/implementation-artifacts/des-workflow-status.md"

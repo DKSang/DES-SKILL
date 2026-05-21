@@ -1,4 +1,74 @@
-# Workflow customization surface for des-data-quality.
+skill_id = "des-data-quality"
+phase = 14
+phase_name = "Data Quality Design"
+
+output_file = ".agents/des-skill/output/14-data-quality-specification.md"
+template_file = ".agents/des-skill/templates/14-data-quality-specification-template.md"
+checklist_file = ".agents/des-skill/checklists/14-data-quality-design-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-orchestration-observability"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/01-business-discovery-brief.md",
+  ".agents/des-skill/output/02-business-question-catalog.md",
+  ".agents/des-skill/output/03-requirements-and-kpi-catalog.md",
+  ".agents/des-skill/output/04-data-product-specification.md",
+  ".agents/des-skill/output/05-data-source-inventory.md",
+  ".agents/des-skill/output/06-conceptual-domain-model.md",
+  ".agents/des-skill/output/07-architecture-decision-record.md",
+  ".agents/des-skill/output/08-ingestion-specification.md",
+  ".agents/des-skill/output/09-bronze-layer-specification.md",
+  ".agents/des-skill/output/10-silver-layer-specification.md",
+  ".agents/des-skill/output/11-gold-layer-specification.md",
+  ".agents/des-skill/output/12-data-contract-specification.md",
+  ".agents/des-skill/output/13-transformation-specification.md"
+]
+
+required_sections = [
+  "Data Quality Summary",
+  "Quality Scope",
+  "Quality Design Principles",
+  "Quality Dimensions",
+  "Quality Rule Inventory",
+  "Dataset to Rule Mapping",
+  "Layer Specific Quality Rules",
+  "Contract Quality Alignment",
+  "Transformation Validation Alignment",
+  "Freshness Rules",
+  "Completeness and Volume Rules",
+  "Uniqueness and Grain Rules",
+  "Validity and Domain Rules",
+  "Referential Integrity Rules",
+  "Consistency and Reconciliation Rules",
+  "Accuracy and Business Reasonableness Rules",
+  "Schema and Compatibility Rules",
+  "Null and Missing Value Rules",
+  "Anomaly and Threshold Rules",
+  "Severity Classification",
+  "Failure Handling and Quality Gates",
+  "Ownership and Stewardship",
+  "Evidence and Reporting Expectations",
+  "Risks",
+  "Assumptions",
+  "Open Questions",
+  "Next Skill Recommendation"
+]
+
+halt_required_decisions = [
+  "upstream_transformation_context",
+  "quality_scope",
+  "quality_rule_required_outputs",
+  "quality_threshold",
+  "severity_classification",
+  "blocking_warning_behavior",
+  "freshness_sla_quality_rule",
+  "metric_reconciliation_tolerance",
+  "quality_owner",
+  "failure_handling",
+  "evidence_reporting_expectation",
+  "consumer_acceptance_quality"
+]
 
 [workflow]
 activation_steps_prepend = []
@@ -9,9 +79,3 @@ persistent_facts = [
 ]
 
 on_complete = ""
-
-[config]
-output_file = "{project-root}/_des-output/planning-artifacts/14-data-quality.md"
-template_file = "{skill-root}/../../templates/14-data-quality-template.md"
-checklist_file = "{skill-root}/../../checklists/observability_checklist.md"
-status_file = "{project-root}/_des-output/implementation-artifacts/des-workflow-status.md"

@@ -1,125 +1,179 @@
 ---
 name: des-cost-and-performance-optimization
-description: Use when reviewing or improving data platform cost, query performance, compute sizing, partitioning, clustering, file layout, caching, materialization, or incremental strategy.
+description: Use when creating the Cost and Performance Optimization Specification to define how storage, compute, and queries should be optimized for scale and efficiency.
 ---
 
 # des-cost-and-performance-optimization
 
-## When To Use
-
-Use after governance and before final CI/CD release, or whenever pipelines, queries, dashboards, APIs, or jobs are too slow or too expensive.
-
 ## Purpose
 
-Create a practical, evidence-based optimization plan that improves performance and reduces cost — without breaking data correctness, lineage, or governance.
+Use this skill to create the Cost and Performance Optimization Specification for any data engineering project.
+
+This skill defines how storage, compute, ingestion, transformations, queries, orchestration, quality checks, semantic models, serving outputs, monitoring, and cloud/platform usage should be optimized for cost, performance, reliability, and scalability.
+
+The goal is to avoid premature optimization while still making cost and performance measurable, observable, and aligned with business value, SLAs, contracts, and governance constraints.
+
+## When To Use
+
+Use this skill when:
+
+- Phase 19 Governance and Security Specification exists;
+- pipeline cost, query performance, storage growth, compute usage, refresh time, API latency, dashboard performance, or capacity planning needs review;
+- the project is moving toward implementation/release;
+- there are concerns about cloud spend, warehouse/lakehouse cost, Spark cost, API cost, storage cost, egress cost, dashboard load, semantic model size, or orchestration runtime;
+- the workflow router selects Phase 20.
+
+Do not use this skill to rewrite SQL/Python/dbt code, change infrastructure, tune actual indexes, resize clusters, configure autoscaling, deploy caching, or implement cost controls.
+
+## Required Inputs
+
+The agent should look for:
+
+- `.agents/des-skill/output/07-architecture-decision-record.md`;
+- `.agents/des-skill/output/08-ingestion-specification.md`;
+- `.agents/des-skill/output/09-bronze-layer-specification.md`;
+- `.agents/des-skill/output/10-silver-layer-specification.md`;
+- `.agents/des-skill/output/11-gold-layer-specification.md`;
+- `.agents/des-skill/output/12-data-contract-specification.md`;
+- `.agents/des-skill/output/13-transformation-specification.md`;
+- `.agents/des-skill/output/14-data-quality-specification.md`;
+- `.agents/des-skill/output/15-orchestration-observability-specification.md`;
+- `.agents/des-skill/output/16-semantic-model-specification.md`;
+- `.agents/des-skill/output/17-serving-layer-specification.md`;
+- `.agents/des-skill/output/18-lineage-metadata-specification.md`;
+- `.agents/des-skill/output/19-governance-security-specification.md`;
+- workflow status file, if present;
+- expected data volume;
+- expected query patterns;
+- freshness/SLA expectations;
+- runtime expectations;
+- cost constraints;
+- performance bottleneck notes;
+- platform/capacity constraints;
+- storage format/partitioning decisions;
+- serving latency expectations.
+
+If Governance and Security or Orchestration context is missing, stop and ask whether to route back to the relevant phase.
+
+## Output
+
+Create or update:
+
+```text
+.agents/des-skill/output/20-cost-performance-optimization-specification.md
+```
+
+The artifact must capture:
+
+* cost and performance summary;
+* optimization scope and non-scope;
+* optimization design principles;
+* workload inventory;
+* cost driver inventory;
+* performance driver inventory;
+* baseline measurement plan;
+* storage optimization strategy;
+* compute optimization strategy;
+* ingestion optimization strategy;
+* transformation optimization strategy;
+* query and semantic model optimization strategy;
+* serving performance strategy;
+* orchestration runtime optimization;
+* data quality cost/performance considerations;
+* caching and materialization strategy;
+* partitioning clustering and file sizing expectations;
+* incremental processing and recomputation strategy;
+* retention lifecycle and storage tiering;
+* cost monitoring and budget guardrails;
+* performance monitoring and SLOs;
+* scalability and capacity planning;
+* trade-off decisions;
+* risks;
+* assumptions;
+* open questions;
+* next skill recommendation.
+
+## On Activation
+
+1. Read this `SKILL.md` completely.
+2. Read `customize.toml`.
+3. Identify `output_file`, `template_file`, `checklist_file`, `status_file`, and required upstream artifacts.
+4. Load only `steps/step-01-context-and-readiness.md`.
+5. Do not load step-02 or step-03 until the current step explicitly instructs you to continue.
+6. Stop at every `HALT` point and wait for user input.
+7. Do not invent volume, cost, latency, concurrency, budget, or SLA numbers.
+8. Do not implement tuning changes or infrastructure changes.
+9. Do not optimize by weakening security, quality, contract, or lineage without explicit decision.
+10. Before marking the artifact as Done, run the configured checklist and update workflow status.
+
+## Guardrails
+
+The agent must not:
+
+* prematurely optimize low-risk/non-P1 workloads;
+* reduce quality gates only to save cost without approval;
+* remove lineage or audit metadata to improve performance without governance approval;
+* expose sensitive data through cached/materialized outputs without security review;
+* increase refresh frequency without source/cost impact review;
+* optimize only for speed while ignoring cost;
+* optimize only for cost while breaking SLA;
+* recommend broad scaling without baseline measurement;
+* ignore data growth and retention;
+* mark optimization Done if cost drivers, performance drivers, monitoring, trade-offs, and risks are not documented.
 
 ## HALT Policy
 
-This skill must stop when a required decision cannot be safely inferred.
+This skill must stop when an optimization decision cannot be safely inferred.
 
-The agent must not continue if any of these are unresolved:
+Stop especially when:
 
-- required upstream artifacts are missing or inconsistent;
-- business owner, metric owner, source owner, or release owner is unclear;
-- business priority, consumer, or project intent is ambiguous;
-- source of truth, access, quality, legal use, cost, or ownership is unknown;
-- KPI formula, grain, freshness, SLA, threshold, or acceptance criteria is ambiguous;
-- architecture, storage, compute, deployment, or engine trade-off needs approval;
-- data contract owner, consumer impact, schema version, or breaking-change policy is missing;
-- DQ severity, threshold, remediation, alerting, or escalation is unknown;
-- security, access, retention, environment, secret, or release evidence is missing.
-
-Use the detailed HALT checkpoints in `steps/`: readiness HALT in step 01, phase decision HALT in step 02, and validation HALT in the final step. HALT asks for a decision, not permission to continue.
-
-
-## Inputs Required
-
-- Architecture decision record (`07-architecture-design.md`).
-- Table and pipeline specifications.
-- Query patterns and serving SLA requirements.
-- Actual pipeline duration, compute size, storage size, and cost metrics.
-
-## Decision Matrix — Storage Optimization Priority
-
-| Problem Observed | Root Cause | Recommended Action |
-| :--- | :--- | :--- |
-| High storage cost (Hot tier) | Data older than 7 days never queried | Enable lifecycle rule: Hot → Cool after 7 days |
-| Slow analytical queries (full table scan) | No partition pruning on filter column | Add `ingestion_date` partition; verify queries use partition filter |
-| Many small files (< 50MB per file) | Frequent small batch appends | Run `OPTIMIZE` / `VACUUM` on Delta tables; increase micro-batch interval |
-| Inconsistent query speed on same table | No clustering / Z-ordering on high-frequency filter columns | Apply `ZORDER BY (region, order_date)` on Delta; `CLUSTER BY` on BigQuery |
-
-## Decision Matrix — Compute Optimization Priority
-
-| Problem Observed | Root Cause | Recommended Action |
-| :--- | :--- | :--- |
-| Cluster running at < 30% utilization | Over-provisioned cluster size | Right-size cluster; profile actual CPU/memory usage during peak |
-| Cluster costs continue overnight | No auto-suspend configured | Set auto-suspend to 60s for interactive; 300s for scheduled jobs |
-| Slow Spark join on large tables | Missing broadcast hint on small dim table | Add `BROADCAST(dim_table)` hint for dimensions < 100MB |
-| High cost from daily full-refresh | Unnecessary full scans | Switch to incremental using watermark column |
-
-## Step-By-Step Process
-
-1. Measure before optimizing: collect pipeline P90 runtime, cluster cost/run, storage cost/month, and dashboard P90 latency.
-2. Identify top 3 cost drivers and top 3 performance bottlenecks — prioritize by ROI.
-3. Apply storage optimizations from the Storage Decision Matrix.
-4. Apply compute optimizations from the Compute Decision Matrix.
-5. Validate that optimizations maintain data correctness (row count and metric total unchanged).
-6. Establish cost monitors and performance alerts to detect regressions.
-7. Document estimated saving, validation method, and rollback plan per optimization.
-
-## Output File
-
-
-The output_file path is configured in `customize.toml`. Default:
-
-Write the final artifact to:
-
-`{project-root}/_des-output/planning-artifacts/20-cost-and-performance-optimization.md`
-
-Use the matching template from:
-
-`{skill-root}/../../templates/20-cost-and-performance-optimization-template.md`
-
-After writing the file, summarize the file path and recommend the next skill.
-
-## Required Outputs
-
-- Measured baseline: cost/month, P90 pipeline runtime, P90 query latency.
-- Top 3 cost drivers and top 3 performance bottlenecks with root cause.
-- Optimization backlog with priority, estimated saving, and validation method.
-- Cost monitoring plan with alert thresholds.
-- Rollback plan per optimization.
+* cost/performance scope is unclear;
+* workload priority is unclear;
+* baseline metrics are missing;
+* budget/cost constraint is missing;
+* SLA or latency target is unclear;
+* storage strategy affects governance or retention;
+* compute strategy affects cost/SLA;
+* caching/materialization affects freshness or security;
+* optimization conflicts with data contracts;
+* quality checks are expensive but required;
+* query performance issue lacks evidence;
+* capacity/scalability requirement is unclear.
 
 ## Quality Checklist
 
-- [ ] Every optimization is tied to a measured bottleneck — not applied speculatively.
-- [ ] Correctness tests (row count + metric total) run before and after each optimization.
-- [ ] Partition pruning is verified with query execution plan (`EXPLAIN`), not just assumed.
-- [ ] Auto-suspend is enabled on all clusters (interactive and scheduled).
-- [ ] Storage lifecycle rules are active and tested (data actually moves to cool tier).
-- [ ] Cost anomaly alerts are configured with budget thresholds.
+- [ ] Optimization scope and principles are clearly defined.
+- [ ] Workload inventory is created and prioritized.
+- [ ] Cost and performance drivers are documented for P1 workloads.
+- [ ] Baseline measurement plan is established.
+- [ ] Storage, compute, and ingestion strategies are defined.
+- [ ] Transformation and query optimizations are identified.
+- [ ] Caching and materialization policies address freshness and security.
+- [ ] Cost monitoring and budget guardrails are in place.
+- [ ] Performance SLOs are measurable and aligned with SLAs.
+- [ ] Scalability and capacity planning address expected growth.
 
 ## Anti-Patterns to Avoid
 
 | Anti-Pattern | Why It Fails |
 | :--- | :--- |
-| Optimizing before measuring | Guessing bottlenecks wastes engineering time; correct diagnosis requires evidence |
-| Partitioning by UUID or high-cardinality column | Creates millions of tiny partitions; metadata overhead kills query planning speed |
-| Creating materialized tables without refresh ownership | Materialized tables go stale; consumers silently get wrong data |
-| Reducing cost by weakening data quality gates | Bypassing DQ to save compute creates silent data errors worth far more than the saving |
-| Applying Z-ORDER to every column | Z-ORDER on many columns is as slow as no Z-ORDER; apply only to top 2–3 filter columns |
+| Premature optimization without measurement | Wastes engineering time on non-bottlenecks; can introduce unnecessary complexity. |
+| Weakening quality or security to save cost | Saves money at the expense of trust; leads to data corruption or breaches. |
+| Ignoring hidden costs like egress or API rates | Cloud billing is complex; ignoring small drivers can lead to massive cost spikes. |
+| Cache without invalidation or freshness status | Misleads users with stale data; breaks decision-making trust. |
+| Scaling only for speed while ignoring cost | Leads to unviable business models; violates FinOps principles. |
 
 ## Undercurrent Coverage
 
 | Undercurrent | Action Required at This Phase |
 | :--- | :--- |
-| Security | Optimization must not expose cached data to unauthorized roles (e.g., cached BI query results) |
-| Data Management | Optimization changes (OPTIMIZE, partition changes) are schema events — log in change history |
-| DataOps | Optimization changes tested in staging with correctness validation before production deploy |
-| Data Architecture | Partition and clustering changes are architectural — document in ADR; may require backfill |
-| Orchestration | OPTIMIZE/VACUUM jobs added to orchestration schedule with appropriate timing |
-| Software Engineering | Optimization changes are code-reviewed; correctness tests added to CI/CD pipeline |
+| Security | Optimization must not bypass access controls or expose sensitive data via caching. |
+| Data Management | Storage optimization must respect retention and tiering policies from Phase 19. |
+| DataOps | FinOps practices, cost monitoring, and performance SLOs are core DataOps responsibilities. |
+| Data Architecture | Partitioning, clustering, and incremental processing are key architectural decisions. |
+| Orchestration | Orchestration runtime and parallelism are optimized for cost and SLA alignment. |
+| Software Engineering | API serving performance and compute efficiency follow best engineering practices. |
 
 ## Handoff To The Next Skill
 
-Next use `des-cicd-and-testing` to automate tests, deployment checks, and release controls for the optimized platform.
+Next use `des-cicd-and-testing` to turn these optimization constraints and targets into automated testing gates and release readiness criteria.

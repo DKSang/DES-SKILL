@@ -1,101 +1,177 @@
 ---
 name: des-data-contracts
-description: Use when defining schema, freshness, ownership, compatibility, and quality agreements between data producers and consumers.
+description: Use when creating the Data Contract Specification for any data engineering project.
 ---
 
 # des-data-contracts
 
-## When To Use
-
-Use after important Bronze, Silver, or Gold datasets are identified and before implementation hardens dependencies. Use for datasets consumed across teams, dashboards, APIs, AI agents, or ML features.
-
 ## Purpose
 
-Create explicit data contracts so producers and consumers agree on schema, semantics, freshness, quality, change management, and ownership — before code is written, not after consumers break.
+Use this skill to create the Data Contract Specification for any data engineering project.
 
-## HALT Policy
+This skill defines data contracts for source feeds, Silver datasets, Gold datasets, and serving outputs where consumers depend on stable structure, meaning, freshness, quality, access, ownership, lineage, and change behavior.
 
-This skill must stop when a required decision cannot be safely inferred.
+The goal is to make producer-consumer expectations explicit before transformation implementation, serving, testing, CI/CD, monitoring, and release gates are designed.
 
-The agent must not continue if any of these are unresolved:
+## When To Use
 
-- required upstream artifacts are missing or inconsistent;
-- business owner, metric owner, source owner, or release owner is unclear;
-- business priority, consumer, or project intent is ambiguous;
-- source of truth, access, quality, legal use, cost, or ownership is unknown;
-- KPI formula, grain, freshness, SLA, threshold, or acceptance criteria is ambiguous;
-- architecture, storage, compute, deployment, or engine trade-off needs approval;
-- data contract owner, consumer impact, schema version, or breaking-change policy is missing;
-- DQ severity, threshold, remediation, alerting, or escalation is unknown;
-- security, access, retention, environment, secret, or release evidence is missing.
+Use this skill when:
 
-Use the detailed HALT checkpoints in `steps/`: readiness HALT in step 01, phase decision HALT in step 02, and validation HALT in the final step. HALT asks for a decision, not permission to continue.
+- Phase 11 Gold Layer Specification exists;
+- one or more datasets or outputs will be consumed by dashboards, semantic models, APIs, ML/AI datasets, analysts, downstream systems, external partners, or production workflows;
+- schema, grain, freshness, quality, access, versioning, or change expectations need to be explicit;
+- upstream sources require agreed expectations before ingestion or transformation;
+- dataset changes could break downstream consumers;
+- the workflow router selects Phase 12.
 
+Do not use this skill to write transformation code, implement data quality tests, deploy pipelines, build dashboards, implement APIs, or create CI/CD workflow files.
 
-## Inputs Required
+## Required Inputs
 
-- Gold and Silver dataset specifications.
-- Source owners and consumer teams.
-- SLA requirements (`03-requirements-and-kpi-catalog.md`).
-- Schema and metric definitions.
-- Governance requirements.
+The agent should look for:
 
-## Decision Matrix — When a Contract Is Required
+- `.agents/des-skill/output/01-business-discovery-brief.md`;
+- `.agents/des-skill/output/02-business-question-catalog.md`;
+- `.agents/des-skill/output/03-requirements-and-kpi-catalog.md`;
+- `.agents/des-skill/output/04-data-product-specification.md`;
+- `.agents/des-skill/output/05-data-source-inventory.md`;
+- `.agents/des-skill/output/06-conceptual-domain-model.md`;
+- `.agents/des-skill/output/07-architecture-decision-record.md`;
+- `.agents/des-skill/output/08-ingestion-specification.md`;
+- `.agents/des-skill/output/09-bronze-layer-specification.md`;
+- `.agents/des-skill/output/10-silver-layer-specification.md`;
+- `.agents/des-skill/output/11-gold-layer-specification.md`;
+- workflow status file, if present;
+- datasets or outputs requiring contract expectations;
+- owners, producers, and consumers;
+- grain and schema expectations;
+- KPI/metric definitions;
+- freshness/SLA expectations;
+- data quality rules;
+- access/security classification;
+- lineage expectations;
+- change/versioning expectations.
 
-| Situation | Contract Required? |
-| :--- | :--- |
-| Dataset consumed by another team (cross-domain) | **Yes** — required |
-| Dataset used in production dashboard or report | **Yes** — required |
-| Dataset consumed by an API or application | **Yes** — required |
-| Dataset used as ML training feature | **Yes** — required |
-| Internal staging table used only within the same team | **No** — internal implementation detail |
-| Scratch or exploratory dataset | **No** — not yet |
-
-**Rule**: If a consumer outside the producing team depends on it, it needs a contract.
-
-## Decision Matrix — Breaking vs. Compatible Change
-
-| Change Type | Classification | Required Action |
-| :--- | :--- | :--- |
-| Add a new non-required column | Compatible | Notify consumers; no schema version bump |
-| Rename an existing column | **Breaking** | Major version bump; migration guide required |
-| Remove an existing column | **Breaking** | Major version bump; deprecation notice ≥ 30 days |
-| Change a column data type | **Breaking** | Major version bump; explicit consumer re-certification |
-| Change metric formula or grain | **Breaking (Semantic)** | Business owner sign-off + all consumer revalidation |
-| Add a new required column | **Breaking** | Major version bump; all consumers must update |
-
-## Step-By-Step Process
-
-1. Identify all contract-required datasets using the Decision Matrix.
-2. Define producer, consumer(s), owner, and steward for each contract.
-3. Specify schema: fields, types, required flags, allowed values, and PII classification.
-4. Define guarantees: freshness, availability SLA, completeness, and quality commitments.
-5. Define backward compatibility rules using the Breaking vs. Compatible matrix.
-6. Define the change management process: notice period, consumer sign-off, deprecation path.
-7. Write contract tests (SQL, dbt tests, Great Expectations, Soda).
-8. Version the contract using semantic versioning (MAJOR.MINOR.PATCH).
+If the Gold Layer Specification is missing or too weak, stop and ask whether to route back to `des-gold-layer-design`.
 
 ## Output File
 
+Create or update the configured `output_file`:
 
-The output_file path is configured in `customize.toml`. Default:
+```text
+.agents/des-skill/output/12-data-contract-specification.md
+```
 
-Write the final artifact to:
+The artifact must capture:
 
-`{project-root}/_des-output/planning-artifacts/12-data-contracts.md`
+* data contract summary;
+* contract scope and non-scope;
+* contract design principles;
+* contract inventory;
+* producer and consumer mapping;
+* contract level;
+* dataset/output identity;
+* business meaning;
+* schema expectations;
+* grain expectations;
+* field-level expectations;
+* metric and KPI expectations;
+* freshness and SLA expectations;
+* quality expectations;
+* volume and completeness expectations;
+* security and access expectations;
+* lineage and metadata expectations;
+* compatibility and versioning policy;
+* change management policy;
+* deprecation policy;
+* incident and escalation policy;
+* acceptance and validation criteria;
+* contract ownership and approval;
+* risks;
+* assumptions;
+* open questions;
+* next skill recommendation.
 
-Use the matching template from:
+## On Activation
 
-`{skill-root}/../../templates/12-data-contracts-template.md`
+1. Read this `SKILL.md` completely.
+2. Read `customize.toml`.
+3. Identify `output_file`, `template_file`, `checklist_file`, `status_file`, and required upstream artifacts.
+4. Load only `steps/step-01-context-and-readiness.md`.
+5. Do not load step-02 or step-03 until the current step explicitly instructs you to continue.
+6. Stop at every `HALT` point and wait for user input.
+7. Do not invent contract owners, consumers, SLA, quality thresholds, schema fields, versioning rules, or incident policies.
+8. Do not write test implementation, transformation code, orchestration code, dashboard code, API code, or CI/CD workflow files.
+9. Before marking the artifact as Done, run the configured checklist and update workflow status.
 
-After writing the file, summarize the file path and recommend the next skill.
+## Process Overview
 
-## Required Outputs
+The detailed execution procedure lives in `steps/`.
 
-- Data contract per critical dataset (schema, guarantees, SLA, versioning).
-- Breaking vs. compatible change classification policy.
-- Change management process (notice periods, sign-off flow).
-- Contract test suite definition.
+At a high level, this skill will:
+
+1. Confirm upstream Gold, Silver, source, product, requirement, and governance context.
+2. Identify which datasets or outputs require contracts.
+3. Define contract boundaries and contract levels.
+4. Define producer, consumer, owner, and approver expectations.
+5. Define schema, grain, field, metric, freshness, quality, access, lineage, and change obligations.
+6. Define compatibility, versioning, deprecation, incident, and escalation policies.
+7. Ask HALT questions for unresolved contract decisions.
+8. Draft the Data Contract Specification.
+9. Run the checklist, update workflow status, and recommend the next skill.
+
+Do not execute this overview directly. Follow the step files.
+
+## Guardrails
+
+The agent must not:
+
+* create contracts for every dataset without need;
+* skip contracts for production or downstream system-facing outputs;
+* define schema without grain and meaning;
+* define freshness/SLA without owner and evidence;
+* define quality expectations without validation criteria;
+* define breaking change policy without consumer notification path;
+* treat a contract as only a schema;
+* ignore access/security expectations;
+* ignore ownership and approval;
+* mark a contract Approved if producer, consumer, owner, schema, grain, freshness, quality, access, or change policy is unresolved.
+
+## HALT Policy
+
+This skill must stop when a contract decision cannot be safely inferred.
+
+Stop especially when:
+
+* upstream Gold or serving context is missing;
+* it is unclear which outputs need contracts;
+* producer or consumer is unknown;
+* contract level is unclear;
+* schema or field expectations are missing;
+* grain is unclear;
+* freshness/SLA is unclear;
+* quality thresholds are missing;
+* access/security classification is unclear;
+* metric definition conflicts exist;
+* versioning or breaking change policy is unclear;
+* incident or escalation path is missing.
+
+## Conventions
+
+- Bare paths such as `steps/step-01-context-and-readiness.md` resolve from the skill root.
+- `{skill-root}` resolves to this skill's installed directory.
+- `{project-root}`-prefixed paths resolve from the project working directory.
+- Document output language follows project config.
+
+## WORKFLOW ARCHITECTURE
+
+This uses step-file architecture for disciplined execution:
+
+- read only the current step file;
+- execute steps in order;
+- stop at every HALT checkpoint;
+- keep unresolved decisions as open questions, not assumptions;
+- run the configured checklist before status advances.
 
 ## Quality Checklist
 
@@ -105,6 +181,7 @@ After writing the file, summarize the file path and recommend the next skill.
 - [ ] Breaking change policy specifies minimum notice period and consumer migration support.
 - [ ] Contract version is recorded using semantic versioning.
 - [ ] Contract tests are implemented or explicitly scheduled.
+- [ ] The artifact does not design detailed dashboard visuals, write SQL/Python transformation code, or include pipeline implementation code.
 
 ## Anti-Patterns to Avoid
 
@@ -116,17 +193,6 @@ After writing the file, summarize the file path and recommend the next skill.
 | Defining guarantees without implementing tests | Unverified contracts are just documentation — they provide false confidence |
 | No versioning on the contract | Consumers cannot detect when a breaking change occurred |
 
-## Undercurrent Coverage
-
-| Undercurrent | Action Required at This Phase |
-| :--- | :--- |
-| Security | PII columns must be explicitly flagged in the contract schema section |
-| Data Management | Contracts are the formal boundary of the data product — required in the catalog |
-| DataOps | Contract tests must be part of CI/CD pipeline — failing tests block deployment |
-| Data Architecture | Contract schema defines the interface; architecture must support schema evolution |
-| Orchestration | Contract freshness SLA integrates with monitoring alerts in orchestration design |
-| Software Engineering | Schema versioning follows semver — enforce via code review gate |
-
 ## Handoff To The Next Skill
 
-Next use `des-transformation-design` to turn layer specs and contracts into implementable transformation logic.
+Recommend `des-transformation-design` only after the Data Contract Specification is complete or explicitly marked Draft with open questions and accepted risks.

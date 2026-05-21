@@ -1,0 +1,84 @@
+skill_id = "des-orchestration-observability"
+phase = 15
+phase_name = "Orchestration and Observability"
+
+output_file = ".agents/des-skill/output/15-orchestration-observability-specification.md"
+template_file = ".agents/des-skill/templates/15-orchestration-observability-specification-template.md"
+checklist_file = ".agents/des-skill/checklists/15-orchestration-observability-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-semantic-model-design"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/01-business-discovery-brief.md",
+  ".agents/des-skill/output/02-business-question-catalog.md",
+  ".agents/des-skill/output/03-requirements-and-kpi-catalog.md",
+  ".agents/des-skill/output/04-data-product-specification.md",
+  ".agents/des-skill/output/05-data-source-inventory.md",
+  ".agents/des-skill/output/06-conceptual-domain-model.md",
+  ".agents/des-skill/output/07-architecture-decision-record.md",
+  ".agents/des-skill/output/08-ingestion-specification.md",
+  ".agents/des-skill/output/09-bronze-layer-specification.md",
+  ".agents/des-skill/output/10-silver-layer-specification.md",
+  ".agents/des-skill/output/11-gold-layer-specification.md",
+  ".agents/des-skill/output/12-data-contract-specification.md",
+  ".agents/des-skill/output/13-transformation-specification.md",
+  ".agents/des-skill/output/14-data-quality-specification.md"
+]
+
+required_sections = [
+  "Orchestration and Observability Summary",
+  "Orchestration Scope",
+  "Orchestration Design Principles",
+  "Workflow Inventory",
+  "Dependency Graph",
+  "Schedule and Trigger Strategy",
+  "Source Readiness Checks",
+  "Ingestion Orchestration",
+  "Bronze Silver Gold Transformation Orchestration",
+  "Quality Gate Integration",
+  "Publish and Release Gates",
+  "Retry and Timeout Policy",
+  "Failure Handling and Recovery Policy",
+  "Backfill and Replay Operations",
+  "Late Data and Correction Operations",
+  "Alerting and Notification Policy",
+  "Incident and Escalation Policy",
+  "Observability Signal Inventory",
+  "Freshness and SLA Monitoring",
+  "Volume and Completeness Monitoring",
+  "Quality Result Monitoring",
+  "Runtime and Performance Monitoring",
+  "Cost and Usage Monitoring",
+  "Run Evidence and Audit Metadata",
+  "Operational Ownership",
+  "Risks",
+  "Assumptions",
+  "Open Questions",
+  "Next Skill Recommendation"
+]
+
+halt_required_decisions = [
+  "upstream_quality_context",
+  "workflow_scope",
+  "schedule_trigger_strategy",
+  "dependency_order",
+  "quality_gate_behavior",
+  "publish_gate_behavior",
+  "retry_timeout_policy",
+  "failure_recovery_policy",
+  "backfill_replay_operations",
+  "late_data_correction_operations",
+  "alerting_owner",
+  "incident_escalation",
+  "freshness_sla_monitoring",
+  "run_evidence_audit"
+]
+
+[workflow]
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = [
+  "file:{project-root}/**/project-context.md",
+]
+on_complete = ""

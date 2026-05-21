@@ -24,8 +24,8 @@ examples/online-learning-platform/
 ├── 09-bronze-layer-design.md              # Phase 09: Bronze layer
 ├── 10-silver-layer-design.md              # Phase 10: Silver layer
 ├── 11-gold-layer-design.md               # Phase 11: Gold layer
-├── 12-data-contracts.md                   # Phase 12: Data contracts
-├── 14-data-quality.md                     # Phase 14: Data quality rules
+├── 12-data-contract-specification.md      # Phase 12: Data contracts
+├── 14-data-quality-specification.md          # Phase 14: Data quality rules
 └── workflow-status.md                     # Trạng thái workflow tổng thể
 ```
 
@@ -66,9 +66,9 @@ examples/online-learning-platform/
     ↓
 09 → 10 → 11 (Medallion layers)
     ↓
-12-data-contracts             ← HALT: Producer + consumer ký contract
+12-data-contract-specification    ← HALT: Producer + consumer ký contract
     ↓
-14-data-quality
+14-data-quality-specification
     ↓
 [15-22: Orchestration → Serving → Governance → Evaluation]
 ```

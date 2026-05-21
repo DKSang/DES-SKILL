@@ -48,12 +48,12 @@ Các vai trò (personas) trong DES-SKILL xác định ranh giới trách nhiệm
 | `des-contract-review` | Data Architect | Review tính đầy đủ của contract, các thay đổi đột ngột (breaking changes), ảnh hưởng consumer |
 | `des-transformation-design` | Data Architect | Định nghĩa chiến lược transform, logic incremental, tính lũy đẳng |
 | `des-data-quality` | Data Quality Engineer | Định nghĩa quy tắc DQ, ngưỡng lỗi (thresholds), owner, hành động xử lý, baseline dị thường |
-| `des-orchestration-and-observability` | Data Quality Engineer | Định nghĩa bộ điều phối (orchestration), thử lại, giám sát, cảnh báo, runbooks |
+| `des-orchestration-observability` | Data Quality Engineer | Định nghĩa bộ điều phối (orchestration), thử lại, giám sát, cảnh báo, runbooks |
 | `des-semantic-model-design` | Analytics Engineer | Định nghĩa certified metrics, semantic layer, RLS, cơ quan quản lý metric |
 | `des-serving-layer-design` | Analytics Engineer | Định nghĩa giao diện serving, caching, access patterns, độ phù hợp người tiêu dùng |
 | `des-semantic-and-serving-layer` | Analytics Engineer | Cầu nối tương thích cho các workflow kết hợp semantic và serving |
-| `des-lineage-and-metadata` | Governance Reviewer | Định nghĩa lineage, metadata, quản trị catalog, schema registry |
-| `des-governance-and-security` | Governance Reviewer | Định nghĩa quyền riêng tư, PII, masking/tokenization, kiểm soát truy cập |
+| `des-lineage-metadata-design` | Governance Reviewer | Định nghĩa lineage, metadata, quản trị catalog, schema registry |
+| `des-governance-security-design` | Governance Reviewer | Định nghĩa quyền riêng tư, PII, masking/tokenization, kiểm soát truy cập |
 | `des-cost-and-performance-optimization` | DataOps Engineer | Đánh giá chi phí, hiệu năng, tài nguyên dự phòng, ROI, khả năng rollback |
 | `des-cicd-and-testing` | DataOps Engineer | Định nghĩa CI/CD, thăng cấp môi trường, các contract tests, release gates |
 | `des-project-evaluation` | DataOps Engineer | Đánh giá độ sẵn sàng release, mức độ tiếp nhận, giá trị, theo dõi sau triển khai |

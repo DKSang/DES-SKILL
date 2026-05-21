@@ -1,131 +1,204 @@
 ---
 name: des-gold-layer-design
-description: Use when designing business-ready Gold tables, marts, facts, dimensions, metrics, and single source of truth datasets for analytics or serving.
+description: Use when creating the Gold Layer Specification for any data engineering project.
 ---
 
 # des-gold-layer-design
 
-## When To Use
-
-Use after Silver layer design and domain modeling are complete. Use before data contracts or transformation implementation when consumers need trusted, business-ready datasets.
-
 ## Purpose
 
-Design Gold datasets that represent business processes as analytical models (facts, dimensions, or OBTs), with certified metrics and explicit grain — optimized for how consumers *query* the data, not how it was stored at source.
+Use this skill to create the Gold Layer Specification for any data engineering project.
 
-## HALT Policy
+This skill defines curated, consumer-ready Gold datasets, marts, aggregates, metric outputs, feature outputs, reporting outputs, or product-aligned datasets derived from trusted Silver data.
 
-This skill must stop when a required decision cannot be safely inferred.
+The Gold layer should be designed around approved business questions, KPIs, consumers, requirements, and data product outputs. It should not be a random collection of tables.
 
-The agent must not continue if any of these are unresolved:
+## When To Use
 
-- required upstream artifacts are missing or inconsistent;
-- business owner, metric owner, source owner, or release owner is unclear;
-- business priority, consumer, or project intent is ambiguous;
-- source of truth, access, quality, legal use, cost, or ownership is unknown;
-- KPI formula, grain, freshness, SLA, threshold, or acceptance criteria is ambiguous;
-- architecture, storage, compute, deployment, or engine trade-off needs approval;
-- data contract owner, consumer impact, schema version, or breaking-change policy is missing;
-- DQ severity, threshold, remediation, alerting, or escalation is unknown;
-- security, access, retention, environment, secret, or release evidence is missing.
+Use this skill when:
 
-Use the detailed HALT checkpoints in `steps/`: readiness HALT in step 01, phase decision HALT in step 02, and validation HALT in the final step. HALT asks for a decision, not permission to continue.
+- Phase 10 Silver Layer Specification exists;
+- trusted Silver entities/events need to be packaged for consumer-facing analytics, reports, semantic models, ML/AI datasets, APIs, exports, or product outputs;
+- business questions need curated outputs;
+- KPIs need metric-ready datasets;
+- star schema, wide table, aggregate table, data mart, feature table, or serving dataset design is being discussed;
+- the workflow router selects Phase 11.
 
+Do not use this skill to write SQL/Python transformation code, build dashboards, implement APIs, create semantic model internals, define full data contracts, or deploy pipelines.
 
-## Inputs Required
+## Required Inputs
 
-- KPI catalog and consumer query patterns (`03-requirements-and-kpi-catalog.md`).
-- Domain model and entity definitions (`06-conceptual-domain-model.md`).
-- Silver table specifications (`10-silver-layer-design.md`).
-- Business definitions and stakeholder-approved metric formulas.
+The agent should look for:
 
-## Decision Matrix — Analytical Modeling Pattern
+- `.agents/des-skill/output/01-business-discovery-brief.md`;
+- `.agents/des-skill/output/02-business-question-catalog.md`;
+- `.agents/des-skill/output/03-requirements-and-kpi-catalog.md`;
+- `.agents/des-skill/output/04-data-product-specification.md`;
+- `.agents/des-skill/output/05-data-source-inventory.md`;
+- `.agents/des-skill/output/06-conceptual-domain-model.md`;
+- `.agents/des-skill/output/07-architecture-decision-record.md`;
+- `.agents/des-skill/output/08-ingestion-specification.md`;
+- `.agents/des-skill/output/09-bronze-layer-specification.md`;
+- `.agents/des-skill/output/10-silver-layer-specification.md`;
+- workflow status file, if present;
+- P1/P2 business questions;
+- approved KPIs and metric definitions;
+- data product outputs;
+- Silver dataset inventory;
+- serving direction from architecture;
+- access/security constraints;
+- freshness/SLA expectations;
+- quality expectations.
 
-| Scenario | Recommended Pattern | When to Override |
-| :--- | :--- | :--- |
-| BI analysts use self-serve dashboards with filters | **Kimball Dimensional** (Star Schema: Fact + Dims) | OBT if domain is simple and team is small |
-| Enterprise data warehouse with normalized domain | **Inmon 3NF** | Kimball if BI performance is critical |
-| Simple domain, small team, exploratory analytics | **One Big Table (OBT)** | Kimball when dataset > 10M rows; OBT joins become expensive |
-| ML feature engineering | **Feature Table** (flat, denormalized) | Separate from BI Gold; maintain independently |
-| Real-time operational analytics | **Streaming Aggregate Table** | Only if P99 latency SLA < 1 min |
-
-**Default**: Use **Kimball Dimensional** for standard analytics use cases. Document the choice as an ADR.
-
-## Grain Rules
-
-| Rule | Guidance |
-| :--- | :--- |
-| One grain per fact table | Never mix daily and monthly grain in the same fact table |
-| Grain approved by business consumer | Grain must be confirmed with the primary BI analyst or data consumer |
-| Additive measures only in fact tables | Non-additive measures (ratios, averages) belong in the semantic/metrics layer, not in Gold |
-| Surrogate keys on all dimensions | Use auto-increment integers — never natural keys from source systems |
-| Orphan FK handling | Facts with no matching dimension key use sentinel key (`-1` = "Unknown") — never NULL FK |
-
-## Step-By-Step Process
-
-1. Select the analytical modeling pattern using the Decision Matrix.
-2. Define all Gold tables: type (Fact / Dimension / Mart / OBT), grain, source Silver datasets.
-3. For each Fact table: document grain, additive measures, and foreign key references.
-4. For each Dimension: decide SCD type (1 = overwrite, 2 = track history); define surrogate key generation.
-5. Define certified metric formulas — with owner sign-off for each metric.
-6. Design orphan FK handling (sentinel key policy).
-7. Map each Gold table to its consumer(s) and access SLA.
+If the Silver Layer Specification is missing or too weak, stop and ask whether to route back to `des-silver-layer-design`.
 
 ## Output File
-
 
 The output_file path is configured in `customize.toml`. Default:
 
 Write the final artifact to:
 
-`{project-root}/_des-output/planning-artifacts/11-gold-layer-design.md`
+`.agents/des-skill/output/11-gold-layer-specification.md`
 
 Use the matching template from:
 
-`{skill-root}/../../templates/11-gold-layer-design-template.md`
+`.agents/des-skill/templates/11-gold-layer-specification-template.md`
 
 After writing the file, summarize the file path and recommend the next skill.
 
 ## Required Outputs
 
-- Gold table inventory (type, grain, source, consumer, SLA).
-- Fact table design (grain, additive measures, FK references, orphan handling).
-- Dimension table design (surrogate key, SCD type, tracked attributes).
-- Certified metric catalog (formula, grain, owner, filter conditions).
-- Consumer SLA mapping.
+The artifact must capture:
+
+- Gold layer summary
+- Gold scope and non-scope
+- Gold design principles
+- Business Question to Gold Mapping
+- Requirement and KPI to Gold Mapping
+- Silver to Gold Mapping
+- Gold Dataset Inventory
+- Gold Output Type
+- Consumer and Serving Alignment
+- Grain and Aggregation Rules
+- Metric and KPI Definitions Used
+- Dimension Fact Aggregate and Output Model Decisions
+- Filtering and Slicing Expectations
+- History and Slowly Changing Behavior
+- Freshness and SLA Expectations
+- Gold Boundary Data Quality Rules
+- Access Control and Security Handling
+- Contract Expectations
+- Lineage and Traceability
+- Performance and Cost Considerations
+- Risks
+- Assumptions
+- Open Questions
+- Next Skill Recommendation
+
+## On Activation
+
+1. Read this `SKILL.md` completely.
+2. Read `customize.toml`.
+3. Identify `output_file`, `template_file`, `checklist_file`, `status_file`, and required upstream artifacts.
+4. Load only `steps/step-01-context-and-readiness.md`.
+5. Do not load step-02 or step-03 until the current step explicitly instructs you to continue.
+6. Stop at every `HALT` point and wait for user input.
+7. Do not invent Gold datasets, metric definitions, aggregation rules, grain, or consumer outputs.
+8. Do not write SQL/Python transformation code, build dashboards, implement APIs, create semantic model internals, define full data contracts, or deploy pipelines.
+9. Before marking the artifact as Done, run the configured checklist and update workflow status.
+
+## Process Overview
+
+The detailed execution procedure lives in `steps/`.
+
+At a high level, this skill will:
+
+1. Confirm upstream Silver, KPI, product, and serving context.
+2. Identify P1/P2 business questions and product outputs requiring Gold datasets.
+3. Define Gold dataset boundaries and output types.
+4. Map Silver datasets to Gold outputs.
+5. Define grain, aggregation, metric, history, and slicing rules.
+6. Define quality, freshness, access, contract, and lineage expectations.
+7. Ask HALT questions for unresolved Gold output, metric, grain, aggregation, and serving decisions.
+8. Draft the Gold Layer Specification.
+9. Run the checklist, update workflow status, and recommend the next skill.
+
+Do not execute this overview directly. Follow the step files.
+
+## Guardrails
+
+The agent must not:
+
+- create Gold tables because they are convenient rather than because they serve a question/use case;
+- define final metric formulas that conflict with Phase 3;
+- invent KPI definitions;
+- aggregate data without approved grain and aggregation rules;
+- mix unrelated consumers into one unclear Gold output;
+- design semantic model internals in this phase;
+- design dashboard layout or API implementation;
+- hide dependency on unresolved Silver identity/source-of-truth issues;
+- mark Gold datasets Ready if business question mapping, grain, KPI mapping, quality rules, lineage, or serving expectation is unresolved.
+
+## HALT Policy
+
+This skill must stop when a Gold design decision cannot be safely inferred.
+
+Stop especially when:
+
+- upstream Silver specification is missing;
+- P1 business questions do not map to Gold outputs;
+- Gold dataset boundary is unclear;
+- consumer or serving path is unclear;
+- metric formula conflicts with Phase 3;
+- grain or aggregation rule is unclear;
+- dimension/fact/aggregate/output type is unclear;
+- history or slowly changing behavior is unclear;
+- freshness/SLA expectation is unclear;
+- Gold quality rule is missing;
+- access/security handling is unclear;
+- lineage to Silver/Bronze is incomplete.
+
+## Conventions
+
+- Bare paths such as `steps/step-01-context-and-readiness.md` resolve from the skill root.
+- `{skill-root}` resolves to this skill's installed directory.
+- `{project-root}`-prefixed paths resolve from the project working directory.
+- Document output language follows project config.
+
+## WORKFLOW ARCHITECTURE
+
+This uses step-file architecture for disciplined execution:
+
+- read only the current step file;
+- execute steps in order;
+- stop at every HALT checkpoint;
+- keep unresolved decisions as open questions, not assumptions;
+- run the configured checklist before status advances.
 
 ## Quality Checklist
 
-- [ ] Analytical modeling pattern (Kimball / Inmon / OBT) is chosen and documented in ADR.
-- [ ] Every fact table has an explicitly declared grain — confirmed by business consumer.
-- [ ] All fact table measures are **additive** (non-additive metrics in semantic layer only).
-- [ ] All dimensions use **surrogate keys** — no natural/source keys in fact table FKs.
-- [ ] Orphan FK handling uses sentinel key (`-1` → "Unknown") — never NULL FK.
-- [ ] All certified metrics have an **owner** who has reviewed and approved the formula.
-- [ ] Gold is not a mirror of Silver — it models business processes, not source tables.
+- [ ] Each P1 business question maps to a Gold output or is explicitly deferred.
+- [ ] Each P1 product output maps to a Gold dataset or is explicitly deferred.
+- [ ] Each P1 Gold dataset has a declared grain, consumer, and serving direction.
+- [ ] Star schema, fact/dimension, aggregate table, or other model pattern is chosen.
+- [ ] Metric and KPI usage aligns with Phase 3 definitions.
+- [ ] History/SCD behavior is explicitly documented.
+- [ ] Freshness/SLA expectations are defined.
+- [ ] Gold boundary quality rules are established.
+- [ ] Access control and security classification are specified.
+- [ ] Contract expectation and lineage back to Silver/Bronze are documented.
+- [ ] The artifact does not design detailed dashboard visuals, write SQL/Python transformation code, or include pipeline implementation code.
 
 ## Anti-Patterns to Avoid
 
 | Anti-Pattern | Why It Fails |
 | :--- | :--- |
-| Mirroring Silver tables instead of modeling business concepts | Silver is for source conformity; Gold must model business process, not source structure |
-| Creating metrics without a named owner | Metrics drift; different reports show different numbers; no one is accountable |
-| Mixing multiple grains in one fact table | Aggregations on mixed-grain tables produce incorrect totals |
-| Optimizing Gold for one specific dashboard | Other consumers get a degraded experience; Gold should serve the widest set of use cases |
-| Using natural keys as FKs in fact tables | Source system key changes break all historical fact rows |
-| Putting calculated ratios or averages in fact tables | Non-additive: `SUM(average_order_value)` is meaningless; keep averages in semantic layer |
-
-## Undercurrent Coverage
-
-| Undercurrent | Action Required at This Phase |
-| :--- | :--- |
-| Security | Gold serves analysts directly; RLS and RBAC applied; no PII columns exposed |
-| Data Management | Certified metric definitions registered in catalog with owner sign-off |
-| DataOps | Gold refresh tested for correctness (row count + metric total vs Silver source) in staging |
-| Data Architecture | Modeling pattern (Kimball / Inmon / OBT) is an architectural decision; logged in ADR |
-| Orchestration | Silver-to-Gold quality gate defined; blocks Gold refresh if Silver gate fails |
-| Software Engineering | Surrogate key generation and SCD logic are version-controlled; tested in dbt or equivalent |
+| Creating Gold tables without a clear consumer/question | Unused datasets create technical debt, waste compute/storage, and confuse users |
+| Redefining metrics inconsistently with Phase 3 | Creates conflicting numbers in downstream reports, destroying trust in the platform |
+| Designing a single monolithic table for all consumers | Creates a rigid, slow-performing model that is hard to maintain and security-gate |
+| Writing SQL/Python transformation logic here | Premature optimization; focus on logical/physical design, not code |
+| Ignoring slowly changing dimension history | Causes report metrics to shift or overwrite history incorrectly when dimensions change |
 
 ## Handoff To The Next Skill
 
-Next use `des-data-contracts` to formalize producer and consumer expectations for critical Gold datasets.
+Recommend `des-data-contracts` only after the Gold Layer Specification is complete or explicitly marked Draft with open questions and accepted risks.

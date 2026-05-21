@@ -1,17 +1,79 @@
-# Workflow customization surface for des-cicd-and-testing.
+skill_id = "des-cicd-and-testing"
+phase = 21
+phase_name = "CI/CD and Testing"
+
+output_file = ".agents/des-skill/output/21-cicd-testing-specification.md"
+template_file = ".agents/des-skill/templates/21-cicd-testing-specification-template.md"
+checklist_file = ".agents/des-skill/checklists/21-cicd-testing-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-project-evaluation"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/07-architecture-decision-record.md",
+  ".agents/des-skill/output/12-data-contract-specification.md",
+  ".agents/des-skill/output/13-transformation-specification.md",
+  ".agents/des-skill/output/14-data-quality-specification.md",
+  ".agents/des-skill/output/15-orchestration-observability-specification.md",
+  ".agents/des-skill/output/16-semantic-model-specification.md",
+  ".agents/des-skill/output/17-serving-layer-specification.md",
+  ".agents/des-skill/output/18-lineage-metadata-specification.md",
+  ".agents/des-skill/output/19-governance-security-specification.md",
+  ".agents/des-skill/output/20-cost-performance-optimization-specification.md"
+]
+
+required_sections = [
+  "CI CD and Testing Summary",
+  "CI CD Scope",
+  "CI CD Design Principles",
+  "Repository and Artifact Inventory",
+  "Branch and Review Strategy",
+  "Environment and Promotion Strategy",
+  "Test Inventory",
+  "Unit Test Expectations",
+  "Integration Test Expectations",
+  "Data Contract Test Expectations",
+  "Data Quality Test Expectations",
+  "Transformation Test Expectations",
+  "Orchestration Test Expectations",
+  "Semantic and Serving Test Expectations",
+  "Security and Governance Test Expectations",
+  "Cost and Performance Test Expectations",
+  "Deployment Gates",
+  "Release Approval Workflow",
+  "Rollback and Recovery Strategy",
+  "Release Evidence and Audit Trail",
+  "Test Data and Fixture Strategy",
+  "Secrets and Environment Configuration Policy",
+  "Risks",
+  "Assumptions",
+  "Open Questions",
+  "Next Skill Recommendation"
+]
+
+halt_required_decisions = [
+  "upstream_release_context",
+  "cicd_scope",
+  "repository_artifact_boundary",
+  "branch_review_strategy",
+  "environment_promotion_strategy",
+  "test_coverage_scope",
+  "contract_test_gate",
+  "quality_test_gate",
+  "security_governance_gate",
+  "performance_cost_gate",
+  "deployment_gate",
+  "release_approval",
+  "rollback_recovery",
+  "test_data_strategy",
+  "secrets_config_policy",
+  "breaking_change_policy"
+]
 
 [workflow]
 activation_steps_prepend = []
 activation_steps_append = []
-
 persistent_facts = [
   "file:{project-root}/**/project-context.md",
 ]
-
 on_complete = ""
-
-[config]
-output_file = "{project-root}/_des-output/planning-artifacts/21-cicd-and-testing.md"
-# template_file = ""  # This skill uses its example output format
-checklist_file = "{skill-root}/../../checklists/observability_checklist.md"
-status_file = "{project-root}/_des-output/implementation-artifacts/des-workflow-status.md"

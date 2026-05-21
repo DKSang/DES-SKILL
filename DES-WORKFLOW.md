@@ -89,14 +89,14 @@ Tạo file này từ template:
 12. `des-data-contracts`
 13. `des-transformation-design`
 14. `des-data-quality`
-15. `des-orchestration-and-observability`
+15. `des-orchestration-observability`
 
 ## Phase 5: Serving, Governance, Delivery (Cung cấp, Quản trị & Bàn giao)
 
 16. `des-semantic-model-design`
 17. `des-serving-layer-design`
-18. `des-lineage-and-metadata`
-19. `des-governance-and-security`
+18. `des-lineage-metadata-design`
+19. `des-governance-security-design`
 20. `des-cost-and-performance-optimization`
 21. `des-cicd-and-testing`
 22. `des-project-evaluation`

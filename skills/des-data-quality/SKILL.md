@@ -1,111 +1,175 @@
 ---
 name: des-data-quality
-description: Use when defining or implementing data quality checks, validation gates, anomaly detection, freshness tests, schema tests, and failure actions.
+description: Use when defining or designing data quality dimensions, rules, thresholds, severity, and gates across Bronze, Silver, Gold, contracts, transformations, and serving outputs.
 ---
 
 # des-data-quality
 
-## When To Use
-
-Use before productionizing pipelines and after core datasets or transformations are defined. Use whenever trust, correctness, freshness, or data incident handling is unclear or undefined.
-
 ## Purpose
 
-Create a data quality rule catalog and validation strategy that protects Bronze, Silver, Gold, contracts, and serving outputs from silent data corruption.
+Use this skill to create the Data Quality Specification for any data engineering project.
 
-## HALT Policy
+This skill defines data quality dimensions, rules, thresholds, severity, ownership, validation scope, quality gates, failure handling, evidence, and monitoring expectations across source, Bronze, Silver, Gold, contracts, transformations, and serving outputs.
 
-This skill must stop when a required decision cannot be safely inferred.
+The goal is to make quality expectations explicit before implementing tests, orchestration, monitoring, CI/CD gates, or release workflows.
 
-The agent must not continue if any of these are unresolved:
+## When To Use
 
-- required upstream artifacts are missing or inconsistent;
-- business owner, metric owner, source owner, or release owner is unclear;
-- business priority, consumer, or project intent is ambiguous;
-- source of truth, access, quality, legal use, cost, or ownership is unknown;
-- KPI formula, grain, freshness, SLA, threshold, or acceptance criteria is ambiguous;
-- architecture, storage, compute, deployment, or engine trade-off needs approval;
-- data contract owner, consumer impact, schema version, or breaking-change policy is missing;
-- DQ severity, threshold, remediation, alerting, or escalation is unknown;
-- security, access, retention, environment, secret, or release evidence is missing.
+Use this skill when:
 
-Use the detailed HALT checkpoints in `steps/`: readiness HALT in step 01, phase decision HALT in step 02, and validation HALT in the final step. HALT asks for a decision, not permission to continue.
+- Phase 13 Transformation Specification exists;
+- data contracts contain quality expectations;
+- Bronze, Silver, Gold, or serving outputs need validation rules;
+- transformations need validation before publish;
+- freshness, completeness, uniqueness, validity, consistency, accuracy, reconciliation, schema, or referential integrity checks are needed;
+- the user asks to create tests, quality gates, validation checks, Great Expectations suites, dbt tests, SQL checks, or data quality monitoring;
+- the workflow router selects Phase 14.
 
+Do not use this skill to implement tests, write SQL/Python/dbt code, create orchestration workflows, build dashboards, implement monitoring tools, or create CI/CD workflow files.
 
-## Inputs Required
+## Required Inputs
 
-- Dataset specifications from Bronze, Silver, and Gold layer designs.
-- Data contracts (`12-data-contracts.md`).
-- Transformation design (`13-transformation-design.md`).
-- SLA and freshness requirements (`03-requirements-and-kpi-catalog.md`).
-- Known quality risks from source assessment (`05-data-source-assessment.md`).
+The agent should look for:
 
-## Decision Matrix — 6 DQ Dimensions
+- `.agents/des-skill/output/01-business-discovery-brief.md`;
+- `.agents/des-skill/output/02-business-question-catalog.md`;
+- `.agents/des-skill/output/03-requirements-and-kpi-catalog.md`;
+- `.agents/des-skill/output/04-data-product-specification.md`;
+- `.agents/des-skill/output/05-data-source-inventory.md`;
+- `.agents/des-skill/output/06-conceptual-domain-model.md`;
+- `.agents/des-skill/output/07-architecture-decision-record.md`;
+- `.agents/des-skill/output/08-ingestion-specification.md`;
+- `.agents/des-skill/output/09-bronze-layer-specification.md`;
+- `.agents/des-skill/output/10-silver-layer-specification.md`;
+- `.agents/des-skill/output/11-gold-layer-specification.md`;
+- `.agents/des-skill/output/12-data-contract-specification.md`;
+- `.agents/des-skill/output/13-transformation-specification.md`;
+- workflow status file, if present;
+- contract quality expectations;
+- transformation validation expectations;
+- Bronze, Silver, Gold quality expectations;
+- freshness/SLA expectations;
+- metric reconciliation expectations;
+- access/security constraints;
+- consumer acceptance criteria.
 
-Every dataset must be evaluated against all 6 dimensions:
-
-| DQ Dimension | What to Check | Example Rule | Recommended Severity |
-| :--- | :--- | :--- | :--- |
-| **Completeness** | Null rates in required columns | `order_id` null ratio = 0% | Critical → FAIL |
-| **Uniqueness** | Duplicate primary keys | No duplicate `order_id` in Silver | Critical → FAIL |
-| **Accuracy** | Values within valid business ranges | `total_amount > 0` | High → QUARANTINE |
-| **Validity** | Format and enum constraints | Email regex, ISO country code | High → QUARANTINE |
-| **Timeliness** | Data latency vs SLA | `MAX(ingestion_ts - event_ts) < 15 min` | High → WARN |
-| **Consistency** | Cross-table metric alignment | `SUM(order_lines.subtotal) == orders.total` | High → WARN |
-
-## Decision Matrix — Failure Action Selection
-
-| Failure Impact | Recommended Action | When to Use |
-| :--- | :--- | :--- |
-| Data corruption of primary keys or FKs | **FAIL** — halt pipeline immediately | Zero tolerance violations: null PK, null FK, security breach |
-| Invalid format or out-of-range values | **QUARANTINE** — separate bad rows, continue loading clean rows | Format errors, enum mismatches, range violations |
-| Timeliness SLA breach, distribution drift | **WARN** — load all rows, alert to monitoring | Low-severity anomalies, SLA degradation without data loss |
-
-**Rule**: Never create a WARN for something that causes business decisions to be wrong. If the downstream user would be misled by bad data, it must be QUARANTINE or FAIL.
-
-## Step-By-Step Process
-
-1. List all datasets that need DQ rules (Bronze quality gates, Silver critical columns, Gold metrics).
-2. For each dataset, write rules across all 6 DQ dimensions.
-3. Assign severity (Critical / High / Low) and failure action (FAIL / QUARANTINE / WARN).
-4. Define anomaly baselines: rolling window (e.g., 7-day average ± 3 standard deviations for row counts).
-5. Choose implementation tool: dbt tests, Great Expectations, Soda, or SQL assertions.
-6. Define DQ audit log target: store all test run results in a queryable `dq_audit_log` table.
-7. Assign an owner and alert channel per rule.
-8. Design the quarantine path: `[table]_quarantine` with columns `dq_rule_id`, `dq_failure_reason`, `dq_failed_at`.
+If the Transformation Specification is missing or too weak, stop and ask whether to route back to `des-transformation-design`.
 
 ## Output File
 
+Create or update:
 
-The output_file path is configured in `customize.toml`. Default:
+```text
+.agents/des-skill/output/14-data-quality-specification.md
+```
 
-Write the final artifact to:
+The artifact must capture:
 
-`{project-root}/_des-output/planning-artifacts/14-data-quality.md`
+* data quality summary;
+* quality scope and non-scope;
+* quality design principles;
+* quality dimensions;
+* quality rule inventory;
+* dataset-to-rule mapping;
+* layer-specific quality rules;
+* contract quality alignment;
+* transformation validation alignment;
+* freshness rules;
+* completeness and volume rules;
+* uniqueness and grain rules;
+* validity and domain rules;
+* referential integrity rules;
+* consistency and reconciliation rules;
+* accuracy and business reasonableness rules;
+* schema and compatibility rules;
+* null and missing value rules;
+* anomaly and threshold rules;
+* severity classification;
+* failure handling and quality gates;
+* ownership and stewardship;
+* evidence and reporting expectations;
+* risks;
+* assumptions;
+* open questions;
+* next skill recommendation.
 
-Use the matching template from:
+## On Activation
 
-`{skill-root}/../../templates/14-data-quality-template.md`
+1. Read this `SKILL.md` completely.
+2. Read `customize.toml`.
+3. Identify `output_file`, `template_file`, `checklist_file`, `status_file`, and required upstream artifacts.
+4. Load only `steps/step-01-context-and-readiness.md`.
+5. Do not load step-02 or step-03 until the current step explicitly instructs you to continue.
+6. Stop at every `HALT` point and wait for user input.
+7. Do not invent quality thresholds, blocking rules, reconciliation tolerances, owners, or acceptance criteria.
+8. Do not write SQL, Python, dbt, Spark, Great Expectations, orchestration, monitoring, or CI/CD code.
+9. Before marking the artifact as Done, run the configured checklist and update workflow status.
 
-After writing the file, summarize the file path and recommend the next skill.
+## Process Overview
 
-## Required Outputs
+The detailed execution procedure lives in `steps/`.
 
-- DQ rule catalog covering all 6 dimensions per dataset.
-- Layer quality gates (Bronze, Silver, Gold) with blocking / non-blocking status.
-- Failure action protocol (FAIL / QUARANTINE / WARN per rule).
-- Anomaly detection baseline configuration.
-- DQ audit log and alert path.
+At a high level, this skill will:
+
+1. Confirm upstream transformation, contract, Gold, Silver, Bronze, and requirement context.
+2. Identify datasets and outputs requiring quality rules.
+3. Define data quality dimensions and rule categories.
+4. Map rules to datasets, contracts, transformations, and layers.
+5. Define thresholds, severity, failure handling, and quality gates.
+6. Define evidence, reporting, ownership, and monitoring expectations.
+7. Ask HALT questions for unresolved quality decisions.
+8. Draft the Data Quality Specification.
+9. Run the checklist, update workflow status, and recommend the next skill.
+
+Do not execute this overview directly. Follow the step files.
+
+## Guardrails
+
+The agent must not:
+
+* treat data quality as only null checks;
+* create quality rules without business or contract relevance;
+* mark a rule as blocking without approval;
+* invent thresholds without evidence or owner approval;
+* ignore freshness and completeness;
+* ignore grain uniqueness;
+* ignore metric reconciliation where metrics are contractual;
+* ignore layer boundaries: Bronze technical quality, Silver conformance quality, Gold consumer quality;
+* silently accept quality failures;
+* implement tests in this phase;
+* mark quality design Done if P1 contracted outputs lack quality rules, severity, failure handling, or ownership.
+
+## HALT Policy
+
+This skill must stop when a quality decision cannot be safely inferred.
+
+Stop especially when:
+
+* upstream transformation or contract context is missing;
+* quality scope is unclear;
+* P1 datasets lack quality expectations;
+* quality threshold is unclear;
+* severity is unclear;
+* blocking vs warning behavior is unclear;
+* freshness SLA is unclear;
+* metric reconciliation tolerance is unclear;
+* owner/steward is missing;
+* failure handling is unclear;
+* evidence/reporting expectation is missing.
+
+## WORKFLOW ARCHITECTURE
+
+This uses step-file architecture for disciplined execution:
+
+- read only the current step file;
+- execute steps in order;
+- stop at every HALT checkpoint;
+- keep unresolved decisions as open questions, not assumptions;
+- run the configured checklist before status advances.
 
 ## Quality Checklist
 
-- [ ] All 6 DQ dimensions are represented in the rule catalog.
-- [ ] Primary key uniqueness and not-null checks exist for all Silver and Gold tables.
-- [ ] Bronze, Silver, and Gold each have at least one blocking quality gate.
-- [ ] Anomaly detection row count baseline window is defined.
-- [ ] Every FAIL or QUARANTINE rule has an owner and Slack/PagerDuty alert path.
-- [ ] DQ audit log stores all test results (not just failures) for trending.
-- [ ] No silent failures: every rule produces a log entry on every run.
+See [14-data-quality-design-checklist.md](file:///c:/Users/dksan/Code/data-engineer/data-engineering-superpowers/checklists/14-data-quality-design-checklist.md) for details.
 
 ## Anti-Patterns to Avoid
 
@@ -130,4 +194,4 @@ After writing the file, summarize the file path and recommend the next skill.
 
 ## Handoff To The Next Skill
 
-Next use `des-orchestration-and-observability` to schedule, monitor, alert, and define runbooks for operating pipelines in production.
+Recommend `des-orchestration-observability` only after Phase 14 is complete.

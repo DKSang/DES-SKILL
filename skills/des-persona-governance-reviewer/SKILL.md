@@ -53,4 +53,4 @@ Use Security and Data Management undercurrents together. Security covers RBAC, R
 
 ## Handoff To The Next Skill
 
-Use `des-lineage-and-metadata` or `des-governance-and-security` as the artifact skill.
+Use `des-lineage-metadata-design` or `des-governance-and-security` as the artifact skill.

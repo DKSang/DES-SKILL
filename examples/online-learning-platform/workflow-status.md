@@ -24,11 +24,11 @@
 | 11 | `des-gold-layer-design` | ⏳ PENDING | — | — |
 | 12 | `des-data-contracts` | ⏳ PENDING | — | — |
 | 13 | `des-transformation-design` | ⏳ PENDING | — | — |
-| 14 | `des-data-quality` | ✅ COMPLETE | `14-data-quality.md` | 14 rules defined; 3-layer gates |
-| 15 | `des-orchestration-and-observability` | ⏳ PENDING | — | — |
+| 14 | `des-data-quality` | ✅ COMPLETE | `14-data-quality-specification.md` | 14 rules defined; 3-layer gates |
+| 15 | `des-orchestration-observability` | ⏳ PENDING | — | — |
 | 16 | `des-semantic-model-design` | ⏳ PENDING | — | — |
 | 17 | `des-serving-layer-design` | ⏳ PENDING | — | — |
-| 18 | `des-lineage-and-metadata` | ⏳ PENDING | — | — |
+| 18 | `des-lineage-metadata-design` | ⏳ PENDING | — | — |
 | 19 | `des-governance-and-security` | ⏳ PENDING | — | — |
 | 20 | `des-cost-and-performance-optimization` | ⏳ PENDING | — | — |
 | 21 | `des-cicd-and-testing` | ⏳ PENDING | — | — |

@@ -1,100 +1,166 @@
 ---
 name: des-transformation-design
-description: Use when designing SQL, Python, Spark, dbt, DuckDB, or warehouse transformations from raw and standardized data into validated analytics models.
+description: Use when designing transformation logic, dependency flow, incremental behavior, business rules, conformance rules, and metric logic across Bronze, Silver, Gold, and serving-ready outputs.
 ---
 
 # des-transformation-design
 
-## When To Use
-
-Use after layer designs and data contracts. Use before writing transformation code or dbt models — design first, then implement.
-
 ## Purpose
 
-Create an implementable transformation plan that maps inputs to outputs, defines business rules explicitly, handles edge cases, and supports automated testing and safe backfill.
+Use this skill to create the Transformation Specification for any data engineering project.
 
-## HALT Policy
+This skill defines transformation logic, dependency flow, incremental behavior, business rules, conformance rules, aggregation rules, metric logic, error handling, lineage, validation expectations, and implementation boundaries for moving data across Bronze, Silver, Gold, and serving-ready outputs.
 
-This skill must stop when a required decision cannot be safely inferred.
+The goal is to design transformation behavior clearly before writing SQL, Python, dbt models, notebooks, stored procedures, or pipeline implementation code.
 
-The agent must not continue if any of these are unresolved:
+## When To Use
 
-- required upstream artifacts are missing or inconsistent;
-- business owner, metric owner, source owner, or release owner is unclear;
-- business priority, consumer, or project intent is ambiguous;
-- source of truth, access, quality, legal use, cost, or ownership is unknown;
-- KPI formula, grain, freshness, SLA, threshold, or acceptance criteria is ambiguous;
-- architecture, storage, compute, deployment, or engine trade-off needs approval;
-- data contract owner, consumer impact, schema version, or breaking-change policy is missing;
-- DQ severity, threshold, remediation, alerting, or escalation is unknown;
-- security, access, retention, environment, secret, or release evidence is missing.
+Use this skill when:
 
-Use the detailed HALT checkpoints in `steps/`: readiness HALT in step 01, phase decision HALT in step 02, and validation HALT in the final step. HALT asks for a decision, not permission to continue.
+- Phase 12 Data Contract Specification exists;
+- Bronze, Silver, and Gold layer designs exist;
+- transformation logic needs to be made explicit before implementation;
+- business rules, joins, filters, deduplication, conformance, aggregation, SCD, or metric logic need approval;
+- incremental transformation, backfill, replay, rollback, or dependency order is unclear;
+- the user asks to write SQL, dbt models, notebooks, Spark jobs, stored procedures, or transformation code;
+- the workflow router selects Phase 13.
 
+Do not use this skill to implement transformation code, run data quality tests, create orchestration workflows, build dashboards, implement APIs, or create CI/CD workflows.
 
-## Inputs Required
+## Required Inputs
 
-- Bronze, Silver, and Gold specifications.
-- Data contracts (`12-data-contracts.md`).
-- Certified metric definitions (`03-requirements-and-kpi-catalog.md`).
-- Data quality requirements.
-- Tooling choices from architecture (`07-architecture-design.md`).
+The agent should look for:
 
-## Decision Matrix — Transformation Tool Selection
+- `.agents/des-skill/output/01-business-discovery-brief.md`;
+- `.agents/des-skill/output/02-business-question-catalog.md`;
+- `.agents/des-skill/output/03-requirements-and-kpi-catalog.md`;
+- `.agents/des-skill/output/04-data-product-specification.md`;
+- `.agents/des-skill/output/05-data-source-inventory.md`;
+- `.agents/des-skill/output/06-conceptual-domain-model.md`;
+- `.agents/des-skill/output/07-architecture-decision-record.md`;
+- `.agents/des-skill/output/08-ingestion-specification.md`;
+- `.agents/des-skill/output/09-bronze-layer-specification.md`;
+- `.agents/des-skill/output/10-silver-layer-specification.md`;
+- `.agents/des-skill/output/11-gold-layer-specification.md`;
+- `.agents/des-skill/output/12-data-contract-specification.md`;
+- workflow status file, if present;
+- Bronze/Silver/Gold dataset inventory;
+- data contracts;
+- metric and KPI definitions;
+- grain and identity rules;
+- source-of-truth decisions;
+- quality expectations;
+- freshness/SLA expectations;
+- access/security constraints;
+- architecture compute/tool constraints.
 
-| Scenario | Recommended Tool | When to Override |
-| :--- | :--- | :--- |
-| SQL-native warehouse (Snowflake, BigQuery, Synapse) | **dbt (SQL)** | Use Python models for ML features or complex logic |
-| Spark/Databricks lakehouse | **dbt + dbt-spark / Databricks SQL** | PySpark for complex window logic or ML pipelines |
-| Local development, small data (< 50GB) | **DuckDB + SQL or dbt-duckdb** | Spark if data grows beyond local capacity |
-| Complex Python/ML transformation | **PySpark / Pandas on Spark** | dbt for simpler SQL-based transformations |
-| Simple one-time historical backfill | **SQL or Python script** | dbt for production pipelines that must be tested |
-
-**Default**: Use dbt where possible — it enforces documentation, testing, and lineage by design.
-
-## Decision Matrix — Incremental Strategy
-
-| Source Behavior | Incremental Strategy |
-| :--- | :--- |
-| Append-only events | `WHERE event_date >= '{{ ds }}'` — filter by partition date |
-| CRUD with watermark (`updated_at`) | `WHERE updated_at > last_watermark` — merge on primary key |
-| Full replacement (small tables < 1M rows) | `--full-refresh` on schedule; mark explicitly in dbt config |
-| Partitioned fact tables | `INSERT OVERWRITE PARTITION` by `ingestion_date` |
-
-**Rule**: Every incremental transformation must be **idempotent** — running it twice for the same date window must produce the same output with no duplicates.
-
-## Step-By-Step Process
-
-1. Map every output table to its input tables (source-to-target mapping).
-2. Define transformation logic stage by stage: Clean → Conform → Enrich → Aggregate → Serve.
-3. Choose implementation tool using the Decision Matrix.
-4. Define incremental strategy using the Incremental Strategy matrix.
-5. Define edge case handling explicitly: nulls, duplicates, late records, deletes, type changes.
-6. Write testable business rules with named rule IDs (e.g., `BR-001: total_amount = unit_price * quantity`).
-7. Sequence transformations by dependency graph (upstream → downstream).
-8. Document backfill behavior and estimated backfill duration.
+If the Data Contract Specification is missing or too weak, stop and ask whether to route back to `des-data-contracts`.
 
 ## Output File
 
+Create or update the configured `output_file`:
 
-The output_file path is configured in `customize.toml`. Default:
+```text
+.agents/des-skill/output/13-transformation-specification.md
+```
 
-Write the final artifact to:
+The artifact must capture:
 
-`{project-root}/_des-output/planning-artifacts/13-transformation-design.md`
+* transformation summary;
+* transformation scope and non-scope;
+* transformation design principles;
+* transformation inventory;
+* layer-to-layer transformation mapping;
+* dependency graph;
+* input and output dataset mapping;
+* transformation grain;
+* business rules;
+* cleaning and conformance rules;
+* join and relationship rules;
+* deduplication and survivorship rules;
+* SCD and history handling;
+* aggregation and metric calculation rules;
+* incremental processing strategy;
+* backfill and replay strategy;
+* late-arriving and corrected data handling;
+* error handling and quarantine behavior;
+* validation and test expectations;
+* contract alignment;
+* lineage and metadata expectations;
+* performance and cost considerations;
+* security and privacy handling;
+* implementation boundary;
+* risks;
+* assumptions;
+* open questions;
+* next skill recommendation.
 
-Use the example output format below because this skill does not have a dedicated template file.
+## On Activation
 
-After writing the file, summarize the file path and recommend the next skill.
+1. Read this `SKILL.md` completely.
+2. Read `customize.toml`.
+3. Identify `output_file`, `template_file`, `checklist_file`, `status_file`, and required upstream artifacts.
+4. Load only `steps/step-01-context-and-readiness.md`.
+5. Do not load step-02 or step-03 until the current step explicitly instructs you to continue.
+6. Stop at every `HALT` point and wait for user input.
+7. Do not invent transformation rules, joins, metric formulas, incremental keys, SCD behavior, or error handling.
+8. Do not write SQL, Python, dbt, Spark, notebook, stored procedure, orchestration, or CD code.
+9. Before marking the artifact as Done, run the configured checklist and update workflow status.
 
-## Required Outputs
+## Process Overview
 
-- Source-to-target mapping per output table.
-- Transformation logic per stage with named business rules.
-- Incremental strategy and idempotency confirmation.
-- Edge case handling (nulls, duplicates, deletes, late records).
-- Dependency graph (DAG order).
-- Backfill plan with estimated duration.
+The detailed execution procedure lives in `steps/`.
+
+At a high level, this skill will:
+
+1. Confirm upstream contracts, Gold, Silver, Bronze, architecture, and KPI context.
+2. Identify transformation scope across Bronze → Silver and Silver → Gold.
+3. Define transformation inventory and dependencies.
+4. Define business rules, cleaning rules, conformance rules, joins, deduplication, SCD, aggregation, and metric logic.
+5. Define incremental, backfill, replay, late data, and correction behavior.
+6. Define validation, test, lineage, security, and performance expectations.
+7. Ask HALT questions for unresolved transformation decisions.
+8. Draft the Transformation Specification.
+9. Run the checklist, update workflow status, and recommend the next skill.
+
+Do not execute this overview directly. Follow the step files.
+
+## Guardrails
+
+The agent must not:
+
+* write implementation code in this phase;
+* turn vague business logic into approved transformation logic without confirmation;
+* define metric logic that conflicts with Phase 3 or Phase 11;
+* join datasets without approved grain and relationship rules;
+* deduplicate without approved rules;
+* aggregate without approved grain;
+* ignore contract expectations;
+* ignore lineage and testability;
+* ignore incremental and replay behavior;
+* silently drop invalid records;
+* hide performance, cost, or operational risks;
+* mark transformation design Done if P1 outputs lack transformation mapping, dependencies, validation expectations, or contract alignment.
+
+## HALT Policy
+
+This skill must stop when a transformation decision cannot be safely inferred.
+
+Stop especially when:
+
+* upstream contract or layer specs are missing;
+* input/output mapping is unclear;
+* transformation grain is unclear;
+* business rule is ambiguous;
+* join rule is unclear;
+* metric formula or aggregation rule conflicts with prior artifacts;
+* deduplication or survivorship rule is unclear;
+* SCD/history behavior is unclear;
+* incremental key/checkpoint is unclear;
+* late-arriving or corrected data behavior is unclear;
+* error/quarantine behavior is unclear;
+* validation/test expectation is missing;
+* transformation conflicts with data contract.
 
 ## Quality Checklist
 
@@ -115,31 +181,6 @@ After writing the file, summarize the file path and recommend the next skill.
 | Ignoring deletes and late-arriving data | Silent data errors accumulate; downstream KPIs become unreliable |
 | Complex CASE chains without named rules | Engineers cannot explain what the logic does; changes introduce regressions |
 
-## Undercurrent Coverage
-
-| Undercurrent | Action Required at This Phase |
-| :--- | :--- |
-| Security | PII masking transformations applied at Silver layer documented here |
-| Data Management | Source-to-target column mapping is the foundation of column-level lineage |
-| DataOps | All business rules must have corresponding dbt tests or DQ assertions in CI/CD |
-| Data Architecture | Incremental strategy must be aligned with storage format capabilities (Delta MERGE vs. partition overwrite) |
-| Orchestration | Dependency graph drives DAG task ordering in orchestration design |
-| Software Engineering | Named business rules are unit-testable; reviewed in PRs; documented in dbt schema.yml |
-
 ## Handoff To The Next Skill
 
-Next use `des-data-quality` to define and implement checks that validate transformation outputs at every layer.
-
-## Example Output Format
-
-```markdown
-# Transformation Design
-| Output Table | Input Tables | Stage | Logic Summary | Incremental Key | Business Rules |
-| `silver.orders` | `bronze.raw_orders` | Conform | Deduplicate by order_id, standardize timestamps | `ingestion_date` | BR-001, BR-002 |
-## Business Rules
-| Rule ID | Rule | Implementation |
-| BR-001 | total_amount = unit_price * quantity | `total_amount = unit_price * quantity` |
-## Dependency Graph
-bronze.raw_orders → silver.orders → gold.fact_orders
-## Backfill Plan
-```
+Recommend `des-data-quality` only after the Transformation Specification is complete or explicitly marked Draft with open questions and accepted risks.

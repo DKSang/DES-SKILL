@@ -90,7 +90,7 @@ Nếu gate pass:
 - Update workflow status cho Phase 17 là completed.
 
 ### 6. Menu bàn giao
-- **[C] Hoàn thành**: Gợi ý `des-lineage-and-metadata`.
+- **[C] Hoàn thành**: Gợi ý `des-lineage-metadata-design`.
 - **[R] Soạn lại**: Quay lại step-01.
 - **[G] Bổ sung gate còn thiếu**: Hoàn thiện SLA/access/monitoring/onboarding.
 

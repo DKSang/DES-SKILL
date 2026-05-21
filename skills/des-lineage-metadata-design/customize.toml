@@ -1,0 +1,83 @@
+skill_id = "des-lineage-metadata-design"
+phase = 18
+phase_name = "Lineage and Metadata Design"
+
+output_file = ".agents/des-skill/output/18-lineage-metadata-specification.md"
+template_file = ".agents/des-skill/templates/18-lineage-metadata-specification-template.md"
+checklist_file = ".agents/des-skill/checklists/18-lineage-metadata-design-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-governance-security-design"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/01-business-discovery-brief.md",
+  ".agents/des-skill/output/02-business-question-catalog.md",
+  ".agents/des-skill/output/03-requirements-and-kpi-catalog.md",
+  ".agents/des-skill/output/04-data-product-specification.md",
+  ".agents/des-skill/output/05-data-source-inventory.md",
+  ".agents/des-skill/output/06-conceptual-domain-model.md",
+  ".agents/des-skill/output/08-ingestion-specification.md",
+  ".agents/des-skill/output/09-bronze-layer-specification.md",
+  ".agents/des-skill/output/10-silver-layer-specification.md",
+  ".agents/des-skill/output/11-gold-layer-specification.md",
+  ".agents/des-skill/output/12-data-contract-specification.md",
+  ".agents/des-skill/output/13-transformation-specification.md",
+  ".agents/des-skill/output/14-data-quality-specification.md",
+  ".agents/des-skill/output/15-orchestration-observability-specification.md",
+  ".agents/des-skill/output/16-semantic-model-specification.md",
+  ".agents/des-skill/output/17-serving-layer-specification.md"
+]
+
+required_sections = [
+  "Lineage and Metadata Summary",
+  "Metadata Scope",
+  "Metadata Design Principles",
+  "Metadata Categories",
+  "Metadata Inventory",
+  "Business Metadata",
+  "Technical Metadata",
+  "Operational Metadata",
+  "Reference Metadata",
+  "Dataset Catalog Requirements",
+  "Field and Schema Metadata",
+  "Metric and KPI Metadata",
+  "Contract Metadata",
+  "Transformation Lineage",
+  "Dataset Lineage",
+  "Column Level Lineage Expectations",
+  "Semantic and Serving Lineage",
+  "Quality and Trust Metadata",
+  "Ownership and Stewardship Metadata",
+  "Usage and Consumer Metadata",
+  "Change and Version Metadata",
+  "Audit and Compliance Metadata",
+  "Metadata Capture Responsibilities",
+  "Metadata Freshness and Maintenance Policy",
+  "Risks",
+  "Assumptions",
+  "Open Questions",
+  "Next Skill Recommendation"
+]
+
+halt_required_decisions = [
+  "upstream_serving_context",
+  "metadata_scope",
+  "metadata_category_coverage",
+  "dataset_catalog_fields",
+  "business_definition_owner",
+  "lineage_depth",
+  "column_level_lineage",
+  "operational_metadata_capture",
+  "quality_trust_metadata",
+  "usage_consumer_metadata",
+  "audit_compliance_metadata",
+  "metadata_maintenance_owner"
+]
+
+[workflow]
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = [
+  "file:{project-root}/**/project-context.md",
+]
+on_complete = ""

@@ -1,132 +1,205 @@
 ---
 name: des-bronze-layer-design
-description: Use when designing raw landing datasets, Bronze tables, raw zones, audit metadata, partitions, retention, and replayable source storage.
+description: Use when creating the Bronze Layer Specification for any data engineering project.
 ---
 
 # des-bronze-layer-design
 
-## When To Use
-
-Use after ingestion design is complete and before Silver layer standardization. Use when raw source records must be stored safely, replayably, and with full audit traceability.
-
 ## Purpose
 
-Design Bronze datasets that preserve source truth, support audit and replay, and avoid premature cleaning or business logic.
+Use this skill to create the Bronze Layer Specification for any data engineering project.
 
-## HALT Policy
+This skill defines how raw or near-raw ingested data will be stored, organized, partitioned, retained, audited, protected, and prepared for downstream Silver transformation.
 
-This skill must stop when a required decision cannot be safely inferred.
+The Bronze layer should preserve source truth, ingestion evidence, and replay capability while avoiding premature business cleaning or modeling.
 
-The agent must not continue if any of these are unresolved:
+## When To Use
 
-- required upstream artifacts are missing or inconsistent;
-- business owner, metric owner, source owner, or release owner is unclear;
-- business priority, consumer, or project intent is ambiguous;
-- source of truth, access, quality, legal use, cost, or ownership is unknown;
-- KPI formula, grain, freshness, SLA, threshold, or acceptance criteria is ambiguous;
-- architecture, storage, compute, deployment, or engine trade-off needs approval;
-- data contract owner, consumer impact, schema version, or breaking-change policy is missing;
-- DQ severity, threshold, remediation, alerting, or escalation is unknown;
-- security, access, retention, environment, secret, or release evidence is missing.
+Use this skill when:
 
-Use the detailed HALT checkpoints in `steps/`: readiness HALT in step 01, phase decision HALT in step 02, and validation HALT in the final step. HALT asks for a decision, not permission to continue.
+- Phase 8 Ingestion Specification exists;
+- sources and ingestion patterns are known;
+- raw/landing storage needs to be designed;
+- source data must be retained for audit, replay, lineage, or troubleshooting;
+- schema drift, raw payload retention, partitioning, storage format, access control, retention, or quarantine behavior is unclear;
+- the workflow router selects Phase 9.
 
+Do not use this skill to design Silver conformance, Gold marts, semantic models, dashboards, APIs, transformations, orchestration implementation, or code.
 
-## Inputs Required
+## Required Inputs
 
-- Ingestion specification (`08-ingestion-design.md`).
-- Source schemas or payload samples.
-- Retention and privacy requirements (`03-requirements-and-kpi-catalog.md`).
-- Architecture decision record (`07-architecture-design.md`).
+The agent should look for:
 
-## Decision Matrix — Storage Format Selection
+- `.agents/des-skill/output/01-business-discovery-brief.md`;
+- `.agents/des-skill/output/02-business-question-catalog.md`;
+- `.agents/des-skill/output/03-requirements-and-kpi-catalog.md`;
+- `.agents/des-skill/output/04-data-product-specification.md`;
+- `.agents/des-skill/output/05-data-source-inventory.md`;
+- `.agents/des-skill/output/06-conceptual-domain-model.md`;
+- `.agents/des-skill/output/07-architecture-decision-record.md`;
+- `.agents/des-skill/output/08-ingestion-specification.md`;
+- workflow status file, if present;
+- approved architecture layer strategy;
+- source-to-ingestion mapping;
+- ingestion metadata expectations;
+- replay/backfill strategy;
+- schema drift policy;
+- security/privacy classification;
+- retention expectations;
+- access restrictions;
+- error/quarantine expectations.
 
-| Scenario | Recommended Format | Rationale |
-| :--- | :--- | :--- |
-| Need ACID + time travel + schema evolution | **Delta Lake** | Best for Medallion architectures; supports MERGE, Z-ORDER, VACUUM |
-| Multi-engine portability (no vendor lock-in) | **Apache Iceberg** | Open standard; supported by Spark, Flink, Athena, BigQuery |
-| Simple columnar storage without ACID | **Parquet** | Good for read-heavy, append-only workloads without updates |
-| Schema registry + streaming | **Avro** | Best with Kafka + Confluent Schema Registry for event streams |
-| Raw JSON fidelity needed | **JSON / NDJSON** | Only for landing zone; always convert to columnar before Bronze |
-
-**Default**: Use **Delta Lake** for Medallion architecture on Databricks/Spark. Use **Iceberg** for multi-engine or cloud-agnostic architectures.
-
-## Partition Design Rules
-
-| Rule | Guidance |
-| :--- | :--- |
-| Primary partition key | Use `ingestion_date = YYYY-MM-DD` (not event date) — enables safe partition overwrite on replay |
-| Target partition file size | 100MB – 1GB per partition file after compression |
-| High-cardinality columns | Never partition by `user_id`, `order_id`, or UUID — creates millions of tiny partitions |
-| Secondary access optimization | Apply Z-ORDER / clustering on high-frequency filter columns within a partition |
-
-## Step-By-Step Process
-
-1. Define one Bronze dataset per source feed or logical raw object.
-2. Select storage format using the Decision Matrix above.
-3. Choose partition key (`ingestion_date` default) and validate cardinality.
-4. Add 5 mandatory audit metadata columns (see Quality Checklist).
-5. Define schema drift handling policy for: new columns / removed columns / type changes.
-6. Define replay and backfill behavior (partition overwrite ensures idempotency).
-7. Define PII treatment: restrict Bronze access to `bronze-raw-readers` role.
-8. Set retention lifecycle rules: Hot → Cool → Archive → Delete.
+If the Ingestion Specification is missing or too weak, stop and ask whether to route back to `des-ingestion-design`.
 
 ## Output File
-
 
 The output_file path is configured in `customize.toml`. Default:
 
 Write the final artifact to:
 
-`{project-root}/_des-output/planning-artifacts/09-bronze-layer-design.md`
+`.agents/des-skill/output/09-bronze-layer-specification.md`
 
 Use the matching template from:
 
-`{skill-root}/../../templates/09-bronze-layer-design-template.md`
+`.agents/des-skill/templates/09-bronze-layer-specification-template.md`
 
 After writing the file, summarize the file path and recommend the next skill.
 
 ## Required Outputs
 
-- Bronze table specifications (format, partition, compression).
-- 5 mandatory metadata columns documented.
-- Schema drift policy (new / removed / type-changed columns).
-- Retention lifecycle plan.
-- PII access restriction policy.
+The artifact must capture:
+
+- Bronze layer summary
+- Bronze scope and non-scope
+- Bronze design principles
+- Source-to-Bronze dataset mapping
+- Bronze dataset inventory
+- Raw preservation strategy
+- Storage format decision
+- File/table organization
+- Partitioning strategy
+- Mandatory metadata columns
+- Ingestion audit metadata
+- Schema drift and evolution handling
+- Replay and backfill support
+- Idempotency and deduplication boundary
+- Quarantine and rejected data handling
+- Retention and lifecycle policy
+- Access control and sensitivity classification
+- Data quality expectations at Bronze boundary
+- Lineage and traceability expectations
+- Operational evidence requirements
+- Risks
+- Assumptions
+- Open Questions
+- Next Skill Recommendation
+
+## On Activation
+
+1. Read this `SKILL.md` completely.
+2. Read `customize.toml`.
+3. Identify `output_file`, `template_file`, `checklist_file`, `status_file`, and required upstream artifacts.
+4. Load only `steps/step-01-context-and-readiness.md`.
+5. Do not load step-02 or step-03 until the current step explicitly instructs you to continue.
+6. Stop at every `HALT` point and wait for user input.
+7. Do not invent Bronze datasets, retention periods, partition keys, access roles, metadata requirements, or schema drift policy.
+8. Do not clean, conform, deduplicate for business correctness, or design Silver/Gold logic in this phase.
+9. Do not write pipeline code or transformation code.
+10. Before marking the artifact as Done, run the configured checklist and update workflow status.
+
+## Process Overview
+
+The detailed execution procedure lives in `steps/`.
+
+At a high level, this skill will:
+
+1. Confirm upstream ingestion and architecture context.
+2. Identify in-scope sources and ingestion outputs.
+3. Define Bronze datasets per source feed or logical raw object.
+4. Define raw preservation, storage format, organization, and partitioning.
+5. Define mandatory audit metadata and lineage metadata.
+6. Define schema drift, replay/backfill, retention, quarantine, and access policies.
+7. Define Bronze boundary quality checks and operational evidence expectations.
+8. Ask HALT questions for unresolved storage, partition, metadata, retention, access, and drift decisions.
+9. Draft the Bronze Layer Specification.
+10. Run the checklist, update workflow status, and recommend the next skill.
+
+Do not execute this overview directly. Follow the step files.
+
+## Guardrails
+
+The agent must not:
+
+- treat Bronze as a cleaned business layer;
+- over-clean or conform source data in Bronze;
+- remove raw fields without explicit retention and replay decision;
+- choose partition keys without considering cardinality, query/replay patterns, and cost;
+- hide schema drift;
+- store sensitive raw data without access policy;
+- drop bad records without quarantine/evidence;
+- mark Bronze datasets Ready if mandatory metadata, retention, drift, replay, and access policies are missing;
+- design Silver/Gold tables in this phase.
+
+## HALT Policy
+
+This skill must stop when a Bronze design decision cannot be safely inferred.
+
+Stop especially when:
+
+- upstream ingestion specification is missing;
+- Bronze dataset boundary is unclear;
+- raw preservation requirement is unclear;
+- storage format is unclear;
+- partition key is unclear or high-risk;
+- metadata/audit requirements are unclear;
+- schema drift policy is unclear;
+- replay/backfill requirement is unclear;
+- retention policy is unclear;
+- source contains sensitive or regulated data and access policy is unclear;
+- quarantine/rejected data policy is missing;
+- Bronze design conflicts with architecture or ingestion decisions.
+
+## Conventions
+
+- Bare paths such as `steps/step-01-context-and-readiness.md` resolve from the skill root.
+- `{skill-root}` resolves to this skill's installed directory.
+- `{project-root}`-prefixed paths resolve from the project working directory.
+- Document output language follows project config.
+
+## WORKFLOW ARCHITECTURE
+
+This uses step-file architecture for disciplined execution:
+
+- read only the current step file;
+- execute steps in order;
+- stop at every HALT checkpoint;
+- keep unresolved decisions as open questions, not assumptions;
+- run the configured checklist before status advances.
 
 ## Quality Checklist
 
-- [ ] Bronze write mode is **append-only** — no in-place updates or deletes of raw records.
-- [ ] Source payload is preserved with zero business logic applied.
-- [ ] Partition key is `ingestion_date` (not event date) to support safe partition overwrite on backfill.
-- [ ] Partition file size is within 100MB – 1GB target range.
-- [ ] All 5 audit columns are present: `des_ingestion_timestamp`, `des_source_system`, `des_source_offset`, `des_pipeline_run_id`, `des_payload_hash`.
-- [ ] Schema drift policy is defined for: new columns, removed columns, type changes.
-- [ ] Bronze access is restricted — PII not masked at this layer, access is role-gated.
-- [ ] Retention lifecycle rule is configured (Hot → Archive → Delete).
+- [ ] Each P1/P2 source maps to a Bronze dataset with name, source, and object details.
+- [ ] Raw preservation policy is documented, ensuring no premature business cleaning.
+- [ ] Storage format (e.g. Parquet, Delta Lake, Iceberg) is decided and justified.
+- [ ] Partitioning strategy is chosen based on cardinality and query patterns.
+- [ ] Mandatory metadata fields for audit and lineage are defined.
+- [ ] Schema drift policy is documented.
+- [ ] Replay and backfill support from raw files/tables is specified.
+- [ ] Access control and sensitive data rules are defined.
+- [ ] Quarantine and rejected data rules are established.
+- [ ] Retention lifecycle policies are set.
+- [ ] The artifact does not design detailed Silver/Gold tables, write transformations, or include pipeline implementation code.
 
 ## Anti-Patterns to Avoid
 
 | Anti-Pattern | Why It Fails |
 | :--- | :--- |
-| Applying business logic in Bronze | Breaks the "raw replay" guarantee; Silver cannot recover if business rules change |
-| Dropping raw source fields | Irreversible data loss; fields needed later cannot be recovered |
-| Partitioning by `user_id` or `order_id` | Creates millions of tiny partitions; kills query performance and increases metadata overhead |
-| Using event date as partition key | Re-processing late-arriving events overwrites wrong partitions |
-| No metadata columns | Cannot trace which pipeline run loaded which records; audit is impossible |
-| Storing raw JSON at scale without conversion | JSON is row-oriented; analytical queries scan 10–100x more data than Parquet/Delta |
-
-## Undercurrent Coverage
-
-| Undercurrent | Action Required at This Phase |
-| :--- | :--- |
-| Security | Bronze access restricted to `bronze-raw-readers`; PII masked starting at Silver |
-| Data Management | Audit metadata columns enable full lineage from source event to Bronze record |
-| DataOps | Partition overwrite strategy makes Bronze replay-safe for CI/CD redeployments |
-| Data Architecture | Format selection must be reversible-aware: Delta/Iceberg avoid storage vendor lock-in |
-| Orchestration | Retention lifecycle rules defined here; enforced by orchestration lifecycle jobs |
-| Software Engineering | Schema drift policy prevents ad-hoc schema changes from breaking downstream pipelines |
+| Applying business logic or conformance in Bronze | Breaks the "raw replay" guarantee; Silver cannot recover if business rules change |
+| Dropping raw source fields permanently | Irreversible data loss; fields needed later cannot be recovered |
+| Partitioning by user_id or high-cardinality keys | Creates millions of tiny files; kills query performance and increases metadata overhead |
+| Storing raw JSON at scale without columnar conversion | Row-oriented JSON scans 10-100x more data than Parquet/Delta, increasing compute costs |
+| Lack of metadata columns | Cannot trace pipeline run IDs, ingestion time, or source filenames, making audit impossible |
 
 ## Handoff To The Next Skill
 
-Next use `des-silver-layer-design` to standardize types, timestamps, naming conventions, apply deduplication, and define SCD strategies for slowly changing dimensions.
+Recommend `des-silver-layer-design` only after the Bronze Layer Specification is complete or explicitly marked Draft with open questions and accepted risks.

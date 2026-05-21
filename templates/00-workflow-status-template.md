@@ -51,18 +51,18 @@
 | 06 | `06-conceptual-domain-model.md` | `des-domain-modeling` | Not Started | |
 | 07 | `07-architecture-decision-record.md` | `des-architecture-design` | Not Started | |
 | 07b | `07-architecture-decision-record-template.md` | `des-architecture-design` | Not Started | Template reference |
-| 08 | `08-ingestion-design.md` | `des-ingestion-design` | Not Started | |
+| 08 | `08-ingestion-specification.md` | `des-ingestion-design` | Not Started | |
 | 09 | `09-bronze-layer-design.md` | `des-bronze-layer-design` | Not Started | |
 | 10 | `10-silver-layer-design.md` | `des-silver-layer-design` | Not Started | |
 | 11 | `11-gold-layer-design.md` | `des-gold-layer-design` | Not Started | |
-| 12 | `12-data-contracts.md` | `des-data-contracts` | Not Started | |
-| 13 | `13-transformation-design.md` | `des-transformation-design` | Not Started | |
-| 14 | `14-data-quality.md` | `des-data-quality` | Not Started | |
-| 15 | `15-orchestration-and-observability.md` | `des-orchestration-and-observability` | Not Started | |
-| 15b | `15b-pipeline-specs.md` | `des-orchestration-and-observability` | Not Started | One spec per pipeline |
-| 16 | `16-semantic-model-design.md` | `des-semantic-model-design` | Not Started | |
-| 17 | `17-serving-layer-design.md` | `des-serving-layer-design` | Not Started | |
-| 18 | `18-lineage-and-metadata.md` | `des-lineage-and-metadata` | Not Started | |
+| 12 | `12-data-contract-specification.md` | `des-data-contracts` | Not Started | |
+| 13 | `13-transformation-specification.md` | `des-transformation-design` | Not Started | |
+| 14 | `14-data-quality-specification.md` | `des-data-quality` | Not Started | |
+| 15 | 15-orchestration-observability-specification.md | des-orchestration-observability | Not Started | |
+| 15b | 15b-pipeline-specs.md | des-orchestration-observability | Not Started | One spec per pipeline |
+| 16 | `16-semantic-model-specification.md` | `des-semantic-model-design` | Not Started | |
+| 17 | `17-serving-layer-specification.md` | `des-serving-layer-design` | Not Started | |
+| 18 | `18-lineage-metadata-specification.md` | `des-lineage-metadata-design` | Not Started | |
 | 19 | `19-governance-and-security.md` | `des-governance-and-security` | Not Started | |
 | 20 | `20-cost-and-performance-optimization.md` | `des-cost-and-performance-optimization` | Not Started | |
 | 21 | `21-cicd-and-testing.md` | `des-cicd-and-testing` | Not Started | |

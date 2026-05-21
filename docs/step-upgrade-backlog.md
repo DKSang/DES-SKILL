@@ -26,10 +26,10 @@
 | Skill | Lý do cần nâng cấp | FDE Knowledge cần bổ sung |
 | :--- | :--- | :--- |
 | `des-semantic-model-design` | Single metric layer principle chưa có enforcement check; RLS design còn abstract | Certified metric layer patterns (dbt Metrics, Cube, Fabric Semantic) |
-| `des-lineage-and-metadata` | Column-level lineage process còn manual; schema registry setup generic | OpenLineage standard; DataHub vs Fabric Data Catalog tradeoffs |
-| `des-governance-and-security` | PII masking decision matrix chưa có HALT khi có PII trong Gold layer | PDPD Vietnam-specific requirements; masking vs tokenization tradeoffs |
+| `des-lineage-metadata-design` | Column-level lineage process còn manual; schema registry setup generic | OpenLineage standard; DataHub vs Fabric Data Catalog tradeoffs |
+| `des-governance-security-design` | PII masking decision matrix chưa có HALT khi có PII trong Gold layer | PDPD Vietnam-specific requirements; masking vs tokenization tradeoffs |
 | `des-data-contracts` | Breaking change policy chưa có semver enforcement guide; notification process abstract | Consumer-driven contract testing patterns |
-| `des-orchestration-and-observability` | DAG design chưa có retry backoff formula; SLA monitoring threshold chưa có | Maximal decoupling orchestration principle; Dagster Sensors vs Airflow Schedule |
+| `des-orchestration-observability` | DAG design chưa có retry backoff formula; SLA monitoring threshold chưa có | Maximal decoupling orchestration principle; Dagster Sensors vs Airflow Schedule |
 
 ## Tier 3 — Nâng cấp khi có nhu cầu
 
@@ -59,10 +59,10 @@
 | `des-transformation-design` | Tier 1 batch: full-refresh vs incremental strategy + idempotency + late/delete handling gate |
 | `des-data-quality` | Tier 1 batch: Bronze/Silver/Gold DQ dimension policy + anomaly formula + owner/action HALT |
 | `des-semantic-model-design` | Tier 2 batch: single metric authority enforcement + semantic layer pattern + RLS test gate |
-| `des-lineage-and-metadata` | Tier 2 batch: column-level lineage for PII/metrics + catalog steward gate + schema registry compatibility |
+| `des-lineage-metadata-design` | Tier 2 batch: column-level lineage for PII/metrics + catalog steward gate + schema registry compatibility |
 | `des-governance-and-security` | Tier 2 batch: PII-in-Gold HALT + PDPD/regulatory scope + masking/tokenization/access control gate |
 | `des-data-contracts` | Tier 2 batch: semver breaking-change policy + consumer-driven contract tests + notification/deprecation gate |
-| `des-orchestration-and-observability` | Tier 2 batch: sensor-vs-schedule decision + retry backoff formula + SLA/alert/runbook gate |
+| `des-orchestration-observability` | Tier 2 batch: sensor-vs-schedule decision + retry backoff formula + SLA/alert/runbook gate |
 | `des-bronze-layer-design` | Tier 3 batch: Parquet/Delta/Iceberg scoring + partition/file-layout + replay/retention gate |
 | `des-silver-layer-design` | Tier 3 batch: SCD Type 2 MERGE key design + dedup/late/delete/quarantine gate |
 | `des-serving-layer-design` | Tier 3 batch: serving interface decision + caching/materialization tree + semantic/access gate |
