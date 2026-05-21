@@ -1,0 +1,77 @@
+skill_id = "des-implementation-plan"
+skill_type = "support"
+phase_name = "Implementation Plan"
+
+output_file = ".agents/des-skill/output/support/implementation-plan.md"
+template_file = ".agents/des-skill/templates/support/implementation-plan-template.md"
+checklist_file = ".agents/des-skill/checklists/support/implementation-plan-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-code-review"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/support/dev-task-breakdown.md"
+]
+
+recommended_upstream_artifacts = [
+  ".agents/des-skill/output/support/sprint-plan.md",
+  ".agents/des-skill/output/support/story-readiness-report.md",
+  ".agents/des-skill/output/support/story-catalog.md",
+  ".agents/des-skill/output/support/epic-catalog.md"
+]
+
+optional_des_artifacts = [
+  ".agents/des-skill/output/07-architecture-decision-record.md",
+  ".agents/des-skill/output/13-transformation-specification.md",
+  ".agents/des-skill/output/14-data-quality-specification.md",
+  ".agents/des-skill/output/15-orchestration-observability-specification.md",
+  ".agents/des-skill/output/18-lineage-metadata-specification.md",
+  ".agents/des-skill/output/19-governance-security-specification.md",
+  ".agents/des-skill/output/20-cost-performance-optimization-specification.md",
+  ".agents/des-skill/output/21-cicd-testing-specification.md"
+]
+
+required_sections = [
+  "Implementation Plan Summary",
+  "Implementation Scope",
+  "Selected Stories and Tasks",
+  "Execution Strategy",
+  "Dependency Sequence",
+  "Parallelization Opportunities",
+  "Implementation Phases",
+  "Checkpoint Plan",
+  "Validation and Test Execution Order",
+  "Quality Contract and Security Gate Timing",
+  "Documentation Metadata and Status Update Plan",
+  "Rollback Abort and Escalation Conditions",
+  "Coding Agent Handoff Prompt",
+  "Implementation Readiness Decision",
+  "Assumptions",
+  "Open Questions",
+  "Next Support Skill Recommendation"
+]
+
+implementation_statuses = [
+  "Ready for Implementation",
+  "Ready with Risks",
+  "Blocked",
+  "Needs Clarification",
+  "Deferred"
+]
+
+halt_required_decisions = [
+  "dev_task_breakdown_availability",
+  "implementation_scope",
+  "task_dependency_sequence",
+  "parallelization_decision",
+  "validation_test_order",
+  "quality_security_gate_timing",
+  "repo_context_requirement",
+  "code_implementation_request"
+]
+
+[workflow]
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = []
+on_complete = ""

@@ -1,0 +1,110 @@
+skill_id = "des-sprint-planning"
+skill_type = "support"
+phase_name = "Sprint Planning"
+
+output_file = ".agents/des-skill/output/support/sprint-plan.md"
+template_file = ".agents/des-skill/templates/support/sprint-plan-template.md"
+checklist_file = ".agents/des-skill/checklists/support/sprint-planning-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-story-readiness-check"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/support/epic-catalog.md",
+  ".agents/des-skill/output/support/story-catalog.md"
+]
+
+recommended_upstream_artifacts = [
+  ".agents/des-skill/sprint-status/des-workflow-status.md"
+]
+
+optional_des_artifacts = [
+  ".agents/des-skill/output/04-data-product-specification.md",
+  ".agents/des-skill/output/07-architecture-decision-record.md",
+  ".agents/des-skill/output/08-ingestion-specification.md",
+  ".agents/des-skill/output/09-bronze-layer-specification.md",
+  ".agents/des-skill/output/10-silver-layer-specification.md",
+  ".agents/des-skill/output/11-gold-layer-specification.md",
+  ".agents/des-skill/output/12-data-contract-specification.md",
+  ".agents/des-skill/output/13-transformation-specification.md",
+  ".agents/des-skill/output/14-data-quality-specification.md",
+  ".agents/des-skill/output/15-orchestration-observability-specification.md",
+  ".agents/des-skill/output/19-governance-security-specification.md",
+  ".agents/des-skill/output/20-cost-performance-optimization-specification.md",
+  ".agents/des-skill/output/21-cicd-testing-specification.md"
+]
+
+required_sections = [
+  "Sprint Plan Summary",
+  "Sprint Planning Scope",
+  "Sprint Goal",
+  "Planning Inputs",
+  "Sprint Capacity and Assumptions",
+  "Candidate Story Pool",
+  "Story Selection Strategy",
+  "Selected Sprint Stories",
+  "Stretch Stories",
+  "Deferred Stories",
+  "Blocked Stories",
+  "Dependency Order",
+  "Sprint Backlog",
+  "Readiness Check Plan",
+  "Sprint Acceptance Criteria",
+  "Definition of Ready",
+  "Definition of Done",
+  "Risks and Mitigations",
+  "Execution Guidance",
+  "Assumptions",
+  "Open Questions",
+  "Next Support Skill Recommendation"
+]
+
+story_selection_factors = [
+  "priority",
+  "release_group",
+  "dependency_order",
+  "readiness_status",
+  "blocker_status",
+  "business_value",
+  "technical_unblock_value",
+  "risk_reduction_value",
+  "capacity_fit",
+  "quality_contract_governance_need",
+  "ci_cd_need"
+]
+
+sprint_statuses = [
+  "Draft",
+  "Ready for Story Readiness Check",
+  "Ready for Implementation Planning",
+  "Blocked",
+  "Deferred"
+]
+
+story_sprint_statuses = [
+  "Selected",
+  "Stretch",
+  "Deferred",
+  "Blocked",
+  "Needs Readiness Check",
+  "Not Selected"
+]
+
+halt_required_decisions = [
+  "epic_catalog_availability",
+  "story_catalog_availability",
+  "sprint_scope",
+  "sprint_goal",
+  "sprint_duration_capacity",
+  "story_selection_strategy",
+  "blocked_story_handling",
+  "dependency_conflict",
+  "readiness_requirement",
+  "task_breakdown_request"
+]
+
+[workflow]
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = []
+on_complete = ""

@@ -90,22 +90,31 @@ function packageRoot() {
 }
 
 function discoverSkills(root) {
-  const skillsRoot = path.join(root, "skills");
+  const allSkills = [];
+  const dirs = ["skills", "skills-support"];
 
-  return fs.readdirSync(skillsRoot, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name)
-    .filter((name) => fs.existsSync(path.join(skillsRoot, name, "SKILL.md")))
-    .sort();
+  for (const dir of dirs) {
+    const skillsRoot = path.join(root, dir);
+    if (!fs.existsSync(skillsRoot)) continue;
+
+    const entries = fs.readdirSync(skillsRoot, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => ({ name: entry.name, dir }))
+      .filter((s) => fs.existsSync(path.join(root, s.dir, s.name, "SKILL.md")));
+    
+    allSkills.push(...entries);
+  }
+
+  return allSkills.sort((a, b) => a.name.localeCompare(b.name));
 }
 
-function copySkill(root, skillName, targetDir, force) {
-  const source = path.join(root, "skills", skillName);
-  const target = path.join(targetDir, skillName);
+function copySkill(root, skill, targetDir, force) {
+  const source = path.join(root, skill.dir, skill.name);
+  const target = path.join(targetDir, skill.name);
 
   if (fs.existsSync(target)) {
     if (!force) {
-      throw new Error(`${skillName} already exists at ${target}. Re-run with --force to overwrite.`);
+      throw new Error(`${skill.name} already exists at ${target}. Re-run with --force to overwrite.`);
     }
 
     fs.rmSync(target, { recursive: true, force: true });
@@ -173,8 +182,8 @@ function install(args) {
 
   fs.mkdirSync(targetDir, { recursive: true });
 
-  for (const skillName of skills) {
-    copySkill(root, skillName, targetDir, args.force);
+  for (const skill of skills) {
+    copySkill(root, skill, targetDir, args.force);
   }
 
   installSupportWorkspace(root, workspaceDir, args.force);

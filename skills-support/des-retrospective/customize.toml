@@ -1,0 +1,85 @@
+skill_id = "des-retrospective"
+skill_type = "support"
+phase_name = "Retrospective"
+
+output_file = ".agents/des-skill/output/support/retrospective-report.md"
+template_file = ".agents/des-skill/templates/support/retrospective-report-template.md"
+checklist_file = ".agents/des-skill/checklists/support/retrospective-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-correct-course"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/support/sprint-plan.md",
+  ".agents/des-skill/output/support/story-catalog.md"
+]
+
+recommended_upstream_artifacts = [
+  ".agents/des-skill/output/support/code-review-report.md",
+  ".agents/des-skill/output/support/release-readiness-report.md",
+  ".agents/des-skill/output/support/implementation-plan.md",
+  ".agents/des-skill/output/support/dev-task-breakdown.md",
+  ".agents/des-skill/output/support/story-readiness-report.md",
+  ".agents/des-skill/output/support/epic-catalog.md",
+  ".agents/des-skill/sprint-status/des-workflow-status.md"
+]
+
+optional_des_artifacts = [
+  ".agents/des-skill/output/01-business-discovery-brief.md",
+  ".agents/des-skill/output/02-business-question-catalog.md",
+  ".agents/des-skill/output/03-requirements-and-kpi-catalog.md",
+  ".agents/des-skill/output/14-data-quality-specification.md",
+  ".agents/des-skill/output/15-orchestration-observability-specification.md",
+  ".agents/des-skill/output/19-governance-security-specification.md",
+  ".agents/des-skill/output/21-cicd-testing-specification.md",
+  ".agents/des-skill/output/22-project-evaluation-report.md"
+]
+
+required_sections = [
+  "Retrospective Summary",
+  "Retrospective Scope",
+  "Planned vs Completed Review",
+  "Story Outcome Review",
+  "Release Readiness Outcome",
+  "What Went Well",
+  "What Did Not Go Well",
+  "Blockers and Root Causes",
+  "Artifact Quality Feedback",
+  "Support Skill Workflow Feedback",
+  "Technical Lessons Learned",
+  "Data Quality Contract and Governance Lessons",
+  "CI CD Release Lessons",
+  "Stakeholder and User Feedback",
+  "Action Items",
+  "Next Sprint Recommendations",
+  "Correct Course Recommendations",
+  "Workflow Status Update Recommendations",
+  "Assumptions",
+  "Open Questions",
+  "Next Support Skill Recommendation"
+]
+
+retro_outcomes = [
+  "Continue to next sprint",
+  "Run des-correct-course",
+  "Update workflow status",
+  "Route back to main DES phase",
+  "Close iteration",
+  "Blocked pending evidence"
+]
+
+halt_required_decisions = [
+  "retrospective_scope",
+  "planned_completed_evidence",
+  "release_outcome_evidence",
+  "blocker_root_cause_handling",
+  "stakeholder_feedback_availability",
+  "next_iteration_direction",
+  "fix_request"
+]
+
+[workflow]
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = []
+on_complete = ""

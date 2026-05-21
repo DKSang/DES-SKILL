@@ -1,0 +1,95 @@
+skill_id = "des-create-epic"
+skill_type = "support"
+phase_name = "Create Epic"
+
+output_file = ".agents/des-skill/output/support/epic-catalog.md"
+template_file = ".agents/des-skill/templates/support/epic-catalog-template.md"
+checklist_file = ".agents/des-skill/checklists/support/epic-catalog-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-create-stories"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/01-business-discovery-brief.md",
+  ".agents/des-skill/output/02-business-question-catalog.md",
+  ".agents/des-skill/output/03-requirements-and-kpi-catalog.md",
+  ".agents/des-skill/output/04-data-product-specification.md",
+  ".agents/des-skill/output/05-data-source-inventory.md",
+  ".agents/des-skill/output/06-conceptual-domain-model.md",
+  ".agents/des-skill/output/07-architecture-decision-record.md",
+  ".agents/des-skill/output/08-ingestion-specification.md",
+  ".agents/des-skill/output/09-bronze-layer-specification.md",
+  ".agents/des-skill/output/10-silver-layer-specification.md",
+  ".agents/des-skill/output/11-gold-layer-specification.md",
+  ".agents/des-skill/output/12-data-contract-specification.md",
+  ".agents/des-skill/output/13-transformation-specification.md",
+  ".agents/des-skill/output/14-data-quality-specification.md",
+  ".agents/des-skill/output/15-orchestration-observability-specification.md",
+  ".agents/des-skill/output/16-semantic-model-specification.md",
+  ".agents/des-skill/output/17-serving-layer-specification.md",
+  ".agents/des-skill/output/18-lineage-metadata-specification.md",
+  ".agents/des-skill/output/19-governance-security-specification.md",
+  ".agents/des-skill/output/20-cost-performance-optimization-specification.md",
+  ".agents/des-skill/output/21-cicd-testing-specification.md",
+  ".agents/des-skill/output/22-project-evaluation-report.md"
+]
+
+minimum_required_artifacts = [
+  ".agents/des-skill/output/04-data-product-specification.md",
+  ".agents/des-skill/output/05-data-source-inventory.md",
+  ".agents/des-skill/output/07-architecture-decision-record.md",
+  ".agents/des-skill/output/08-ingestion-specification.md",
+  ".agents/des-skill/output/11-gold-layer-specification.md",
+  ".agents/des-skill/output/13-transformation-specification.md",
+  ".agents/des-skill/output/14-data-quality-specification.md",
+  ".agents/des-skill/output/21-cicd-testing-specification.md"
+]
+
+required_sections = [
+  "Epic Catalog Summary",
+  "Epic Creation Scope",
+  "Epic Design Principles",
+  "Input Artifact Coverage",
+  "Implementation Theme Extraction",
+  "Epic Inventory",
+  "Epic Detail",
+  "Epic to DES Artifact Mapping",
+  "Epic Dependency Map",
+  "Epic Priority and Release Grouping",
+  "Epic Acceptance Criteria",
+  "Epic Risk and Blocker Register",
+  "Story Creation Guidance",
+  "Assumptions",
+  "Open Questions",
+  "Next Support Skill Recommendation"
+]
+
+default_epic_categories = [
+  "Project Foundation",
+  "Source Ingestion",
+  "Bronze Layer",
+  "Silver Layer",
+  "Gold Layer",
+  "Contracts and Quality",
+  "Orchestration and Observability",
+  "Semantic and Serving",
+  "Lineage Metadata Governance Security",
+  "Cost Performance",
+  "CI CD Testing Release"
+]
+
+halt_required_decisions = [
+  "upstream_artifact_completeness",
+  "epic_creation_scope",
+  "implementation_boundary",
+  "p1_p2_priority",
+  "epic_granularity",
+  "missing_critical_context",
+  "story_level_request"
+]
+
+[workflow]
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = []
+on_complete = ""

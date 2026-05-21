@@ -1,0 +1,84 @@
+skill_id = "des-dev-task-breakdown"
+skill_type = "support"
+phase_name = "Development Task Breakdown"
+
+output_file = ".agents/des-skill/output/support/dev-task-breakdown.md"
+template_file = ".agents/des-skill/templates/support/dev-task-breakdown-template.md"
+checklist_file = ".agents/des-skill/checklists/support/dev-task-breakdown-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-implementation-plan"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/support/story-catalog.md",
+  ".agents/des-skill/output/support/story-readiness-report.md"
+]
+
+recommended_upstream_artifacts = [
+  ".agents/des-skill/output/support/epic-catalog.md",
+  ".agents/des-skill/output/support/sprint-plan.md"
+]
+
+optional_des_artifacts = [
+  ".agents/des-skill/output/05-data-source-inventory.md",
+  ".agents/des-skill/output/06-conceptual-domain-model.md",
+  ".agents/des-skill/output/07-architecture-decision-record.md",
+  ".agents/des-skill/output/08-ingestion-specification.md",
+  ".agents/des-skill/output/09-bronze-layer-specification.md",
+  ".agents/des-skill/output/10-silver-layer-specification.md",
+  ".agents/des-skill/output/11-gold-layer-specification.md",
+  ".agents/des-skill/output/12-data-contract-specification.md",
+  ".agents/des-skill/output/13-transformation-specification.md",
+  ".agents/des-skill/output/14-data-quality-specification.md",
+  ".agents/des-skill/output/15-orchestration-observability-specification.md",
+  ".agents/des-skill/output/16-semantic-model-specification.md",
+  ".agents/des-skill/output/17-serving-layer-specification.md",
+  ".agents/des-skill/output/18-lineage-metadata-specification.md",
+  ".agents/des-skill/output/19-governance-security-specification.md",
+  ".agents/des-skill/output/20-cost-performance-optimization-specification.md",
+  ".agents/des-skill/output/21-cicd-testing-specification.md"
+]
+
+required_sections = [
+  "Dev Task Breakdown Summary",
+  "Task Breakdown Scope",
+  "Selected Story Context",
+  "Implementation Context",
+  "Affected Areas",
+  "Ordered Task List",
+  "Task Details",
+  "Test Task List",
+  "Quality Contract and Governance Tasks",
+  "Dependency and Sequencing Notes",
+  "Task Acceptance Checks",
+  "Implementation Risks",
+  "Coding Agent Handoff Prompt",
+  "Ready for Implementation Decision",
+  "Assumptions",
+  "Open Questions",
+  "Next Support Skill Recommendation"
+]
+
+task_statuses = [
+  "Ready",
+  "Blocked",
+  "Deferred",
+  "Needs Clarification"
+]
+
+halt_required_decisions = [
+  "ready_story_availability",
+  "story_selection",
+  "task_breakdown_scope",
+  "repository_structure_context",
+  "implementation_boundary",
+  "test_task_expectation",
+  "quality_contract_security_task_expectation",
+  "code_implementation_request"
+]
+
+[workflow]
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = []
+on_complete = ""

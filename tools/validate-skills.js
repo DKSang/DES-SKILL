@@ -4,8 +4,12 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
-const skillsDir = path.join(root, "skills");
 const workflowPath = path.join(root, "DES-WORKFLOW.md");
+
+const skillsDirs = [
+  path.join(root, "skills"),
+  path.join(root, "skills-support")
+];
 
 let failures = 0;
 
@@ -22,16 +26,17 @@ function read(filePath) {
   return fs.readFileSync(filePath, "utf8");
 }
 
-function listSkillNames() {
-  if (!fs.existsSync(skillsDir)) {
-    fail("skills/ directory is missing");
-    return [];
+function listSkillPaths() {
+  const paths = [];
+  for (const dir of skillsDirs) {
+    if (fs.existsSync(dir)) {
+      const entries = fs.readdirSync(dir, { withFileTypes: true })
+        .filter((entry) => entry.isDirectory())
+        .map((entry) => path.join(dir, entry.name));
+      paths.push(...entries);
+    }
   }
-
-  return fs.readdirSync(skillsDir, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name)
-    .sort();
+  return paths.sort();
 }
 
 function parseFrontmatter(content) {
@@ -47,49 +52,60 @@ function parseFrontmatter(content) {
   return fields;
 }
 
-function validateSkill(skillName) {
-  const skillPath = path.join(skillsDir, skillName, "SKILL.md");
-  if (!fs.existsSync(skillPath)) {
+function validateSkill(skillPath) {
+  const skillName = path.basename(skillPath);
+  const skillMdPath = path.join(skillPath, "SKILL.md");
+  if (!fs.existsSync(skillMdPath)) {
     fail(`${skillName} is missing SKILL.md`);
     return;
   }
 
-  const content = read(skillPath);
+  const content = read(skillMdPath);
   const frontmatter = parseFrontmatter(content);
+  const isMainSkill = path.dirname(skillPath).endsWith("skills");
 
-  if (!frontmatter) {
-    fail(`${skillName} is missing YAML frontmatter`);
-    return;
+  if (isMainSkill) {
+    if (!frontmatter) {
+      fail(`${skillName} is missing YAML frontmatter`);
+      return;
+    }
+
+    if (frontmatter.name !== skillName) {
+      fail(`${skillName} frontmatter name must match directory name`);
+    }
+
+    if (!frontmatter.description) {
+      fail(`${skillName} is missing description`);
+    } else if (!frontmatter.description.startsWith("Use when")) {
+      fail(`${skillName} description should start with "Use when"`);
+    }
   }
 
-  if (frontmatter.name !== skillName) {
-    fail(`${skillName} frontmatter name must match directory name`);
+  const requiredHeadings = ["## When To Use", "## Purpose"];
+  if (isMainSkill) {
+    requiredHeadings.push("## Quality Checklist");
   }
 
-  if (!frontmatter.description) {
-    fail(`${skillName} is missing description`);
-  } else if (!frontmatter.description.startsWith("Use when")) {
-    fail(`${skillName} description should start with "Use when"`);
-  }
-
-  for (const heading of ["## When To Use", "## Purpose", "## Quality Checklist"]) {
+  for (const heading of requiredHeadings) {
     if (!content.includes(heading)) {
       fail(`${skillName} is missing heading: ${heading}`);
     }
   }
 
-  // Accept either old or new heading name for mistakes/anti-patterns section
-  if (!content.includes("## Common Mistakes To Avoid") && !content.includes("## Anti-Patterns to Avoid")) {
-    fail(`${skillName} is missing heading: ## Common Mistakes To Avoid (or ## Anti-Patterns to Avoid)`);
-  }
+  if (isMainSkill) {
+    // Accept either old or new heading name for mistakes/anti-patterns section
+    if (!content.includes("## Common Mistakes To Avoid") && !content.includes("## Anti-Patterns to Avoid")) {
+      fail(`${skillName} is missing heading: ## Common Mistakes To Avoid (or ## Anti-Patterns to Avoid)`);
+    }
 
-  if (!content.includes("## Handoff To The Next Skill") && skillName !== "using-des-skill") {
-    fail(`${skillName} is missing handoff guidance`);
+    if (!content.includes("## Handoff To The Next Skill") && skillName !== "using-des-skill") {
+      fail(`${skillName} is missing handoff guidance`);
+    }
   }
 
   // Refactored skill checks
-  const customizePath = path.join(skillsDir, skillName, "customize.toml");
-  const stepsDir = path.join(skillsDir, skillName, "steps");
+  const customizePath = path.join(skillPath, "customize.toml");
+  const stepsDir = path.join(skillPath, "steps");
 
   const hasCustomize = fs.existsSync(customizePath);
   const hasSteps = fs.existsSync(stepsDir);
@@ -161,10 +177,11 @@ function validatePackage() {
 }
 
 function main() {
-  const skillNames = listSkillNames();
+  const skillPaths = listSkillPaths();
+  const skillNames = skillPaths.map(p => path.basename(p));
 
-  for (const skillName of skillNames) {
-    validateSkill(skillName);
+  for (const skillPath of skillPaths) {
+    validateSkill(skillPath);
   }
 
   validateWorkflow(skillNames);

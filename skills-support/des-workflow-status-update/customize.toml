@@ -1,0 +1,115 @@
+skill_id = "des-workflow-status-update"
+skill_type = "support"
+phase_name = "Workflow Status Update"
+
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+template_file = ".agents/des-skill/templates/support/des-workflow-status-template.md"
+checklist_file = ".agents/des-skill/checklists/support/workflow-status-checklist.md"
+
+next_recommended_skill = "dynamic_route"
+
+status_sources = [
+  ".agents/des-skill/output/support/epic-catalog.md",
+  ".agents/des-skill/output/support/story-catalog.md",
+  ".agents/des-skill/output/support/sprint-plan.md",
+  ".agents/des-skill/output/support/story-readiness-report.md",
+  ".agents/des-skill/output/support/dev-task-breakdown.md",
+  ".agents/des-skill/output/support/implementation-plan.md",
+  ".agents/des-skill/output/support/code-review-report.md",
+  ".agents/des-skill/output/support/release-readiness-report.md",
+  ".agents/des-skill/output/support/retrospective-report.md",
+  ".agents/des-skill/output/support/correct-course-plan.md"
+]
+
+main_phase_sources = [
+  ".agents/des-skill/output/01-business-discovery-brief.md",
+  ".agents/des-skill/output/02-business-question-catalog.md",
+  ".agents/des-skill/output/03-requirements-and-kpi-catalog.md",
+  ".agents/des-skill/output/04-data-product-specification.md",
+  ".agents/des-skill/output/05-data-source-inventory.md",
+  ".agents/des-skill/output/06-conceptual-domain-model.md",
+  ".agents/des-skill/output/07-architecture-decision-record.md",
+  ".agents/des-skill/output/08-ingestion-specification.md",
+  ".agents/des-skill/output/09-bronze-layer-specification.md",
+  ".agents/des-skill/output/10-silver-layer-specification.md",
+  ".agents/des-skill/output/11-gold-layer-specification.md",
+  ".agents/des-skill/output/12-data-contract-specification.md",
+  ".agents/des-skill/output/13-transformation-specification.md",
+  ".agents/des-skill/output/14-data-quality-specification.md",
+  ".agents/des-skill/output/15-orchestration-observability-specification.md",
+  ".agents/des-skill/output/16-semantic-model-specification.md",
+  ".agents/des-skill/output/17-serving-layer-specification.md",
+  ".agents/des-skill/output/18-lineage-metadata-specification.md",
+  ".agents/des-skill/output/19-governance-security-specification.md",
+  ".agents/des-skill/output/20-cost-performance-optimization-specification.md",
+  ".agents/des-skill/output/21-cicd-testing-specification.md",
+  ".agents/des-skill/output/22-project-evaluation-report.md"
+]
+
+required_sections = [
+  "Workflow Status Summary",
+  "Project Metadata",
+  "Current Workflow State",
+  "Main DES Phase Status",
+  "Support Skill Status",
+  "Epic Status",
+  "Story Status",
+  "Sprint Status",
+  "Readiness Status",
+  "Implementation Status",
+  "Review Status",
+  "Release Status",
+  "Correct Course Status",
+  "Open Blockers",
+  "Open Risks",
+  "Required Next Actions",
+  "Routing Decision",
+  "Status History"
+]
+
+status_values = [
+  "Not Started",
+  "Draft",
+  "In Progress",
+  "Done",
+  "Done with Risks",
+  "Blocked",
+  "Deferred",
+  "Missing",
+  "Unknown",
+  "Not Applicable"
+]
+
+workflow_states = [
+  "Main Lifecycle Design",
+  "Epic Planning",
+  "Story Planning",
+  "Sprint Planning",
+  "Story Readiness",
+  "Task Breakdown",
+  "Implementation Planning",
+  "Implementation In Progress",
+  "Code Review",
+  "Release Readiness",
+  "Retrospective",
+  "Correct Course",
+  "Ready for Next Sprint",
+  "Closed",
+  "Blocked",
+  "Unknown"
+]
+
+halt_required_decisions = [
+  "status_scope",
+  "conflicting_status_evidence",
+  "missing_artifact_done_request",
+  "blocker_severity",
+  "next_route",
+  "history_overwrite"
+]
+
+[workflow]
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = []
+on_complete = ""

@@ -1,0 +1,98 @@
+skill_id = "des-code-review"
+skill_type = "support"
+phase_name = "Code Review"
+
+output_file = ".agents/des-skill/output/support/code-review-report.md"
+template_file = ".agents/des-skill/templates/support/code-review-report-template.md"
+checklist_file = ".agents/des-skill/checklists/support/code-review-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-data-quality-review"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/support/story-catalog.md",
+  ".agents/des-skill/output/support/dev-task-breakdown.md",
+  ".agents/des-skill/output/support/implementation-plan.md"
+]
+
+recommended_upstream_artifacts = [
+  ".agents/des-skill/output/support/story-readiness-report.md",
+  ".agents/des-skill/output/support/sprint-plan.md",
+  ".agents/des-skill/output/support/epic-catalog.md"
+]
+
+optional_des_artifacts = [
+  ".agents/des-skill/output/07-architecture-decision-record.md",
+  ".agents/des-skill/output/08-ingestion-specification.md",
+  ".agents/des-skill/output/09-bronze-layer-specification.md",
+  ".agents/des-skill/output/10-silver-layer-specification.md",
+  ".agents/des-skill/output/11-gold-layer-specification.md",
+  ".agents/des-skill/output/12-data-contract-specification.md",
+  ".agents/des-skill/output/13-transformation-specification.md",
+  ".agents/des-skill/output/14-data-quality-specification.md",
+  ".agents/des-skill/output/15-orchestration-observability-specification.md",
+  ".agents/des-skill/output/16-semantic-model-specification.md",
+  ".agents/des-skill/output/17-serving-layer-specification.md",
+  ".agents/des-skill/output/18-lineage-metadata-specification.md",
+  ".agents/des-skill/output/19-governance-security-specification.md",
+  ".agents/des-skill/output/20-cost-performance-optimization-specification.md",
+  ".agents/des-skill/output/21-cicd-testing-specification.md"
+]
+
+required_sections = [
+  "Code Review Summary",
+  "Review Scope",
+  "Reviewed Story and Tasks",
+  "Implementation Evidence Reviewed",
+  "Acceptance Criteria Review",
+  "Task Completion Review",
+  "Architecture and Design Alignment Review",
+  "Transformation Logic Review",
+  "Data Contract Review",
+  "Data Quality Review",
+  "Test Coverage Review",
+  "Orchestration and Observability Review",
+  "Governance and Security Review",
+  "Cost and Performance Review",
+  "Documentation Metadata and Status Review",
+  "Findings",
+  "Required Changes",
+  "Optional Improvements",
+  "Merge Readiness Decision",
+  "Assumptions",
+  "Open Questions",
+  "Next Support Skill Recommendation"
+]
+
+finding_severities = [
+  "Blocker",
+  "Major",
+  "Minor",
+  "Suggestion",
+  "Question"
+]
+
+review_decisions = [
+  "Approved",
+  "Approved with minor comments",
+  "Changes requested",
+  "Blocked",
+  "Needs more evidence"
+]
+
+halt_required_decisions = [
+  "implementation_evidence_availability",
+  "review_scope",
+  "target_story_mapping",
+  "acceptance_criteria_availability",
+  "test_result_availability",
+  "contract_quality_security_risk",
+  "breaking_change_detected",
+  "release_deploy_request"
+]
+
+[workflow]
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = []
+on_complete = ""
