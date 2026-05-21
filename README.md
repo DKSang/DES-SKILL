@@ -6,39 +6,21 @@
 [![Skills](https://img.shields.io/badge/skills-32-7c3aed)](skills/)
 [![Step Files](https://img.shields.io/badge/step%20files-89-0ea5e9)](skills/)
 
-Các skill Agent có thể tái sử dụng để bàn giao dự án Data Engineering từ đầu đến cuối (end-to-end).
+**DES-SKILL gives data-engineering agents a delivery methodology, not just a bag of prompts.**
 
-Kho lưu trữ này là gói kỹ năng Agent (Agent Skills) trung lập với nhà cung cấp, dành cho các dự án data engineering chuyên nghiệp trong nhiều lĩnh vực như nông nghiệp, tài chính, bán lẻ, y tế, logistics, phân tích SaaS và IoT.
+DES-SKILL is a vendor-neutral Agent Skills framework for end-to-end Data Engineering projects. It helps agents slow down, understand the business problem, define measurable outcomes, assess sources, design architecture, create reviewable artifacts, and only then implement pipelines, models, contracts, tests, orchestration, serving layers, and release checks.
 
-Gói hỗ trợ phát triển local-first với SQL, Python, DuckDB và dbt, cũng như phát triển cloud-first với các nền tảng như Databricks, Snowflake, BigQuery, Microsoft Fabric, Azure Data Factory, Airflow, Dagster, Kafka, Great Expectations, Soda, Power BI, Superset và GitHub Actions.
+If BMAD Method brings structured product/software planning to agents, and Superpowers brings disciplined coding workflows to agents, DES-SKILL brings that same kind of structure to **production-grade data engineering delivery**.
 
-## Quick Evaluation (Đánh giá nhanh)
+## Quickstart
 
-> **Dành cho người muốn đánh giá nhanh trước khi dùng.**
-
-DES-SKILL giải quyết vấn đề gì? Agent AI thường nhảy thẳng vào viết code khi được giao một data project. DES-SKILL buộc agent phải đi qua **22 phases có kiểm soát** — từ business discovery đến project evaluation — với **human-in-the-loop HALT** tại mọi điểm quyết định quan trọng.
-
-| Đặc điểm | DES-SKILL | Agent không có skill |
-| :--- | :--- | :--- |
-| Bắt đầu từ đâu | Business questions → KPI → Source → Architecture | Thường bắt đầu từ code |
-| Quyết định nghiệp vụ | HALT bắt buộc, chờ người dùng xác nhận | Agent tự quyết định |
-| Metric conflicts | Phải được business owner giải quyết | Engineer tự chọn một định nghĩa |
-| Grain declaration | Khai báo "Mỗi hàng là một ___" trước khi thiết kế bảng | Schema được copy từ source |
-| SLA classification | P1 Cứng / P2 Mềm / P3 Tùy chọn có hệ quả cụ thể | "refresh daily" không có thời gian cụ thể |
-| Output | Artifact có thể review và track (`.md` files có số thứ tự) | Code và comments |
-
-**Thử ngay**: dùng `init` để scaffold project mới, hoặc `install` nếu chỉ muốn cài skill pack.
-
-## Cài đặt (Installation)
-
-### Lựa chọn 1: Thiết lập cấu trúc dự án đầy đủ với `init`
-
-Sử dụng lệnh này cho một dự án mới áp dụng phương pháp DES. Nó tạo toàn bộ không gian làm việc của dự án và cài đặt các skill:
+For a new project:
 
 ```bash
 npx @dksang/des-skill init
 ```
 
+<<<<<<< HEAD
 Tùy chỉnh thư mục lưu trữ các skill cục bộ của dự án:
 
 ```bash
@@ -85,23 +67,116 @@ docs/
 ### Lựa chọn 2: Chỉ cài đặt gói skill (Skill pack install only)
 
 Sử dụng lệnh này khi bạn chỉ muốn cài đặt hoặc cập nhật các skill DES-SKILL và không gian làm việc hỗ trợ `.agents/des-skill`:
+=======
+For an existing project:
+>>>>>>> a37cba5aeec2e46ac5729ee942f3ed6f9195af7d
 
 ```bash
 npx @dksang/des-skill install
 ```
 
-Cài đặt vào một thư mục tùy chỉnh:
+Then tell your agent:
 
-```bash
-npx @dksang/des-skill install --dir .agents/skills
+```text
+Use DES-SKILL for this data engineering project.
+Start with using-des-skill.
+Detect the current workflow mode and phase.
+Check required upstream artifacts.
+Load only the next required step file.
+Do not write code until the business context, KPIs, sources, architecture, and quality expectations are clear.
 ```
 
-Ghi đè lên các skill hiện có:
+The agent should begin from `skills/using-des-skill/SKILL.md`, read `DES-WORKFLOW.md`, check `ARTIFACTS.md`, inspect the workflow status file when present, and produce the next reviewable artifact.
+
+## Why DES-SKILL exists
+
+Most AI agents are eager to write code. That is dangerous for data engineering.
+
+A real data platform fails when the agent guesses the business question, KPI formula, table grain, source authority, freshness requirement, data quality rule, contract owner, or release readiness.
+
+DES-SKILL turns those decisions into explicit workflow checkpoints. The agent creates artifacts, stops at important decisions, runs checklists, tracks status, and asks for human approval when the decision is not safe to infer.
+
+## How it works
+
+DES-SKILL starts when your agent recognizes that it is working on a data project.
+
+Instead of jumping into notebooks, SQL, dbt models, or pipeline code, the agent steps back and asks what the data product is meant to achieve. It moves through controlled phases, produces small reviewable artifacts, and uses human-in-the-loop `HALT` points whenever a business or architecture decision cannot be safely guessed.
+
+Once planning artifacts are approved, DES-SKILL can switch into implementation support: brainstorm a change, write an implementation plan, build from approved artifacts, review the work, verify delivery with evidence, and capture retrospective notes.
+
+> **Code implements approved data artifacts. Code does not replace discovery, requirements, architecture, contracts, or quality design.**
+
+## Basic workflow
+
+DES-SKILL has a 22-phase lifecycle plus optional support skills for implementation.
+
+1. **Business discovery** — clarify problem, stakeholders, decisions, constraints, and success criteria.
+2. **Business questions** — turn vague needs into explicit analytical and operational questions.
+3. **Requirements and KPIs** — define metrics, owners, grain, formulas, acceptance criteria, and conflicts.
+4. **Data product definition** — define consumers, use cases, freshness, service expectations, and outputs.
+5. **Source assessment** — inventory sources, ownership, reliability, access, latency, quality, and risks.
+6. **Domain modeling** — identify entities, relationships, grain, events, and business vocabulary.
+7. **Architecture design** — choose platform pattern, layers, compute, storage, and trade-offs.
+8. **Ingestion design** — define batch, streaming, CDC, API, file ingestion, and failure handling.
+9. **Bronze layer design** — preserve raw data with traceability, metadata, and replay strategy.
+10. **Silver layer design** — standardize, clean, deduplicate, conform, and validate data.
+11. **Gold layer design** — model curated marts, facts, dimensions, aggregates, and outputs.
+12. **Data contracts** — define schema, ownership, compatibility, change policy, and breaking-change rules.
+13. **Transformation design** — specify transformation logic and test strategy.
+14. **Data quality** — define rules, severity, thresholds, monitoring, and remediation ownership.
+15. **Orchestration and observability** — define schedules, dependencies, retries, alerts, and run evidence.
+16. **Semantic model design** — define metrics, dimensions, relationships, and BI behavior.
+17. **Serving layer design** — define how data is exposed to BI, apps, APIs, files, or downstream systems.
+18. **Lineage and metadata** — record traceability, owners, classifications, and discoverability.
+19. **Governance and security** — define access, privacy, compliance, retention, masking, and gates.
+20. **Cost and performance optimization** — analyze cost, query patterns, partitioning, and scaling.
+21. **CI/CD and testing** — define repository structure, checks, deployment path, and tests.
+22. **Project evaluation** — verify release readiness, evidence, risks, decisions, and handover state.
+
+**The agent checks the workflow before moving forward. These are mandatory delivery gates, not suggestions.**
+
+## Workflow modes
+
+| Mode | Use when | Behavior |
+| --- | --- | --- |
+| `Quick Fix` | Small bounded change | Finds the minimum safe artifact and verification path. |
+| `Standard Feature` | Normal feature or pipeline change | Uses relevant planning, design, build, review, and verify steps. |
+| `Enterprise Data Product` | New or high-impact data product | Runs the full lifecycle with stronger HALT gates and evidence. |
+| `Correct Course` | Existing work is wrong, unclear, or blocked | Reassesses artifacts and routes to the right recovery phase. |
+
+See [docs/workflow-modes.md](docs/workflow-modes.md).
+
+## What makes DES-SKILL different
+
+| Without DES-SKILL | With DES-SKILL |
+| --- | --- |
+| Agent starts from code. | Agent starts from business context and decisions. |
+| KPI definitions are guessed. | KPI formulas, grain, owners, and conflicts are captured. |
+| Source schemas drive the model. | Source assessment and domain modeling drive the target design. |
+| Freshness is vague. | SLA is classified and tied to delivery consequences. |
+| Quality checks are added late. | Quality rules and evidence are designed before release. |
+| Review happens after implementation. | Every phase creates reviewable artifacts and checklist evidence. |
+| Project state is lost between sessions. | Status is tracked in `.agents/des-skill/sprint-status/des-workflow-status.md`. |
+
+## Installation
+
+### Full project scaffold
 
 ```bash
+npx @dksang/des-skill init
+npx @dksang/des-skill init --dir .agents/skills
+npx @dksang/des-skill init --force
+```
+
+### Skill pack only
+
+```bash
+npx @dksang/des-skill install
+npx @dksang/des-skill install --dir .agents/skills
 npx @dksang/des-skill install --force
 ```
 
+<<<<<<< HEAD
 Lệnh `install` sẽ tạo mới hoặc cập nhật:
 
 ```text
@@ -128,20 +203,16 @@ Lệnh `install` sẽ tạo mới hoặc cập nhật:
 ### Lựa chọn 3: Sử dụng GitHub CLI
 
 Sử dụng GitHub CLI khi bạn muốn cài đặt từng skill một:
+=======
+### GitHub CLI
+>>>>>>> a37cba5aeec2e46ac5729ee942f3ed6f9195af7d
 
 ```bash
 gh skill install DKSang/DES-SKILL using-des-skill
-```
-
-Nếu bạn chạy lệnh này mà không có tên skill, GitHub CLI có thể nhắc bạn chọn một:
-
-```bash
 gh skill install DKSang/DES-SKILL
 ```
 
-### Lựa chọn 4: Cài đặt thủ công bằng một câu lệnh
-
-Cài đặt toàn cục cho các agent đọc thư mục `~/.agents/skills`:
+### Manual install
 
 ```bash
 git clone https://github.com/DKSang/DES-SKILL.git
@@ -149,116 +220,147 @@ cd DES-SKILL
 bash install.sh
 ```
 
-Cài đặt vào dự án hiện tại:
+Project-local manual install:
 
 ```bash
 bash install.sh .agents/skills
 ```
 
-### Lựa chọn 5: Copy thủ công
+Restart your agent or refresh its skill registry after installation.
 
-Cài đặt cục bộ vào dự án:
+## Quick start prompts
 
-```bash
-mkdir -p .agents/skills
-cp -r skills/* .agents/skills/
-```
-
-Cài đặt cá nhân/toàn cục:
-
-```bash
-mkdir -p ~/.agents/skills
-cp -r skills/* ~/.agents/skills/
-```
-
-Sau khi cài đặt, hãy khởi động lại agent của bạn hoặc chạy lệnh làm mới skill nếu được hỗ trợ.
-
-## Gợi ý Prompt Khởi động nhanh (Quick Start Prompt)
+### New data engineering project
 
 ```text
-Tôi muốn sử dụng DES-SKILL cho một dự án data engineering mới.
+I want to use DES-SKILL for a new data engineering project.
 
-Ý tưởng dự án:
-[mô tả dự án của bạn tại đây]
+Project idea:
+[describe the project]
 
-Vui lòng tuân thủ quy trình làm việc DES-SKILL:
-1. Bắt đầu với using-des-skill.
-2. Đọc DES-WORKFLOW.md, ARTIFACTS.md, và des-workflow-status.md nếu có.
-3. Phát hiện phase hiện tại của dự án.
-4. Kiểm tra xem các artifact thượng nguồn bắt buộc đã tồn tại chưa.
-5. Sử dụng skill phù hợp từ các skill đã cài đặt.
-6. Tuyệt đối không viết code trước khi làm rõ bối cảnh nghiệp vụ, các yêu cầu, nguồn dữ liệu, kiến trúc và kỳ vọng chất lượng.
-7. Tạo ra artifact được yêu cầu bằng cách sử dụng thư mục templates/.
-8. Chạy checklist_file đã cấu hình trước khi đánh dấu artifact là Done.
-9. Cập nhật file .agents/des-skill/sprint-status/des-workflow-status.md.
-10. Khuyến nghị skill tiếp theo khi artifact hiện tại hoàn thành.
+Start with using-des-skill.
+Detect the correct workflow mode.
+Read DES-WORKFLOW.md, ARTIFACTS.md, and the workflow status file if it exists.
+Check required upstream artifacts before selecting a phase skill.
+Load only one step file at a time.
+Create the required artifact from the template.
+Run the configured checklist before marking anything Done.
+Update .agents/des-skill/sprint-status/des-workflow-status.md.
+Do not write code until the business context, KPIs, sources, architecture, and quality expectations are clear.
 ```
 
-Phiên bản ngắn gọn:
+### Existing project or unclear state
 
 ```text
-Cài đặt DES-SKILL, sau đó bắt đầu với using-des-skill.
-Đóng vai trò là agent bàn giao Data Engineering.
-Phát hiện phase hiện tại, kiểm tra các artifact thượng nguồn còn thiếu, kích hoạt skill phù hợp.
-Đọc từng file step của skill một — KHÔNG bỏ qua các bước.
-Tạo artifact được yêu cầu từ template, chạy checklist_file đã cấu hình, cập nhật trạng thái quy trình và bàn giao.
-Tuyệt đối không viết code trước khi làm rõ bối cảnh nghiệp vụ, các KPI, nguồn dữ liệu, kiến trúc và kỳ vọng chất lượng.
+Use DES-SKILL to assess the current state of this data engineering project.
+Start with using-des-skill.
+Detect whether this is Quick Fix, Standard Feature, Enterprise Data Product, or Correct Course.
+Find missing or stale artifacts.
+Recommend the next safe phase and explain what must be reviewed before implementation continues.
 ```
 
-## Kiến trúc — Quy trình làm việc với Step-File (Step-File Workflow)
+## Step-file architecture
 
-Mỗi skill phase sử dụng **kiến trúc step-file** để đảm bảo tính kỷ luật trong thực thi của agent:
+Each skill uses step files so the agent does not load too much context or skip decisions.
 
 ```text
 skill/
-├── SKILL.md            # Kích hoạt giao thức On Activation → nạp step-01
-├── customize.toml      # Cấu hình output_file, template, checklist paths
+├── SKILL.md
+├── customize.toml
 └── steps/
-    ├── step-01-*.md    # Được nạp đầu tiên; dừng (HALT) tại các điểm quyết định
-    ├── step-02-*.md    # Chỉ được nạp sau khi step-01 hoàn thành
-    └── step-03-*.md    # Soạn thảo draft artifact + quality checklist + bàn giao
+    ├── step-01-*.md
+    ├── step-02-*.md
+    └── step-03-*.md
 ```
 
-Các quy tắc chính mà agent phải tuân thủ:
-- **KHÔNG BAO GIỜ** nạp nhiều file step cùng một lúc.
-- **LUÔN LUÔN** dừng (HALT) tại các menu và chờ phản hồi từ người dùng.
-- **LUÔN LUÔN** chạy file checklist đã cấu hình trước khi đánh dấu một artifact là Done.
-- **KHÔNG BAO GIỜ** đi tiếp khi chưa giải quyết các xung đột metric, các contract chưa ký, thiếu bằng chứng kiểm thử, hoặc các checkpoint checklist bị chặn.
+Rules for agents:
 
-## Điểm bắt đầu Quy trình (Workflow Entrypoint)
+- **Never** load all step files at once.
+- **Always** start from `SKILL.md` and follow the activation protocol.
+- **Always** stop at `HALT` points and wait for the user when a decision is required.
+- **Always** run the configured checklist before marking an artifact as Done.
+- **Never** continue past unresolved KPI conflicts, unsigned contracts, blocked checklist items, or missing verification evidence.
 
-Sử dụng [skills/using-des-skill/SKILL.md](skills/using-des-skill/SKILL.md) làm định tuyến skill (router skill), [DES-WORKFLOW.md](DES-WORKFLOW.md) làm bản đồ phase, và [ARTIFACTS.md](ARTIFACTS.md) làm bản đồ artifact chuẩn hóa.
+## Project state and artifacts
 
-Bộ định tuyến hỗ trợ bốn chế độ quy trình thích ứng (workflow modes): `Quick Fix`, `Standard Feature`, `Enterprise Data Product`, và `Correct Course` (xem thêm tại [docs/workflow-modes.md](docs/workflow-modes.md)). Nó cũng ánh xạ các trách nhiệm bằng cách sử dụng lớp vai trò [docs/personas.md](docs/personas.md).
+| Item | Path |
+| --- | --- |
+| Router skill | `skills/using-des-skill/SKILL.md` |
+| Workflow map | `DES-WORKFLOW.md` |
+| Artifact map | `ARTIFACTS.md` |
+| Workflow status | `.agents/des-skill/sprint-status/des-workflow-status.md` |
+| Status template | `.agents/des-skill/templates/00-workflow-status-template.md` |
+| Phase artifacts | `.agents/des-skill/output/` |
+| Planning artifacts | `_des-output/planning-artifacts/` |
+| Implementation artifacts | `_des-output/implementation-artifacts/` |
 
-Theo dõi tiến độ trong:
+When in doubt, follow `ARTIFACTS.md` for exact artifact names and paths.
 
-```text
-.agents/des-skill/sprint-status/des-workflow-status.md
-```
+## Skills library
 
-Tạo file trạng thái từ:
+### Core lifecycle skills
 
-```text
-.agents/des-skill/templates/00-workflow-status-template.md
-```
+| Skill | Main artifact |
+| --- | --- |
+| `using-des-skill` | Workflow routing and status coordination |
+| `de-business-discovery` | Business discovery brief |
+| `de-business-questions` | Business question catalog |
+| `de-requirements-and-kpis` | Requirements and KPI catalog |
+| `de-data-product-definition` | Data product specification |
+| `de-data-source-assessment` | Data source inventory |
+| `de-domain-modeling` | Conceptual domain model |
+| `de-architecture-design` | Architecture decision record |
+| `de-ingestion-design` | Ingestion specification |
+| `de-bronze-layer-design` | Bronze table specifications |
+| `de-silver-layer-design` | Silver table specifications |
+| `de-gold-layer-design` | Gold table specifications |
+| `de-data-contracts` | Data contracts |
+| `de-transformation-design` | Transformation design |
+| `de-data-quality` | Data quality rule catalog |
+| `de-orchestration-and-observability` | Orchestration and observability specification |
+| `de-semantic-model-design` | Semantic model specification |
+| `de-serving-layer-design` | Serving layer specification |
+| `de-semantic-and-serving-layer` | Compatibility bridge for semantic and serving work |
+| `de-lineage-and-metadata` | Lineage and metadata catalog |
+| `de-governance-and-security` | Governance checklist |
+| `de-cost-and-performance-optimization` | Cost and performance assessment |
+| `de-cicd-and-testing` | CI/CD and testing plan |
+| `de-project-evaluation` | Release readiness evaluation |
 
-## Vị trí lưu trữ Artifact (Artifact Locations)
+### Implementation support skills
 
-DES-SKILL hiện hỗ trợ cả đầu ra cấu trúc dự án và đầu ra hỗ trợ của agent:
+| Skill | Main artifact |
+| --- | --- |
+| `de-brainstorm-change` | Change brief |
+| `de-implementation-planning` | Implementation plan and implementation story |
+| `de-build-from-artifacts` | Implementation log |
+| `de-review-implementation` | Review report |
+| `de-verify-delivery` | Verification report |
+| `de-implementation-retrospective` | Implementation retrospective |
 
-| Khu vực | Đường dẫn | Mục đích |
-| --- | --- | --- |
-| Phase artifacts | `.agents/des-skill/output/` | Đầu ra chuẩn hóa của các phase từ `ARTIFACTS.md` |
-| Trạng thái quy trình | `.agents/des-skill/sprint-status/des-workflow-status.md` | Trạng thái quy trình giữa các phiên làm việc |
-| Thư mục lập kế hoạch dự án | `_des-output/planning-artifacts/` | Khu vực lưu trữ bằng chứng lập kế hoạch và các bản sao |
-| Hỗ trợ triển khai | `_des-output/implementation-artifacts/` | Change brief, implementation plan, logs, review, verification, retrospective |
+Implementation support uses:
 
-Khi có nghi ngờ, hãy tuân theo `ARTIFACTS.md` để biết tên và đường dẫn chính xác của artifact.
+- `checklists/implementation-readiness-checklist.md`
+- `checklists/definition-of-done-checklist.md`
 
-## Xác thực (Validation)
+Behavioral code changes should follow red-green-refactor. Completion requires fresh evidence, not claims.
 
-Chạy các lệnh kiểm tra kho lưu trữ trước khi publish hoặc thay đổi các skill:
+## Supported project styles
+
+DES-SKILL is platform-neutral. It can support local-first development with SQL, Python, DuckDB, and dbt; lakehouse projects on Microsoft Fabric, Databricks, Snowflake, BigQuery, or similar platforms; orchestration with Airflow, Dagster, Azure Data Factory, Fabric Data Pipelines, or equivalent tools; quality workflows with Great Expectations, Soda, dbt tests, SQL checks, or Python validation; and serving through Power BI, Superset, semantic models, APIs, warehouse tables, or exported datasets.
+
+The skills should not force a tool choice. They should force the agent to explain the trade-off and capture the decision.
+
+## Philosophy
+
+- **Business first** — Data work starts from decisions, KPIs, and consumers, not tables.
+- **Artifacts over vibes** — Every major decision should leave a reviewable file behind.
+- **Human checkpoints** — Business definitions, contracts, architecture trade-offs, and release gates need explicit approval.
+- **Evidence over claims** — Work is done when checks, logs, tests, and review evidence support it.
+- **Small context, strict steps** — Load one step file at a time.
+- **Vendor-neutral by default** — The workflow should remain portable across data stacks.
+
+## Validation
 
 ```bash
 npm test
@@ -266,8 +368,9 @@ npm run validate:skills
 node tools/validate-artifacts.js
 ```
 
-Các script xác thực sẽ kiểm tra hành vi của trình cài đặt, các file skill bắt buộc, frontmatter, các tiêu đề chính, metadata của package, các tham chiếu quy trình, bản đồ artifact và các template.
+## Release pinning
 
+<<<<<<< HEAD
 ## Nguyên tắc hoạt động (Operating Principle)
 
 Tuyệt đối không nhảy trực tiếp vào viết code. Một dự án dữ liệu hướng tới môi trường production cần bắt đầu với bối cảnh nghiệp vụ, kết quả đo lường được, độ sẵn sàng của nguồn dữ liệu, các lựa chọn kiến trúc, kỳ vọng chất lượng và nhu cầu cung cấp dữ liệu rõ ràng. Code chỉ nên dùng để hiện thực hóa các artifact đã thống nhất, chứ không thay thế bước khám phá (discovery).
@@ -337,20 +440,31 @@ npm publish --access public
 ```
 
 Sau đó xuất bản GitHub Release tương ứng từ tag `v0.1.2`. Người dùng có thể ghim phiên bản cài đặt npm bằng cách chạy:
+=======
+The current package version is `0.1.2`.
+>>>>>>> a37cba5aeec2e46ac5729ee942f3ed6f9195af7d
 
 ```bash
 npx @dksang/des-skill@0.1.2 install
 ```
 
-## Repository Metadata (Siêu dữ liệu Kho lưu trữ)
+Before recommending a new pinned version, update `package.json`, create the git tag, publish to npm, and create the matching GitHub Release.
 
-Mô tả GitHub khuyến nghị:
+```bash
+npm version patch
+npm publish --access public
+git push --follow-tags
+```
+
+## Repository metadata
+
+Suggested GitHub description:
 
 ```text
 Reusable Agent Skills for end-to-end Data Engineering project delivery.
 ```
 
-Các chủ đề (topics) khuyến nghị:
+Suggested topics:
 
 ```text
 agent-skills
@@ -367,10 +481,14 @@ duckdb
 fabric
 ```
 
-## Đóng góp (Contributing)
+## Contributing
 
-Xem thêm tại [CONTRIBUTING.md](CONTRIBUTING.md) để biết về các tiêu chuẩn skill, tiêu chí chất lượng step, và quy trình gửi Pull Request.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for skill standards, step quality criteria, validation, and pull request guidance.
 
-## Nhật ký thay đổi (Changelog)
+## Changelog
 
-Xem thêm tại [CHANGELOG.md](CHANGELOG.md) để biết lịch sử phiên bản.
+See [CHANGELOG.md](CHANGELOG.md) for release history.
+
+## License
+
+MIT License. See [LICENSE](LICENSE).
