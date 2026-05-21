@@ -1,0 +1,17 @@
+# Workflow customization surface for des-project-evaluation.
+
+[workflow]
+activation_steps_prepend = []
+activation_steps_append = []
+
+persistent_facts = [
+  "file:{project-root}/**/project-context.md",
+]
+
+on_complete = ""
+
+[config]
+output_file = "{project-root}/_des-output/planning-artifacts/22-project-evaluation.md"
+template_file = "{skill-root}/../../templates/22-project-evaluation-template.md"
+checklist_file = "{skill-root}/../../checklists/business_readiness_checklist.md"
+status_file = "{project-root}/_des-output/implementation-artifacts/des-workflow-status.md"

@@ -63,7 +63,7 @@ docs/
 .agents/
 ├── skills/
 │   ├── using-des-skill/
-│   ├── de-business-discovery/
+│   ├── des-business-discovery/
 │   │   ├── SKILL.md
 │   │   ├── customize.toml
 │   │   └── steps/
@@ -108,8 +108,8 @@ Lệnh `install` sẽ tạo mới hoặc cập nhật:
 .agents/
 ├── skills/
 │   ├── using-des-skill/
-│   ├── de-business-discovery/
-│   ├── de-ingestion-design/
+│   ├── des-business-discovery/
+│   ├── des-ingestion-design/
 │   └── ...
 └── des-skill/
     ├── output/
@@ -277,42 +277,47 @@ Tuyệt đối không nhảy trực tiếp vào viết code. Một dự án dữ
 | Skill | Artifact chính |
 | --- | --- |
 | `using-des-skill` | Định tuyến quy trình và phối hợp trạng thái |
-| `de-business-discovery` | Tài liệu tóm tắt khám phá nghiệp vụ (Business discovery brief) |
-| `de-business-questions` | Danh mục câu hỏi nghiệp vụ (Business question catalog) |
-| `de-requirements-and-kpis` | Danh mục yêu cầu và KPI (Requirements and KPI catalog) |
-| `de-data-product-definition` | Đặc tả sản phẩm dữ liệu (Data product specification) |
-| `de-data-source-assessment` | Bản đánh giá nguồn dữ liệu (Data source inventory) |
-| `de-domain-modeling` | Mô hình domain khái niệm (Conceptual domain model) |
-| `de-architecture-design` | Tài liệu quyết định kiến trúc (Architecture decision record) |
-| `de-ingestion-design` | Đặc tả thu thập dữ liệu (Ingestion specification) |
-| `de-bronze-layer-design` | Đặc tả bảng Bronze (Bronze table specifications) |
-| `de-silver-layer-design` | Đặc tả bảng Silver (Silver table specifications) |
-| `de-gold-layer-design` | Đặc tả bảng Gold (Gold table specifications) |
-| `de-data-contracts` | Hợp đồng dữ liệu (Data contracts) |
-| `de-transformation-design` | Thiết kế chuyển đổi (Transformation design) |
-| `de-data-quality` | Danh mục quy tắc chất lượng dữ liệu (Data quality rule catalog) |
-| `de-orchestration-and-observability` | Đặc tả điều phối và giám sát pipeline |
-| `de-semantic-model-design` | Đặc tả mô hình semantic (Semantic model specification) |
-| `de-serving-layer-design` | Đặc tả lớp cung cấp dữ liệu (Serving layer specification) |
-| `de-semantic-and-serving-layer` | Cầu nối tương thích cho các công việc semantic và serving |
-| `de-lineage-and-metadata` | Danh mục lineage và metadata |
-| `de-governance-and-security` | Checklist quản trị dữ liệu (Governance checklist) |
-| `de-cost-and-performance-optimization` | Đánh giá chi phí và hiệu năng |
-| `de-cicd-and-testing` | Kế hoạch CI/CD và kiểm thử |
-| `de-project-evaluation` | Đánh giá độ sẵn sàng release |
+| `des-business-discovery` | Tài liệu tóm tắt khám phá nghiệp vụ (Business discovery brief) |
+| `des-business-questions` | Danh mục câu hỏi nghiệp vụ (Business question catalog) |
+| `des-requirements-and-kpis` | Danh mục yêu cầu và KPI (Requirements and KPI catalog) |
+| `des-data-product-definition` | Đặc tả sản phẩm dữ liệu (Data product specification) |
+| `des-data-source-assessment` | Bản đánh giá nguồn dữ liệu (Data source inventory) |
+| `des-domain-modeling` | Mô hình domain khái niệm (Conceptual domain model) |
+| `des-architecture-design` | Tài liệu quyết định kiến trúc (Architecture decision record) |
+| `des-ingestion-design` | Đặc tả thu thập dữ liệu (Ingestion specification) |
+| `des-bronze-layer-design` | Đặc tả bảng Bronze (Bronze table specifications) |
+| `des-silver-layer-design` | Đặc tả bảng Silver (Silver table specifications) |
+| `des-gold-layer-design` | Đặc tả bảng Gold (Gold table specifications) |
+| `des-data-contracts` | Hợp đồng dữ liệu (Data contracts) |
+| `des-transformation-design` | Thiết kế chuyển đổi (Transformation design) |
+| `des-data-quality` | Danh mục quy tắc chất lượng dữ liệu (Data quality rule catalog) |
+| `des-orchestration-and-observability` | Đặc tả điều phối và giám sát pipeline |
+| `des-semantic-model-design` | Đặc tả mô hình semantic (Semantic model specification) |
+| `des-serving-layer-design` | Đặc tả lớp cung cấp dữ liệu (Serving layer specification) |
+| `des-semantic-and-serving-layer` | Cầu nối tương thích cho các công việc semantic và serving |
+| `des-lineage-and-metadata` | Danh mục lineage và metadata |
+| `des-governance-and-security` | Checklist quản trị dữ liệu (Governance checklist) |
+| `des-cost-and-performance-optimization` | Đánh giá chi phí và hiệu năng |
+| `des-cicd-and-testing` | Kế hoạch CI/CD và kiểm thử |
+| `des-project-evaluation` | Đánh giá độ sẵn sàng release |
 
 ## Danh mục Skill Hỗ trợ (Support Skill Index)
 
-Các skill tùy chọn này giúp chuyển đổi các artifact thiết kế đã duyệt thành mã nguồn, review, xác thực và thực hiện retrospective. Chúng tuân theo luồng hỗ trợ kiểu BMad: brainstorm change, lập kế hoạch triển khai, xây dựng từ artifact, review, xác thực với bằng chứng mới, và ghi nhận công việc theo dõi.
+Các skill tùy chọn này giúp chuyển đổi các artifact thiết kế đã duyệt thành sprint status, epic, story, mã nguồn, review, xác thực và retrospective. Chúng tuân theo luồng hỗ trợ kiểu BMad: brainstorm change, tạo epic, tạo sprint-status, tạo story từ artifact, kiểm tra readiness, dev-story, code-review, verify, và retrospective.
 
 | Skill | Artifact chính |
 | --- | --- |
-| `de-brainstorm-change` | Change brief |
-| `de-implementation-planning` | Kế hoạch triển khai (Implementation plan) + câu chuyện triển khai (implementation story) |
-| `de-build-from-artifacts` | Nhật ký triển khai (Implementation log) |
-| `de-review-implementation` | Báo cáo review (Review report) |
-| `de-verify-delivery` | Báo cáo xác thực (Verification report) |
-| `de-implementation-retrospective` | Nhật ký đúc rút kinh nghiệm (Implementation retrospective) |
+| `des-help` | Ghi chú hỗ trợ / định tuyến khi cần |
+| `des-brainstorm-change` | Change brief |
+| `des-create-epic` | Epics triển khai từ artifact |
+| `des-sprint-planning` | Sprint status |
+| `des-create-story` | Story triển khai giàu ngữ cảnh |
+| `des-check-implementation-readiness` | Báo cáo readiness trước dev |
+| `des-implementation-planning` | Kế hoạch triển khai (Implementation plan) + câu chuyện triển khai (implementation story) |
+| `des-dev-story` | Nhật ký triển khai (Implementation log) |
+| `des-code-review` | Báo cáo review (Review report) |
+| `des-verify-delivery` | Báo cáo xác thực (Verification report) |
+| `des-retrospective` | Nhật ký đúc rút kinh nghiệm (Implementation retrospective) |
 
 Hỗ trợ triển khai sử dụng hai cổng kiểm soát bàn giao (delivery gates):
 

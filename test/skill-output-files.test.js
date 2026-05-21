@@ -6,47 +6,47 @@ const test = require("node:test");
 const repoRoot = path.resolve(__dirname, "..");
 
 const outputSpecs = [
-  ["de-business-discovery", "01-business-discovery.md", "01-business-discovery-template.md"],
-  ["de-business-questions", "02-business-questions.md", "02-business-questions-template.md"],
-  ["de-requirements-and-kpis", "03-requirements-and-kpis.md", "03-requirements-and-kpis-template.md"],
-  ["de-data-product-definition", "04-data-product-definition.md", "04-data-product-definition-template.md"],
-  ["de-data-source-assessment", "05-data-source-assessment.md", "05-data-source-assessment-template.md"],
-  ["de-domain-modeling", "06-domain-modeling.md", "06-domain-modeling-template.md"],
-  ["de-architecture-design", "07-architecture-design.md", "07-architecture-design-template.md"],
-  ["de-ingestion-design", "08-ingestion-design.md", "08-ingestion-design-template.md"],
-  ["de-bronze-layer-design", "09-bronze-layer-design.md", "09-bronze-layer-design-template.md"],
-  ["de-silver-layer-design", "10-silver-layer-design.md", "10-silver-layer-design-template.md"],
-  ["de-gold-layer-design", "11-gold-layer-design.md", "11-gold-layer-design-template.md"],
-  ["de-data-contracts", "12-data-contracts.md", "12-data-contracts-template.md"],
-  ["de-transformation-design", "13-transformation-design.md", null],
-  ["de-data-quality", "14-data-quality.md", "14-data-quality-template.md"],
-  ["de-orchestration-and-observability", "15-orchestration-and-observability.md", "15-orchestration-and-observability-template.md"],
-  ["de-semantic-model-design", "16-semantic-model-design.md", "16-semantic-model-design-template.md"],
-  ["de-serving-layer-design", "17-serving-layer-design.md", null],
-  ["de-lineage-and-metadata", "18-lineage-and-metadata.md", "18-lineage-and-metadata-template.md"],
-  ["de-governance-and-security", "19-governance-and-security.md", "19-governance-and-security-template.md"],
-  ["de-cost-and-performance-optimization", "20-cost-and-performance-optimization.md", "20-cost-and-performance-optimization-template.md"],
-  ["de-cicd-and-testing", "21-cicd-and-testing.md", null],
-  ["de-project-evaluation", "22-project-evaluation.md", "22-project-evaluation-template.md"],
-  ["de-semantic-and-serving-layer", "16-17-semantic-and-serving-layer.md", null]
+  ["des-business-discovery", "01-business-discovery-brief.md", "01-business-discovery-brief-template.md"],
+  ["des-business-questions", "02-business-question-catalog.md", "02-business-question-catalog-template.md"],
+  ["des-requirements-and-kpis", "03-requirements-and-kpi-catalog.md", "03-requirements-and-kpi-catalog-template.md"],
+  ["des-data-product-definition", "04-data-product-specification.md", "04-data-product-specification-template.md"],
+  ["des-data-source-assessment", "05-data-source-inventory.md", "05-data-source-inventory-template.md"],
+  ["des-domain-modeling", "06-conceptual-domain-model.md", "06-conceptual-domain-model-template.md"],
+  ["des-architecture-design", "07-architecture-decision-record.md", "07-architecture-decision-record-template.md"],
+  ["des-ingestion-design", "08-ingestion-design.md", "08-ingestion-design-template.md"],
+  ["des-bronze-layer-design", "09-bronze-layer-design.md", "09-bronze-layer-design-template.md"],
+  ["des-silver-layer-design", "10-silver-layer-design.md", "10-silver-layer-design-template.md"],
+  ["des-gold-layer-design", "11-gold-layer-design.md", "11-gold-layer-design-template.md"],
+  ["des-data-contracts", "12-data-contracts.md", "12-data-contracts-template.md"],
+  ["des-transformation-design", "13-transformation-design.md", null],
+  ["des-data-quality", "14-data-quality.md", "14-data-quality-template.md"],
+  ["des-orchestration-and-observability", "15-orchestration-and-observability.md", "15-orchestration-and-observability-template.md"],
+  ["des-semantic-model-design", "16-semantic-model-design.md", "16-semantic-model-design-template.md"],
+  ["des-serving-layer-design", "17-serving-layer-design.md", null],
+  ["des-lineage-and-metadata", "18-lineage-and-metadata.md", "18-lineage-and-metadata-template.md"],
+  ["des-governance-and-security", "19-governance-and-security.md", "19-governance-and-security-template.md"],
+  ["des-cost-and-performance-optimization", "20-cost-and-performance-optimization.md", "20-cost-and-performance-optimization-template.md"],
+  ["des-cicd-and-testing", "21-cicd-and-testing.md", null],
+  ["des-project-evaluation", "22-project-evaluation.md", "22-project-evaluation-template.md"],
+  ["des-semantic-and-serving-layer", "16-17-semantic-and-serving-layer.md", null]
 ];
 
 const supportOutputSpecs = [
-  ["de-brainstorm-change", "change-brief.md"],
-  ["de-implementation-planning", "implementation-plan.md"],
-  ["de-build-from-artifacts", "implementation-log.md"],
-  ["de-review-implementation", "review-report.md"],
-  ["de-verify-delivery", "verification-report.md"],
-  ["de-implementation-retrospective", "implementation-retrospective.md"]
+  ["des-brainstorm-change", "change-brief.md"],
+  ["des-implementation-planning", "implementation-plan.md"],
+  ["des-dev-story", "implementation-log.md"],
+  ["des-code-review", "review-report.md"],
+  ["des-verify-delivery", "verification-report.md"],
+  ["des-retrospective", "implementation-retrospective.md"]
 ];
 
 const supportWorkflowRequirements = {
-  "de-brainstorm-change": ["HALT", "affected artifacts", "decision log"],
-  "de-implementation-planning": ["readiness", "acceptance criteria", "artifact traceability"],
-  "de-build-from-artifacts": ["status", "implementation log", "HALT"],
-  "de-review-implementation": ["findings", "severity", "artifact compliance"],
-  "de-verify-delivery": ["fresh", "evidence", "completion claim"],
-  "de-implementation-retrospective": ["artifact drift", "follow-up", "next workflow"]
+  "des-brainstorm-change": ["HALT", "affected artifacts", "decision log"],
+  "des-implementation-planning": ["readiness", "acceptance criteria", "artifact traceability"],
+  "des-dev-story": ["status", "implementation log", "HALT"],
+  "des-code-review": ["findings", "severity", "artifact compliance"],
+  "des-verify-delivery": ["fresh", "evidence", "completion claim"],
+  "des-retrospective": ["artifact drift", "follow-up", "next workflow"]
 };
 
 

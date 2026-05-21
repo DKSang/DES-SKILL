@@ -16,10 +16,10 @@ Sử dụng chế độ nhẹ nhàng nhất có thể nhưng vẫn đảm bảo 
 
 | Mode | Use When | Default Route |
 | :--- | :--- | :--- |
-| Quick Fix | Lỗi nhỏ, sửa đổi tài liệu, thay đổi test/config phạm vi hẹp, hoặc dọn dẹp repo ít rủi ro | `de-build-from-artifacts` -> `de-verify-delivery`; thêm `de-review-implementation` nếu có thay đổi hành vi code |
-| Standard Feature | Một tính năng dữ liệu gắn kết, thay đổi pipeline, thay đổi model, hoặc cập nhật contract/DQ | `de-brainstorm-change` nếu phạm vi chưa rõ ràng -> `de-implementation-planning` -> `de-build-from-artifacts` -> `de-review-implementation` -> `de-verify-delivery` |
+| Quick Fix | Lỗi nhỏ, sửa đổi tài liệu, thay đổi test/config phạm vi hẹp, hoặc dọn dẹp repo ít rủi ro | `des-dev-story` -> `des-verify-delivery`; thêm `des-code-review` nếu có thay đổi hành vi code |
+| Standard Feature | Một tính năng dữ liệu gắn kết, thay đổi pipeline, thay đổi model, hoặc cập nhật contract/DQ | `des-brainstorm-change` nếu phạm vi chưa rõ ràng -> `des-implementation-planning` -> `des-dev-story` -> `des-code-review` -> `des-verify-delivery` |
 | Enterprise Data Product | Sản phẩm dữ liệu mới hoặc thay đổi lớn, bàn giao giữa các team, dữ liệu có kiểm soát, rủi ro tuân thủ, hoặc quyết định kiến trúc khó đảo ngược | Hoàn thành các artifact yêu cầu từ Phase 01-22, sau đó chạy support loop |
-| Correct Course | Các artifact đã duyệt xung đột với thực tế repo, phát hiện lỗi khi review/verify, sự cố thực tế, hoặc ràng buộc mới | `de-brainstorm-change` -> cập nhật phase skill bị ảnh hưởng -> `de-implementation-planning` |
+| Correct Course | Các artifact đã duyệt xung đột với thực tế repo, phát hiện lỗi khi review/verify, sự cố thực tế, hoặc ràng buộc mới | `des-brainstorm-change` -> cập nhật phase skill bị ảnh hưởng -> `des-implementation-planning` |
 
 ## Lớp Persona Layer (Data Engineering Personas)
 
@@ -29,16 +29,16 @@ Router cần báo cáo persona được chọn, persona skill, mode, và artifac
 
 | Persona | Persona Skill | Phạm vi sở hữu (Typical Ownership) |
 | :--- | :--- | :--- |
-| Workflow Coordinator | `de-persona-workflow-coordinator` | routing, mode selection, status, handoff |
-| Data Product Analyst | `de-persona-data-product-analyst` | business context, questions, KPIs, product definition |
-| Source & Domain Analyst | `de-persona-source-domain-analyst` | source readiness, source behavior, domain model |
-| Data Architect | `de-persona-data-architect` | architecture, ingestion, layers, contracts, transformations |
-| Data Quality Engineer | `de-persona-data-quality-engineer` | DQ rules, orchestration, observability |
-| Analytics Engineer | `de-persona-analytics-engineer` | semantic model and serving layer |
-| Governance Reviewer | `de-persona-governance-reviewer` | lineage, metadata, privacy, security |
-| DataOps Engineer | `de-persona-dataops-engineer` | cost, performance, CI/CD, release readiness |
-| Implementation Developer | `de-persona-implementation-developer` | implementation planning and build work |
-| Delivery Reviewer | `de-persona-delivery-reviewer` | review, verification, retrospective |
+| Workflow Coordinator | `des-persona-workflow-coordinator` | routing, mode selection, status, handoff |
+| Data Product Analyst | `des-persona-data-product-analyst` | business context, questions, KPIs, product definition |
+| Source & Domain Analyst | `des-persona-source-domain-analyst` | source readiness, source behavior, domain model |
+| Data Architect | `des-persona-data-architect` | architecture, ingestion, layers, contracts, transformations |
+| Data Quality Engineer | `des-persona-data-quality-engineer` | DQ rules, orchestration, observability |
+| Analytics Engineer | `des-persona-analytics-engineer` | semantic model and serving layer |
+| Governance Reviewer | `des-persona-governance-reviewer` | lineage, metadata, privacy, security |
+| DataOps Engineer | `des-persona-dataops-engineer` | cost, performance, CI/CD, release readiness |
+| Implementation Developer | `des-persona-implementation-developer` | implementation planning and build work |
+| Delivery Reviewer | `des-persona-delivery-reviewer` | review, verification, retrospective |
 
 ## Cổng kiểm soát Checklist (Configured Checklist Gate)
 
@@ -66,40 +66,40 @@ Tạo file này từ template:
 
 ## Phase 1: Business & Requirements (Nghiệp vụ & Yêu cầu)
 
-1. `de-business-discovery`
-2. `de-business-questions`
-3. `de-requirements-and-kpis`
-4. `de-data-product-definition`
+1. `des-business-discovery`
+2. `des-business-questions`
+3. `des-requirements-and-kpis`
+4. `des-data-product-definition`
 
 ## Phase 2: Data & Domain (Dữ liệu & Domain)
 
-5. `de-data-source-assessment`
-6. `de-domain-modeling`
+5. `des-data-source-assessment`
+6. `des-domain-modeling`
 
 ## Phase 3: Architecture & Layers (Kiến trúc & Các Lớp Dữ liệu)
 
-7. `de-architecture-design`
-8. `de-ingestion-design`
-9. `de-bronze-layer-design`
-10. `de-silver-layer-design`
-11. `de-gold-layer-design`
+7. `des-architecture-design`
+8. `des-ingestion-design`
+9. `des-bronze-layer-design`
+10. `des-silver-layer-design`
+11. `des-gold-layer-design`
 
 ## Phase 4: Quality, Contracts, Orchestration (Chất lượng, Hợp đồng dữ liệu & Điều phối)
 
-12. `de-data-contracts`
-13. `de-transformation-design`
-14. `de-data-quality`
-15. `de-orchestration-and-observability`
+12. `des-data-contracts`
+13. `des-transformation-design`
+14. `des-data-quality`
+15. `des-orchestration-and-observability`
 
 ## Phase 5: Serving, Governance, Delivery (Cung cấp, Quản trị & Bàn giao)
 
-16. `de-semantic-model-design`
-17. `de-serving-layer-design`
-18. `de-lineage-and-metadata`
-19. `de-governance-and-security`
-20. `de-cost-and-performance-optimization`
-21. `de-cicd-and-testing`
-22. `de-project-evaluation`
+16. `des-semantic-model-design`
+17. `des-serving-layer-design`
+18. `des-lineage-and-metadata`
+19. `des-governance-and-security`
+20. `des-cost-and-performance-optimization`
+21. `des-cicd-and-testing`
+22. `des-project-evaluation`
 
 ## Các Skill Hỗ trợ (Support Skills)
 
@@ -107,19 +107,24 @@ Sử dụng các skill này bên ngoài luồng phase có đánh số khi cần 
 
 Luồng hỗ trợ khuyến nghị (Recommended support loop):
 
-`de-brainstorm-change` -> `de-implementation-planning` -> `de-build-from-artifacts` -> `de-review-implementation` -> `de-verify-delivery` -> `de-implementation-retrospective`
+`des-brainstorm-change` -> `des-create-epic` -> `des-sprint-planning` -> `des-create-story` -> `des-check-implementation-readiness` -> `des-dev-story` -> `des-code-review` -> `des-verify-delivery` -> `des-retrospective`
 
-Skill `de-implementation-planning` tạo ra cả `implementation-plan.md` và `implementation-story.md`. File story là gói tài liệu thực thi để bàn giao cho `de-build-from-artifacts`.
+Skill `des-implementation-planning` vẫn có thể tạo `implementation-plan.md` và `implementation-story.md` cho luồng cũ hoặc công việc nhỏ. Với luồng BMAD-style đầy đủ, dùng `des-create-epic`, `des-sprint-planning`, `des-create-story`, và `des-check-implementation-readiness` trước khi bàn giao cho `des-dev-story`.
 
 | Skill hỗ trợ | Khi nào sử dụng |
 | :--- | :--- |
-| `de-brainstorm-change` | Khám phá yêu cầu thay đổi mới, tính năng mới, xử lý sự cố, hoặc điều chỉnh scope trước khi lập kế hoạch triển khai |
-| `de-implementation-planning` | Chuyển đổi các artifact DES đã duyệt thành một kế hoạch triển khai (implementation plan) cụ thể |
-| `de-build-from-artifacts` | Triển khai code, cấu hình, test, hoặc tài liệu từ một kế hoạch triển khai đã duyệt |
-| `de-review-implementation` | Review các file thay đổi so với artifact thiết kế, hợp đồng dữ liệu, DQ, và các kỳ vọng bảo mật |
-| `de-verify-delivery` | Chạy bước xác thực cuối cùng và ghi lại bằng chứng dòng lệnh (command evidence) trước khi đánh dấu hoàn thành hoặc yêu cầu phát hành |
-| `de-implementation-retrospective` | Đúc rút kinh nghiệm, ghi nhận độ lệch thiết kế (artifact drift), nợ kỹ thuật (technical debt), và tồn đọng (backlog) sau bàn giao |
+| `des-help` | Giải thích workflow, xác định HALT/blocker hiện tại, và đề xuất skill tiếp theo |
+| `des-brainstorm-change` | Khám phá yêu cầu thay đổi mới, tính năng mới, xử lý sự cố, hoặc điều chỉnh scope trước khi lập kế hoạch triển khai |
+| `des-create-epic` | Chia các artifact DES đã duyệt thành epic triển khai có traceability, scope, dependencies, và acceptance outcomes |
+| `des-sprint-planning` | Tạo hoặc cập nhật sprint-status từ epics/stories để agent có thể resume đúng trạng thái |
+| `des-create-story` | Tạo story triển khai giàu ngữ cảnh từ epic, artifacts, repo context, và sprint status |
+| `des-check-implementation-readiness` | Chặn dev-story nếu story còn thiếu artifact traceability, acceptance criteria, owners, tests, hoặc blockers |
+| `des-implementation-planning` | Chuyển đổi các artifact DES đã duyệt thành một kế hoạch triển khai (implementation plan) cụ thể |
+| `des-dev-story` | Triển khai code, cấu hình, test, hoặc tài liệu từ một kế hoạch triển khai đã duyệt |
+| `des-code-review` | Review các file thay đổi so với artifact thiết kế, hợp đồng dữ liệu, DQ, và các kỳ vọng bảo mật |
+| `des-verify-delivery` | Chạy bước xác thực cuối cùng và ghi lại bằng chứng dòng lệnh (command evidence) trước khi đánh dấu hoàn thành hoặc yêu cầu phát hành |
+| `des-retrospective` | Đúc rút kinh nghiệm, ghi nhận độ lệch thiết kế (artifact drift), nợ kỹ thuật (technical debt), và tồn đọng (backlog) sau bàn giao |
 
 ## Khả năng tương thích ngược (Compatibility Skill)
 
-Skill `de-semantic-and-serving-layer` được giữ lại như một cầu nối tương thích cho các dự án kết hợp thiết kế semantic model và serving layer trong cùng một bước. Khuyến khích sử dụng các skill riêng biệt `de-semantic-model-design` and `de-serving-layer-design` cho các công việc mới.
+Skill `des-semantic-and-serving-layer` được giữ lại như một cầu nối tương thích cho các dự án kết hợp thiết kế semantic model và serving layer trong cùng một bước. Khuyến khích sử dụng các skill riêng biệt `des-semantic-model-design` and `des-serving-layer-design` cho các công việc mới.

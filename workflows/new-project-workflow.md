@@ -33,28 +33,28 @@ Do not skip upstream skills unless the required artifact already exists and is g
 
 | Situation | Use This Skill | Main Function |
 | --- | --- | --- |
-| The project idea is vague or tool-first | `de-business-discovery` | Clarify business problem, users, decisions, scope |
-| The business goal exists but KPIs are unclear | `de-requirements-and-kpis` | Define KPIs, reports, freshness, SLAs |
-| Data sources are unknown or unreliable | `de-data-source-assessment` | Evaluate sources, owners, access, quality, risks |
-| You need to choose platform/tools/patterns | `de-architecture-design` | Create architecture decision record |
-| You need to bring data into the platform | `de-ingestion-design` | Define ingestion mode, schedule, watermark, retry |
-| You need raw/replayable storage | `de-bronze-layer-design` | Design raw Bronze datasets and metadata |
-| You need cleaned/conformed datasets | `de-silver-layer-design` | Design standardized Silver datasets |
-| You need business-ready analytics tables | `de-gold-layer-design` | Design facts, dimensions, marts, metrics |
-| Producers/consumers need clear guarantees | `de-data-contracts` | Define schema, freshness, quality and change contract |
-| You are ready to implement transformations | `de-transformation-design` | Define source-to-target logic and tests |
-| Trust, correctness, or freshness is unclear | `de-data-quality` | Define quality checks and failure actions |
-| Pipelines need scheduling and monitoring | `de-orchestration-and-observability` | Define DAGs, alerts, runbooks, observability |
-| Data must be consumed by BI/API/AI agents | `de-semantic-and-serving-layer` | Design semantic model and serving channels |
-| Access, privacy, lineage, retention matter | `de-governance-and-security` | Define owners, access, classification, lineage |
-| You need safe deployments | `de-cicd-and-testing` | Define tests, environments, release, rollback |
-| You need release approval or maturity review | `de-project-evaluation` | Produce go/no-go review and improvement backlog |
+| The project idea is vague or tool-first | `des-business-discovery` | Clarify business problem, users, decisions, scope |
+| The business goal exists but KPIs are unclear | `des-requirements-and-kpis` | Define KPIs, reports, freshness, SLAs |
+| Data sources are unknown or unreliable | `des-data-source-assessment` | Evaluate sources, owners, access, quality, risks |
+| You need to choose platform/tools/patterns | `des-architecture-design` | Create architecture decision record |
+| You need to bring data into the platform | `des-ingestion-design` | Define ingestion mode, schedule, watermark, retry |
+| You need raw/replayable storage | `des-bronze-layer-design` | Design raw Bronze datasets and metadata |
+| You need cleaned/conformed datasets | `des-silver-layer-design` | Design standardized Silver datasets |
+| You need business-ready analytics tables | `des-gold-layer-design` | Design facts, dimensions, marts, metrics |
+| Producers/consumers need clear guarantees | `des-data-contracts` | Define schema, freshness, quality and change contract |
+| You are ready to implement transformations | `des-transformation-design` | Define source-to-target logic and tests |
+| Trust, correctness, or freshness is unclear | `des-data-quality` | Define quality checks and failure actions |
+| Pipelines need scheduling and monitoring | `des-orchestration-and-observability` | Define DAGs, alerts, runbooks, observability |
+| Data must be consumed by BI/API/AI agents | `des-semantic-and-serving-layer` | Design semantic model and serving channels |
+| Access, privacy, lineage, retention matter | `des-governance-and-security` | Define owners, access, classification, lineage |
+| You need safe deployments | `des-cicd-and-testing` | Define tests, environments, release, rollback |
+| You need release approval or maturity review | `des-project-evaluation` | Produce go/no-go review and improvement backlog |
 
 ---
 
 ## Phase 1: Discovery And Requirements
 
-### 1. Use `de-business-discovery`
+### 1. Use `des-business-discovery`
 
 **When to use**
 
@@ -93,7 +93,7 @@ Continue only when the project has a clear business problem, named stakeholders,
 
 ---
 
-### 2. Use `de-requirements-and-kpis`
+### 2. Use `des-requirements-and-kpis`
 
 **When to use**
 
@@ -125,7 +125,7 @@ Continue only when each important KPI has a definition, owner, grain, target, an
 
 ## Phase 2: Source And Architecture Planning
 
-### 3. Use `de-data-source-assessment`
+### 3. Use `des-data-source-assessment`
 
 **When to use**
 
@@ -156,7 +156,7 @@ Continue only when accepted sources have owner, access path, grain, freshness, h
 
 ---
 
-### 4. Use `de-architecture-design`
+### 4. Use `des-architecture-design`
 
 **When to use**
 
@@ -189,7 +189,7 @@ Continue only when the architecture supports freshness, scale, cost, security, a
 
 ## Phase 3: Ingestion And Medallion Layer Design
 
-### 5. Use `de-ingestion-design`
+### 5. Use `des-ingestion-design`
 
 **When to use**
 
@@ -219,7 +219,7 @@ Continue only when every source has ingestion mode, destination, incremental str
 
 ---
 
-### 6. Use `de-bronze-layer-design`
+### 6. Use `des-bronze-layer-design`
 
 **When to use**
 
@@ -248,7 +248,7 @@ Continue only when Bronze can replay Silver transformations and includes source 
 
 ---
 
-### 7. Use `de-silver-layer-design`
+### 7. Use `des-silver-layer-design`
 
 **When to use**
 
@@ -279,7 +279,7 @@ Continue only when each Silver dataset has explicit grain, keys, lineage to Bron
 
 ---
 
-### 8. Use `de-gold-layer-design`
+### 8. Use `des-gold-layer-design`
 
 **When to use**
 
@@ -311,7 +311,7 @@ Continue only when every Gold table has declared grain, stable keys, measures, d
 
 ## Phase 4: Contracts, Transformation, And Quality
 
-### 9. Use `de-data-contracts`
+### 9. Use `des-data-contracts`
 
 **When to use**
 
@@ -341,7 +341,7 @@ Continue only when critical datasets have named producer/consumer, version, test
 
 ---
 
-### 10. Use `de-transformation-design`
+### 10. Use `des-transformation-design`
 
 **When to use**
 
@@ -371,7 +371,7 @@ Continue only when every output column has a source or derivation and every busi
 
 ---
 
-### 11. Use `de-data-quality`
+### 11. Use `des-data-quality`
 
 **When to use**
 
@@ -404,7 +404,7 @@ Continue only when critical datasets have freshness, uniqueness, validity, refer
 
 ## Phase 5: Operations And Serving
 
-### 12. Use `de-orchestration-and-observability`
+### 12. Use `des-orchestration-and-observability`
 
 **When to use**
 
@@ -435,7 +435,7 @@ Continue only when dependencies, SLAs, monitoring metrics, alert owners, rerun, 
 
 ---
 
-### 13. Use `de-semantic-and-serving-layer`
+### 13. Use `des-semantic-and-serving-layer`
 
 **When to use**
 
@@ -469,7 +469,7 @@ Continue only when serving channels map to user decisions, metrics are defined o
 
 ## Phase 6: Governance, Deployment, And Evaluation
 
-### 14. Use `de-governance-and-security`
+### 14. Use `des-governance-and-security`
 
 **When to use**
 
@@ -501,7 +501,7 @@ Continue only when every critical dataset has owner, classification, least-privi
 
 ---
 
-### 15. Use `de-cicd-and-testing`
+### 15. Use `des-cicd-and-testing`
 
 **When to use**
 
@@ -534,7 +534,7 @@ Continue only when tests run before production, secrets are externalized, rollba
 
 ---
 
-### 16. Use `de-project-evaluation`
+### 16. Use `des-project-evaluation`
 
 **When to use**
 
@@ -614,7 +614,7 @@ Use this prompt with a coding/data agent that has access to this skill pack:
 ```text
 We are starting a new data engineering project.
 Use the Data Engineering Superpowers workflow.
-Start with `de-business-discovery` and do not move to architecture, ingestion, or coding until the required upstream artifacts are clear.
+Start with `des-business-discovery` and do not move to architecture, ingestion, or coding until the required upstream artifacts are clear.
 
 Project idea:
 [Describe the domain, problem, users, expected outputs, and known data sources.]

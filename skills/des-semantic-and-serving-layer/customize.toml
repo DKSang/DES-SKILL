@@ -1,0 +1,17 @@
+# Workflow customization surface for des-semantic-and-serving-layer.
+
+[workflow]
+activation_steps_prepend = []
+activation_steps_append = []
+
+persistent_facts = [
+  "file:{project-root}/**/project-context.md",
+]
+
+on_complete = ""
+
+[config]
+output_file = "{project-root}/_des-output/planning-artifacts/16-17-semantic-and-serving-layer.md"
+# template_file = ""  # This skill uses its example output format
+checklist_file = "{skill-root}/../../checklists/serving_checklist.md"
+status_file = "{project-root}/_des-output/implementation-artifacts/des-workflow-status.md"

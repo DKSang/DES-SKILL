@@ -129,17 +129,17 @@ function injectIntoSkillMd(skillName, steps) {
 
 // Skills config: name -> { steps, outputNum, templateFile, checklistFile }
 const SKILLS_CONFIG = {
-  'de-requirements-and-kpis': {
+  'des-requirements-and-kpis': {
     steps: ['step-01-collect-requirements', 'step-02-resolve-conflicts', 'step-03-draft-and-handoff'],
-    outputNum: '03', templateFile: '03-requirements-and-kpis-template.md', checklistFile: 'business_readiness_checklist.md'
+    outputNum: '03', templateFile: '03-requirements-and-kpi-catalog-template.md', checklistFile: 'business_readiness_checklist.md'
   },
-  'de-data-product-definition': {
+  'des-data-product-definition': {
     steps: ['step-01-classify-products', 'step-02-define-products', 'step-03-draft-and-handoff'],
-    outputNum: '04', templateFile: '04-data-product-definition-template.md', checklistFile: 'data_product_checklist.md'
+    outputNum: '04', templateFile: '04-data-product-specification-template.md', checklistFile: '04-data-product-definition-checklist.md'
   },
-  'de-domain-modeling': {
-    steps: ['step-01-identify-entities', 'step-02-model-relationships', 'step-03-draft-and-handoff'],
-    outputNum: '06', templateFile: '06-domain-modeling-template.md', checklistFile: 'domain_modeling_checklist.md'
+  'des-domain-modeling': {
+    steps: ['step-01-context-and-readiness', 'step-02-domain-concepts-and-relationships', 'step-03-artifact-checklist-and-handoff'],
+    outputNum: '06', templateFile: '06-conceptual-domain-model-template.md', checklistFile: '06-domain-modeling-checklist.md'
   },
 };
 

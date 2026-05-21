@@ -19,10 +19,10 @@ DES-SKILL uses adaptive workflow modes so small work does not require full lifec
 
 | Mode | Use When | Default Route |
 | :--- | :--- | :--- |
-| Quick Fix | Small bug, doc correction, narrow test/config change, or low-risk cleanup | `de-build-from-artifacts` -> `de-verify-delivery`; add `de-review-implementation` when behavior changes |
-| Standard Feature | One cohesive data feature, pipeline change, model change, or contract/DQ update | `de-brainstorm-change` if unclear -> `de-implementation-planning` -> `de-build-from-artifacts` -> `de-review-implementation` -> `de-verify-delivery` |
+| Quick Fix | Small bug, doc correction, narrow test/config change, or low-risk cleanup | `des-dev-story` -> `des-verify-delivery`; add `des-code-review` when behavior changes |
+| Standard Feature | One cohesive data feature, pipeline change, model change, or contract/DQ update | `des-brainstorm-change` if unclear -> `des-create-epic` -> `des-sprint-planning` -> `des-create-story` -> `des-check-implementation-readiness` -> `des-dev-story` -> `des-code-review` -> `des-verify-delivery` |
 | Enterprise Data Product | New data product, cross-team delivery, regulated data, compliance risk, or irreversible architecture choice | Complete required phase artifacts 01-22, then run support skills |
-| Correct Course | Approved artifacts conflict with repo reality, review findings, verification failures, incident facts, or new constraints | `de-brainstorm-change` -> affected phase skill update -> `de-implementation-planning` |
+| Correct Course | Approved artifacts conflict with repo reality, review findings, verification failures, incident facts, or new constraints | `des-brainstorm-change` -> affected phase skill update -> `des-create-story` or `des-implementation-planning` |
 
 The router must name the selected mode, explain the reason, list missing upstream artifacts, and identify the next skill before implementation starts.
 
@@ -32,7 +32,7 @@ DES-SKILL uses personas to define responsibility boundaries for each skill. Read
 
 The router must identify the primary persona and persona skill for the selected artifact/support skill, state what that persona owns, and name any cross-persona handoff. Persona changes responsibility boundaries only; it must not change quality gates, document language, or evidence requirements.
 
-Example: activate `de-persona-data-architect` for stance, then use `de-ingestion-design` for the artifact.
+Example: activate `des-persona-data-architect` for stance, then use `des-ingestion-design` for the artifact.
 
 ## Global Checklist Gate
 

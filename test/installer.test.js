@@ -28,8 +28,8 @@ test("installs all top-level skills into the requested directory", () => {
     });
 
     assert.ok(fs.existsSync(path.join(target, "using-des-skill", "SKILL.md")));
-    assert.ok(fs.existsSync(path.join(target, "de-business-discovery", "SKILL.md")));
-    assert.ok(fs.existsSync(path.join(target, "de-ingestion-design", "SKILL.md")));
+    assert.ok(fs.existsSync(path.join(target, "des-business-discovery", "SKILL.md")));
+    assert.ok(fs.existsSync(path.join(target, "des-ingestion-design", "SKILL.md")));
     assert.equal(fs.existsSync(path.join(target, "des-skill", "SKILL.md")), false);
     assert.equal(fs.existsSync(path.join(target, ".gh-skill-install-test")), false);
   } finally {
@@ -52,10 +52,10 @@ test("creates the project support workspace next to installed skills", () => {
     assert.ok(fs.existsSync(path.join(workspace, "planning")));
     assert.ok(fs.existsSync(path.join(workspace, "sprint-status")));
     assert.ok(fs.existsSync(path.join(workspace, "sprint-status", "des-workflow-status.md")));
-    assert.ok(fs.existsSync(path.join(workspace, "templates", "01-business-discovery-template.md")));
+    assert.ok(fs.existsSync(path.join(workspace, "templates", "01-business-discovery-brief-template.md")));
     assert.ok(fs.existsSync(path.join(workspace, "templates", "22-project-evaluation-template.md")));
     assert.ok(fs.existsSync(path.join(workspace, "templates", "00-workflow-status-template.md")));
-    assert.ok(fs.existsSync(path.join(workspace, "checklists", "business_readiness_checklist.md")));
+    assert.ok(fs.existsSync(path.join(workspace, "checklists", "01-business-discovery-checklist.md")));
     assert.ok(fs.existsSync(path.join(workspace, "docs", "workflow-modes.md")));
     assert.ok(fs.existsSync(path.join(workspace, "workflows", "new-project-workflow.md")));
     assert.ok(fs.existsSync(path.join(workspace, "examples", "example_iot_project.md")));
@@ -105,7 +105,7 @@ test("scaffolds a full DES workspace using the init command", () => {
     });
 
     assert.ok(fs.existsSync(path.join(target, "using-des-skill", "SKILL.md")));
-    assert.ok(fs.existsSync(path.join(target, "de-business-discovery", "SKILL.md")));
+    assert.ok(fs.existsSync(path.join(target, "des-business-discovery", "SKILL.md")));
 
     assert.ok(fs.existsSync(path.join(tmpRoot, "_des")));
     assert.ok(fs.existsSync(path.join(tmpRoot, "_des", "config.toml")));

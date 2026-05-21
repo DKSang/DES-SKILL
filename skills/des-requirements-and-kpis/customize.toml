@@ -1,0 +1,56 @@
+skill_id = "des-requirements-and-kpis"
+phase = 3
+phase_name = "Requirements and KPIs"
+
+output_file = ".agents/des-skill/output/03-requirements-and-kpi-catalog.md"
+template_file = ".agents/des-skill/templates/03-requirements-and-kpi-catalog-template.md"
+checklist_file = ".agents/des-skill/checklists/03-requirements-and-kpis-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-data-product-definition"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/01-business-discovery-brief.md",
+  ".agents/des-skill/output/02-business-question-catalog.md"
+]
+
+required_sections = [
+  "Requirement Summary",
+  "Functional Requirements",
+  "Non-Functional Requirements",
+  "KPI and Metric Catalog",
+  "Metric Definitions",
+  "Metric Grain",
+  "Metric Ownership",
+  "Business Question Mapping",
+  "Consumer Mapping",
+  "Acceptance Criteria",
+  "Freshness and SLA Expectations",
+  "Quality Expectations",
+  "Security and Privacy Constraints",
+  "Cost and Performance Constraints",
+  "Requirement Traceability",
+  "Conflicts",
+  "Assumptions",
+  "Open Questions",
+  "Next Skill Recommendation"
+]
+
+halt_required_decisions = [
+  "upstream_question_approval",
+  "functional_requirement_scope",
+  "kpi_formula",
+  "metric_grain",
+  "metric_owner",
+  "freshness_sla",
+  "acceptance_criteria",
+  "metric_conflict"
+]
+
+[workflow]
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = [
+  "file:{project-root}/**/project-context.md",
+]
+on_complete = ""

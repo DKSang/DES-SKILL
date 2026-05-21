@@ -35,12 +35,12 @@ Relevant BMad skills:
 | BMad Skill | Pattern To Borrow | DES Target |
 | --- | --- | --- |
 | `bmad-quick-dev` | clarify-and-route, quick spec, plan, implement, review, present | Add DES quick mode for small changes |
-| `bmad-create-story` | exhaustive context packet before dev, previous work intelligence, file-read guardrails | Upgrade `de-implementation-planning` into DES implementation story creation |
-| `bmad-dev-story` | exact task order, status transitions, TDD, file list, change log, DoD gates | Upgrade `de-build-from-artifacts` |
-| `bmad-code-review` | layered review, triage, findings-first reporting | Upgrade `de-review-implementation` |
+| `bmad-create-story` | exhaustive context packet before dev, previous work intelligence, file-read guardrails | Upgrade `des-implementation-planning` into DES implementation story creation |
+| `bmad-dev-story` | exact task order, status transitions, TDD, file list, change log, DoD gates | Upgrade `des-dev-story` |
+| `bmad-code-review` | layered review, triage, findings-first reporting | Upgrade `des-code-review` |
 | `bmad-check-implementation-readiness` | readiness report, stepsCompleted, document discovery, final assessment | Add DES readiness gates and frontmatter state |
-| `bmad-retrospective` | delivery learning, prior action follow-through, next-cycle readiness | Upgrade `de-implementation-retrospective` |
-| `bmad-correct-course` | controlled scope correction when artifacts conflict | Strengthen `de-brainstorm-change` |
+| `bmad-retrospective` | delivery learning, prior action follow-through, next-cycle readiness | Upgrade `des-retrospective` |
+| `bmad-correct-course` | controlled scope correction when artifacts conflict | Strengthen `des-brainstorm-change` |
 
 ### From Superpowers
 
@@ -134,10 +134,10 @@ Candidate sections:
 
 Primary files to modify:
 
-- `skills/de-implementation-planning/SKILL.md`
-- `skills/de-implementation-planning/steps/*`
-- `skills/de-build-from-artifacts/SKILL.md`
-- `skills/de-build-from-artifacts/steps/*`
+- `skills/des-implementation-planning/SKILL.md`
+- `skills/des-implementation-planning/steps/*`
+- `skills/des-dev-story/SKILL.md`
+- `skills/des-dev-story/steps/*`
 - new `templates/implementation-story-template.md`
 - `ARTIFACTS.md`
 - `test/skill-output-files.test.js`
@@ -176,9 +176,9 @@ Primary files to modify:
 
 - new `checklists/implementation-readiness-checklist.md`
 - new `checklists/definition-of-done-checklist.md`
-- `skills/de-implementation-planning/*`
-- `skills/de-build-from-artifacts/*`
-- `skills/de-verify-delivery/*`
+- `skills/des-implementation-planning/*`
+- `skills/des-dev-story/*`
+- `skills/des-verify-delivery/*`
 - `templates/00-workflow-status-template.md`
 
 Acceptance criteria:
@@ -189,7 +189,7 @@ Acceptance criteria:
 
 ### 5. TDD And Evidence Discipline
 
-Strengthen `de-build-from-artifacts` using Superpowers-style TDD and BMad dev-story discipline.
+Strengthen `des-dev-story` using Superpowers-style TDD and BMad dev-story discipline.
 
 Rules to add:
 
@@ -202,10 +202,10 @@ Rules to add:
 
 Primary files to modify:
 
-- `skills/de-build-from-artifacts/SKILL.md`
-- `skills/de-build-from-artifacts/steps/step-02-implement-task.md`
-- `skills/de-build-from-artifacts/steps/step-03-run-validation.md`
-- `skills/de-verify-delivery/SKILL.md`
+- `skills/des-dev-story/SKILL.md`
+- `skills/des-dev-story/steps/step-02-implement-task.md`
+- `skills/des-dev-story/steps/step-03-run-validation.md`
+- `skills/des-verify-delivery/SKILL.md`
 
 Acceptance criteria:
 
@@ -232,8 +232,8 @@ Optional subagent model:
 
 Primary files to modify:
 
-- `skills/de-review-implementation/SKILL.md`
-- `skills/de-review-implementation/steps/*`
+- `skills/des-code-review/SKILL.md`
+- `skills/des-code-review/steps/*`
 - new `templates/review-report-template.md`
 
 Acceptance criteria:
@@ -342,8 +342,8 @@ Goal: convert implementation planning/build into BMad-style story execution.
 
 Files:
 
-- `skills/de-implementation-planning/*`
-- `skills/de-build-from-artifacts/*`
+- `skills/des-implementation-planning/*`
+- `skills/des-dev-story/*`
 - new `templates/implementation-story-template.md`
 - `ARTIFACTS.md`
 - `test/skill-output-files.test.js`
@@ -364,9 +364,9 @@ Files:
 
 - new `checklists/implementation-readiness-checklist.md`
 - new `checklists/definition-of-done-checklist.md`
-- `skills/de-implementation-planning/*`
-- `skills/de-build-from-artifacts/*`
-- `skills/de-verify-delivery/*`
+- `skills/des-implementation-planning/*`
+- `skills/des-dev-story/*`
+- `skills/des-verify-delivery/*`
 - tests for checklist references
 
 Done when:
@@ -382,9 +382,9 @@ Goal: add Superpowers-style engineering discipline.
 
 Files:
 
-- `skills/de-build-from-artifacts/*`
-- `skills/de-review-implementation/*`
-- `skills/de-verify-delivery/*`
+- `skills/des-dev-story/*`
+- `skills/des-code-review/*`
+- `skills/des-verify-delivery/*`
 - new `templates/review-report-template.md`
 - tests for TDD/review guardrails
 

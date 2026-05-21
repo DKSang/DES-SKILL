@@ -45,15 +45,15 @@ test("implementation readiness and definition-of-done checklists exist", () => {
 test("planning build and verification skills reference readiness and DoD gates", () => {
   const requiredReferences = [
     [
-      "skills/de-implementation-planning/SKILL.md",
+      "skills/des-implementation-planning/SKILL.md",
       ["implementation-readiness-checklist.md", "readiness gate"]
     ],
     [
-      "skills/de-build-from-artifacts/SKILL.md",
+      "skills/des-dev-story/SKILL.md",
       ["definition-of-done-checklist.md", "Definition of Done"]
     ],
     [
-      "skills/de-verify-delivery/SKILL.md",
+      "skills/des-verify-delivery/SKILL.md",
       ["definition-of-done-checklist.md", "completion claim"]
     ],
     [

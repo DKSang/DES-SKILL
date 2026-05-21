@@ -14,7 +14,7 @@ DES-SKILL không sao chép nội dung sách. Mỗi đóng góp phải là kiến
 
 ```text
 skills/                     # 22 phase skills + 2 meta skills
-├── de-business-discovery/
+├── des-business-discovery/
 │   ├── SKILL.md            # Skill definition (bắt buộc)
 │   ├── customize.toml      # Workflow configuration surface
 │   └── steps/              # Step-file architecture
@@ -103,7 +103,7 @@ npm install
 ### 2. Tạo branch
 
 ```bash
-git checkout -b feat/upgrade-de-architecture-design-steps
+git checkout -b feat/upgrade-des-architecture-design-steps
 ```
 
 Naming convention:
@@ -123,7 +123,7 @@ node tools/validate-skills.js   # Custom validator (phải PASS)
 
 ```bash
 git add .
-git commit -m "feat(de-architecture-design): upgrade step-02 with Irreversible HALT and ADR scoring matrix"
+git commit -m "feat(des-architecture-design): upgrade step-02 with Irreversible HALT and ADR scoring matrix"
 ```
 
 Commit message format: `<type>(<scope>): <description tiếng Anh ngắn>`

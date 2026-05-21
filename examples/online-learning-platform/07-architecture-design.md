@@ -1,8 +1,8 @@
 # 07 — Architecture Design
 # Online Learning Platform
 
-**Skill sử dụng**: `de-architecture-design`
-**Input từ**: `06-domain-modeling.md`, `05-data-source-assessment.md`, `03-requirements-and-kpis.md`
+**Skill sử dụng**: `des-architecture-design`
+**Input từ**: `06-conceptual-domain-model.md`, `05-data-source-assessment.md`, `03-requirements-and-kpi-catalog.md`
 
 ---
 
@@ -146,4 +146,4 @@ Source Systems
 - **Reversibility**: **One-way door** — migration sang Iceberg = full rewrite tất cả pipelines
 - **Accepted by**: Data Lead, 2026-05-21
 
-**Handoff**: Chuyển sang `de-ingestion-design`.
+**Handoff**: Chuyển sang `des-ingestion-design`.

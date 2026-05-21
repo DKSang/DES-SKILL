@@ -1,0 +1,20 @@
+[skill]
+name = "des-contract-review"
+version = "1.0.0"
+phase = "contracts"
+input_templates = ["12-data-contracts-template.md"]
+output_template = "12b-contract-review-template.md"
+
+[workflow]
+
+  [workflow.persistent_facts]
+  contract_review_principles = """
+  1. Contract không có nullable policy = consumer không biết cách handle null.
+  2. SLA không được cross-check với infrastructure thực tế = vi phạm ngay ngày đầu.
+  3. Không có schema version = breaking change gây production incident.
+  4. PII columns không được flag = compliance failure.
+  5. Contract không có review date = stale contract, schema drift không phát hiện được.
+  """
+  breaking_change_examples = "Xóa column, đổi type, thay đổi nullable → breaking. Thêm column nullable → non-breaking."
+
+  output_file = "{project-root}/_des-output/planning-artifacts/12b-contract-review.md"

@@ -38,11 +38,11 @@ test("router step maps workflow modes to next skills and gates", () => {
   const route = fs.readFileSync(routePath, "utf8");
 
   for (const skill of [
-    "de-brainstorm-change",
-    "de-implementation-planning",
-    "de-build-from-artifacts",
-    "de-review-implementation",
-    "de-verify-delivery"
+    "des-brainstorm-change",
+    "des-implementation-planning",
+    "des-dev-story",
+    "des-code-review",
+    "des-verify-delivery"
   ]) {
     assert.match(route, new RegExp(skill), `router step should reference ${skill}`);
   }

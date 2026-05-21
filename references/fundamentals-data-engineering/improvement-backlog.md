@@ -47,7 +47,7 @@ This backlog outlines the prioritized batches for implementing the findings from
 *Add decision tables, lifecycle undercurrent checks, and anti-patterns directly into each phase's `SKILL.md`.*
 
 - [ ] **Update Core Ingestion, Ingestion-Design, and Source-Assessment Skills**
-  - Add Ingestion Mode selector matrix directly to `skills/de-ingestion-design/SKILL.md`.
+  - Add Ingestion Mode selector matrix directly to `skills/des-ingestion-design/SKILL.md`.
 - [ ] **Update Core Storage and Bronze/Silver/Gold Layer Skills**
   - Add serialization and partition guidelines to Bronze, Silver, and Gold skills.
 - [ ] **Update Governance, Security, and Observability Skills**

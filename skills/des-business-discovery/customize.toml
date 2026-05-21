@@ -1,0 +1,46 @@
+skill_id = "des-business-discovery"
+phase = 1
+phase_name = "Business Discovery"
+
+output_file = ".agents/des-skill/output/01-business-discovery-brief.md"
+template_file = ".agents/des-skill/templates/01-business-discovery-brief-template.md"
+checklist_file = ".agents/des-skill/checklists/01-business-discovery-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-business-questions"
+
+required_upstream_artifacts = []
+
+required_sections = [
+  "Project Intent",
+  "Business Problem",
+  "Stakeholders and Consumers",
+  "Target Decisions or Use Cases",
+  "Expected Value",
+  "Data Maturity Context",
+  "Scope",
+  "Non-Scope",
+  "Constraints",
+  "Assumptions",
+  "Risks",
+  "Initial Success Criteria",
+  "Open Questions",
+  "Next Skill Recommendation"
+]
+
+halt_required_decisions = [
+  "project_intent",
+  "primary_consumer",
+  "business_problem",
+  "target_decision_or_use_case",
+  "mvp_scope",
+  "success_criteria"
+]
+
+[workflow]
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = [
+  "file:{project-root}/**/project-context.md",
+]
+on_complete = ""

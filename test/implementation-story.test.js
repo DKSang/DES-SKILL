@@ -27,8 +27,8 @@ test("implementation story template defines executable dev packet sections", () 
 });
 
 test("implementation planning and build skills reference implementation story packet", () => {
-  const planning = fs.readFileSync(path.join(repoRoot, "skills", "de-implementation-planning", "SKILL.md"), "utf8");
-  const build = fs.readFileSync(path.join(repoRoot, "skills", "de-build-from-artifacts", "SKILL.md"), "utf8");
+  const planning = fs.readFileSync(path.join(repoRoot, "skills", "des-implementation-planning", "SKILL.md"), "utf8");
+  const build = fs.readFileSync(path.join(repoRoot, "skills", "des-dev-story", "SKILL.md"), "utf8");
   const artifacts = fs.readFileSync(path.join(repoRoot, "ARTIFACTS.md"), "utf8");
 
   for (const content of [planning, build, artifacts]) {

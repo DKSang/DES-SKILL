@@ -1,0 +1,49 @@
+skill_id = "des-business-questions"
+phase = 2
+phase_name = "Business Questions"
+
+output_file = ".agents/des-skill/output/02-business-question-catalog.md"
+template_file = ".agents/des-skill/templates/02-business-question-catalog-template.md"
+checklist_file = ".agents/des-skill/checklists/02-business-questions-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-requirements-and-kpis"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/01-business-discovery-brief.md"
+]
+
+required_sections = [
+  "Question Summary",
+  "Prioritized Business Questions",
+  "Question Classification",
+  "Consumer Mapping",
+  "Decision Mapping",
+  "Expected Answer Format",
+  "Candidate Metrics",
+  "Freshness Expectations",
+  "Grain Hints",
+  "Source Hints",
+  "Dependencies",
+  "Out of Scope Questions",
+  "Assumptions",
+  "Open Questions",
+  "Next Skill Recommendation"
+]
+
+halt_required_decisions = [
+  "phase_1_context",
+  "question_priority",
+  "question_scope",
+  "question_answerability",
+  "consumer_mapping",
+  "decision_mapping"
+]
+
+[workflow]
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = [
+  "file:{project-root}/**/project-context.md",
+]
+on_complete = ""

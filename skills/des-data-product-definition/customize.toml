@@ -1,0 +1,60 @@
+skill_id = "des-data-product-definition"
+phase = 4
+phase_name = "Data Product Definition"
+
+output_file = ".agents/des-skill/output/04-data-product-specification.md"
+template_file = ".agents/des-skill/templates/04-data-product-specification-template.md"
+checklist_file = ".agents/des-skill/checklists/04-data-product-definition-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-data-source-assessment"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/01-business-discovery-brief.md",
+  ".agents/des-skill/output/02-business-question-catalog.md",
+  ".agents/des-skill/output/03-requirements-and-kpi-catalog.md"
+]
+
+required_sections = [
+  "Data Product Summary",
+  "Product Intent",
+  "Primary and Secondary Consumers",
+  "Supported Use Cases",
+  "Business Question and Requirement Mapping",
+  "Product Outputs",
+  "Product Boundary",
+  "Non-Scope",
+  "Service Expectations",
+  "Freshness and SLA Expectations",
+  "Quality and Trust Expectations",
+  "Access and Serving Expectations",
+  "Ownership and Stewardship",
+  "Lifecycle Status",
+  "Dependencies",
+  "Data Contract Expectations",
+  "Governance and Security Considerations",
+  "Success Criteria",
+  "Assumptions",
+  "Risks",
+  "Open Questions",
+  "Next Skill Recommendation"
+]
+
+halt_required_decisions = [
+  "upstream_requirements_context",
+  "primary_consumer",
+  "product_boundary",
+  "first_release_output",
+  "service_expectation",
+  "product_owner",
+  "lifecycle_status",
+  "trust_expectation"
+]
+
+[workflow]
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = [
+  "file:{project-root}/**/project-context.md",
+]
+on_complete = ""

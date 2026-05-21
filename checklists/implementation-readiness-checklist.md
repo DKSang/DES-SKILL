@@ -1,6 +1,6 @@
 # Implementation Readiness Checklist
 
-Use this checklist before `de-build-from-artifacts`. If any required item fails, implementation is blocked unless the user gives an explicit override and the risk is recorded.
+Use this checklist before `des-dev-story`. If any required item fails, implementation is blocked unless the user gives an explicit override and the risk is recorded.
 
 ## Scope Approval
 

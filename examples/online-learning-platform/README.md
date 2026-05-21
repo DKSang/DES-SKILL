@@ -13,12 +13,12 @@ Domain: **Nền tảng học trực tuyến** (Online Learning Platform) — gi�
 ```text
 examples/online-learning-platform/
 ├── README.md                               # File này
-├── 01-business-discovery.md               # Phase 01: Khám phá nghiệp vụ
-├── 02-business-questions.md               # Phase 02: Câu hỏi nghiệp vụ
-├── 03-requirements-and-kpis.md            # Phase 03: KPI và yêu cầu
-├── 04-data-product-definition.md          # Phase 04: Định nghĩa data product
+├── 01-business-discovery-brief.md         # Phase 01: Khám phá nghiệp vụ
+├── 02-business-question-catalog.md        # Phase 02: Câu hỏi nghiệp vụ
+├── 03-requirements-and-kpi-catalog.md            # Phase 03: KPI và yêu cầu
+├── 04-data-product-specification.md          # Phase 04: Định nghĩa data product
 ├── 05-data-source-assessment.md           # Phase 05: Đánh giá nguồn dữ liệu
-├── 06-domain-modeling.md                  # Phase 06: Domain model
+├── 06-conceptual-domain-model.md          # Phase 06: Domain model
 ├── 07-architecture-design.md             # Phase 07: Kiến trúc
 ├── 08-ingestion-design.md                 # Phase 08: Ingestion design
 ├── 09-bronze-layer-design.md              # Phase 09: Bronze layer
@@ -50,15 +50,15 @@ examples/online-learning-platform/
 ```text
 01-business-discovery
     ↓
-02-business-questions
+02-business-question-catalog
     ↓
-03-requirements-and-kpis      ← HALT: Metric conflict giải quyết ở đây
+03-requirements-and-kpi-catalog      ← HALT: Metric conflict giải quyết ở đây
     ↓
-04-data-product-definition
+04-data-product-specification
     ↓
 05-data-source-assessment     ← HALT: Xác nhận binlog retention CDC
     ↓
-06-domain-modeling            ← HALT: Grain declaration per dataset
+06-conceptual-domain-model    ← HALT: Grain declaration per dataset
     ↓
 07-architecture-design        ← HALT: Irreversible decisions (storage format)
     ↓

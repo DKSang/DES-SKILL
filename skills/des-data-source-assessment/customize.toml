@@ -1,0 +1,66 @@
+skill_id = "des-data-source-assessment"
+phase = 5
+phase_name = "Data Source Assessment"
+
+output_file = ".agents/des-skill/output/05-data-source-inventory.md"
+template_file = ".agents/des-skill/templates/05-data-source-inventory-template.md"
+checklist_file = ".agents/des-skill/checklists/05-data-source-assessment-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-domain-modeling"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/01-business-discovery-brief.md",
+  ".agents/des-skill/output/02-business-question-catalog.md",
+  ".agents/des-skill/output/03-requirements-and-kpi-catalog.md",
+  ".agents/des-skill/output/04-data-product-specification.md"
+]
+
+required_sections = [
+  "Source Inventory Summary",
+  "Source-to-Product Mapping",
+  "Source-to-Requirement and KPI Mapping",
+  "Source System Inventory",
+  "Source Type and Generation Pattern",
+  "Ownership and Contacts",
+  "Access Method and Permissions",
+  "Source of Truth Decisions",
+  "Data Format and Schema",
+  "Update Frequency and Freshness",
+  "Volume and Growth",
+  "History and Retention",
+  "Quality Profile",
+  "Reliability and Availability",
+  "Schema Change and Evolution",
+  "Security and Privacy Classification",
+  "Compliance and Regulatory Concerns",
+  "Cost, Licensing, and Usage Limits",
+  "Operational Dependencies",
+  "Contract and SLA Expectations",
+  "Ingestion Feasibility",
+  "Risks",
+  "Assumptions",
+  "Open Questions",
+  "Next Skill Recommendation"
+]
+
+halt_required_decisions = [
+  "upstream_product_context",
+  "candidate_source_mapping",
+  "source_owner",
+  "source_of_truth",
+  "access_permission",
+  "sensitive_data_classification",
+  "freshness_reliability_expectation",
+  "source_quality_unknown",
+  "schema_change_behavior",
+  "cost_or_license_constraint"
+]
+
+[workflow]
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = [
+  "file:{project-root}/**/project-context.md",
+]
+on_complete = ""

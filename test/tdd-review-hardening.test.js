@@ -11,9 +11,9 @@ function read(relativePath) {
 
 test("build skill requires red-green-refactor for behavior changes", () => {
   const content = [
-    read("skills/de-build-from-artifacts/SKILL.md"),
-    read("skills/de-build-from-artifacts/steps/step-02-implement-task.md"),
-    read("skills/de-build-from-artifacts/steps/step-03-run-validation.md")
+    read("skills/des-dev-story/SKILL.md"),
+    read("skills/des-dev-story/steps/step-02-implement-task.md"),
+    read("skills/des-dev-story/steps/step-03-run-validation.md")
   ].join("\n");
 
   for (const phrase of [
@@ -30,8 +30,8 @@ test("build skill requires red-green-refactor for behavior changes", () => {
 
 test("review skill defines hardened layered review model", () => {
   const content = [
-    read("skills/de-review-implementation/SKILL.md"),
-    read("skills/de-review-implementation/steps/step-02-run-review-layers.md")
+    read("skills/des-code-review/SKILL.md"),
+    read("skills/des-code-review/steps/step-02-run-review-layers.md")
   ].join("\n");
 
   for (const phrase of [
@@ -48,7 +48,7 @@ test("review skill defines hardened layered review model", () => {
 });
 
 test("verification skill rejects stale or failing evidence before completion claims", () => {
-  const content = read("skills/de-verify-delivery/SKILL.md");
+  const content = read("skills/des-verify-delivery/SKILL.md");
 
   for (const phrase of [
     "stale evidence",

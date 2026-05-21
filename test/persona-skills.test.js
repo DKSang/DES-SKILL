@@ -6,16 +6,16 @@ const test = require("node:test");
 const repoRoot = path.resolve(__dirname, "..");
 
 const personaSkills = [
-  ["de-persona-workflow-coordinator", "Data Engineering Lifecycle"],
-  ["de-persona-data-product-analyst", "Data Maturity Levels"],
-  ["de-persona-source-domain-analyst", "Generation"],
-  ["de-persona-data-architect", "Storage"],
-  ["de-persona-data-quality-engineer", "DataOps"],
-  ["de-persona-analytics-engineer", "Serving"],
-  ["de-persona-governance-reviewer", "Security"],
-  ["de-persona-dataops-engineer", "Orchestration"],
-  ["de-persona-implementation-developer", "Software Engineering"],
-  ["de-persona-delivery-reviewer", "Six Undercurrents"]
+  ["des-persona-workflow-coordinator", "Data Engineering Lifecycle"],
+  ["des-persona-data-product-analyst", "Data Maturity Levels"],
+  ["des-persona-source-domain-analyst", "Generation"],
+  ["des-persona-data-architect", "Storage"],
+  ["des-persona-data-quality-engineer", "DataOps"],
+  ["des-persona-analytics-engineer", "Serving"],
+  ["des-persona-governance-reviewer", "Security"],
+  ["des-persona-dataops-engineer", "Orchestration"],
+  ["des-persona-implementation-developer", "Software Engineering"],
+  ["des-persona-delivery-reviewer", "Six Undercurrents"]
 ];
 
 test("persona skills exist with FDE responsibility guardrails", () => {

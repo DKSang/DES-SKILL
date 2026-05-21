@@ -1,0 +1,63 @@
+skill_id = "des-domain-modeling"
+phase = 6
+phase_name = "Domain Modeling"
+
+output_file = ".agents/des-skill/output/06-conceptual-domain-model.md"
+template_file = ".agents/des-skill/templates/06-conceptual-domain-model-template.md"
+checklist_file = ".agents/des-skill/checklists/06-domain-modeling-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-architecture-design"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/01-business-discovery-brief.md",
+  ".agents/des-skill/output/02-business-question-catalog.md",
+  ".agents/des-skill/output/03-requirements-and-kpi-catalog.md",
+  ".agents/des-skill/output/04-data-product-specification.md",
+  ".agents/des-skill/output/05-data-source-inventory.md"
+]
+
+required_sections = [
+  "Domain Model Summary",
+  "Domain Scope",
+  "Business Glossary",
+  "Core Entities",
+  "Domain Events",
+  "Value Objects and Attributes",
+  "Relationships",
+  "Conceptual Grains",
+  "Identifiers and Identity Rules",
+  "Source Alignment",
+  "Source of Truth Mapping",
+  "Terminology Conflicts",
+  "Domain Rules",
+  "Lifecycle and State Definitions",
+  "Temporal Concepts",
+  "Ownership and Stewardship",
+  "Downstream Use Case Mapping",
+  "Modeling Assumptions",
+  "Risks",
+  "Open Questions",
+  "Next Skill Recommendation"
+]
+
+halt_required_decisions = [
+  "upstream_source_context",
+  "domain_scope",
+  "business_term_ambiguity",
+  "core_entity_identity",
+  "conceptual_grain",
+  "source_of_truth_mapping",
+  "relationship_ambiguity",
+  "domain_event_definition",
+  "temporal_concept",
+  "lifecycle_state_definition"
+]
+
+[workflow]
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = [
+  "file:{project-root}/**/project-context.md",
+]
+on_complete = ""

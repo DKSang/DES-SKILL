@@ -11,28 +11,28 @@
 
 | Phase | Skill | Status | Artifact | Notes |
 | :--- | :--- | :--- | :--- | :--- |
-| 01 | `de-business-discovery` | ✅ COMPLETE | `01-business-discovery.md` | Level 2 confirmed; scope defined |
-| 02 | `de-business-questions` | ✅ COMPLETE | `02-business-questions.md` | Completion Rate conflict resolved |
-| 03 | `de-requirements-and-kpis` | ✅ COMPLETE | `03-requirements-and-kpis.md` | P1 Hard SLA: 6AM daily |
-| 04 | `de-data-product-definition` | ⏳ PENDING | — | — |
-| 05 | `de-data-source-assessment` | ✅ COMPLETE | `05-data-source-assessment.md` | HALT: Udemy rate limit & PII policy resolved |
-| 06 | `de-domain-modeling` | ✅ COMPLETE | `06-domain-modeling.md` | Grain confirmed: daily snapshot |
-| 07 | `de-architecture-design` | ✅ COMPLETE | `07-architecture-design.md` | ADR-001: Delta Lake One-way door confirmed |
-| 08 | `de-ingestion-design` | ⏳ PENDING | — | — |
-| 09 | `de-bronze-layer-design` | ⏳ PENDING | — | — |
-| 10 | `de-silver-layer-design` | ⏳ PENDING | — | — |
-| 11 | `de-gold-layer-design` | ⏳ PENDING | — | — |
-| 12 | `de-data-contracts` | ⏳ PENDING | — | — |
-| 13 | `de-transformation-design` | ⏳ PENDING | — | — |
-| 14 | `de-data-quality` | ✅ COMPLETE | `14-data-quality.md` | 14 rules defined; 3-layer gates |
-| 15 | `de-orchestration-and-observability` | ⏳ PENDING | — | — |
-| 16 | `de-semantic-model-design` | ⏳ PENDING | — | — |
-| 17 | `de-serving-layer-design` | ⏳ PENDING | — | — |
-| 18 | `de-lineage-and-metadata` | ⏳ PENDING | — | — |
-| 19 | `de-governance-and-security` | ⏳ PENDING | — | — |
-| 20 | `de-cost-and-performance-optimization` | ⏳ PENDING | — | — |
-| 21 | `de-cicd-and-testing` | ⏳ PENDING | — | — |
-| 22 | `de-project-evaluation` | ⏳ PENDING | — | — |
+| 01 | `des-business-discovery` | ✅ COMPLETE | `01-business-discovery-brief.md` | Level 2 confirmed; scope defined |
+| 02 | `des-business-questions` | ✅ COMPLETE | `02-business-question-catalog.md` | Completion Rate conflict resolved |
+| 03 | `des-requirements-and-kpis` | ✅ COMPLETE | `03-requirements-and-kpi-catalog.md` | P1 Hard SLA: 6AM daily |
+| 04 | `des-data-product-definition` | ⏳ PENDING | — | — |
+| 05 | `des-data-source-assessment` | ✅ COMPLETE | `05-data-source-inventory.md` | HALT: Udemy rate limit & PII policy resolved |
+| 06 | `des-domain-modeling` | ✅ COMPLETE | `06-conceptual-domain-model.md` | Grain confirmed: daily snapshot |
+| 07 | `des-architecture-design` | ✅ COMPLETE | `07-architecture-design.md` | ADR-001: Delta Lake One-way door confirmed |
+| 08 | `des-ingestion-design` | ⏳ PENDING | — | — |
+| 09 | `des-bronze-layer-design` | ⏳ PENDING | — | — |
+| 10 | `des-silver-layer-design` | ⏳ PENDING | — | — |
+| 11 | `des-gold-layer-design` | ⏳ PENDING | — | — |
+| 12 | `des-data-contracts` | ⏳ PENDING | — | — |
+| 13 | `des-transformation-design` | ⏳ PENDING | — | — |
+| 14 | `des-data-quality` | ✅ COMPLETE | `14-data-quality.md` | 14 rules defined; 3-layer gates |
+| 15 | `des-orchestration-and-observability` | ⏳ PENDING | — | — |
+| 16 | `des-semantic-model-design` | ⏳ PENDING | — | — |
+| 17 | `des-serving-layer-design` | ⏳ PENDING | — | — |
+| 18 | `des-lineage-and-metadata` | ⏳ PENDING | — | — |
+| 19 | `des-governance-and-security` | ⏳ PENDING | — | — |
+| 20 | `des-cost-and-performance-optimization` | ⏳ PENDING | — | — |
+| 21 | `des-cicd-and-testing` | ⏳ PENDING | — | — |
+| 22 | `des-project-evaluation` | ⏳ PENDING | — | — |
 
 ---
 
@@ -62,4 +62,4 @@
 
 ## Next Skill
 
-→ **`de-data-product-definition`** (Phase 04) để define formal data products cho Instructor Dashboard và At-Risk API.
+→ **`des-data-product-definition`** (Phase 04) để define formal data products cho Instructor Dashboard và At-Risk API.

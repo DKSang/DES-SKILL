@@ -1,7 +1,7 @@
 # 14 — Data Quality Rule Catalog
 # Online Learning Platform
 
-**Skill sử dụng**: `de-data-quality`
+**Skill sử dụng**: `des-data-quality`
 **Input từ**: `05-data-source-assessment.md`, `10-silver-layer-design.md`, `11-gold-layer-design.md`
 
 ---
@@ -88,4 +88,4 @@
 - **Incident Path**: FAIL → `#data-incidents` (Slack) → PagerDuty on-call → escalate đến Data Lead nếu > 2 giờ
 - **DQ Dashboard**: Power BI page "Data Quality Health" với trend per rule per day
 
-**Handoff**: Chuyển sang `de-orchestration-and-observability`.
+**Handoff**: Chuyển sang `des-orchestration-and-observability`.

@@ -24,12 +24,12 @@ Read the status file if it exists to understand which phases are completed, in-p
 ### 2. Detect Project State
 Scan the resolved output folder (default `.agents/des-skill/output/` or `{planning_artifacts}`) for existing files:
 ```text
-01-business-discovery.md
-02-business-questions.md
-03-requirements-and-kpis.md
-04-data-product-definition.md
+01-business-discovery-brief.md
+02-business-question-catalog.md
+03-requirements-and-kpi-catalog.md
+04-data-product-specification.md
 05-data-source-assessment.md
-06-domain-modeling.md
+06-conceptual-domain-model.md
 07-architecture-design.md
 08-ingestion-design.md
 09-bronze-layer-design.md
@@ -56,10 +56,10 @@ Classify the request into one of these modes:
 
 | Mode | Use When | Route |
 |---|---|---|
-| Quick Fix | Small bug, doc correction, narrow test/config change, or low-risk cleanup | `de-build-from-artifacts` -> `de-verify-delivery`; add `de-review-implementation` when behavior changes |
-| Standard Feature | One cohesive data feature, pipeline change, model change, or contract/DQ update | `de-brainstorm-change` if unclear -> `de-implementation-planning` -> `de-build-from-artifacts` -> `de-review-implementation` -> `de-verify-delivery` |
+| Quick Fix | Small bug, doc correction, narrow test/config change, or low-risk cleanup | `des-dev-story` -> `des-verify-delivery`; add `des-code-review` when behavior changes |
+| Standard Feature | One cohesive data feature, pipeline change, model change, or contract/DQ update | `des-brainstorm-change` if unclear -> `des-create-epic` -> `des-sprint-planning` -> `des-create-story` -> `des-check-implementation-readiness` -> `des-dev-story` -> `des-code-review` -> `des-verify-delivery` |
 | Enterprise Data Product | New data product, cross-team delivery, regulated data, compliance risk, or irreversible architecture choice | Complete required phase artifacts 01-22, then run support skills |
-| Correct Course | Approved artifacts conflict with repo reality, review findings, verification failures, incident facts, or new constraints | `de-brainstorm-change` -> affected phase skill update -> `de-implementation-planning` |
+| Correct Course | Approved artifacts conflict with repo reality, review findings, verification failures, incident facts, or new constraints | `des-brainstorm-change` -> affected phase skill update -> `des-create-story` or `des-implementation-planning` |
 
 Mode rules:
 
@@ -75,8 +75,8 @@ Produce a summary of the current project state using a table like this:
 
 | # | Phase / Skill | Expected Artifact | Status |
 |---|---|---|---|
-| 01 | `de-business-discovery` | `01-business-discovery.md` | [Completed / Missing / In Progress] |
-| 02 | `de-business-questions` | `02-business-questions.md` | ... |
+| 01 | `des-business-discovery` | `01-business-discovery-brief.md` | [Completed / Missing / In Progress] |
+| 02 | `des-business-questions` | `02-business-question-catalog.md` | ... |
 | ... | ... | ... | ... |
 
 ### 5. Select Persona
@@ -87,16 +87,16 @@ If `docs/personas.md` is missing, use this fallback:
 
 | Persona | Persona Skill | Typical Artifact/Support Skills |
 |---|---|---|
-| Workflow Coordinator | `de-persona-workflow-coordinator` | `using-des-skill`, `de-brainstorm-change` |
-| Data Product Analyst | `de-persona-data-product-analyst` | `de-business-discovery`, `de-business-questions`, `de-requirements-and-kpis`, `de-data-product-definition` |
-| Source & Domain Analyst | `de-persona-source-domain-analyst` | `de-data-source-assessment`, `de-domain-modeling` |
-| Data Architect | `de-persona-data-architect` | `de-architecture-design`, `de-architecture-review`, `de-ingestion-design`, `de-bronze-layer-design`, `de-silver-layer-design`, `de-gold-layer-design`, `de-data-contracts`, `de-contract-review`, `de-transformation-design` |
-| Data Quality Engineer | `de-persona-data-quality-engineer` | `de-data-quality`, `de-orchestration-and-observability` |
-| Analytics Engineer | `de-persona-analytics-engineer` | `de-semantic-model-design`, `de-serving-layer-design`, `de-semantic-and-serving-layer` |
-| Governance Reviewer | `de-persona-governance-reviewer` | `de-lineage-and-metadata`, `de-governance-and-security` |
-| DataOps Engineer | `de-persona-dataops-engineer` | `de-cost-and-performance-optimization`, `de-cicd-and-testing`, `de-project-evaluation` |
-| Implementation Developer | `de-persona-implementation-developer` | `de-implementation-planning`, `de-build-from-artifacts` |
-| Delivery Reviewer | `de-persona-delivery-reviewer` | `de-review-implementation`, `de-verify-delivery`, `de-implementation-retrospective` |
+| Workflow Coordinator | `des-persona-workflow-coordinator` | `using-des-skill`, `des-brainstorm-change` |
+| Data Product Analyst | `des-persona-data-product-analyst` | `des-business-discovery`, `des-business-questions`, `des-requirements-and-kpis`, `des-data-product-definition` |
+| Source & Domain Analyst | `des-persona-source-domain-analyst` | `des-data-source-assessment`, `des-domain-modeling` |
+| Data Architect | `des-persona-data-architect` | `des-architecture-design`, `des-architecture-review`, `des-ingestion-design`, `des-bronze-layer-design`, `des-silver-layer-design`, `des-gold-layer-design`, `des-data-contracts`, `des-contract-review`, `des-transformation-design` |
+| Data Quality Engineer | `des-persona-data-quality-engineer` | `des-data-quality`, `des-orchestration-and-observability` |
+| Analytics Engineer | `des-persona-analytics-engineer` | `des-semantic-model-design`, `des-serving-layer-design`, `des-semantic-and-serving-layer` |
+| Governance Reviewer | `des-persona-governance-reviewer` | `des-lineage-and-metadata`, `des-governance-and-security` |
+| DataOps Engineer | `des-persona-dataops-engineer` | `des-cost-and-performance-optimization`, `des-cicd-and-testing`, `des-project-evaluation` |
+| Implementation Developer | `des-persona-implementation-developer` | `des-create-epic`, `des-sprint-planning`, `des-create-story`, `des-check-implementation-readiness`, `des-implementation-planning`, `des-dev-story` |
+| Delivery Reviewer | `des-persona-delivery-reviewer` | `des-code-review`, `des-verify-delivery`, `des-retrospective` |
 
 When reporting the next skill, include:
 
@@ -111,7 +111,7 @@ Present the following choices to the user:
 - **[M] Select Mode**: Manually choose Quick Fix, Standard Feature, Enterprise Data Product, or Correct Course.
 - **[N] Auto-Route**: Automatically select the earliest phase skill that is missing its required artifact.
 - **[S] Select Phase**: Manually choose a specific phase to run.
-- **[I] Implementation Support**: Route into `de-brainstorm-change`, `de-implementation-planning`, `de-build-from-artifacts`, `de-review-implementation`, or `de-verify-delivery`.
+- **[I] Implementation Support**: Route into `des-brainstorm-change`, `des-create-epic`, `des-sprint-planning`, `des-create-story`, `des-check-implementation-readiness`, `des-implementation-planning`, `des-dev-story`, `des-code-review`, or `des-verify-delivery`.
 - **[A] Audit**: Review and audit existing artifacts for quality compliance.
 - **[Q] Quit**: Exit the routing workspace.
 
@@ -119,7 +119,7 @@ HALT and wait for user selection.
 
 - On **[N]**:
   - Identify the earliest missing file in the order of execution.
-  - Advise the user to activate that skill. For example: "Earliest missing artifact is `01-business-discovery.md`. Recommend activating skill `de-business-discovery`."
+  - Advise the user to activate that skill. For example: "Earliest missing artifact is `01-business-discovery-brief.md`. Recommend activating skill `des-business-discovery`."
   - Wait for user confirmation or direct execution.
 - On **[M]**:
   - Ask the user to choose Quick Fix, Standard Feature, Enterprise Data Product, or Correct Course.
@@ -129,11 +129,15 @@ HALT and wait for user selection.
   - List the available skills and ask the user to input the skill number or name.
   - Check if the selected skill has all its required upstream artifacts. If not, warn the user about missing dependencies and require explicit override before proceeding.
 - On **[I]**:
-  - If scope is unclear or artifacts conflict, recommend `de-brainstorm-change`.
-  - If the work is scoped but not planned, recommend `de-implementation-planning`.
-  - If an implementation plan exists and status is ready, recommend `de-build-from-artifacts`.
-  - If changes are implemented, recommend `de-review-implementation`.
-  - If review is complete or accepted, recommend `de-verify-delivery`.
+  - If scope is unclear or artifacts conflict, recommend `des-brainstorm-change`.
+  - If approved artifacts need implementation breakdown, recommend `des-create-epic`.
+  - If epics exist but sprint tracking is missing, recommend `des-sprint-planning`.
+  - If sprint tracking has backlog stories, recommend `des-create-story`.
+  - If a story exists but readiness is uncertain, recommend `des-check-implementation-readiness`.
+  - If the work is scoped but needs a legacy implementation plan, recommend `des-implementation-planning`.
+  - If a story or implementation plan exists and status is ready, recommend `des-dev-story`.
+  - If changes are implemented, recommend `des-code-review`.
+  - If review is complete or accepted, recommend `des-verify-delivery`.
 - On **[A]**:
   - Scan the contents of existing artifacts and run their quality checklists.
   - Output a compliance report.

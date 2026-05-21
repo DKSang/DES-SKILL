@@ -127,7 +127,7 @@ function validateWorkflow(skillNames) {
   }
 
   const workflow = read(workflowPath);
-  const referenced = Array.from(workflow.matchAll(/`(de-[a-z0-9-]+|using-des-skill)`/g)).map((match) => match[1]);
+  const referenced = Array.from(workflow.matchAll(/`(des-[a-z0-9-]+|using-des-skill)`/g)).map((match) => match[1]);
   const uniqueReferenced = [...new Set(referenced)];
 
   for (const name of uniqueReferenced) {

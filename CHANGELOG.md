@@ -29,22 +29,22 @@ Mỗi skill giờ có `customize.toml` + `steps/` directory để enforce sequen
 **Số lượng**: 42 step files + 22 `customize.toml` files
 
 #### Batch A — Business & Requirements
-- `de-requirements-and-kpis/steps/` (3 steps): HALT bắt buộc tại metric conflicts; 5-criteria KPI gate; P1/P2/P3 SLA classification
-- `de-data-product-definition/steps/` (3 steps): Decision matrix 7 loại data product; Phase 1/2+ separation; per-product spec với consumer + owner + SLA
-- `de-domain-modeling/steps/` (3 steps): Grain declaration enforcement ("Mỗi hàng là một ___"); HALT bắt buộc tại M:M relationships; SCD identification
+- `des-requirements-and-kpis/steps/` (3 steps): HALT bắt buộc tại metric conflicts; 5-criteria KPI gate; P1/P2/P3 SLA classification
+- `des-data-product-definition/steps/` (3 steps): Decision matrix 7 loại data product; Phase 1/2+ separation; per-product spec với consumer + owner + SLA
+- `des-domain-modeling/steps/` (3 steps): Grain declaration enforcement ("Mỗi hàng là một ___"); HALT bắt buộc tại M:M relationships; SCD identification
 
 #### Batch B — Data Source & Architecture
-- `de-data-source-assessment/steps/` (3 steps): FDE write pattern classification (CRUD/Insert-Only/Event/File/API); CDC log retention check; 7-criteria source profile; risk flagging
-- `de-architecture-design/steps/` (3 steps): Reversibility classification (One-way/Two-way door); HALT tại Irreversible decisions; 6 Undercurrents review
+- `des-data-source-assessment/steps/` (3 steps): FDE write pattern classification (CRUD/Insert-Only/Event/File/API); CDC log retention check; 7-criteria source profile; risk flagging
+- `des-architecture-design/steps/` (3 steps): Reversibility classification (One-way/Two-way door); HALT tại Irreversible decisions; 6 Undercurrents review
 
 #### Batch C-E — Full Pipeline (via scaffold)
 - 17 skills còn lại: scaffold steps với đầy đủ menu tương tác và HALT placeholders
-  - `de-ingestion-design`, `de-bronze-layer-design`, `de-silver-layer-design`
-  - `de-gold-layer-design`, `de-data-contracts`, `de-transformation-design`
-  - `de-data-quality`, `de-orchestration-and-observability`
-  - `de-semantic-model-design`, `de-serving-layer-design`, `de-semantic-and-serving-layer`
-  - `de-lineage-and-metadata`, `de-governance-and-security`
-  - `de-cost-and-performance-optimization`, `de-cicd-and-testing`, `de-project-evaluation`
+  - `des-ingestion-design`, `des-bronze-layer-design`, `des-silver-layer-design`
+  - `des-gold-layer-design`, `des-data-contracts`, `des-transformation-design`
+  - `des-data-quality`, `des-orchestration-and-observability`
+  - `des-semantic-model-design`, `des-serving-layer-design`, `des-semantic-and-serving-layer`
+  - `des-lineage-and-metadata`, `des-governance-and-security`
+  - `des-cost-and-performance-optimization`, `des-cicd-and-testing`, `des-project-evaluation`
 
 ### Changed
 - Tất cả 23 SKILL.md: path references `{_des-output}` và `{skill-root}/../../templates/` thay thế `.agents/des-skill/output/` cũ
@@ -57,7 +57,7 @@ Mỗi skill giờ có `customize.toml` + `steps/` directory để enforce sequen
 - `tools/inject-step-architecture.js` — Helper để inject workflow architecture vào SKILL.md
 
 ### Fixed
-- `de-business-questions` output path: `.agents/des-skill/output/` → `{project-root}/_des-output/planning-artifacts/`
+- `des-business-questions` output path: `.agents/des-skill/output/` → `{project-root}/_des-output/planning-artifacts/`
 - 3 skills với `## Output Files` (plural) không pass regex test
 
 ---

@@ -6,10 +6,10 @@ DES-SKILL hỗ trợ bốn chế độ quy trình thích ứng. Hãy sử dụng
 
 | Mode | Use When | Required Path |
 | --- | --- | --- |
-| Quick Fix | Lỗi nhỏ, sửa tài liệu, thay đổi test/config hẹp, hoặc dọn dẹp repo ít rủi ro | `de-build-from-artifacts` -> `de-verify-delivery`; thêm `de-review-implementation` khi có thay đổi hành vi code |
-| Standard Feature | Một tính năng dữ liệu gắn kết, thay đổi pipeline, thay đổi model, hoặc cập nhật contract/DQ | `de-brainstorm-change` nếu phạm vi chưa rõ ràng -> `de-implementation-planning` -> `de-build-from-artifacts` -> `de-review-implementation` -> `de-verify-delivery` |
+| Quick Fix | Lỗi nhỏ, sửa tài liệu, thay đổi test/config hẹp, hoặc dọn dẹp repo ít rủi ro | `des-dev-story` -> `des-verify-delivery`; thêm `des-code-review` khi có thay đổi hành vi code |
+| Standard Feature | Một tính năng dữ liệu gắn kết, thay đổi pipeline, thay đổi model, hoặc cập nhật contract/DQ | `des-brainstorm-change` nếu phạm vi chưa rõ ràng -> `des-implementation-planning` -> `des-dev-story` -> `des-code-review` -> `des-verify-delivery` |
 | Enterprise Data Product | Sản phẩm dữ liệu mới, bàn giao liên team, dữ liệu có kiểm soát, rủi ro tuân thủ, hoặc quyết định kiến trúc khó đảo ngược | Hoàn thành tất cả các artifact bắt buộc từ phase 01-22, sau đó chạy luồng hỗ trợ (support loop) |
-| Correct Course | Các artifact đã duyệt xung đột với thực tế repo, phát hiện lỗi khi review/verify, sự cố thực tế, hoặc ràng buộc mới | `de-brainstorm-change` -> cập nhật phase skill bị ảnh hưởng -> `de-implementation-planning` |
+| Correct Course | Các artifact đã duyệt xung đột với thực tế repo, phát hiện lỗi khi review/verify, sự cố thực tế, hoặc ràng buộc mới | `des-brainstorm-change` -> cập nhật phase skill bị ảnh hưởng -> `des-implementation-planning` |
 
 ## Quy tắc Chọn Chế độ (Mode Selection Rules)
 

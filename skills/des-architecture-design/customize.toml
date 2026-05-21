@@ -1,0 +1,74 @@
+skill_id = "des-architecture-design"
+phase = 7
+phase_name = "Architecture Design"
+
+output_file = ".agents/des-skill/output/07-architecture-decision-record.md"
+template_file = ".agents/des-skill/templates/07-architecture-decision-record-template.md"
+checklist_file = ".agents/des-skill/checklists/07-architecture-design-checklist.md"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+next_recommended_skill = "des-ingestion-design"
+
+required_upstream_artifacts = [
+  ".agents/des-skill/output/01-business-discovery-brief.md",
+  ".agents/des-skill/output/02-business-question-catalog.md",
+  ".agents/des-skill/output/03-requirements-and-kpi-catalog.md",
+  ".agents/des-skill/output/04-data-product-specification.md",
+  ".agents/des-skill/output/05-data-source-inventory.md",
+  ".agents/des-skill/output/06-conceptual-domain-model.md"
+]
+
+required_sections = [
+  "Architecture Summary",
+  "Decision Context",
+  "Architecture Goals",
+  "Architecture Principles",
+  "Target Architecture Overview",
+  "Lifecycle Alignment",
+  "Environment Strategy",
+  "Storage Strategy",
+  "Compute Strategy",
+  "Batch Streaming and Event Strategy",
+  "Integration Pattern",
+  "Layer Strategy",
+  "Serving Strategy",
+  "Orchestration Boundary",
+  "Observability Direction",
+  "Security and Privacy Posture",
+  "Governance and Metadata Direction",
+  "DataOps and Software Engineering Direction",
+  "Build Versus Buy Considerations",
+  "Technology Constraints and Options",
+  "Architecture Decisions",
+  "Trade-Offs",
+  "Reversibility Classification",
+  "Risks",
+  "Assumptions",
+  "Open Questions",
+  "Next Skill Recommendation"
+]
+
+halt_required_decisions = [
+  "upstream_architecture_context",
+  "architecture_scope",
+  "target_platform",
+  "environment_strategy",
+  "storage_strategy",
+  "compute_strategy",
+  "batch_streaming_event_strategy",
+  "serving_direction",
+  "security_privacy_posture",
+  "cost_constraint",
+  "team_capability_constraint",
+  "hard_to_reverse_decision"
+]
+
+[workflow]
+activation_steps_prepend = []
+activation_steps_append = []
+
+persistent_facts = [
+  "file:{project-root}/**/project-context.md",
+]
+
+on_complete = ""
