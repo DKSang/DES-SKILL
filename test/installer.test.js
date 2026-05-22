@@ -7,6 +7,11 @@ const test = require("node:test");
 
 const repoRoot = path.resolve(__dirname, "..");
 const cliPath = path.join(repoRoot, "bin", "des-skill.js");
+const packageJson = require("../package.json");
+
+test("package version is 0.2.0", () => {
+  assert.equal(packageJson.version, "0.2.0");
+});
 
 test("prints help from the top-level help flag", () => {
   const output = execFileSync(process.execPath, [cliPath, "--help"], {
@@ -116,6 +121,24 @@ test("scaffolds a full DES workspace using the init command", () => {
 
     const configContent = fs.readFileSync(path.join(tmpRoot, "_des", "config.toml"), "utf8");
     assert.match(configContent, /planning_artifacts = "_des-output\/planning-artifacts"/);
+  } finally {
+    fs.rmSync(tmpRoot, { recursive: true, force: true });
+  }
+});
+
+test("scaffolds the four project folders when run without a command", () => {
+  const tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), "des-skill-test-"));
+
+  try {
+    execFileSync(process.execPath, [cliPath], {
+      cwd: tmpRoot,
+      encoding: "utf8"
+    });
+
+    assert.ok(fs.existsSync(path.join(tmpRoot, "_des")));
+    assert.ok(fs.existsSync(path.join(tmpRoot, "_des-output")));
+    assert.ok(fs.existsSync(path.join(tmpRoot, ".agents")));
+    assert.ok(fs.existsSync(path.join(tmpRoot, "docs")));
   } finally {
     fs.rmSync(tmpRoot, { recursive: true, force: true });
   }

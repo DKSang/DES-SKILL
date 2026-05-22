@@ -7,10 +7,12 @@ const path = require("node:path");
 function usage() {
   return [
     "Usage:",
+    "  des-skill [--dir <path>] [--scope project|user] [--force]",
     "  des-skill install [--dir <path>] [--scope project|user] [--force]",
     "  des-skill init [--dir <path>] [--force]",
     "",
     "Defaults:",
+    "  no command runs init for npx-friendly project scaffolding",
     "  --scope project installs to .agents/skills",
     "  --scope user installs to ~/.agents/skills",
     "  init scaffolds a full DES-method workspace (_des, _des-output, .agents/skills, docs)"
@@ -263,9 +265,13 @@ function initializeWorkspace(args) {
 function main(argv) {
   const args = parseArgs(argv);
 
-  if (!args.command || args.command === "help") {
+  if (args.command === "help") {
     console.log(usage());
     return 0;
+  }
+
+  if (!args.command) {
+    args.command = "init";
   }
 
   if (args.command === "init") {

@@ -147,13 +147,16 @@ Dùng DES-SKILL khi bạn muốn:
 
 ```bash
 # Full project scaffold
+npx @dksang/des-skill
+
+# Full project scaffold (explicit)
 npx @dksang/des-skill init
 
 # Skill pack only (existing project)
 npx @dksang/des-skill install
 
 # Pinned version
-npx @dksang/des-skill@0.1.2 install
+npx @dksang/des-skill@0.2.0
 ```
 
 ### Prompt mẫu — Main skill

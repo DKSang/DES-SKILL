@@ -9,10 +9,10 @@ Hướng dẫn bắt đầu nhanh với DES-SKILL.
 ### Dự án mới
 
 ```bash
-npx @dksang/des-skill init
+npx @dksang/des-skill
 ```
 
-Lệnh `init` tạo ra:
+Lệnh này tạo ra:
 
 ```text
 _des/
@@ -54,7 +54,7 @@ npx @dksang/des-skill init --force
 ### Pinned version
 
 ```bash
-npx @dksang/des-skill@0.1.2 install
+npx @dksang/des-skill@0.2.0
 ```
 
 ### Clone thủ công
