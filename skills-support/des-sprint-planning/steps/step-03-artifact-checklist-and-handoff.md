@@ -17,7 +17,7 @@ Create or update the Sprint Plan, validate it, update workflow status, and recom
 1. Create or update:
 
 ```text
-.agents/des-skill/output/support/sprint-plan.md
+_des-output/implementation-artifacts/sprint-plan.md
 ```
 
 2. Use the configured template.
@@ -69,7 +69,7 @@ Stop if the checklist fails.
 A. Fix the Sprint Plan now
 B. Mark Sprint Plan as Draft with blockers
 C. Return to Step 02 sprint selection
-D. Route back to `des-create-stories`
+D. Route back to `des-create-story`
 E. Stop workflow
 
 ### Required response
@@ -83,7 +83,7 @@ Update `des-workflow-status.md` with:
 ```yaml
 support_des_sprint_planning:
   skill: des-sprint-planning
-  artifact: .agents/des-skill/output/support/sprint-plan.md
+  artifact: _des-output/implementation-artifacts/sprint-plan.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   sprint_goal: ...

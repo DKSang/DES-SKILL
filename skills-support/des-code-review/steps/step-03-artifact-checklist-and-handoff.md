@@ -17,7 +17,7 @@ Create or update the Code Review Report, validate it, update workflow status, an
 1. Create or update:
 
 ```text
-.agents/des-skill/output/support/code-review-report.md
+_des-output/implementation-artifacts/code-review-report.md
 ```
 
 2. Use the configured template.
@@ -81,7 +81,7 @@ Update `des-workflow-status.md` with:
 ```yaml
 support_des_code_review:
   skill: des-code-review
-  artifact: .agents/des-skill/output/support/code-review-report.md
+  artifact: _des-output/implementation-artifacts/code-review-report.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   reviewed_scope: ...

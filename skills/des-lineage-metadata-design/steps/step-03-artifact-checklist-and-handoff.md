@@ -97,7 +97,7 @@ Choose A/B/C/D/E.
 ```yaml
 phase_18_lineage_metadata_design:
   skill: des-lineage-metadata-design
-  artifact: .agents/des-skill/output/18-lineage-metadata-specification.md
+  artifact: _des-output/planning-artifacts/18-lineage-metadata-specification.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   metadata_assets:

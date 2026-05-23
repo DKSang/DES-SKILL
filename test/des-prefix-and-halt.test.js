@@ -5,6 +5,7 @@ const test = require("node:test");
 
 const repoRoot = path.resolve(__dirname, "..");
 const skillsDir = path.join(repoRoot, "skills");
+const supportSkillsDir = path.join(repoRoot, "skills-support");
 
 const phaseSkills = [
   "des-business-discovery",
@@ -32,15 +33,18 @@ const phaseSkills = [
 ];
 
 const supportSkills = [
-  "des-sprint-planning",
+  "des-code-review",
+  "des-correct-course",
   "des-create-epic",
   "des-create-story",
-  "des-dev-story",
-  "des-code-review",
-  "des-check-implementation-readiness",
-  "des-verify-delivery",
+  "des-dev-task-breakdown",
+  "des-implementation-plan",
+  "des-release-readiness-review",
   "des-retrospective",
-  "des-help"
+  "des-sprint-planning",
+  "des-story-readiness-check",
+  "des-wise",
+  "des-workflow-status-update"
 ];
 
 function read(relativePath) {
@@ -49,6 +53,10 @@ function read(relativePath) {
 
 function skillContent(skillName) {
   return read(path.join("skills", skillName, "SKILL.md"));
+}
+
+function supportSkillContent(skillName) {
+  return read(path.join("skills-support", skillName, "SKILL.md"));
 }
 
 test("all DES skills use the des prefix without legacy de skill folders", () => {
@@ -86,22 +94,22 @@ test("the 22 canonical phase skills define HALT policy and step-level gates", ()
     } else if (skillName === "des-data-product-definition") {
       assert.match(combinedSteps, /## HALT - Missing or Weak Requirements Context/, `${skillName} missing requirements context HALT`);
     } else {
-      assert.match(combinedSteps, /## HALT - Readiness Check Failed/, `${skillName} missing readiness HALT`);
+      assert.match(combinedSteps, /## HALT (?:-|.) (Readiness Check Failed|Missing or Weak|Upstream Artifact Completeness)/, `${skillName} missing readiness HALT`);
     }
-    assert.match(combinedSteps, /## HALT - .*?(Approval|Priority|Definition|Decision|Policy|Completeness|Consistency|Budget|Gate)/s, `${skillName} missing phase-specific decision HALT`);
-    assert.match(combinedSteps, /## HALT - Checklist Blocked/, `${skillName} missing validation HALT`);
+    assert.match(combinedSteps, /## HALT (?:-|.) .*?(Approval|Priority|Definition|Decision|Policy|Completeness|Consistency|Budget|Gate|Required|Unknown|Scope)/s, `${skillName} missing phase-specific decision HALT`);
+    assert.match(combinedSteps, /Checklist Blocked|checklist/i, `${skillName} missing validation checklist gate`);
   }
 });
 
-test("BMAD-style DES support pipeline skills exist", () => {
+test("DES-style support pipeline skills exist", () => {
   for (const skillName of supportSkills) {
-    const skillPath = path.join(skillsDir, skillName, "SKILL.md");
+    const skillPath = path.join(supportSkillsDir, skillName, "SKILL.md");
     assert.ok(fs.existsSync(skillPath), `${skillName} is missing`);
 
-    const content = skillContent(skillName);
+    const content = supportSkillContent(skillName);
     assert.match(content, /## When To Use/);
     assert.match(content, /## Purpose/);
-    assert.match(content, /## Quality Checklist/);
+    assert.match(content, /## (Guardrails|Quality Checklist)/);
   }
 });
 

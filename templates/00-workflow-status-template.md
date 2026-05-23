@@ -1,6 +1,6 @@
 # DES-SKILL Workflow Status
 
-> Copy this file to `.agents/des-skill/sprint-status/des-workflow-status.md` when starting a project.
+> Copy this file to `_des-output/implementation-artifacts/des-workflow-status.md` when starting a project.
 > Update it after every phase to maintain a reliable session-to-session handoff.
 
 ---
@@ -26,10 +26,10 @@
 
 | Mode | Status | Reason | Required Next Skill / Gate |
 | :--- | :--- | :--- | :--- |
-| Quick Fix | Not Selected | Small bug, doc correction, narrow test/config change, or low-risk cleanup | `des-dev-story` -> `des-verify-delivery` |
-| Standard Feature | Not Selected | One cohesive data feature, pipeline change, model change, or contract/DQ update | `des-implementation-planning` before build |
+| Quick Fix | Not Selected | Small bug, doc correction, narrow test/config change, or low-risk cleanup | `des-dev-task-breakdown` -> `des-code-review` |
+| Standard Feature | Not Selected | One cohesive data feature, pipeline change, model change, or contract/DQ update | `des-implementation-plan` before build |
 | Enterprise Data Product | Not Selected | New production data product, regulated data, cross-team work, or irreversible decision | Required phase artifacts 01-22 |
-| Correct Course | Not Selected | Artifact conflict, review blocker, verification failure, incident fact, or scope change | `des-brainstorm-change` then affected phase update |
+| Correct Course | Not Selected | Artifact conflict, review blocker, verification failure, incident fact, or scope change | `des-correct-course` then affected phase update |
 
 **Selected Mode**:
 
@@ -106,17 +106,16 @@ Use this section when moving from planning artifacts into implementation work. T
 | Support Artifact | Skill | Status | Notes |
 | :--- | :--- | :--- | :--- |
 | `help-note.md` | `des-help` | Not Started | Optional workflow explanation or routing note |
-| `change-brief.md` | `des-brainstorm-change` | Not Started | Scope change, new feature, or incident follow-up |
-| `epics.md` | `des-create-epic` | Not Started | Epics derived from approved DES artifacts |
-| `sprint-status.yaml` | `des-sprint-planning` | Not Started | Sprint/story/review/verify/retro status tracking |
-| `<story-key>.md` | `des-create-story` | Not Started | Context-rich story packet from artifacts and repo context |
-| `readiness-report.md` | `des-check-implementation-readiness` | Not Started | Readiness gate before dev-story |
-| `implementation-plan.md` | `des-implementation-planning` | Not Started | Tasks mapped to planning artifacts |
-| `implementation-story.md` | `des-implementation-planning` | Not Started | Executable dev packet with ACs, tasks, guardrails, file list, change log |
-| `implementation-log.md` | `des-dev-story` | Not Started | Files changed, tests run, deviations |
-| `review-report.md` | `des-code-review` | Not Started | Findings against artifacts/contracts/DQ/security |
-| `verification-report.md` | `des-verify-delivery` | Not Started | Fresh command evidence |
-| `implementation-retrospective.md` | `des-retrospective` | Not Started | Lessons, artifact drift, follow-up backlog |
+| `epic-catalog.md` | `des-create-epic` | Not Started | Epics derived from approved DES artifacts |
+| `story-catalog.md` | `des-create-story` | Not Started | Context-rich story packet from artifacts and repo context |
+| `sprint-plan.md` | `des-sprint-planning` | Not Started | Sprint/story/review/release/retro status tracking |
+| `story-readiness-report.md` | `des-story-readiness-check` | Not Started | Readiness gate before task breakdown |
+| `dev-task-breakdown.md` | `des-dev-task-breakdown` | Not Started | Developer task list with checks and validation notes |
+| `implementation-plan.md` | `des-implementation-plan` | Not Started | Tasks mapped to planning artifacts |
+| `code-review-report.md` | `des-code-review` | Not Started | Findings against artifacts/contracts/DQ/security |
+| `release-readiness-report.md` | `des-release-readiness-review` | Not Started | Fresh release evidence and release decision |
+| `retrospective-report.md` | `des-retrospective` | Not Started | Lessons, artifact drift, follow-up backlog |
+| `correct-course-plan.md` | `des-correct-course` | Not Started | Corrective route and action plan |
 
 **Status values**: `Not Started` → `In Progress` → `Done` → `Blocked (reason)` → `Skipped (reason)`
 
@@ -126,7 +125,7 @@ Use this section when moving from planning artifacts into implementation work. T
 
 | Gate | Checklist | Status | Notes |
 | :--- | :--- | :--- | :--- |
-| Implementation Readiness | `checklists/implementation-readiness-checklist.md` | Not Started | Must pass before `des-dev-story` unless risk is explicitly accepted |
+| Implementation Readiness | `checklists/implementation-readiness-checklist.md` | Not Started | Must pass before `des-dev-task-breakdown` unless risk is explicitly accepted |
 | Definition of Done | `checklists/definition-of-done-checklist.md` | Not Started | Must support ready-for-review, complete, release, or completion claim |
 
 **Gate status values**: `Not Started` -> `Pass` -> `Blocked` -> `Ready with Accepted Risk` -> `Partial`
@@ -157,14 +156,14 @@ Copy and paste this at the start of the next agent session:
 Continue this DES-SKILL project.
 
 Read these files in order:
-1. .agents/des-skill/DES-WORKFLOW.md
-2. .agents/des-skill/sprint-status/des-workflow-status.md
-3. .agents/des-skill/output/ (scan all completed artifacts)
+1. _des/DES-WORKFLOW.md
+2. _des-output/implementation-artifacts/des-workflow-status.md
+3. _des-output/planning-artifacts/ (scan all completed artifacts)
 
 Then:
 - Identify the current phase from des-workflow-status.md
 - Check that all upstream phase artifacts are complete before starting the next phase
 - Activate the correct next skill from the Skill column
-- Write the next artifact to .agents/des-skill/output/
+- Write the next artifact to _des-output/planning-artifacts/
 - Update des-workflow-status.md: set artifact status to Done, update Current Phase and Next Recommended Skill
 ```

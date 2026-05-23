@@ -51,23 +51,24 @@ Các vai trò (personas) trong DES-SKILL xác định ranh giới trách nhiệm
 | `des-orchestration-observability` | Data Quality Engineer | Định nghĩa bộ điều phối (orchestration), thử lại, giám sát, cảnh báo, runbooks |
 | `des-semantic-model-design` | Analytics Engineer | Định nghĩa certified metrics, semantic layer, RLS, cơ quan quản lý metric |
 | `des-serving-layer-design` | Analytics Engineer | Định nghĩa giao diện serving, caching, access patterns, độ phù hợp người tiêu dùng |
-| `des-semantic-and-serving-layer` | Analytics Engineer | Cầu nối tương thích cho các workflow kết hợp semantic và serving |
 | `des-lineage-metadata-design` | Governance Reviewer | Định nghĩa lineage, metadata, quản trị catalog, schema registry |
+| `des-governance-and-security` | Governance Reviewer | Skill tương thích cho governance và security khi dùng workflow cũ |
 | `des-governance-security-design` | Governance Reviewer | Định nghĩa quyền riêng tư, PII, masking/tokenization, kiểm soát truy cập |
 | `des-cost-and-performance-optimization` | DataOps Engineer | Đánh giá chi phí, hiệu năng, tài nguyên dự phòng, ROI, khả năng rollback |
 | `des-cicd-and-testing` | DataOps Engineer | Định nghĩa CI/CD, thăng cấp môi trường, các contract tests, release gates |
 | `des-project-evaluation` | DataOps Engineer | Đánh giá độ sẵn sàng release, mức độ tiếp nhận, giá trị, theo dõi sau triển khai |
-| `des-help` | Workflow Coordinator | Giải thích workflow, xác định HALT/blocker hiện tại, và đề xuất skill tiếp theo |
-| `des-brainstorm-change` | Workflow Coordinator | Làm rõ yêu cầu thay đổi, ảnh hưởng, các phương án, blockers, lộ trình sửa hướng đi |
 | `des-create-epic` | Implementation Developer | Chuyển các artifact đã duyệt thành epic triển khai có truy vết và ranh giới rõ ràng |
-| `des-sprint-planning` | Implementation Developer | Tạo hoặc cập nhật sprint-status từ epics, stories, review, verification, và retrospective |
 | `des-create-story` | Implementation Developer | Tạo story triển khai giàu ngữ cảnh từ epic, artifacts, repo context, và sprint status |
-| `des-check-implementation-readiness` | Delivery Reviewer | Kiểm tra story/artifact đã đủ điều kiện để bắt đầu triển khai hay chưa |
-| `des-implementation-planning` | Implementation Developer | Chuyển đổi các artifact thành kế hoạch triển khai và các task thực thi cụ thể |
-| `des-dev-story` | Implementation Developer | Triển khai các thay đổi được khoanh vùng từ các artifact kèm theo bằng chứng và log |
+| `des-sprint-planning` | Implementation Developer | Tạo sprint plan từ epic, story, readiness, review, release, và retrospective |
+| `des-story-readiness-check` | Delivery Reviewer | Kiểm tra story/artifact đã đủ điều kiện để bắt đầu triển khai hay chưa |
+| `des-dev-task-breakdown` | Implementation Developer | Chuyển story đã sẵn sàng thành task triển khai có kiểm tra rõ ràng |
+| `des-implementation-plan` | Implementation Developer | Chuyển đổi task breakdown thành kế hoạch triển khai và thứ tự thực thi cụ thể |
 | `des-code-review` | Delivery Reviewer | Review các thay đổi so với các artifact thiết kế, contracts, DQ, bảo mật, bằng chứng |
-| `des-verify-delivery` | Delivery Reviewer | Chạy kiểm thử xác thực mới và quyết định có hỗ trợ hoàn thành hay không |
+| `des-release-readiness-review` | Delivery Reviewer | Kiểm tra bằng chứng release, blockers, rollback, và quyết định release readiness |
 | `des-retrospective` | Delivery Reviewer | Ghi nhận lệch thiết kế (drift), nợ kỹ thuật (debt), bài học, tồn đọng theo dõi |
+| `des-correct-course` | Workflow Coordinator | Lập kế hoạch sửa hướng khi artifact xung đột, scope đổi, hoặc review phát hiện blocker |
+| `des-workflow-status-update` | Workflow Coordinator | Cập nhật trạng thái workflow từ planning và implementation artifacts |
+| `des-wise` | Workflow Coordinator | Định tuyến yêu cầu người dùng tới skill phù hợp và đề xuất bước tiếp theo |
 
 ## Quy tắc của Bộ Định Tuyến (Router Rules)
 

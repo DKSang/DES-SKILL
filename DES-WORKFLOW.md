@@ -76,11 +76,11 @@ Trước khi ghi file thiết kế hoặc cập nhật trạng thái quy trình,
 
 Theo dõi tiến độ trong file:
 
-`.agents/des-skill/sprint-status/des-workflow-status.md`
+`_des-output/implementation-artifacts/des-workflow-status.md`
 
 Tạo file này từ template:
 
-`.agents/des-skill/templates/support/des-workflow-status-template.md`
+`_des/templates/support/des-workflow-status-template.md`
 
 ## Phase 0: Router
 

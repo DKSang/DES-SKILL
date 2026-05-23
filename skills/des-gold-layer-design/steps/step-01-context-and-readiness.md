@@ -8,16 +8,16 @@ Confirm that Gold Layer Design is the correct next step and that upstream Silver
 
 Look for:
 
-- `.agents/des-skill/output/01-business-discovery-brief.md`;
-- `.agents/des-skill/output/02-business-question-catalog.md`;
-- `.agents/des-skill/output/03-requirements-and-kpi-catalog.md`;
-- `.agents/des-skill/output/04-data-product-specification.md`;
-- `.agents/des-skill/output/05-data-source-inventory.md`;
-- `.agents/des-skill/output/06-conceptual-domain-model.md`;
-- `.agents/des-skill/output/07-architecture-decision-record.md`;
-- `.agents/des-skill/output/08-ingestion-specification.md`;
-- `.agents/des-skill/output/09-bronze-layer-specification.md`;
-- `.agents/des-skill/output/10-silver-layer-specification.md`;
+- `_des-output/planning-artifacts/01-business-discovery-brief.md`;
+- `_des-output/planning-artifacts/02-business-question-catalog.md`;
+- `_des-output/planning-artifacts/03-requirements-and-kpi-catalog.md`;
+- `_des-output/planning-artifacts/04-data-product-specification.md`;
+- `_des-output/planning-artifacts/05-data-source-inventory.md`;
+- `_des-output/planning-artifacts/06-conceptual-domain-model.md`;
+- `_des-output/planning-artifacts/07-architecture-decision-record.md`;
+- `_des-output/planning-artifacts/08-ingestion-specification.md`;
+- `_des-output/planning-artifacts/09-bronze-layer-specification.md`;
+- `_des-output/planning-artifacts/10-silver-layer-specification.md`;
 - workflow status file;
 - P1/P2 business questions;
 - approved KPIs and metric definitions;

@@ -141,7 +141,7 @@ Required action:
 
 | Story ID | Refinement Needed | Route                                 |
 | -------- | ----------------- | ------------------------------------- |
-|          |                   | des-create-stories / DES phase / user |
+|          |                   | des-create-story / DES phase / user |
 
 ## 14. Ready Story Handoff
 

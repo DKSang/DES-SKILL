@@ -17,7 +17,7 @@ Create or update the Epic Catalog, validate it, update workflow status, and reco
 1. Create or update:
 
 ```text
-.agents/des-skill/output/support/epic-catalog.md
+_des-output/implementation-artifacts/epic-catalog.md
 ```
 
 2. Use the configured template.
@@ -40,7 +40,7 @@ Passed | Passed with risks | Blocked
 9. Recommend the next support skill:
 
 ```text
-des-create-stories
+des-create-story
 ```
 
 ## HALT — Checklist Blocked
@@ -79,7 +79,7 @@ Update `des-workflow-status.md` with:
 ```yaml
 support_des_create_epic:
   skill: des-create-epic
-  artifact: .agents/des-skill/output/support/epic-catalog.md
+  artifact: _des-output/implementation-artifacts/epic-catalog.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   epic_count: ...
@@ -93,7 +93,7 @@ support_des_create_epic:
     - ...
   open_questions:
     - ...
-  next_recommended_skill: des-create-stories
+  next_recommended_skill: des-create-story
 ```
 
 ## Completion Criteria

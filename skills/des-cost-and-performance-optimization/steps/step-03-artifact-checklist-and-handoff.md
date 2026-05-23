@@ -71,7 +71,7 @@ Update the status file with:
 ```yaml
 phase_20_cost_performance_optimization:
   skill: des-cost-and-performance-optimization
-  artifact: .agents/des-skill/output/20-cost-performance-optimization-specification.md
+  artifact: _des-output/planning-artifacts/20-cost-performance-optimization-specification.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   optimized_workloads:

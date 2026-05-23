@@ -92,7 +92,7 @@ Với hai tầng, agent luôn biết:
 File trung tâm theo dõi toàn bộ trạng thái:
 
 ```text
-.agents/des-skill/sprint-status/des-workflow-status.md
+_des-output/implementation-artifacts/des-workflow-status.md
 ```
 
 Agent phải cập nhật file này sau mỗi artifact quan trọng, để phiên làm việc tiếp theo biết đang ở đâu.
@@ -117,6 +117,6 @@ Agent phải cập nhật file này sau mỗi artifact quan trọng, để phiê
 
 - [workflow.md](workflow.md) — Workflow đầy đủ và luồng rút gọn
 - [skill-catalog.md](skill-catalog.md) — Danh mục 22 main skills
-- [support-skills.md](support-skills.md) — Danh mục 11 support skills
+- [support-skills.md](support-skills.md) — Danh mục 12 support skills
 - [quick-start.md](quick-start.md) — Hướng dẫn bắt đầu nhanh
 - [agent-rules.md](agent-rules.md) — Quy tắc bắt buộc cho agent

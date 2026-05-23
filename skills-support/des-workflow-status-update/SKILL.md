@@ -42,49 +42,49 @@ Do not use this skill to create new epics, stories, sprint plans, tasks, impleme
 The agent should inspect available status sources:
 
 ```text
-.agents/des-skill/output/support/epic-catalog.md
-.agents/des-skill/output/support/story-catalog.md
-.agents/des-skill/output/support/sprint-plan.md
-.agents/des-skill/output/support/story-readiness-report.md
-.agents/des-skill/output/support/dev-task-breakdown.md
-.agents/des-skill/output/support/implementation-plan.md
-.agents/des-skill/output/support/code-review-report.md
-.agents/des-skill/output/support/release-readiness-report.md
-.agents/des-skill/output/support/retrospective-report.md
-.agents/des-skill/output/support/correct-course-plan.md
+_des-output/implementation-artifacts/epic-catalog.md
+_des-output/implementation-artifacts/story-catalog.md
+_des-output/implementation-artifacts/sprint-plan.md
+_des-output/implementation-artifacts/story-readiness-report.md
+_des-output/implementation-artifacts/dev-task-breakdown.md
+_des-output/implementation-artifacts/implementation-plan.md
+_des-output/implementation-artifacts/code-review-report.md
+_des-output/implementation-artifacts/release-readiness-report.md
+_des-output/implementation-artifacts/retrospective-report.md
+_des-output/implementation-artifacts/correct-course-plan.md
 ```
 
 It should also inspect DES main phase outputs where available:
 
 ```text
-.agents/des-skill/output/01-business-discovery-brief.md
-.agents/des-skill/output/02-business-question-catalog.md
-.agents/des-skill/output/03-requirements-and-kpi-catalog.md
-.agents/des-skill/output/04-data-product-specification.md
-.agents/des-skill/output/05-data-source-inventory.md
-.agents/des-skill/output/06-conceptual-domain-model.md
-.agents/des-skill/output/07-architecture-decision-record.md
-.agents/des-skill/output/08-ingestion-specification.md
-.agents/des-skill/output/09-bronze-layer-specification.md
-.agents/des-skill/output/10-silver-layer-specification.md
-.agents/des-skill/output/11-gold-layer-specification.md
-.agents/des-skill/output/12-data-contract-specification.md
-.agents/des-skill/output/13-transformation-specification.md
-.agents/des-skill/output/14-data-quality-specification.md
-.agents/des-skill/output/15-orchestration-observability-specification.md
-.agents/des-skill/output/16-semantic-model-specification.md
-.agents/des-skill/output/17-serving-layer-specification.md
-.agents/des-skill/output/18-lineage-metadata-specification.md
-.agents/des-skill/output/19-governance-security-specification.md
-.agents/des-skill/output/20-cost-performance-optimization-specification.md
-.agents/des-skill/output/21-cicd-testing-specification.md
-.agents/des-skill/output/22-project-evaluation-report.md
+_des-output/planning-artifacts/01-business-discovery-brief.md
+_des-output/planning-artifacts/02-business-question-catalog.md
+_des-output/planning-artifacts/03-requirements-and-kpi-catalog.md
+_des-output/planning-artifacts/04-data-product-specification.md
+_des-output/planning-artifacts/05-data-source-inventory.md
+_des-output/planning-artifacts/06-conceptual-domain-model.md
+_des-output/planning-artifacts/07-architecture-decision-record.md
+_des-output/planning-artifacts/08-ingestion-specification.md
+_des-output/planning-artifacts/09-bronze-layer-specification.md
+_des-output/planning-artifacts/10-silver-layer-specification.md
+_des-output/planning-artifacts/11-gold-layer-specification.md
+_des-output/planning-artifacts/12-data-contract-specification.md
+_des-output/planning-artifacts/13-transformation-specification.md
+_des-output/planning-artifacts/14-data-quality-specification.md
+_des-output/planning-artifacts/15-orchestration-observability-specification.md
+_des-output/planning-artifacts/16-semantic-model-specification.md
+_des-output/planning-artifacts/17-serving-layer-specification.md
+_des-output/planning-artifacts/18-lineage-metadata-specification.md
+_des-output/planning-artifacts/19-governance-security-specification.md
+_des-output/planning-artifacts/20-cost-performance-optimization-specification.md
+_des-output/planning-artifacts/21-cicd-testing-specification.md
+_des-output/planning-artifacts/22-project-evaluation-report.md
 ```
 
 Existing output to update:
 
 ```text
-.agents/des-skill/sprint-status/des-workflow-status.md
+_des-output/implementation-artifacts/des-workflow-status.md
 ```
 
 ## Output
@@ -92,7 +92,7 @@ Existing output to update:
 Create or update:
 
 ```text
-.agents/des-skill/sprint-status/des-workflow-status.md
+_des-output/implementation-artifacts/des-workflow-status.md
 ```
 
 The workflow status file must include:

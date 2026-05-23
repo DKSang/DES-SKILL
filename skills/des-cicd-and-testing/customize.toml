@@ -2,24 +2,24 @@ skill_id = "des-cicd-and-testing"
 phase = 21
 phase_name = "CI/CD and Testing"
 
-output_file = ".agents/des-skill/output/21-cicd-testing-specification.md"
-template_file = ".agents/des-skill/templates/21-cicd-testing-specification-template.md"
-checklist_file = ".agents/des-skill/checklists/21-cicd-testing-checklist.md"
-status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+output_file = "_des-output/planning-artifacts/21-cicd-testing-specification.md"
+template_file = "_des/templates/21-cicd-testing-specification-template.md"
+checklist_file = "_des/checklists/21-cicd-testing-checklist.md"
+status_file = "_des-output/implementation-artifacts/des-workflow-status.md"
 
 next_recommended_skill = "des-project-evaluation"
 
 required_upstream_artifacts = [
-  ".agents/des-skill/output/07-architecture-decision-record.md",
-  ".agents/des-skill/output/12-data-contract-specification.md",
-  ".agents/des-skill/output/13-transformation-specification.md",
-  ".agents/des-skill/output/14-data-quality-specification.md",
-  ".agents/des-skill/output/15-orchestration-observability-specification.md",
-  ".agents/des-skill/output/16-semantic-model-specification.md",
-  ".agents/des-skill/output/17-serving-layer-specification.md",
-  ".agents/des-skill/output/18-lineage-metadata-specification.md",
-  ".agents/des-skill/output/19-governance-security-specification.md",
-  ".agents/des-skill/output/20-cost-performance-optimization-specification.md"
+  "_des-output/planning-artifacts/07-architecture-decision-record.md",
+  "_des-output/planning-artifacts/12-data-contract-specification.md",
+  "_des-output/planning-artifacts/13-transformation-specification.md",
+  "_des-output/planning-artifacts/14-data-quality-specification.md",
+  "_des-output/planning-artifacts/15-orchestration-observability-specification.md",
+  "_des-output/planning-artifacts/16-semantic-model-specification.md",
+  "_des-output/planning-artifacts/17-serving-layer-specification.md",
+  "_des-output/planning-artifacts/18-lineage-metadata-specification.md",
+  "_des-output/planning-artifacts/19-governance-security-specification.md",
+  "_des-output/planning-artifacts/20-cost-performance-optimization-specification.md"
 ]
 
 required_sections = [

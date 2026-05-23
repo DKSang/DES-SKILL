@@ -20,6 +20,26 @@ test("prints help from the top-level help flag", () => {
   });
 
   assert.match(output, /des-skill install/);
+  assert.doesNotMatch(output, /BMAD/);
+});
+
+test("prints DES branding during install", () => {
+  const tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), "des-skill-test-"));
+  const target = path.join(tmpRoot, ".agents", "skills");
+
+  try {
+    const output = execFileSync(process.execPath, [cliPath, "install", "--dir", target], {
+      cwd: tmpRoot,
+      encoding: "utf8"
+    });
+
+    assert.match(output, /DES-SKILL/);
+    assert.match(output, /Data Engineering Superpowers/);
+    assert.match(output, /DES is ready to use/);
+    assert.doesNotMatch(output, /BMAD/);
+  } finally {
+    fs.rmSync(tmpRoot, { recursive: true, force: true });
+  }
 });
 
 test("installs all top-level skills into the requested directory", () => {
@@ -35,6 +55,8 @@ test("installs all top-level skills into the requested directory", () => {
     assert.ok(fs.existsSync(path.join(target, "using-des-skill", "SKILL.md")));
     assert.ok(fs.existsSync(path.join(target, "des-business-discovery", "SKILL.md")));
     assert.ok(fs.existsSync(path.join(target, "des-ingestion-design", "SKILL.md")));
+    assert.ok(fs.existsSync(path.join(target, "des-create-epic", "SKILL.md")));
+    assert.ok(fs.existsSync(path.join(target, "des-artifact-quiz", "SKILL.md")));
     assert.equal(fs.existsSync(path.join(target, "des-skill", "SKILL.md")), false);
     assert.equal(fs.existsSync(path.join(target, ".gh-skill-install-test")), false);
   } finally {
@@ -42,7 +64,7 @@ test("installs all top-level skills into the requested directory", () => {
   }
 });
 
-test("creates the project support workspace next to installed skills", () => {
+test("creates a DES-style workspace next to installed skills", () => {
   const tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), "des-skill-test-"));
   const target = path.join(tmpRoot, ".agents", "skills");
 
@@ -52,11 +74,13 @@ test("creates the project support workspace next to installed skills", () => {
       encoding: "utf8"
     });
 
-    const workspace = path.join(tmpRoot, ".agents", "des-skill");
-    assert.ok(fs.existsSync(path.join(workspace, "output")));
-    assert.ok(fs.existsSync(path.join(workspace, "planning")));
-    assert.ok(fs.existsSync(path.join(workspace, "sprint-status")));
-    assert.ok(fs.existsSync(path.join(workspace, "sprint-status", "des-workflow-status.md")));
+    const workspace = path.join(tmpRoot, "_des");
+    assert.ok(fs.existsSync(path.join(workspace, "config.toml")));
+    assert.ok(fs.existsSync(path.join(workspace, "config.user.toml")));
+    assert.ok(fs.existsSync(path.join(workspace, "_config")));
+    assert.ok(fs.existsSync(path.join(workspace, "method", "using-des-skill", "SKILL.md")));
+    assert.ok(fs.existsSync(path.join(workspace, "support", "des-create-epic", "SKILL.md")));
+    assert.ok(fs.existsSync(path.join(workspace, "learning", "des-artifact-quiz", "SKILL.md")));
     assert.ok(fs.existsSync(path.join(workspace, "templates", "01-business-discovery-brief-template.md")));
     assert.ok(fs.existsSync(path.join(workspace, "templates", "22-project-evaluation-template.md")));
     assert.ok(fs.existsSync(path.join(workspace, "templates", "00-workflow-status-template.md")));
@@ -64,8 +88,11 @@ test("creates the project support workspace next to installed skills", () => {
     assert.ok(fs.existsSync(path.join(workspace, "docs", "workflow-modes.md")));
     assert.ok(fs.existsSync(path.join(workspace, "workflows", "new-project-workflow.md")));
     assert.ok(fs.existsSync(path.join(workspace, "examples", "example_iot_project.md")));
+    assert.ok(fs.existsSync(path.join(workspace, "knowledge", "FUNDAMENTALS-MAP.md")));
     assert.ok(fs.existsSync(path.join(workspace, "DES-WORKFLOW.md")));
     assert.ok(fs.existsSync(path.join(workspace, "ARTIFACTS.md")));
+    assert.ok(fs.existsSync(path.join(workspace, "SOUL.md")));
+    assert.equal(fs.existsSync(path.join(tmpRoot, ".agents", "des-skill")), false);
   } finally {
     fs.rmSync(tmpRoot, { recursive: true, force: true });
   }
@@ -111,16 +138,22 @@ test("scaffolds a full DES workspace using the init command", () => {
 
     assert.ok(fs.existsSync(path.join(target, "using-des-skill", "SKILL.md")));
     assert.ok(fs.existsSync(path.join(target, "des-business-discovery", "SKILL.md")));
+    assert.ok(fs.existsSync(path.join(target, "des-create-epic", "SKILL.md")));
+    assert.ok(fs.existsSync(path.join(target, "des-artifact-quiz", "SKILL.md")));
 
     assert.ok(fs.existsSync(path.join(tmpRoot, "_des")));
     assert.ok(fs.existsSync(path.join(tmpRoot, "_des", "config.toml")));
     assert.ok(fs.existsSync(path.join(tmpRoot, "_des-output")));
     assert.ok(fs.existsSync(path.join(tmpRoot, "_des-output", "planning-artifacts")));
     assert.ok(fs.existsSync(path.join(tmpRoot, "_des-output", "implementation-artifacts")));
+    assert.ok(fs.existsSync(path.join(tmpRoot, "_des-output", "learning-artifacts")));
+    assert.ok(fs.existsSync(path.join(tmpRoot, "_des-output", "test-artifacts")));
+    assert.ok(fs.existsSync(path.join(tmpRoot, "_des-output", "implementation-artifacts", "des-workflow-status.md")));
     assert.ok(fs.existsSync(path.join(tmpRoot, "docs")));
 
     const configContent = fs.readFileSync(path.join(tmpRoot, "_des", "config.toml"), "utf8");
     assert.match(configContent, /planning_artifacts = "_des-output\/planning-artifacts"/);
+    assert.match(configContent, /learning_artifacts = "_des-output\/learning-artifacts"/);
   } finally {
     fs.rmSync(tmpRoot, { recursive: true, force: true });
   }

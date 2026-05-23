@@ -86,7 +86,7 @@ Update the status file with:
 ```yaml
 phase_01_business_discovery:
   skill: des-business-discovery
-  artifact: .agents/des-skill/output/01-business-discovery-brief.md
+  artifact: _des-output/planning-artifacts/01-business-discovery-brief.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   open_questions:

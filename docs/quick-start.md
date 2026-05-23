@@ -16,21 +16,31 @@ Lệnh này tạo ra:
 
 ```text
 _des/
-└── config.toml
+├── config.toml
+├── config.user.toml
+├── _config/
+├── method/
+├── support/
+├── learning/
+├── templates/
+├── checklists/
+├── docs/
+├── workflows/
+├── examples/
+└── knowledge/
 _des-output/
 ├── planning-artifacts/
-└── implementation-artifacts/
+├── implementation-artifacts/
+│   └── des-workflow-status.md
+├── learning-artifacts/
+└── test-artifacts/
 .agents/
-├── skills/
-│   ├── using-des-skill/
-│   ├── des-business-discovery/
-│   └── ...
-└── des-skill/
-    ├── output/
-    ├── sprint-status/
-    │   └── des-workflow-status.md
-    ├── templates/
-    └── checklists/
+└── skills/
+    ├── using-des-skill/
+    ├── des-business-discovery/
+    ├── des-create-epic/
+    ├── des-artifact-quiz/
+    └── ...
 ```
 
 ### Dự án đang có
@@ -161,7 +171,7 @@ Mỗi prompt nên có đủ 4 phần:
 File trạng thái trung tâm:
 
 ```text
-.agents/des-skill/sprint-status/des-workflow-status.md
+_des-output/implementation-artifacts/des-workflow-status.md
 ```
 
 Xem file này để biết:

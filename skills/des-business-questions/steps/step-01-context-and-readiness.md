@@ -8,7 +8,7 @@ Confirm that Business Questions is the correct next step and that Phase 1 discov
 
 Look for:
 
-- `.agents/des-skill/output/01-business-discovery-brief.md`;
+- `_des-output/planning-artifacts/01-business-discovery-brief.md`;
 - current workflow status file;
 - current user request;
 - any existing business question list, dashboard request, report request, ML use case, API request, or analytics backlog;

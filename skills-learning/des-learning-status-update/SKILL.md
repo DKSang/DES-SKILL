@@ -48,10 +48,10 @@ The agent should inspect:
 ```text
 SOUL.md
 knowledge/FUNDAMENTALS-MAP.md
-.agents/des-skill/output/
-.agents/des-skill/output/learning/
-.agents/des-skill/learning-status/des-learning-status.md
-.agents/des-skill/sprint-status/des-workflow-status.md
+_des-output/planning-artifacts/
+_des-output/learning-artifacts/
+_des-output/learning-artifacts/des-learning-status.md
+_des-output/implementation-artifacts/des-workflow-status.md
 ```
 
 If existing learning status is missing, create it.
@@ -63,7 +63,7 @@ If existing learning status is missing, create it.
 Create or update:
 
 ```text
-.agents/des-skill/learning-status/des-learning-status.md
+_des-output/learning-artifacts/des-learning-status.md
 ```
 
 ---

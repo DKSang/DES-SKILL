@@ -73,7 +73,7 @@ Update the status file with:
 ```yaml
 phase_22_project_evaluation:
   skill: des-project-evaluation
-  artifact: .agents/des-skill/output/22-project-evaluation-report.md
+  artifact: _des-output/planning-artifacts/22-project-evaluation-report.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   final_decision: Ready for production release | Ready for MVP/demo release | Ready for internal review only | Not ready | Design complete implementation pending | Learning/portfolio complete | Custom

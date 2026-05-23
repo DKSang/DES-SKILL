@@ -33,32 +33,32 @@ Do not use this skill to create new stories, plan sprints, break stories into de
 The agent should look for:
 
 ```text
-.agents/des-skill/output/support/story-catalog.md
-.agents/des-skill/output/support/sprint-plan.md
+_des-output/implementation-artifacts/story-catalog.md
+_des-output/implementation-artifacts/sprint-plan.md
 ```
 
 Useful supporting artifacts:
 
 ```text
-.agents/des-skill/output/support/epic-catalog.md
-.agents/des-skill/output/04-data-product-specification.md
-.agents/des-skill/output/05-data-source-inventory.md
-.agents/des-skill/output/06-conceptual-domain-model.md
-.agents/des-skill/output/07-architecture-decision-record.md
-.agents/des-skill/output/08-ingestion-specification.md
-.agents/des-skill/output/09-bronze-layer-specification.md
-.agents/des-skill/output/10-silver-layer-specification.md
-.agents/des-skill/output/11-gold-layer-specification.md
-.agents/des-skill/output/12-data-contract-specification.md
-.agents/des-skill/output/13-transformation-specification.md
-.agents/des-skill/output/14-data-quality-specification.md
-.agents/des-skill/output/15-orchestration-observability-specification.md
-.agents/des-skill/output/16-semantic-model-specification.md
-.agents/des-skill/output/17-serving-layer-specification.md
-.agents/des-skill/output/18-lineage-metadata-specification.md
-.agents/des-skill/output/19-governance-security-specification.md
-.agents/des-skill/output/20-cost-performance-optimization-specification.md
-.agents/des-skill/output/21-cicd-testing-specification.md
+_des-output/implementation-artifacts/epic-catalog.md
+_des-output/planning-artifacts/04-data-product-specification.md
+_des-output/planning-artifacts/05-data-source-inventory.md
+_des-output/planning-artifacts/06-conceptual-domain-model.md
+_des-output/planning-artifacts/07-architecture-decision-record.md
+_des-output/planning-artifacts/08-ingestion-specification.md
+_des-output/planning-artifacts/09-bronze-layer-specification.md
+_des-output/planning-artifacts/10-silver-layer-specification.md
+_des-output/planning-artifacts/11-gold-layer-specification.md
+_des-output/planning-artifacts/12-data-contract-specification.md
+_des-output/planning-artifacts/13-transformation-specification.md
+_des-output/planning-artifacts/14-data-quality-specification.md
+_des-output/planning-artifacts/15-orchestration-observability-specification.md
+_des-output/planning-artifacts/16-semantic-model-specification.md
+_des-output/planning-artifacts/17-serving-layer-specification.md
+_des-output/planning-artifacts/18-lineage-metadata-specification.md
+_des-output/planning-artifacts/19-governance-security-specification.md
+_des-output/planning-artifacts/20-cost-performance-optimization-specification.md
+_des-output/planning-artifacts/21-cicd-testing-specification.md
 ```
 
 The most important inputs depend on story type:
@@ -77,7 +77,7 @@ If the Story Catalog is missing, stop and ask whether to route back to `des-crea
 Create or update:
 
 ```text
-.agents/des-skill/output/support/story-readiness-report.md
+_des-output/implementation-artifacts/story-readiness-report.md
 ```
 
 The Story Readiness Report must include:

@@ -16,12 +16,12 @@ soul_file = "SOUL.md"
 concept_map_file = "knowledge/FUNDAMENTALS-MAP.md"
 template_file = "templates/learning/learning-review-template.md"
 checklist_file = "skills-learning/des-learning-review/checklist.md"
-learning_status_file = ".agents/des-skill/learning-status/des-learning-status.md"
-learning_output_dir = ".agents/des-skill/output/learning"
-workflow_status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+learning_status_file = "_des-output/learning-artifacts/des-learning-status.md"
+learning_output_dir = "_des-output/learning-artifacts"
+workflow_status_file = "_des-output/implementation-artifacts/des-workflow-status.md"
 
 [output]
-output_file = ".agents/des-skill/output/learning/des-learning-review.md"
+output_file = "_des-output/learning-artifacts/des-learning-review.md"
 language = "follow-user-language"
 default_status = "Draft"
 

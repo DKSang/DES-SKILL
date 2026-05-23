@@ -102,7 +102,7 @@ Update the status file with:
 ```yaml
 phase_09_bronze_layer_design:
   skill: des-bronze-layer-design
-  artifact: .agents/des-skill/output/09-bronze-layer-specification.md
+  artifact: _des-output/planning-artifacts/09-bronze-layer-specification.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   bronze_datasets:

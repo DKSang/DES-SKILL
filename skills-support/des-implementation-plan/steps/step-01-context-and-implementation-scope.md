@@ -9,35 +9,35 @@ Confirm that `des-implementation-plan` is the correct support skill and select t
 Required:
 
 ```text
-.agents/des-skill/output/support/dev-task-breakdown.md
+_des-output/implementation-artifacts/dev-task-breakdown.md
 ```
 
 Recommended:
 
 ```text
-.agents/des-skill/output/support/sprint-plan.md
-.agents/des-skill/output/support/story-readiness-report.md
-.agents/des-skill/output/support/story-catalog.md
-.agents/des-skill/output/support/epic-catalog.md
+_des-output/implementation-artifacts/sprint-plan.md
+_des-output/implementation-artifacts/story-readiness-report.md
+_des-output/implementation-artifacts/story-catalog.md
+_des-output/implementation-artifacts/epic-catalog.md
 ```
 
 Useful DES artifacts:
 
 ```text
-.agents/des-skill/output/07-architecture-decision-record.md
-.agents/des-skill/output/13-transformation-specification.md
-.agents/des-skill/output/14-data-quality-specification.md
-.agents/des-skill/output/15-orchestration-observability-specification.md
-.agents/des-skill/output/18-lineage-metadata-specification.md
-.agents/des-skill/output/19-governance-security-specification.md
-.agents/des-skill/output/20-cost-performance-optimization-specification.md
-.agents/des-skill/output/21-cicd-testing-specification.md
+_des-output/planning-artifacts/07-architecture-decision-record.md
+_des-output/planning-artifacts/13-transformation-specification.md
+_des-output/planning-artifacts/14-data-quality-specification.md
+_des-output/planning-artifacts/15-orchestration-observability-specification.md
+_des-output/planning-artifacts/18-lineage-metadata-specification.md
+_des-output/planning-artifacts/19-governance-security-specification.md
+_des-output/planning-artifacts/20-cost-performance-optimization-specification.md
+_des-output/planning-artifacts/21-cicd-testing-specification.md
 ```
 
 Existing output to check:
 
 ```text
-.agents/des-skill/output/support/implementation-plan.md
+_des-output/implementation-artifacts/implementation-plan.md
 ```
 
 ## Actions
@@ -93,7 +93,7 @@ Stop if no usable task breakdown exists.
 Use this HALT if:
 
 ```text
-.agents/des-skill/output/support/dev-task-breakdown.md
+_des-output/implementation-artifacts/dev-task-breakdown.md
 ```
 
 is missing, empty, or does not contain usable ready tasks.

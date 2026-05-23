@@ -1,4 +1,4 @@
-const assert = require("node:assert/strict");
+﻿const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
 const test = require("node:test");
@@ -25,15 +25,15 @@ test("des-domain-modeling uses generic Phase 6 artifact paths and step names", (
   assert.match(skill, /step-01-context-and-readiness\.md/);
   assert.match(customize, /skill_id = "des-domain-modeling"/);
   assert.match(customize, /phase = 6/);
-  assert.match(customize, /output_file = "\.agents\/des-skill\/output\/06-conceptual-domain-model\.md"/);
-  assert.match(customize, /template_file = "\.agents\/des-skill\/templates\/06-conceptual-domain-model-template\.md"/);
-  assert.match(customize, /checklist_file = "\.agents\/des-skill\/checklists\/06-domain-modeling-checklist\.md"/);
+  assert.match(customize, /output_file = "_des-output\/planning-artifacts\/06-conceptual-domain-model\.md"/);
+  assert.match(customize, /template_file = "_des\/templates\/06-conceptual-domain-model-template\.md"/);
+  assert.match(customize, /checklist_file = "_des\/checklists\/06-domain-modeling-checklist\.md"/);
   assert.match(customize, /next_recommended_skill = "des-architecture-design"/);
-  assert.match(customize, /\.agents\/des-skill\/output\/01-business-discovery-brief\.md/);
-  assert.match(customize, /\.agents\/des-skill\/output\/02-business-question-catalog\.md/);
-  assert.match(customize, /\.agents\/des-skill\/output\/03-requirements-and-kpi-catalog\.md/);
-  assert.match(customize, /\.agents\/des-skill\/output\/04-data-product-specification\.md/);
-  assert.match(customize, /\.agents\/des-skill\/output\/05-data-source-inventory\.md/);
+  assert.match(customize, /_des-output\/planning-artifacts\/01-business-discovery-brief\.md/);
+  assert.match(customize, /_des-output\/planning-artifacts\/02-business-question-catalog\.md/);
+  assert.match(customize, /_des-output\/planning-artifacts\/03-requirements-and-kpi-catalog\.md/);
+  assert.match(customize, /_des-output\/planning-artifacts\/04-data-product-specification\.md/);
+  assert.match(customize, /_des-output\/planning-artifacts\/05-data-source-inventory\.md/);
 });
 
 test("conceptual domain model template and checklist cover generic required sections", () => {
@@ -87,14 +87,14 @@ test("conceptual domain modeling step files enforce domain decisions and no phys
 
   assert.match(step01, /HALT - Readiness Check Failed/);
   assert.match(step01, /05-data-source-inventory\.md/);
-  assert.match(step02, /HALT — Business Term Ambiguity/);
-  assert.match(step02, /HALT — Core Entity Identity Required/);
-  assert.match(step02, /HALT — Conceptual Grain Approval/);
-  assert.match(step02, /HALT — Source of Truth Mapping/);
-  assert.match(step02, /HALT — Relationship Ambiguity/);
-  assert.match(step02, /HALT — Domain Event Definition/);
-  assert.match(step02, /HALT — Temporal Concept Approval/);
-  assert.match(step02, /HALT — Lifecycle or State Definition/);
+  assert.match(step02, /HALT . Business Term Ambiguity/);
+  assert.match(step02, /HALT . Core Entity Identity Required/);
+  assert.match(step02, /HALT . Conceptual Grain Approval/);
+  assert.match(step02, /HALT . Source of Truth Mapping/);
+  assert.match(step02, /HALT . Relationship Ambiguity/);
+  assert.match(step02, /HALT . Domain Event Definition/);
+  assert.match(step02, /HALT . Temporal Concept Approval/);
+  assert.match(step02, /HALT . Lifecycle or State Definition/);
   assert.match(step03, /HALT - Checklist Blocked/);
   assert.match(step03, /des-architecture-design/);
 

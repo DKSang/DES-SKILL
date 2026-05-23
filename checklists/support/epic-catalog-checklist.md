@@ -68,7 +68,7 @@
 - [ ] Epics are not untraceable guesses.
 - [ ] Missing context is marked Draft/Risk/Blocked.
 - [ ] Epics are neither too small as tasks nor too broad as entire project.
-- [ ] Story creation is deferred to `des-create-stories`.
+- [ ] Story creation is deferred to `des-create-story`.
 
 ## HALT Validation
 

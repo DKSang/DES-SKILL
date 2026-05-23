@@ -30,13 +30,13 @@ Do not use this skill to design detailed Bronze table schemas, Silver/Gold trans
 
 The agent should look for:
 
-- `.agents/des-skill/output/01-business-discovery-brief.md`;
-- `.agents/des-skill/output/02-business-question-catalog.md`;
-- `.agents/des-skill/output/03-requirements-and-kpi-catalog.md`;
-- `.agents/des-skill/output/04-data-product-specification.md`;
-- `.agents/des-skill/output/05-data-source-inventory.md`;
-- `.agents/des-skill/output/06-conceptual-domain-model.md`;
-- `.agents/des-skill/output/07-architecture-decision-record.md`;
+- `_des-output/planning-artifacts/01-business-discovery-brief.md`;
+- `_des-output/planning-artifacts/02-business-question-catalog.md`;
+- `_des-output/planning-artifacts/03-requirements-and-kpi-catalog.md`;
+- `_des-output/planning-artifacts/04-data-product-specification.md`;
+- `_des-output/planning-artifacts/05-data-source-inventory.md`;
+- `_des-output/planning-artifacts/06-conceptual-domain-model.md`;
+- `_des-output/planning-artifacts/07-architecture-decision-record.md`;
 - workflow status file, if present;
 - P1/P2 source systems;
 - approved architecture layer strategy;
@@ -56,11 +56,11 @@ The output_file path is configured in `customize.toml`. Default:
 
 Write the final artifact to:
 
-`.agents/des-skill/output/08-ingestion-specification.md`
+`_des-output/planning-artifacts/08-ingestion-specification.md`
 
 Use the matching template from:
 
-`.agents/des-skill/templates/08-ingestion-specification-template.md`
+`_des/templates/08-ingestion-specification-template.md`
 
 After writing the file, summarize the file path and recommend the next skill.
 

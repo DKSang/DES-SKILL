@@ -109,7 +109,7 @@ Trước khi khai báo artifact là Done, agent phải:
 Sau mỗi artifact quan trọng được tạo hoặc cập nhật, agent phải cập nhật:
 
 ```text
-.agents/des-skill/sprint-status/des-workflow-status.md
+_des-output/implementation-artifacts/des-workflow-status.md
 ```
 
 File này phải phản ánh:

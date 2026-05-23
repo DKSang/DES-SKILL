@@ -2,18 +2,18 @@ skill_id = "des-data-source-assessment"
 phase = 5
 phase_name = "Data Source Assessment"
 
-output_file = ".agents/des-skill/output/05-data-source-inventory.md"
-template_file = ".agents/des-skill/templates/05-data-source-inventory-template.md"
-checklist_file = ".agents/des-skill/checklists/05-data-source-assessment-checklist.md"
-status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+output_file = "_des-output/planning-artifacts/05-data-source-inventory.md"
+template_file = "_des/templates/05-data-source-inventory-template.md"
+checklist_file = "_des/checklists/05-data-source-assessment-checklist.md"
+status_file = "_des-output/implementation-artifacts/des-workflow-status.md"
 
 next_recommended_skill = "des-domain-modeling"
 
 required_upstream_artifacts = [
-  ".agents/des-skill/output/01-business-discovery-brief.md",
-  ".agents/des-skill/output/02-business-question-catalog.md",
-  ".agents/des-skill/output/03-requirements-and-kpi-catalog.md",
-  ".agents/des-skill/output/04-data-product-specification.md"
+  "_des-output/planning-artifacts/01-business-discovery-brief.md",
+  "_des-output/planning-artifacts/02-business-question-catalog.md",
+  "_des-output/planning-artifacts/03-requirements-and-kpi-catalog.md",
+  "_des-output/planning-artifacts/04-data-product-specification.md"
 ]
 
 required_sections = [

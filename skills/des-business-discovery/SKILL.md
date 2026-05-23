@@ -41,7 +41,7 @@ If these inputs are missing, continue only as Draft and use HALT checkpoints for
 Create or update the configured `output_file`:
 
 ```text
-.agents/des-skill/output/01-business-discovery-brief.md
+_des-output/planning-artifacts/01-business-discovery-brief.md
 ```
 
 The artifact must capture:

@@ -9,25 +9,25 @@ Confirm that `des-retrospective` is the correct support skill and define the ret
 Required:
 
 ```text
-.agents/des-skill/output/support/sprint-plan.md
-.agents/des-skill/output/support/story-catalog.md
+_des-output/implementation-artifacts/sprint-plan.md
+_des-output/implementation-artifacts/story-catalog.md
 ```
 
 Recommended:
 
 ```text
-.agents/des-skill/output/support/code-review-report.md
-.agents/des-skill/output/support/release-readiness-report.md
-.agents/des-skill/output/support/implementation-plan.md
-.agents/des-skill/output/support/dev-task-breakdown.md
-.agents/des-skill/output/support/story-readiness-report.md
-.agents/des-skill/sprint-status/des-workflow-status.md
+_des-output/implementation-artifacts/code-review-report.md
+_des-output/implementation-artifacts/release-readiness-report.md
+_des-output/implementation-artifacts/implementation-plan.md
+_des-output/implementation-artifacts/dev-task-breakdown.md
+_des-output/implementation-artifacts/story-readiness-report.md
+_des-output/implementation-artifacts/des-workflow-status.md
 ```
 
 Existing output to check:
 
 ```text
-.agents/des-skill/output/support/retrospective-report.md
+_des-output/implementation-artifacts/retrospective-report.md
 ```
 
 ## Actions

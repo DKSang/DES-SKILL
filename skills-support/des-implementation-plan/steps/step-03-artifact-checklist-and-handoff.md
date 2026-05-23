@@ -17,7 +17,7 @@ Create or update the Implementation Plan, validate it, update workflow status, a
 1. Create or update:
 
 ```text
-.agents/des-skill/output/support/implementation-plan.md
+_des-output/implementation-artifacts/implementation-plan.md
 ```
 
 2. Use the configured template.
@@ -80,7 +80,7 @@ Update `des-workflow-status.md` with:
 ```yaml
 support_des_implementation_plan:
   skill: des-implementation-plan
-  artifact: .agents/des-skill/output/support/implementation-plan.md
+  artifact: _des-output/implementation-artifacts/implementation-plan.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   implementation_scope: ...

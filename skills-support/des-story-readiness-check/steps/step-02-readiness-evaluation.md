@@ -95,7 +95,7 @@ How should missing acceptance criteria be handled?
 
 A. Mark story Needs Refinement
 B. Infer criteria only from DES artifacts
-C. Route back to `des-create-stories`
+C. Route back to `des-create-story`
 D. Route back to relevant DES main phase
 E. User provides criteria now
 F. Block story
@@ -209,7 +209,7 @@ How should story sizing problem be handled?
 
 ### Options
 
-A. Split story in `des-create-stories`
+A. Split story in `des-create-story`
 B. Merge micro-story with related story
 C. Keep story but mark Needs Refinement
 D. Convert to dev task in `des-dev-task-breakdown`
@@ -230,8 +230,8 @@ Where should the workflow route?
 
 ### Options
 
-A. `des-create-epics`
-B. `des-create-stories`
+A. `des-create-epic`
+B. `des-create-story`
 C. `des-sprint-planning`
 D. DES Phase 12 — Data Contracts
 E. DES Phase 14 — Data Quality

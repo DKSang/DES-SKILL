@@ -104,7 +104,7 @@ Update the status file with:
 ```yaml
 phase_08_ingestion_design:
   skill: des-ingestion-design
-  artifact: .agents/des-skill/output/08-ingestion-specification.md
+  artifact: _des-output/planning-artifacts/08-ingestion-specification.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   ingestion_sources:

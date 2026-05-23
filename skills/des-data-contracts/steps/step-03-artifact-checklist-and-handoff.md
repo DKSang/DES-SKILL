@@ -110,7 +110,7 @@ Update the status file with:
 ```yaml
 phase_12_data_contracts:
   skill: des-data-contracts
-  artifact: .agents/des-skill/output/12-data-contract-specification.md
+  artifact: _des-output/planning-artifacts/12-data-contract-specification.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   contracts:

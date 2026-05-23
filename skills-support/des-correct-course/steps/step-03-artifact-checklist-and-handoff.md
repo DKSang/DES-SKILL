@@ -17,7 +17,7 @@ Create or update the Correct Course Plan, validate it, update workflow status, a
 1. Create or update:
 
 ```text
-.agents/des-skill/output/support/correct-course-plan.md
+_des-output/implementation-artifacts/correct-course-plan.md
 ```
 
 2. Use the configured template.
@@ -85,7 +85,7 @@ Update `des-workflow-status.md` with:
 ```yaml
 support_des_correct_course:
   skill: des-correct-course
-  artifact: .agents/des-skill/output/support/correct-course-plan.md
+  artifact: _des-output/implementation-artifacts/correct-course-plan.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   issue_summary: ...

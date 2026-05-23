@@ -76,8 +76,8 @@ Use this routing guide:
 | cost/performance issue              | DES Phase 20                          |
 | testing/release issue               | DES Phase 21                          |
 | evaluation/closure issue            | DES Phase 22                          |
-| epic too broad/wrong                | des-create-epics                      |
-| story vague/wrong                   | des-create-stories                    |
+| epic too broad/wrong                | des-create-epic                       |
+| story vague/wrong                   | des-create-story                      |
 | sprint overloaded/wrong order       | des-sprint-planning                   |
 | story not ready                     | des-story-readiness-check             |
 | task breakdown wrong                | des-dev-task-breakdown                |

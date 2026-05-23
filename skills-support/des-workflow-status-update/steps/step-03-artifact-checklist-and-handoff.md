@@ -16,7 +16,7 @@ Create or update the workflow status file, validate it, and give the final routi
 1. Create or update:
 
 ```text
-.agents/des-skill/sprint-status/des-workflow-status.md
+_des-output/implementation-artifacts/des-workflow-status.md
 ```
 
 2. Use the configured template if creating new.

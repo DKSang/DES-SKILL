@@ -26,19 +26,18 @@ test("implementation story template defines executable dev packet sections", () 
   }
 });
 
-test("implementation planning and build skills reference implementation story packet", () => {
-  const planning = fs.readFileSync(path.join(repoRoot, "skills", "des-implementation-planning", "SKILL.md"), "utf8");
-  const build = fs.readFileSync(path.join(repoRoot, "skills", "des-dev-story", "SKILL.md"), "utf8");
+test("implementation support skills reference current story and task packets", () => {
+  const story = fs.readFileSync(path.join(repoRoot, "skills-support", "des-create-story", "SKILL.md"), "utf8");
+  const breakdown = fs.readFileSync(path.join(repoRoot, "skills-support", "des-dev-task-breakdown", "SKILL.md"), "utf8");
+  const planning = fs.readFileSync(path.join(repoRoot, "skills-support", "des-implementation-plan", "SKILL.md"), "utf8");
   const artifacts = fs.readFileSync(path.join(repoRoot, "ARTIFACTS.md"), "utf8");
 
-  for (const content of [planning, build, artifacts]) {
-    assert.match(content, /implementation-story\.md/, "implementation-story.md should be documented");
+  for (const content of [story, breakdown, planning, artifacts]) {
+    assert.match(content, /story-catalog\.md|dev-task-breakdown\.md|implementation-plan\.md/, "current implementation artifacts should be documented");
   }
 
-  assert.match(planning, /implementation-story-template\.md/, "planning skill should reference implementation-story-template.md");
-  assert.match(build, /allowed sections/i, "build skill should define allowed sections");
-  assert.match(build, /Tasks \/ Subtasks/, "build skill should allow task checkbox updates");
-  assert.match(build, /Dev Agent Record/, "build skill should allow Dev Agent Record updates");
-  assert.match(build, /File List/, "build skill should allow File List updates");
-  assert.match(build, /Change Log/, "build skill should allow Change Log updates");
+  assert.match(story, /story-catalog\.md/, "story skill should write story-catalog.md");
+  assert.match(breakdown, /task-level acceptance checks/i, "task breakdown should define task-level checks");
+  assert.match(breakdown, /test task list/i, "task breakdown should include test tasks");
+  assert.match(planning, /coding-agent handoff/i, "implementation plan should include coding-agent handoff");
 });

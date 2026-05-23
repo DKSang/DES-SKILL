@@ -23,13 +23,13 @@ skills-learning/des-learning-status-update/customize.toml
 Inspect:
 
 ```text
-.agents/des-skill/output/
-.agents/des-skill/output/learning/
-.agents/des-skill/learning-status/
-.agents/des-skill/sprint-status/
+_des-output/planning-artifacts/
+_des-output/learning-artifacts/
+_des-output/learning-artifacts/
+_des-output/implementation-artifacts/
 ```
 
-If `.agents/des-skill/learning-status/` does not exist, prepare to create it.
+If `_des-output/learning-artifacts/` does not exist, prepare to create it.
 
 ---
 

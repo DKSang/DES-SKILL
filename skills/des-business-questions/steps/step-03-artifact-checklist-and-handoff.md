@@ -87,7 +87,7 @@ Update the status file with:
 ```yaml
 phase_02_business_questions:
   skill: des-business-questions
-  artifact: .agents/des-skill/output/02-business-question-catalog.md
+  artifact: _des-output/planning-artifacts/02-business-question-catalog.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   top_questions:

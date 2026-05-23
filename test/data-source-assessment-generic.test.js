@@ -1,4 +1,4 @@
-const assert = require("node:assert/strict");
+﻿const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
 const test = require("node:test");
@@ -25,14 +25,14 @@ test("des-data-source-assessment uses generic Phase 5 artifact paths and step na
   assert.match(skill, /step-01-context-and-readiness\.md/);
   assert.match(customize, /skill_id = "des-data-source-assessment"/);
   assert.match(customize, /phase = 5/);
-  assert.match(customize, /output_file = "\.agents\/des-skill\/output\/05-data-source-inventory\.md"/);
-  assert.match(customize, /template_file = "\.agents\/des-skill\/templates\/05-data-source-inventory-template\.md"/);
-  assert.match(customize, /checklist_file = "\.agents\/des-skill\/checklists\/05-data-source-assessment-checklist\.md"/);
+  assert.match(customize, /output_file = "_des-output\/planning-artifacts\/05-data-source-inventory\.md"/);
+  assert.match(customize, /template_file = "_des\/templates\/05-data-source-inventory-template\.md"/);
+  assert.match(customize, /checklist_file = "_des\/checklists\/05-data-source-assessment-checklist\.md"/);
   assert.match(customize, /next_recommended_skill = "des-domain-modeling"/);
-  assert.match(customize, /\.agents\/des-skill\/output\/01-business-discovery-brief\.md/);
-  assert.match(customize, /\.agents\/des-skill\/output\/02-business-question-catalog\.md/);
-  assert.match(customize, /\.agents\/des-skill\/output\/03-requirements-and-kpi-catalog\.md/);
-  assert.match(customize, /\.agents\/des-skill\/output\/04-data-product-specification\.md/);
+  assert.match(customize, /_des-output\/planning-artifacts\/01-business-discovery-brief\.md/);
+  assert.match(customize, /_des-output\/planning-artifacts\/02-business-question-catalog\.md/);
+  assert.match(customize, /_des-output\/planning-artifacts\/03-requirements-and-kpi-catalog\.md/);
+  assert.match(customize, /_des-output\/planning-artifacts\/04-data-product-specification\.md/);
 });
 
 test("data source assessment template and checklist cover generic required sections", () => {
@@ -89,14 +89,14 @@ test("data source assessment step files enforce source decisions and no downstre
 
   assert.match(step01, /HALT - Readiness Check Failed/);
   assert.match(step01, /04-data-product-specification\.md/);
-  assert.match(step02, /HALT — Source Owner Required/);
-  assert.match(step02, /HALT — Source of Truth Decision/);
-  assert.match(step02, /HALT — Access and Permission Approval/);
-  assert.match(step02, /HALT — Sensitive Data Classification/);
-  assert.match(step02, /HALT — Freshness and Reliability Expectation/);
-  assert.match(step02, /HALT — Source Quality Unknown/);
-  assert.match(step02, /HALT — Schema Change Behavior/);
-  assert.match(step02, /HALT — Cost, License, or Usage Limit/);
+  assert.match(step02, /HALT . Source Owner Required/);
+  assert.match(step02, /HALT . Source of Truth Decision/);
+  assert.match(step02, /HALT . Access and Permission Approval/);
+  assert.match(step02, /HALT . Sensitive Data Classification/);
+  assert.match(step02, /HALT . Freshness and Reliability Expectation/);
+  assert.match(step02, /HALT . Source Quality Unknown/);
+  assert.match(step02, /HALT . Schema Change Behavior/);
+  assert.match(step02, /HALT . Cost, License, or Usage Limit/);
   assert.match(step03, /HALT - Checklist Blocked/);
   assert.match(step03, /des-domain-modeling/);
 

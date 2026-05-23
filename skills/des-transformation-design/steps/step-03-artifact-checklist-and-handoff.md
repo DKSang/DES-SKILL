@@ -109,7 +109,7 @@ Update the status file with:
 ```yaml
 phase_13_transformation_design:
   skill: des-transformation-design
-  artifact: .agents/des-skill/output/13-transformation-specification.md
+  artifact: _des-output/planning-artifacts/13-transformation-specification.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   transformations:

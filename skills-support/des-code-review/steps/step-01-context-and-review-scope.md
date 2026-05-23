@@ -9,17 +9,17 @@ Confirm that `des-code-review` is the correct support skill, identify the implem
 Required planning artifacts:
 
 ```text
-.agents/des-skill/output/support/story-catalog.md
-.agents/des-skill/output/support/dev-task-breakdown.md
-.agents/des-skill/output/support/implementation-plan.md
+_des-output/implementation-artifacts/story-catalog.md
+_des-output/implementation-artifacts/dev-task-breakdown.md
+_des-output/implementation-artifacts/implementation-plan.md
 ```
 
 Recommended:
 
 ```text
-.agents/des-skill/output/support/story-readiness-report.md
-.agents/des-skill/output/support/sprint-plan.md
-.agents/des-skill/output/support/epic-catalog.md
+_des-output/implementation-artifacts/story-readiness-report.md
+_des-output/implementation-artifacts/sprint-plan.md
+_des-output/implementation-artifacts/epic-catalog.md
 ```
 
 Implementation evidence required:
@@ -31,7 +31,7 @@ changed files / code diff / PR summary / implementation summary / notebook / SQL
 Existing output to check:
 
 ```text
-.agents/des-skill/output/support/code-review-report.md
+_des-output/implementation-artifacts/code-review-report.md
 ```
 
 ## Actions
@@ -144,7 +144,7 @@ How should unmapped implementation be handled?
 A. Map to user-provided story ID
 B. Infer mapping from changed files and implementation summary
 C. Mark review as Needs more evidence
-D. Route back to `des-create-stories`
+D. Route back to `des-create-story`
 E. Treat as out-of-scope change
 F. Stop review
 

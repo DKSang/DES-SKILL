@@ -75,7 +75,7 @@ If the user says a phase number, infer the artifact from this map:
 Default artifact directory:
 
 ```text
-.agents/des-skill/output/
+_des-output/planning-artifacts/
 ```
 
 ---

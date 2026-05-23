@@ -17,7 +17,7 @@ Create or update the Retrospective Report, validate it, update workflow status, 
 1. Create or update:
 
 ```text
-.agents/des-skill/output/support/retrospective-report.md
+_des-output/implementation-artifacts/retrospective-report.md
 ```
 
 2. Use the configured template.
@@ -82,7 +82,7 @@ Update `des-workflow-status.md` with:
 ```yaml
 support_des_retrospective:
   skill: des-retrospective
-  artifact: .agents/des-skill/output/support/retrospective-report.md
+  artifact: _des-output/implementation-artifacts/retrospective-report.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   retrospective_scope: ...

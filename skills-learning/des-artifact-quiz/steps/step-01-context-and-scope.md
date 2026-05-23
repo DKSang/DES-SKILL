@@ -50,8 +50,8 @@ If the user provides a source artifact, use it directly.
 If the user provides only a phase number, infer both possible paths:
 
 ```text
-.agents/des-skill/output/{phase-artifact}.md
-.agents/des-skill/output/learning/{phase}-*-learning-notes.md
+_des-output/planning-artifacts/{phase-artifact}.md
+_des-output/learning-artifacts/{phase}-*-learning-notes.md
 ```
 
 If learning notes exist, prefer learning notes.

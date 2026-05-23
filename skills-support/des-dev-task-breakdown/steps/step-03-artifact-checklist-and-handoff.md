@@ -17,7 +17,7 @@ Create or update the Dev Task Breakdown, validate it, update workflow status, an
 1. Create or update:
 
 ```text
-.agents/des-skill/output/support/dev-task-breakdown.md
+_des-output/implementation-artifacts/dev-task-breakdown.md
 ```
 
 2. Use the configured template.
@@ -80,7 +80,7 @@ Update `des-workflow-status.md` with:
 ```yaml
 support_des_dev_task_breakdown:
   skill: des-dev-task-breakdown
-  artifact: .agents/des-skill/output/support/dev-task-breakdown.md
+  artifact: _des-output/implementation-artifacts/dev-task-breakdown.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   story_id: ...

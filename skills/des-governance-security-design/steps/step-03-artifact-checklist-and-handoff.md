@@ -40,7 +40,7 @@ Create or update the Governance and Security Specification, validate it, update 
 ```yaml
 phase_19_governance_security_design:
   skill: des-governance-security-design
-  artifact: .agents/des-skill/output/19-governance-security-specification.md
+  artifact: _des-output/planning-artifacts/19-governance-security-specification.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   governed_assets:

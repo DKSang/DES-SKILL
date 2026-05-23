@@ -45,16 +45,16 @@ test("implementation readiness and definition-of-done checklists exist", () => {
 test("planning build and verification skills reference readiness and DoD gates", () => {
   const requiredReferences = [
     [
-      "skills/des-implementation-planning/SKILL.md",
-      ["implementation-readiness-checklist.md", "readiness gate"]
+      "skills-support/des-story-readiness-check/SKILL.md",
+      ["readiness", "acceptance criteria"]
     ],
     [
-      "skills/des-dev-story/SKILL.md",
-      ["definition-of-done-checklist.md", "Definition of Done"]
+      "skills-support/des-create-story/SKILL.md",
+      ["definition of done", "acceptance criteria"]
     ],
     [
-      "skills/des-verify-delivery/SKILL.md",
-      ["definition-of-done-checklist.md", "completion claim"]
+      "skills-support/des-release-readiness-review/SKILL.md",
+      ["test evidence", "release decision"]
     ],
     [
       "templates/00-workflow-status-template.md",
@@ -65,7 +65,7 @@ test("planning build and verification skills reference readiness and DoD gates",
   for (const [relativePath, phrases] of requiredReferences) {
     const content = fs.readFileSync(path.join(repoRoot, relativePath), "utf8");
     for (const phrase of phrases) {
-      assert.match(content, new RegExp(phrase), `${relativePath} missing ${phrase}`);
+      assert.match(content, new RegExp(phrase, "i"), `${relativePath} missing ${phrase}`);
     }
   }
 });

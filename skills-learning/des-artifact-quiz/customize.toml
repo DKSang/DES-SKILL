@@ -16,8 +16,8 @@ soul_file = "SOUL.md"
 concept_map_file = "knowledge/FUNDAMENTALS-MAP.md"
 template_file = "templates/learning/artifact-quiz-template.md"
 checklist_file = "skills-learning/des-artifact-quiz/checklist.md"
-learning_output_dir = ".agents/des-skill/output/learning"
-source_artifact_dir = ".agents/des-skill/output"
+learning_output_dir = "_des-output/learning-artifacts"
+source_artifact_dir = "_des-output/planning-artifacts"
 
 [output]
 file_suffix = "artifact-quiz.md"

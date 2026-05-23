@@ -49,9 +49,9 @@ knowledge/FUNDAMENTALS-MAP.md
 Optional inputs:
 
 ```text
-.agents/des-skill/output/
-.agents/des-skill/output/learning/
-.agents/des-skill/sprint-status/des-workflow-status.md
+_des-output/planning-artifacts/
+_des-output/learning-artifacts/
+_des-output/implementation-artifacts/des-workflow-status.md
 ```
 
 If no project artifacts exist, create a generic DES learning path.
@@ -65,7 +65,7 @@ If project artifacts exist, create a personalized learning path based on complet
 Create or update:
 
 ```text
-.agents/des-skill/output/learning/des-learning-path.md
+_des-output/learning-artifacts/des-learning-path.md
 ```
 
 ---

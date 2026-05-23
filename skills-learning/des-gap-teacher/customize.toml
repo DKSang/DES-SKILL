@@ -16,8 +16,8 @@ soul_file = "SOUL.md"
 concept_map_file = "knowledge/FUNDAMENTALS-MAP.md"
 template_file = "templates/learning/learning-gap-report-template.md"
 checklist_file = "skills-learning/des-gap-teacher/checklist.md"
-learning_output_dir = ".agents/des-skill/output/learning"
-source_artifact_dir = ".agents/des-skill/output"
+learning_output_dir = "_des-output/learning-artifacts"
+source_artifact_dir = "_des-output/planning-artifacts"
 
 [output]
 file_suffix = "learning-gap-report.md"

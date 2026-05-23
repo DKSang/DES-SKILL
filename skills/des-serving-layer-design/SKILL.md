@@ -29,16 +29,16 @@ Do not use this skill to implement dashboards, APIs, ML pipelines, reverse ETL j
 
 The agent should look for:
 
-- `.agents/des-skill/output/01-business-discovery-brief.md`;
-- `.agents/des-skill/output/02-business-question-catalog.md`;
-- `.agents/des-skill/output/03-requirements-and-kpi-catalog.md`;
-- `.agents/des-skill/output/04-data-product-specification.md`;
-- `.agents/des-skill/output/07-architecture-decision-record.md`;
-- `.agents/des-skill/output/11-gold-layer-specification.md`;
-- `.agents/des-skill/output/12-data-contract-specification.md`;
-- `.agents/des-skill/output/14-data-quality-specification.md`;
-- `.agents/des-skill/output/15-orchestration-observability-specification.md`;
-- `.agents/des-skill/output/16-semantic-model-specification.md`;
+- `_des-output/planning-artifacts/01-business-discovery-brief.md`;
+- `_des-output/planning-artifacts/02-business-question-catalog.md`;
+- `_des-output/planning-artifacts/03-requirements-and-kpi-catalog.md`;
+- `_des-output/planning-artifacts/04-data-product-specification.md`;
+- `_des-output/planning-artifacts/07-architecture-decision-record.md`;
+- `_des-output/planning-artifacts/11-gold-layer-specification.md`;
+- `_des-output/planning-artifacts/12-data-contract-specification.md`;
+- `_des-output/planning-artifacts/14-data-quality-specification.md`;
+- `_des-output/planning-artifacts/15-orchestration-observability-specification.md`;
+- `_des-output/planning-artifacts/16-semantic-model-specification.md`;
 - workflow status file, if present;
 - serving direction from architecture;
 - consumer personas;
@@ -57,7 +57,7 @@ If the Semantic Model Specification is missing or too weak, stop and ask whether
 Create or update:
 
 ```text
-.agents/des-skill/output/17-serving-layer-specification.md
+_des-output/planning-artifacts/17-serving-layer-specification.md
 ```
 
 The artifact must capture:

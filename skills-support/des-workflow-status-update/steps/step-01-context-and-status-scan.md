@@ -9,30 +9,30 @@ Confirm that `des-workflow-status-update` is the correct support skill and scan 
 Existing status file:
 
 ```text
-.agents/des-skill/sprint-status/des-workflow-status.md
+_des-output/implementation-artifacts/des-workflow-status.md
 ```
 
 Support artifacts:
 
 ```text
-.agents/des-skill/output/support/epic-catalog.md
-.agents/des-skill/output/support/story-catalog.md
-.agents/des-skill/output/support/sprint-plan.md
-.agents/des-skill/output/support/story-readiness-report.md
-.agents/des-skill/output/support/dev-task-breakdown.md
-.agents/des-skill/output/support/implementation-plan.md
-.agents/des-skill/output/support/code-review-report.md
-.agents/des-skill/output/support/release-readiness-report.md
-.agents/des-skill/output/support/retrospective-report.md
-.agents/des-skill/output/support/correct-course-plan.md
+_des-output/implementation-artifacts/epic-catalog.md
+_des-output/implementation-artifacts/story-catalog.md
+_des-output/implementation-artifacts/sprint-plan.md
+_des-output/implementation-artifacts/story-readiness-report.md
+_des-output/implementation-artifacts/dev-task-breakdown.md
+_des-output/implementation-artifacts/implementation-plan.md
+_des-output/implementation-artifacts/code-review-report.md
+_des-output/implementation-artifacts/release-readiness-report.md
+_des-output/implementation-artifacts/retrospective-report.md
+_des-output/implementation-artifacts/correct-course-plan.md
 ```
 
 Main DES artifacts:
 
 ```text
-.agents/des-skill/output/01-business-discovery-brief.md
+_des-output/planning-artifacts/01-business-discovery-brief.md
 ...
-.agents/des-skill/output/22-project-evaluation-report.md
+_des-output/planning-artifacts/22-project-evaluation-report.md
 ```
 
 ## Actions

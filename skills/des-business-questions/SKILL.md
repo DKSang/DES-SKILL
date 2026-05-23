@@ -27,7 +27,7 @@ Do not use this skill to define final KPI formulas, design tables, choose data s
 
 The agent should look for:
 
-- `.agents/des-skill/output/01-business-discovery-brief.md`;
+- `_des-output/planning-artifacts/01-business-discovery-brief.md`;
 - workflow status file, if present;
 - known consumers and stakeholders;
 - target decisions or use cases;
@@ -41,7 +41,7 @@ If the Phase 1 artifact is missing, stale, or incomplete, stop and ask whether t
 Create or update the configured `output_file`:
 
 ```text
-.agents/des-skill/output/02-business-question-catalog.md
+_des-output/planning-artifacts/02-business-question-catalog.md
 ```
 
 The artifact must capture:

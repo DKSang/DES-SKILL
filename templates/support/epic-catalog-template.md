@@ -12,7 +12,7 @@
 | Owner |  |
 | Last Updated |  |
 | Source Workflow | DES main skills |
-| Next Support Skill | des-create-stories |
+| Next Support Skill | des-create-story |
 
 ## 1. Epic Catalog Summary
 
@@ -795,7 +795,7 @@ EPIC-10 Cost Performance and Operational Optimization starts after baseline evid
 
 ## 13. Story Creation Guidance
 
-Use `des-create-stories` next.
+Use `des-create-story` next.
 
 Story generation should follow these rules:
 
@@ -834,14 +834,14 @@ Recommended story order:
 
 | Open Question | Why It Matters | Owner | Needed By                                             |
 | ------------- | -------------- | ----- | ----------------------------------------------------- |
-|               |                |       | des-create-stories / sprint planning / implementation |
+|               |                |       | des-create-story / sprint planning / implementation |
 
 ## 16. Next Support Skill Recommendation
 
 Recommended next support skill:
 
 ```text
-des-create-stories
+des-create-story
 ```
 
 Reason:

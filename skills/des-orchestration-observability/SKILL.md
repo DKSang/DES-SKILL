@@ -31,20 +31,20 @@ Do not use this skill to implement orchestration code, write DAGs, create Fabric
 
 The agent should look for:
 
-- `.agents/des-skill/output/01-business-discovery-brief.md`;
-- `.agents/des-skill/output/02-business-question-catalog.md`;
-- `.agents/des-skill/output/03-requirements-and-kpi-catalog.md`;
-- `.agents/des-skill/output/04-data-product-specification.md`;
-- `.agents/des-skill/output/05-data-source-inventory.md`;
-- `.agents/des-skill/output/06-conceptual-domain-model.md`;
-- `.agents/des-skill/output/07-architecture-decision-record.md`;
-- `.agents/des-skill/output/08-ingestion-specification.md`;
-- `.agents/des-skill/output/09-bronze-layer-specification.md`;
-- `.agents/des-skill/output/10-silver-layer-specification.md`;
-- `.agents/des-skill/output/11-gold-layer-specification.md`;
-- `.agents/des-skill/output/12-data-contract-specification.md`;
-- `.agents/des-skill/output/13-transformation-specification.md`;
-- `.agents/des-skill/output/14-data-quality-specification.md`;
+- `_des-output/planning-artifacts/01-business-discovery-brief.md`;
+- `_des-output/planning-artifacts/02-business-question-catalog.md`;
+- `_des-output/planning-artifacts/03-requirements-and-kpi-catalog.md`;
+- `_des-output/planning-artifacts/04-data-product-specification.md`;
+- `_des-output/planning-artifacts/05-data-source-inventory.md`;
+- `_des-output/planning-artifacts/06-conceptual-domain-model.md`;
+- `_des-output/planning-artifacts/07-architecture-decision-record.md`;
+- `_des-output/planning-artifacts/08-ingestion-specification.md`;
+- `_des-output/planning-artifacts/09-bronze-layer-specification.md`;
+- `_des-output/planning-artifacts/10-silver-layer-specification.md`;
+- `_des-output/planning-artifacts/11-gold-layer-specification.md`;
+- `_des-output/planning-artifacts/12-data-contract-specification.md`;
+- `_des-output/planning-artifacts/13-transformation-specification.md`;
+- `_des-output/planning-artifacts/14-data-quality-specification.md`;
 - workflow status file, if present;
 - approved architecture orchestration boundary;
 - ingestion frequency and trigger;
@@ -62,7 +62,7 @@ If the Data Quality Specification is missing or too weak, stop and ask whether t
 Create or update:
 
 ```text
-.agents/des-skill/output/15-orchestration-observability-specification.md
+_des-output/planning-artifacts/15-orchestration-observability-specification.md
 ```
 
 The artifact must capture:

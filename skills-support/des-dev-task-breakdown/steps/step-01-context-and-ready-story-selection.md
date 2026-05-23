@@ -9,15 +9,15 @@ Confirm that `des-dev-task-breakdown` is the correct support skill and select st
 Required:
 
 ```text
-.agents/des-skill/output/support/story-catalog.md
-.agents/des-skill/output/support/story-readiness-report.md
+_des-output/implementation-artifacts/story-catalog.md
+_des-output/implementation-artifacts/story-readiness-report.md
 ```
 
 Recommended:
 
 ```text
-.agents/des-skill/output/support/sprint-plan.md
-.agents/des-skill/output/support/epic-catalog.md
+_des-output/implementation-artifacts/sprint-plan.md
+_des-output/implementation-artifacts/epic-catalog.md
 ```
 
 Relevant DES artifacts depend on selected story type.
@@ -25,7 +25,7 @@ Relevant DES artifacts depend on selected story type.
 Existing output to check:
 
 ```text
-.agents/des-skill/output/support/dev-task-breakdown.md
+_des-output/implementation-artifacts/dev-task-breakdown.md
 ```
 
 ## Actions

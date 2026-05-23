@@ -8,15 +8,15 @@ Confirm that Governance and Security Design is the correct next step and that up
 
 Look for:
 
-- `.agents/des-skill/output/04-data-product-specification.md`;
-- `.agents/des-skill/output/05-data-source-inventory.md`;
-- `.agents/des-skill/output/09-bronze-layer-specification.md`;
-- `.agents/des-skill/output/10-silver-layer-specification.md`;
-- `.agents/des-skill/output/11-gold-layer-specification.md`;
-- `.agents/des-skill/output/12-data-contract-specification.md`;
-- `.agents/des-skill/output/16-semantic-model-specification.md`;
-- `.agents/des-skill/output/17-serving-layer-specification.md`;
-- `.agents/des-skill/output/18-lineage-metadata-specification.md`;
+- `_des-output/planning-artifacts/04-data-product-specification.md`;
+- `_des-output/planning-artifacts/05-data-source-inventory.md`;
+- `_des-output/planning-artifacts/09-bronze-layer-specification.md`;
+- `_des-output/planning-artifacts/10-silver-layer-specification.md`;
+- `_des-output/planning-artifacts/11-gold-layer-specification.md`;
+- `_des-output/planning-artifacts/12-data-contract-specification.md`;
+- `_des-output/planning-artifacts/16-semantic-model-specification.md`;
+- `_des-output/planning-artifacts/17-serving-layer-specification.md`;
+- `_des-output/planning-artifacts/18-lineage-metadata-specification.md`;
 - workflow status file;
 - asset sensitivity inventory;
 - field-level metadata;

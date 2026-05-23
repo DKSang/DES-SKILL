@@ -70,7 +70,7 @@ Update the status file with:
 ```yaml
 phase_21_cicd_testing:
   skill: des-cicd-and-testing
-  artifact: .agents/des-skill/output/21-cicd-testing-specification.md
+  artifact: _des-output/planning-artifacts/21-cicd-testing-specification.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   release_gates:

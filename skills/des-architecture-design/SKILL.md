@@ -30,12 +30,12 @@ Do not use this skill to design ingestion pipeline steps, physical table schemas
 
 The agent should look for:
 
-- `.agents/des-skill/output/01-business-discovery-brief.md`;
-- `.agents/des-skill/output/02-business-question-catalog.md`;
-- `.agents/des-skill/output/03-requirements-and-kpi-catalog.md`;
-- `.agents/des-skill/output/04-data-product-specification.md`;
-- `.agents/des-skill/output/05-data-source-inventory.md`;
-- `.agents/des-skill/output/06-conceptual-domain-model.md`;
+- `_des-output/planning-artifacts/01-business-discovery-brief.md`;
+- `_des-output/planning-artifacts/02-business-question-catalog.md`;
+- `_des-output/planning-artifacts/03-requirements-and-kpi-catalog.md`;
+- `_des-output/planning-artifacts/04-data-product-specification.md`;
+- `_des-output/planning-artifacts/05-data-source-inventory.md`;
+- `_des-output/planning-artifacts/06-conceptual-domain-model.md`;
 - workflow status file, if present;
 - known platform constraints;
 - known team capability constraints;
@@ -50,19 +50,19 @@ If the Conceptual Domain Model is missing or too weak, stop and ask whether to r
 Create or update the configured `output_file`:
 
 ```text
-.agents/des-skill/output/07-architecture-decision-record.md
+_des-output/planning-artifacts/07-architecture-decision-record.md
 ```
 
 The template file `template_file` is located at:
 
 ```text
-.agents/des-skill/templates/07-architecture-decision-record-template.md
+_des/templates/07-architecture-decision-record-template.md
 ```
 
 The checklist file `checklist_file` is located at:
 
 ```text
-.agents/des-skill/checklists/07-architecture-design-checklist.md
+_des/checklists/07-architecture-design-checklist.md
 ```
 
 The artifact must capture:

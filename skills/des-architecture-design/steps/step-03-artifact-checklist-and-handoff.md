@@ -103,7 +103,7 @@ Update the status file with:
 ```yaml
 phase_07_architecture_design:
   skill: des-architecture-design
-  artifact: .agents/des-skill/output/07-architecture-decision-record.md
+  artifact: _des-output/planning-artifacts/07-architecture-decision-record.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   architecture_scope: ...

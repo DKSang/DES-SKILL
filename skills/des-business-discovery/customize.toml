@@ -2,10 +2,10 @@ skill_id = "des-business-discovery"
 phase = 1
 phase_name = "Business Discovery"
 
-output_file = ".agents/des-skill/output/01-business-discovery-brief.md"
-template_file = ".agents/des-skill/templates/01-business-discovery-brief-template.md"
-checklist_file = ".agents/des-skill/checklists/01-business-discovery-checklist.md"
-status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+output_file = "_des-output/planning-artifacts/01-business-discovery-brief.md"
+template_file = "_des/templates/01-business-discovery-brief-template.md"
+checklist_file = "_des/checklists/01-business-discovery-checklist.md"
+status_file = "_des-output/implementation-artifacts/des-workflow-status.md"
 
 next_recommended_skill = "des-business-questions"
 

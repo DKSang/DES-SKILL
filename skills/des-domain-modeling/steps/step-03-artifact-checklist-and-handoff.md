@@ -97,7 +97,7 @@ Update the status file with:
 ```yaml
 phase_06_domain_modeling:
   skill: des-domain-modeling
-  artifact: .agents/des-skill/output/06-conceptual-domain-model.md
+  artifact: _des-output/planning-artifacts/06-conceptual-domain-model.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   core_entities:

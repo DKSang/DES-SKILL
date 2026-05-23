@@ -17,7 +17,7 @@ Create or update the Release Readiness Report, validate it, update workflow stat
 1. Create or update:
 
 ```text
-.agents/des-skill/output/support/release-readiness-report.md
+_des-output/implementation-artifacts/release-readiness-report.md
 ```
 
 2. Use the configured template.
@@ -83,7 +83,7 @@ Update `des-workflow-status.md` with:
 ```yaml
 support_des_release_readiness_review:
   skill: des-release-readiness-review
-  artifact: .agents/des-skill/output/support/release-readiness-report.md
+  artifact: _des-output/implementation-artifacts/release-readiness-report.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   release_scope: ...

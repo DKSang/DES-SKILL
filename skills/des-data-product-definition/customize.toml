@@ -2,17 +2,17 @@ skill_id = "des-data-product-definition"
 phase = 4
 phase_name = "Data Product Definition"
 
-output_file = ".agents/des-skill/output/04-data-product-specification.md"
-template_file = ".agents/des-skill/templates/04-data-product-specification-template.md"
-checklist_file = ".agents/des-skill/checklists/04-data-product-definition-checklist.md"
-status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+output_file = "_des-output/planning-artifacts/04-data-product-specification.md"
+template_file = "_des/templates/04-data-product-specification-template.md"
+checklist_file = "_des/checklists/04-data-product-definition-checklist.md"
+status_file = "_des-output/implementation-artifacts/des-workflow-status.md"
 
 next_recommended_skill = "des-data-source-assessment"
 
 required_upstream_artifacts = [
-  ".agents/des-skill/output/01-business-discovery-brief.md",
-  ".agents/des-skill/output/02-business-question-catalog.md",
-  ".agents/des-skill/output/03-requirements-and-kpi-catalog.md"
+  "_des-output/planning-artifacts/01-business-discovery-brief.md",
+  "_des-output/planning-artifacts/02-business-question-catalog.md",
+  "_des-output/planning-artifacts/03-requirements-and-kpi-catalog.md"
 ]
 
 required_sections = [

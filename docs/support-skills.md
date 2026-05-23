@@ -22,6 +22,7 @@ Support skills dùng để chuyển output của 22 main skills thành backlog, 
 | 09 | `des-retrospective` | Tổng kết sprint/release cycle | sprint kết thúc | `retrospective-report.md` |
 | 10 | `des-correct-course` | Điều hướng khi workflow bị lệch | workflow status + blockers | `correct-course-plan.md` |
 | 11 | `des-workflow-status-update` | Cập nhật trạng thái workflow trung tâm | tất cả artifacts | `des-workflow-status.md` |
+| 12 | `des-wise` | Router thông thái và trợ giúp | Trạng thái workflow + câu hỏi của user | Phản hồi trực tiếp hoặc `des-wise-recommendation.md` |
 
 ---
 
@@ -220,7 +221,7 @@ des-workflow-status-update
 
 **Mục tiêu:** Cập nhật file trạng thái trung tâm sau mỗi milestone.
 
-**Output:** `des-workflow-status.md` tại `.agents/des-skill/sprint-status/`
+**Output:** `des-workflow-status.md` tại `_des-output/implementation-artifacts/`
 
 File này track:
 - Phase nào Done / In Progress / Not Started / Blocked
@@ -228,3 +229,11 @@ File này track:
 - Sprint hiện tại đang ở đâu
 - Open blockers
 - Next recommended skill
+
+---
+
+### `des-wise`
+
+**Mục tiêu:** Trợ giúp thông thái và định tuyến cho người dùng: gợi ý nên chạy skill nào, phát hiện người dùng đang ở phase nào, đề xuất hành động tiếp theo, hoặc hỗ trợ khi bị kẹt.
+
+**Output:** Trực tiếp phản hồi hoặc tạo file khuyến nghị `des-wise-recommendation.md`.

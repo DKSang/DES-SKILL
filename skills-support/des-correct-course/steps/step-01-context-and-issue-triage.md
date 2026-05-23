@@ -9,14 +9,14 @@ Confirm that `des-correct-course` is the correct support skill and identify the 
 Support artifacts:
 
 ```text
-.agents/des-skill/output/support/retrospective-report.md
-.agents/des-skill/output/support/release-readiness-report.md
-.agents/des-skill/output/support/code-review-report.md
-.agents/des-skill/output/support/story-readiness-report.md
-.agents/des-skill/output/support/sprint-plan.md
-.agents/des-skill/output/support/story-catalog.md
-.agents/des-skill/output/support/epic-catalog.md
-.agents/des-skill/sprint-status/des-workflow-status.md
+_des-output/implementation-artifacts/retrospective-report.md
+_des-output/implementation-artifacts/release-readiness-report.md
+_des-output/implementation-artifacts/code-review-report.md
+_des-output/implementation-artifacts/story-readiness-report.md
+_des-output/implementation-artifacts/sprint-plan.md
+_des-output/implementation-artifacts/story-catalog.md
+_des-output/implementation-artifacts/epic-catalog.md
+_des-output/implementation-artifacts/des-workflow-status.md
 ```
 
 DES main artifacts may be needed depending on issue category.
@@ -24,7 +24,7 @@ DES main artifacts may be needed depending on issue category.
 Existing output to check:
 
 ```text
-.agents/des-skill/output/support/correct-course-plan.md
+_des-output/implementation-artifacts/correct-course-plan.md
 ```
 
 ## Actions

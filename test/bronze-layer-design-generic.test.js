@@ -1,4 +1,4 @@
-const assert = require("node:assert/strict");
+﻿const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
 const test = require("node:test");
@@ -25,18 +25,18 @@ test("des-bronze-layer-design uses generic Phase 9 artifact paths and step names
   assert.match(skill, /step-01-context-and-readiness\.md/);
   assert.match(customize, /skill_id = "des-bronze-layer-design"/);
   assert.match(customize, /phase = 9/);
-  assert.match(customize, /output_file = "\.agents\/des-skill\/output\/09-bronze-layer-specification\.md"/);
-  assert.match(customize, /template_file = "\.agents\/des-skill\/templates\/09-bronze-layer-specification-template\.md"/);
-  assert.match(customize, /checklist_file = "\.agents\/des-skill\/checklists\/09-bronze-layer-design-checklist\.md"/);
+  assert.match(customize, /output_file = "_des-output\/planning-artifacts\/09-bronze-layer-specification\.md"/);
+  assert.match(customize, /template_file = "_des\/templates\/09-bronze-layer-specification-template\.md"/);
+  assert.match(customize, /checklist_file = "_des\/checklists\/09-bronze-layer-design-checklist\.md"/);
   assert.match(customize, /next_recommended_skill = "des-silver-layer-design"/);
-  assert.match(customize, /\.agents\/des-skill\/output\/01-business-discovery-brief\.md/);
-  assert.match(customize, /\.agents\/des-skill\/output\/02-business-question-catalog\.md/);
-  assert.match(customize, /\.agents\/des-skill\/output\/03-requirements-and-kpi-catalog\.md/);
-  assert.match(customize, /\.agents\/des-skill\/output\/04-data-product-specification\.md/);
-  assert.match(customize, /\.agents\/des-skill\/output\/05-data-source-inventory\.md/);
-  assert.match(customize, /\.agents\/des-skill\/output\/06-conceptual-domain-model\.md/);
-  assert.match(customize, /\.agents\/des-skill\/output\/07-architecture-decision-record\.md/);
-  assert.match(customize, /\.agents\/des-skill\/output\/08-ingestion-specification\.md/);
+  assert.match(customize, /_des-output\/planning-artifacts\/01-business-discovery-brief\.md/);
+  assert.match(customize, /_des-output\/planning-artifacts\/02-business-question-catalog\.md/);
+  assert.match(customize, /_des-output\/planning-artifacts\/03-requirements-and-kpi-catalog\.md/);
+  assert.match(customize, /_des-output\/planning-artifacts\/04-data-product-specification\.md/);
+  assert.match(customize, /_des-output\/planning-artifacts\/05-data-source-inventory\.md/);
+  assert.match(customize, /_des-output\/planning-artifacts\/06-conceptual-domain-model\.md/);
+  assert.match(customize, /_des-output\/planning-artifacts\/07-architecture-decision-record\.md/);
+  assert.match(customize, /_des-output\/planning-artifacts\/08-ingestion-specification\.md/);
 });
 
 test("bronze layer specification template and checklist cover generic required sections", () => {

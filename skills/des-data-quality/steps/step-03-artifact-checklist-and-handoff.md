@@ -106,7 +106,7 @@ Update the status file with:
 ```yaml
 phase_14_data_quality_design:
   skill: des-data-quality
-  artifact: .agents/des-skill/output/14-data-quality-specification.md
+  artifact: _des-output/planning-artifacts/14-data-quality-specification.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   quality_rules:

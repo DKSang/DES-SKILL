@@ -92,7 +92,7 @@ Update the status file with:
 ```yaml
 phase_03_requirements_and_kpis:
   skill: des-requirements-and-kpis
-  artifact: .agents/des-skill/output/03-requirements-and-kpi-catalog.md
+  artifact: _des-output/planning-artifacts/03-requirements-and-kpi-catalog.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   approved_kpis:

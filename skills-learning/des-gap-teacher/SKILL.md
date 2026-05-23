@@ -51,9 +51,9 @@ knowledge/FUNDAMENTALS-MAP.md
 The agent should inspect one or more of:
 
 ```text
-.agents/des-skill/output/{phase-artifact}.md
-.agents/des-skill/output/learning/{phase}-*-learning-notes.md
-.agents/des-skill/output/learning/{phase}-artifact-quiz.md
+_des-output/planning-artifacts/{phase-artifact}.md
+_des-output/learning-artifacts/{phase}-*-learning-notes.md
+_des-output/learning-artifacts/{phase}-artifact-quiz.md
 ```
 
 User-provided evidence may include:
@@ -75,15 +75,15 @@ If there is no user answer, artifact, or explanation to diagnose, stop and ask f
 Create or update:
 
 ```text
-.agents/des-skill/output/learning/{phase}-learning-gap-report.md
+_des-output/learning-artifacts/{phase}-learning-gap-report.md
 ```
 
 Examples:
 
 ```text
-.agents/des-skill/output/learning/08-ingestion-learning-gap-report.md
-.agents/des-skill/output/learning/10-silver-layer-learning-gap-report.md
-.agents/des-skill/output/learning/14-data-quality-learning-gap-report.md
+_des-output/learning-artifacts/08-ingestion-learning-gap-report.md
+_des-output/learning-artifacts/10-silver-layer-learning-gap-report.md
+_des-output/learning-artifacts/14-data-quality-learning-gap-report.md
 ```
 
 ---

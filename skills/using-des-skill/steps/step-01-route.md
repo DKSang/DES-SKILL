@@ -14,15 +14,15 @@
 Scan the following locations for project configuration:
 - `{project-root}/_des/des/config.yaml` or `{project-root}/_des/config.toml` to find planning/implementation output folders.
 - If not configured, default paths are:
-  - Workflow Map: `.agents/des-skill/DES-WORKFLOW.md`
-  - Artifacts Map: `.agents/des-skill/ARTIFACTS.md`
-  - Status File: `.agents/des-skill/sprint-status/des-workflow-status.md`
-  - Output Folder: `.agents/des-skill/output/`
+  - Workflow Map: `_des/DES-WORKFLOW.md`
+  - Artifacts Map: `_des/ARTIFACTS.md`
+  - Status File: `_des-output/implementation-artifacts/des-workflow-status.md`
+  - Output Folder: `_des-output/planning-artifacts/`
 
 Read the status file if it exists to understand which phases are completed, in-progress, or blocked.
 
 ### 2. Detect Project State
-Scan the resolved output folder (default `.agents/des-skill/output/` or `{planning_artifacts}`) for existing files:
+Scan the resolved output folder (default `_des-output/planning-artifacts/` or `{planning_artifacts}`) for existing files:
 ```text
 01-business-discovery-brief.md
 02-business-question-catalog.md

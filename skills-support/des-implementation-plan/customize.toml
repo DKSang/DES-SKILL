@@ -2,33 +2,33 @@ skill_id = "des-implementation-plan"
 skill_type = "support"
 phase_name = "Implementation Plan"
 
-output_file = ".agents/des-skill/output/support/implementation-plan.md"
-template_file = ".agents/des-skill/templates/support/implementation-plan-template.md"
-checklist_file = ".agents/des-skill/checklists/support/implementation-plan-checklist.md"
-status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+output_file = "_des-output/implementation-artifacts/implementation-plan.md"
+template_file = "_des/templates/support/implementation-plan-template.md"
+checklist_file = "_des/checklists/support/implementation-plan-checklist.md"
+status_file = "_des-output/implementation-artifacts/des-workflow-status.md"
 
 next_recommended_skill = "des-code-review"
 
 required_upstream_artifacts = [
-  ".agents/des-skill/output/support/dev-task-breakdown.md"
+  "_des-output/implementation-artifacts/dev-task-breakdown.md"
 ]
 
 recommended_upstream_artifacts = [
-  ".agents/des-skill/output/support/sprint-plan.md",
-  ".agents/des-skill/output/support/story-readiness-report.md",
-  ".agents/des-skill/output/support/story-catalog.md",
-  ".agents/des-skill/output/support/epic-catalog.md"
+  "_des-output/implementation-artifacts/sprint-plan.md",
+  "_des-output/implementation-artifacts/story-readiness-report.md",
+  "_des-output/implementation-artifacts/story-catalog.md",
+  "_des-output/implementation-artifacts/epic-catalog.md"
 ]
 
 optional_des_artifacts = [
-  ".agents/des-skill/output/07-architecture-decision-record.md",
-  ".agents/des-skill/output/13-transformation-specification.md",
-  ".agents/des-skill/output/14-data-quality-specification.md",
-  ".agents/des-skill/output/15-orchestration-observability-specification.md",
-  ".agents/des-skill/output/18-lineage-metadata-specification.md",
-  ".agents/des-skill/output/19-governance-security-specification.md",
-  ".agents/des-skill/output/20-cost-performance-optimization-specification.md",
-  ".agents/des-skill/output/21-cicd-testing-specification.md"
+  "_des-output/planning-artifacts/07-architecture-decision-record.md",
+  "_des-output/planning-artifacts/13-transformation-specification.md",
+  "_des-output/planning-artifacts/14-data-quality-specification.md",
+  "_des-output/planning-artifacts/15-orchestration-observability-specification.md",
+  "_des-output/planning-artifacts/18-lineage-metadata-specification.md",
+  "_des-output/planning-artifacts/19-governance-security-specification.md",
+  "_des-output/planning-artifacts/20-cost-performance-optimization-specification.md",
+  "_des-output/planning-artifacts/21-cicd-testing-specification.md"
 ]
 
 required_sections = [

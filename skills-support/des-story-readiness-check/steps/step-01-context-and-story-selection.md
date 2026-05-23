@@ -9,39 +9,39 @@ Confirm that `des-story-readiness-check` is the correct support skill and select
 Required:
 
 ```text
-.agents/des-skill/output/support/story-catalog.md
+_des-output/implementation-artifacts/story-catalog.md
 ```
 
 Recommended:
 
 ```text
-.agents/des-skill/output/support/epic-catalog.md
-.agents/des-skill/output/support/sprint-plan.md
+_des-output/implementation-artifacts/epic-catalog.md
+_des-output/implementation-artifacts/sprint-plan.md
 ```
 
 Useful DES artifacts depend on story type:
 
 ```text
-.agents/des-skill/output/05-data-source-inventory.md
-.agents/des-skill/output/08-ingestion-specification.md
-.agents/des-skill/output/09-bronze-layer-specification.md
-.agents/des-skill/output/10-silver-layer-specification.md
-.agents/des-skill/output/11-gold-layer-specification.md
-.agents/des-skill/output/12-data-contract-specification.md
-.agents/des-skill/output/13-transformation-specification.md
-.agents/des-skill/output/14-data-quality-specification.md
-.agents/des-skill/output/15-orchestration-observability-specification.md
-.agents/des-skill/output/16-semantic-model-specification.md
-.agents/des-skill/output/17-serving-layer-specification.md
-.agents/des-skill/output/18-lineage-metadata-specification.md
-.agents/des-skill/output/19-governance-security-specification.md
-.agents/des-skill/output/21-cicd-testing-specification.md
+_des-output/planning-artifacts/05-data-source-inventory.md
+_des-output/planning-artifacts/08-ingestion-specification.md
+_des-output/planning-artifacts/09-bronze-layer-specification.md
+_des-output/planning-artifacts/10-silver-layer-specification.md
+_des-output/planning-artifacts/11-gold-layer-specification.md
+_des-output/planning-artifacts/12-data-contract-specification.md
+_des-output/planning-artifacts/13-transformation-specification.md
+_des-output/planning-artifacts/14-data-quality-specification.md
+_des-output/planning-artifacts/15-orchestration-observability-specification.md
+_des-output/planning-artifacts/16-semantic-model-specification.md
+_des-output/planning-artifacts/17-serving-layer-specification.md
+_des-output/planning-artifacts/18-lineage-metadata-specification.md
+_des-output/planning-artifacts/19-governance-security-specification.md
+_des-output/planning-artifacts/21-cicd-testing-specification.md
 ```
 
 Existing output to check:
 
 ```text
-.agents/des-skill/output/support/story-readiness-report.md
+_des-output/implementation-artifacts/story-readiness-report.md
 ```
 
 ## Actions
@@ -100,7 +100,7 @@ Stop if Story Catalog is missing.
 Use this HALT if:
 
 ```text
-.agents/des-skill/output/support/story-catalog.md
+_des-output/implementation-artifacts/story-catalog.md
 ```
 
 does not exist, is empty, or does not contain usable stories.
@@ -111,7 +111,7 @@ How should the agent proceed?
 
 ### Options
 
-A. Route back to `des-create-stories`
+A. Route back to `des-create-story`
 B. User provides story details now
 C. Continue with Draft readiness report using available context
 D. Stop workflow

@@ -1,4 +1,4 @@
-const assert = require("node:assert/strict");
+﻿const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
 const test = require("node:test");
@@ -25,9 +25,9 @@ test("des-business-discovery uses generic Phase 1 artifact paths and step names"
   assert.match(skill, /step-01-context-and-readiness\.md/);
   assert.match(customize, /skill_id = "des-business-discovery"/);
   assert.match(customize, /phase = 1/);
-  assert.match(customize, /output_file = "\.agents\/des-skill\/output\/01-business-discovery-brief\.md"/);
-  assert.match(customize, /template_file = "\.agents\/des-skill\/templates\/01-business-discovery-brief-template\.md"/);
-  assert.match(customize, /checklist_file = "\.agents\/des-skill\/checklists\/01-business-discovery-checklist\.md"/);
+  assert.match(customize, /output_file = "_des-output\/planning-artifacts\/01-business-discovery-brief\.md"/);
+  assert.match(customize, /template_file = "_des\/templates\/01-business-discovery-brief-template\.md"/);
+  assert.match(customize, /checklist_file = "_des\/checklists\/01-business-discovery-checklist\.md"/);
   assert.match(customize, /next_recommended_skill = "des-business-questions"/);
 });
 

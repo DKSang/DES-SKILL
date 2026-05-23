@@ -8,8 +8,8 @@ Confirm that Requirements and KPIs is the correct next step and that approved bu
 
 Look for:
 
-- `.agents/des-skill/output/01-business-discovery-brief.md`;
-- `.agents/des-skill/output/02-business-question-catalog.md`;
+- `_des-output/planning-artifacts/01-business-discovery-brief.md`;
+- `_des-output/planning-artifacts/02-business-question-catalog.md`;
 - workflow status file;
 - approved or draft P1/P2 business questions;
 - known consumers;

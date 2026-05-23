@@ -8,19 +8,19 @@ Confirm that Cost and Performance Optimization is the correct next step and that
 
 Look for:
 
-- `.agents/des-skill/output/07-architecture-decision-record.md`;
-- `.agents/des-skill/output/08-ingestion-specification.md`;
-- `.agents/des-skill/output/09-bronze-layer-specification.md`;
-- `.agents/des-skill/output/10-silver-layer-specification.md`;
-- `.agents/des-skill/output/11-gold-layer-specification.md`;
-- `.agents/des-skill/output/12-data-contract-specification.md`;
-- `.agents/des-skill/output/13-transformation-specification.md`;
-- `.agents/des-skill/output/14-data-quality-specification.md`;
-- `.agents/des-skill/output/15-orchestration-observability-specification.md`;
-- `.agents/des-skill/output/16-semantic-model-specification.md`;
-- `.agents/des-skill/output/17-serving-layer-specification.md`;
-- `.agents/des-skill/output/18-lineage-metadata-specification.md`;
-- `.agents/des-skill/output/19-governance-security-specification.md`;
+- `_des-output/planning-artifacts/07-architecture-decision-record.md`;
+- `_des-output/planning-artifacts/08-ingestion-specification.md`;
+- `_des-output/planning-artifacts/09-bronze-layer-specification.md`;
+- `_des-output/planning-artifacts/10-silver-layer-specification.md`;
+- `_des-output/planning-artifacts/11-gold-layer-specification.md`;
+- `_des-output/planning-artifacts/12-data-contract-specification.md`;
+- `_des-output/planning-artifacts/13-transformation-specification.md`;
+- `_des-output/planning-artifacts/14-data-quality-specification.md`;
+- `_des-output/planning-artifacts/15-orchestration-observability-specification.md`;
+- `_des-output/planning-artifacts/16-semantic-model-specification.md`;
+- `_des-output/planning-artifacts/17-serving-layer-specification.md`;
+- `_des-output/planning-artifacts/18-lineage-metadata-specification.md`;
+- `_des-output/planning-artifacts/19-governance-security-specification.md`;
 - workflow status file;
 - P1 workloads;
 - expected data volume and growth;

@@ -92,7 +92,7 @@ How should review proceed?
 
 A. Mark review `Needs more evidence`  
 B. Review code structure only  
-C. Route back to `des-create-stories`  
+C. Route back to `des-create-story`  
 D. Route back to `des-story-readiness-check`  
 E. User provides acceptance criteria now  
 F. Block review  

@@ -106,7 +106,7 @@ Update the status file with:
 ```yaml
 phase_15_orchestration_observability:
   skill: des-orchestration-observability
-  artifact: .agents/des-skill/output/15-orchestration-observability-specification.md
+  artifact: _des-output/planning-artifacts/15-orchestration-observability-specification.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   workflows:

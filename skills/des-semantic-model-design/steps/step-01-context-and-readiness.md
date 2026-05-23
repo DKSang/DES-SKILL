@@ -8,17 +8,17 @@ Confirm that Semantic Model Design is the correct next step and that upstream Go
 
 Look for:
 
-- `.agents/des-skill/output/01-business-discovery-brief.md`;
-- `.agents/des-skill/output/02-business-question-catalog.md`;
-- `.agents/des-skill/output/03-requirements-and-kpi-catalog.md`;
-- `.agents/des-skill/output/04-data-product-specification.md`;
-- `.agents/des-skill/output/06-conceptual-domain-model.md`;
-- `.agents/des-skill/output/10-silver-layer-specification.md`;
-- `.agents/des-skill/output/11-gold-layer-specification.md`;
-- `.agents/des-skill/output/12-data-contract-specification.md`;
-- `.agents/des-skill/output/13-transformation-specification.md`;
-- `.agents/des-skill/output/14-data-quality-specification.md`;
-- `.agents/des-skill/output/15-orchestration-observability-specification.md`;
+- `_des-output/planning-artifacts/01-business-discovery-brief.md`;
+- `_des-output/planning-artifacts/02-business-question-catalog.md`;
+- `_des-output/planning-artifacts/03-requirements-and-kpi-catalog.md`;
+- `_des-output/planning-artifacts/04-data-product-specification.md`;
+- `_des-output/planning-artifacts/06-conceptual-domain-model.md`;
+- `_des-output/planning-artifacts/10-silver-layer-specification.md`;
+- `_des-output/planning-artifacts/11-gold-layer-specification.md`;
+- `_des-output/planning-artifacts/12-data-contract-specification.md`;
+- `_des-output/planning-artifacts/13-transformation-specification.md`;
+- `_des-output/planning-artifacts/14-data-quality-specification.md`;
+- `_des-output/planning-artifacts/15-orchestration-observability-specification.md`;
 - workflow status file;
 - Gold datasets and output types;
 - business questions and KPIs;

@@ -17,7 +17,7 @@ Create or update the Story Readiness Report, validate it, update workflow status
 1. Create or update:
 
 ```text
-.agents/des-skill/output/support/story-readiness-report.md
+_des-output/implementation-artifacts/story-readiness-report.md
 ```
 
 2. Use the configured template.
@@ -85,7 +85,7 @@ Update `des-workflow-status.md` with:
 ```yaml
 support_des_story_readiness_check:
   skill: des-story-readiness-check
-  artifact: .agents/des-skill/output/support/story-readiness-report.md
+  artifact: _des-output/implementation-artifacts/story-readiness-report.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   reviewed_stories:

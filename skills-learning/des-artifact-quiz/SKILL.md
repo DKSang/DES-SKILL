@@ -47,13 +47,13 @@ knowledge/FUNDAMENTALS-MAP.md
 Recommended input:
 
 ```text
-.agents/des-skill/output/learning/{phase}-*-learning-notes.md
+_des-output/learning-artifacts/{phase}-*-learning-notes.md
 ```
 
 The agent may also inspect the source artifact:
 
 ```text
-.agents/des-skill/output/{phase-artifact}.md
+_des-output/planning-artifacts/{phase-artifact}.md
 ```
 
 If neither the learning notes nor the source artifact is available, stop and ask the user which artifact or phase to quiz.
@@ -65,15 +65,15 @@ If neither the learning notes nor the source artifact is available, stop and ask
 Create or update:
 
 ```text
-.agents/des-skill/output/learning/{phase}-artifact-quiz.md
+_des-output/learning-artifacts/{phase}-artifact-quiz.md
 ```
 
 Examples:
 
 ```text
-.agents/des-skill/output/learning/08-ingestion-artifact-quiz.md
-.agents/des-skill/output/learning/10-silver-layer-artifact-quiz.md
-.agents/des-skill/output/learning/14-data-quality-artifact-quiz.md
+_des-output/learning-artifacts/08-ingestion-artifact-quiz.md
+_des-output/learning-artifacts/10-silver-layer-artifact-quiz.md
+_des-output/learning-artifacts/14-data-quality-artifact-quiz.md
 ```
 
 ---

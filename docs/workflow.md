@@ -1,6 +1,6 @@
 # DES-SKILL Workflow
 
-## Workflow đầy đủ (22 phases + 11 support steps)
+## Workflow đầy đủ (22 phases + 12 support steps)
 
 ### Tầng 1 — Main lifecycle phases
 
@@ -44,6 +44,7 @@ des-release-readiness-review →  release-readiness-report.md
 des-retrospective           →  retrospective-report.md
 des-correct-course          →  correct-course-plan.md
 des-workflow-status-update  →  des-workflow-status.md
+des-wise                    →  des-wise-recommendation.md (hoặc response trực tiếp)
 ```
 
 ---
@@ -77,7 +78,7 @@ Phase 21  des-cicd-and-testing
 
 ## Luồng đầy đủ cho project nghiêm túc
 
-Dùng toàn bộ 22 main skills và 11 support skills. Không bỏ qua phase nào mà không có lý do rõ ràng.
+Dùng toàn bộ 22 main skills và 12 support skills. Không bỏ qua phase nào mà không có lý do rõ ràng.
 
 ---
 

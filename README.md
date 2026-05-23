@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-22c55e.svg)](LICENSE)
 [![Tests](https://img.shields.io/badge/tests-8%2F8%20pass-22c55e)](test/)
 [![Main Skills](https://img.shields.io/badge/main%20skills-22-7c3aed)](skills/)
-[![Support Skills](https://img.shields.io/badge/support%20skills-11-0ea5e9)](skills-support/)
+[![Support Skills](https://img.shields.io/badge/support%20skills-12-0ea5e9)](skills-support/)
 
 **DES-SKILL** là bộ skill dành cho các AI agent như Codex, ChatGPT, Cursor, Claude Code hoặc các coding/data agent khác để hỗ trợ triển khai dự án **Data Engineering** theo quy trình có cấu trúc.
 
@@ -61,8 +61,8 @@ Main skills tạo ra các artifact thiết kế:
 Support skills dùng sau khi đã có artifact thiết kế để chuyển sang backlog, sprint, task, review và release.
 
 ```text
-des-create-epics
-→ des-create-stories
+des-create-epic
+→ des-create-story
 → des-sprint-planning
 → des-story-readiness-check
 → des-dev-task-breakdown
@@ -97,9 +97,9 @@ des-workflow-status.md
 ```text
 22 DES Main Skills (phases 01–22)
            ↓
-  des-create-epics
+  des-create-epic
            ↓
-  des-create-stories
+  des-create-story
            ↓
   des-sprint-planning
            ↓
@@ -183,7 +183,7 @@ Instructions:
 ### Prompt mẫu — Support skill
 
 ```text
-Use DES support skill: des-create-epics
+Use DES support skill: des-create-epic
 
 Project context:
 Tôi đã có output của 22 main skills.
@@ -192,13 +192,13 @@ Objective:
 Tạo Epic Catalog để chuẩn bị triển khai dự án.
 
 Instructions:
-1. Read `skills-support/des-create-epics/SKILL.md`.
-2. Read `skills-support/des-create-epics/customize.toml`.
+1. Read `skills-support/des-create-epic/SKILL.md`.
+2. Read `skills-support/des-create-epic/customize.toml`.
 3. Load only step-01.
 4. Use DES main artifacts as input.
 5. Do not create stories.
 6. Create `epic-catalog.md`.
-7. Recommend `des-create-stories`.
+7. Recommend `des-create-story`.
 ```
 
 ---
@@ -283,7 +283,7 @@ skills-learning/
 Use DES learning skill: des-artifact-quiz
 
 Artifact:
-.agents/des-skill/output/08-ingestion-specification.md
+_des-output/planning-artifacts/08-ingestion-specification.md
 
 Objective:
 Create a quiz to check whether I understand ingestion design.
@@ -393,8 +393,8 @@ Instructions:
 2. Read knowledge/FUNDAMENTALS-MAP.md.
 3. Read skills-learning/des-learning-status-update/SKILL.md.
 4. Load only step-01.
-5. Scan .agents/des-skill/output and .agents/des-skill/output/learning.
-6. Create or update .agents/des-skill/learning-status/des-learning-status.md.
+5. Scan _des-output/planning-artifacts and _des-output/learning-artifacts.
+6. Create or update _des-output/learning-artifacts/des-learning-status.md.
 ```
 
 ### Example — Review Learning Progress
@@ -408,7 +408,7 @@ Tổng kết tôi đã học đến đâu, còn yếu concept nào, và nên h�
 Instructions:
 1. Read SOUL.md.
 2. Read knowledge/FUNDAMENTALS-MAP.md.
-3. Read .agents/des-skill/learning-status/des-learning-status.md.
+3. Read _des-output/learning-artifacts/des-learning-status.md.
 4. Read skills-learning/des-learning-review/SKILL.md.
 5. Load only step-01.
 6. Summarize progress, weak concepts, gaps, and next actions.
@@ -439,7 +439,7 @@ Mỗi skill trong DES-SKILL tuân theo nguyên tắc:
 DES-SKILL sử dụng file trạng thái trung tâm:
 
 ```text
-.agents/des-skill/sprint-status/des-workflow-status.md
+_des-output/implementation-artifacts/des-workflow-status.md
 ```
 
 Quy trình hỗ trợ bốn chế độ workflow thích ứng (workflow modes):
@@ -467,6 +467,7 @@ File này giúp agent biết:
 ```text
 DES-SKILL/
 ├── README.md
+├── SOUL.md
 ├── docs/
 │   ├── overview.md
 │   ├── workflow.md
@@ -477,6 +478,8 @@ DES-SKILL/
 │   ├── repo-structure.md
 │   ├── agent-rules.md
 │   └── contributing.md
+├── knowledge/
+│   └── FUNDAMENTALS-MAP.md
 ├── skills/
 │   ├── des-business-discovery/
 │   ├── des-business-questions/
@@ -485,10 +488,29 @@ DES-SKILL/
 │   ├── des-create-epic/
 │   ├── des-create-story/
 │   └── ...  (12 support skills)
+├── skills-learning/
+│   ├── des-explain-artifact/
+│   ├── des-artifact-quiz/
+│   ├── des-learning-path/
+│   ├── des-gap-teacher/
+│   ├── des-socratic-coach/
+│   ├── des-learning-status-update/
+│   └── des-learning-review/
 ├── templates/
+│   ├── learning/
+│   │   ├── artifact-explanation-template.md
+│   │   ├── artifact-quiz-template.md
+│   │   ├── learning-path-template.md
+│   │   ├── learning-gap-report-template.md
+│   │   └── socratic-coaching-session-template.md
+│   └── support/
+│       └── des-wise-response-template.md
 ├── checklists/
-└── .agents/des-skill/
+└── _des/
     ├── output/
+    │   └── learning/
+    ├── learning-status/
+    │   └── des-learning-status.md
     ├── sprint-status/
     │   └── des-workflow-status.md
     └── templates/

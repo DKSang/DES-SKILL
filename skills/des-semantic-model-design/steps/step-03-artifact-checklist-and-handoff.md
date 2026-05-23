@@ -101,7 +101,7 @@ Update the status file with:
 ```yaml
 phase_16_semantic_model_design:
   skill: des-semantic-model-design
-  artifact: .agents/des-skill/output/16-semantic-model-specification.md
+  artifact: _des-output/planning-artifacts/16-semantic-model-specification.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   semantic_models:

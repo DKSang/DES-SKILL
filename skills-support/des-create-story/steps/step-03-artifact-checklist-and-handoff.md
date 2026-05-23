@@ -17,7 +17,7 @@ Create or update the Story Catalog, validate it, update workflow status, and rec
 1. Create or update:
 
 ```text
-.agents/des-skill/output/support/story-catalog.md
+_des-output/implementation-artifacts/story-catalog.md
 ```
 
 2. Use the configured template.
@@ -79,7 +79,7 @@ Update `des-workflow-status.md` with:
 ```yaml
 support_des_create_story:
   skill: des-create-story
-  artifact: .agents/des-skill/output/support/story-catalog.md
+  artifact: _des-output/implementation-artifacts/story-catalog.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   story_count: ...

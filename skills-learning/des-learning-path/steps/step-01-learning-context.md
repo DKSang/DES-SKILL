@@ -46,9 +46,9 @@ mode = project-based if artifacts exist, generic if not
 Inspect these directories if available:
 
 ```text
-.agents/des-skill/output/
-.agents/des-skill/output/learning/
-.agents/des-skill/sprint-status/des-workflow-status.md
+_des-output/planning-artifacts/
+_des-output/learning-artifacts/
+_des-output/implementation-artifacts/des-workflow-status.md
 ```
 
 Classify each phase as:

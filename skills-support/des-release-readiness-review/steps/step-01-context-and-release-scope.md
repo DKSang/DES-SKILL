@@ -9,34 +9,34 @@ Confirm that `des-release-readiness-review` is the correct support skill, identi
 Required:
 
 ```text
-.agents/des-skill/output/support/story-catalog.md
-.agents/des-skill/output/support/sprint-plan.md
-.agents/des-skill/output/support/code-review-report.md
+_des-output/implementation-artifacts/story-catalog.md
+_des-output/implementation-artifacts/sprint-plan.md
+_des-output/implementation-artifacts/code-review-report.md
 ```
 
 Recommended:
 
 ```text
-.agents/des-skill/output/support/implementation-plan.md
-.agents/des-skill/output/support/dev-task-breakdown.md
-.agents/des-skill/output/support/story-readiness-report.md
-.agents/des-skill/output/support/epic-catalog.md
+_des-output/implementation-artifacts/implementation-plan.md
+_des-output/implementation-artifacts/dev-task-breakdown.md
+_des-output/implementation-artifacts/story-readiness-report.md
+_des-output/implementation-artifacts/epic-catalog.md
 ```
 
 Useful DES artifacts:
 
 ```text
-.agents/des-skill/output/12-data-contract-specification.md
-.agents/des-skill/output/14-data-quality-specification.md
-.agents/des-skill/output/15-orchestration-observability-specification.md
-.agents/des-skill/output/19-governance-security-specification.md
-.agents/des-skill/output/21-cicd-testing-specification.md
+_des-output/planning-artifacts/12-data-contract-specification.md
+_des-output/planning-artifacts/14-data-quality-specification.md
+_des-output/planning-artifacts/15-orchestration-observability-specification.md
+_des-output/planning-artifacts/19-governance-security-specification.md
+_des-output/planning-artifacts/21-cicd-testing-specification.md
 ```
 
 Existing output to check:
 
 ```text
-.agents/des-skill/output/support/release-readiness-report.md
+_des-output/implementation-artifacts/release-readiness-report.md
 ```
 
 ## Actions

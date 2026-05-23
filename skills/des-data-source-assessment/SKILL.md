@@ -31,10 +31,10 @@ Do not use this skill to design ingestion pipelines, storage layout, Bronze tabl
 
 The agent should look for:
 
-- `.agents/des-skill/output/01-business-discovery-brief.md`;
-- `.agents/des-skill/output/02-business-question-catalog.md`;
-- `.agents/des-skill/output/03-requirements-and-kpi-catalog.md`;
-- `.agents/des-skill/output/04-data-product-specification.md`;
+- `_des-output/planning-artifacts/01-business-discovery-brief.md`;
+- `_des-output/planning-artifacts/02-business-question-catalog.md`;
+- `_des-output/planning-artifacts/03-requirements-and-kpi-catalog.md`;
+- `_des-output/planning-artifacts/04-data-product-specification.md`;
 - workflow status file, if present;
 - known candidate sources;
 - known source owners;
@@ -48,7 +48,7 @@ If the Data Product Specification is missing or too weak, stop and ask whether t
 Create or update the configured `output_file`:
 
 ```text
-.agents/des-skill/output/05-data-source-inventory.md
+_des-output/planning-artifacts/05-data-source-inventory.md
 ```
 
 The artifact must capture:

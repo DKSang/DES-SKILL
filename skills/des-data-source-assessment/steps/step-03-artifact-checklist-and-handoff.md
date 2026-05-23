@@ -100,7 +100,7 @@ Update the status file with:
 ```yaml
 phase_05_data_source_assessment:
   skill: des-data-source-assessment
-  artifact: .agents/des-skill/output/05-data-source-inventory.md
+  artifact: _des-output/planning-artifacts/05-data-source-inventory.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   sources:

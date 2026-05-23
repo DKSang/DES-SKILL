@@ -56,10 +56,10 @@ DES-WORKFLOW.md
 ARTIFACTS.md
 README.md
 knowledge/FUNDAMENTALS-MAP.md
-.agents/des-skill/sprint-status/des-workflow-status.md
-.agents/des-skill/learning-status/des-learning-status.md
-.agents/des-skill/output/
-.agents/des-skill/output/learning/
+_des-output/implementation-artifacts/des-workflow-status.md
+_des-output/learning-artifacts/des-learning-status.md
+_des-output/planning-artifacts/
+_des-output/learning-artifacts/
 ```
 
 If status files are missing, `des-wise` may still provide generic guidance.
@@ -73,7 +73,7 @@ This skill usually responds directly to the user.
 Optionally create:
 
 ```text
-.agents/des-skill/output/support/des-wise-recommendation.md
+_des-output/implementation-artifacts/des-wise-recommendation.md
 ```
 
 Create the output file when:

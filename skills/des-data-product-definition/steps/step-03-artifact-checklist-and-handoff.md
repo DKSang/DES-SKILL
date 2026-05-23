@@ -97,7 +97,7 @@ Update the status file with:
 ```yaml
 phase_04_data_product_definition:
   skill: des-data-product-definition
-  artifact: .agents/des-skill/output/04-data-product-specification.md
+  artifact: _des-output/planning-artifacts/04-data-product-specification.md
   status: Done | Draft | Blocked
   checklist_result: Passed | Passed with risks | Blocked
   data_products:

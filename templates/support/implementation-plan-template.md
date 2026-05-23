@@ -142,7 +142,7 @@ Escalate to:
 
 | Condition                   | Route                                          |
 | --------------------------- | ---------------------------------------------- |
-| missing story detail        | des-create-stories / des-story-readiness-check |
+| missing story detail        | des-create-story / des-story-readiness-check |
 | missing task detail         | des-dev-task-breakdown                         |
 | missing quality/contract    | DES Phase 12 / Phase 14                        |
 | missing governance/security | DES Phase 19                                   |
@@ -154,9 +154,9 @@ Escalate to:
 Implement the selected story/task plan.
 
 Use:
-- .agents/des-skill/output/support/dev-task-breakdown.md
-- .agents/des-skill/output/support/story-readiness-report.md
-- .agents/des-skill/output/support/sprint-plan.md
+- _des-output/implementation-artifacts/dev-task-breakdown.md
+- _des-output/implementation-artifacts/story-readiness-report.md
+- _des-output/implementation-artifacts/sprint-plan.md
 - relevant DES artifacts listed in the task breakdown
 
 Implementation rules:

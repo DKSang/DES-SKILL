@@ -29,16 +29,16 @@ Do not use this skill to implement actual CI/CD workflows, write production test
 
 The agent should look for:
 
-- `.agents/des-skill/output/07-architecture-decision-record.md`;
-- `.agents/des-skill/output/12-data-contract-specification.md`;
-- `.agents/des-skill/output/13-transformation-specification.md`;
-- `.agents/des-skill/output/14-data-quality-specification.md`;
-- `.agents/des-skill/output/15-orchestration-observability-specification.md`;
-- `.agents/des-skill/output/16-semantic-model-specification.md`;
-- `.agents/des-skill/output/17-serving-layer-specification.md`;
-- `.agents/des-skill/output/18-lineage-metadata-specification.md`;
-- `.agents/des-skill/output/19-governance-security-specification.md`;
-- `.agents/des-skill/output/20-cost-performance-optimization-specification.md`;
+- `_des-output/planning-artifacts/07-architecture-decision-record.md`;
+- `_des-output/planning-artifacts/12-data-contract-specification.md`;
+- `_des-output/planning-artifacts/13-transformation-specification.md`;
+- `_des-output/planning-artifacts/14-data-quality-specification.md`;
+- `_des-output/planning-artifacts/15-orchestration-observability-specification.md`;
+- `_des-output/planning-artifacts/16-semantic-model-specification.md`;
+- `_des-output/planning-artifacts/17-serving-layer-specification.md`;
+- `_des-output/planning-artifacts/18-lineage-metadata-specification.md`;
+- `_des-output/planning-artifacts/19-governance-security-specification.md`;
+- `_des-output/planning-artifacts/20-cost-performance-optimization-specification.md`;
 - workflow status file, if present;
 - repository structure;
 - environment strategy;
@@ -57,7 +57,7 @@ If Phase 20 or required release context is missing, stop and ask whether to rout
 Create or update:
 
 ```text
-.agents/des-skill/output/21-cicd-testing-specification.md
+_des-output/planning-artifacts/21-cicd-testing-specification.md
 ```
 
 The artifact must capture:

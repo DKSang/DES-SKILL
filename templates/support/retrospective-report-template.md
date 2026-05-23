@@ -85,8 +85,8 @@ Out of scope:
 
 | Support Skill                | Feedback | Action |
 | ---------------------------- | -------- | ------ |
-| des-create-epics             |          |        |
-| des-create-stories           |          |        |
+| des-create-epic              |          |        |
+| des-create-story             |          |        |
 | des-sprint-planning          |          |        |
 | des-story-readiness-check    |          |        |
 | des-dev-task-breakdown       |          |        |
@@ -128,7 +128,7 @@ Out of scope:
 
 | Recommendation | Reason | Route                                                     |
 | -------------- | ------ | --------------------------------------------------------- |
-|                |        | des-sprint-planning / des-create-stories / implementation |
+|                |        | des-sprint-planning / des-create-story / implementation |
 
 ## 17. Correct Course Recommendations
 

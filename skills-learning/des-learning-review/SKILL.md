@@ -45,9 +45,9 @@ The agent should inspect:
 ```text
 SOUL.md
 knowledge/FUNDAMENTALS-MAP.md
-.agents/des-skill/learning-status/des-learning-status.md
-.agents/des-skill/output/learning/
-.agents/des-skill/sprint-status/des-workflow-status.md
+_des-output/learning-artifacts/des-learning-status.md
+_des-output/learning-artifacts/
+_des-output/implementation-artifacts/des-workflow-status.md
 ```
 
 If learning status is missing, recommend running `des-learning-status-update` first.
@@ -59,7 +59,7 @@ If learning status is missing, recommend running `des-learning-status-update` fi
 Create or update:
 
 ```text
-.agents/des-skill/output/learning/des-learning-review.md
+_des-output/learning-artifacts/des-learning-review.md
 ```
 
 ---

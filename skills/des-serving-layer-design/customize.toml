@@ -2,24 +2,24 @@ skill_id = "des-serving-layer-design"
 phase = 17
 phase_name = "Serving Layer Design"
 
-output_file = ".agents/des-skill/output/17-serving-layer-specification.md"
-template_file = ".agents/des-skill/templates/17-serving-layer-specification-template.md"
-checklist_file = ".agents/des-skill/checklists/17-serving-layer-design-checklist.md"
-status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+output_file = "_des-output/planning-artifacts/17-serving-layer-specification.md"
+template_file = "_des/templates/17-serving-layer-specification-template.md"
+checklist_file = "_des/checklists/17-serving-layer-design-checklist.md"
+status_file = "_des-output/implementation-artifacts/des-workflow-status.md"
 
 next_recommended_skill = "des-lineage-metadata-design"
 
 required_upstream_artifacts = [
-  ".agents/des-skill/output/01-business-discovery-brief.md",
-  ".agents/des-skill/output/02-business-question-catalog.md",
-  ".agents/des-skill/output/03-requirements-and-kpi-catalog.md",
-  ".agents/des-skill/output/04-data-product-specification.md",
-  ".agents/des-skill/output/07-architecture-decision-record.md",
-  ".agents/des-skill/output/11-gold-layer-specification.md",
-  ".agents/des-skill/output/12-data-contract-specification.md",
-  ".agents/des-skill/output/14-data-quality-specification.md",
-  ".agents/des-skill/output/15-orchestration-observability-specification.md",
-  ".agents/des-skill/output/16-semantic-model-specification.md"
+  "_des-output/planning-artifacts/01-business-discovery-brief.md",
+  "_des-output/planning-artifacts/02-business-question-catalog.md",
+  "_des-output/planning-artifacts/03-requirements-and-kpi-catalog.md",
+  "_des-output/planning-artifacts/04-data-product-specification.md",
+  "_des-output/planning-artifacts/07-architecture-decision-record.md",
+  "_des-output/planning-artifacts/11-gold-layer-specification.md",
+  "_des-output/planning-artifacts/12-data-contract-specification.md",
+  "_des-output/planning-artifacts/14-data-quality-specification.md",
+  "_des-output/planning-artifacts/15-orchestration-observability-specification.md",
+  "_des-output/planning-artifacts/16-semantic-model-specification.md"
 ]
 
 required_sections = [

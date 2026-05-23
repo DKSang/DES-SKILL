@@ -29,7 +29,7 @@ Instructions:
 4. Stop at every HALT point and wait for my input.
 5. Create `01-business-discovery-brief.md` at the configured output path.
 6. Run the checklist before marking Done.
-7. Update `.agents/des-skill/sprint-status/des-workflow-status.md`.
+7. Update `_des-output/implementation-artifacts/des-workflow-status.md`.
 8. Recommend the next skill when done.
 ```
 
@@ -162,7 +162,7 @@ Use DES support skill: des-correct-course
 
 Project context:
 Phát hiện vấn đề: Code đã được viết cho Gold layer nhưng phase 11 (Gold Layer Design) chưa có artifact.
-Workflow status file: `.agents/des-skill/sprint-status/des-workflow-status.md`
+Workflow status file: `_des-output/implementation-artifacts/des-workflow-status.md`
 
 Objective:
 Phân tích root cause và tạo recovery plan.

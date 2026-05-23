@@ -66,15 +66,15 @@ If no concept or artifact is provided, stop and ask what concept the user wants 
 Create or update:
 
 ```text
-.agents/des-skill/output/learning/{phase}-socratic-coaching-session.md
+_des-output/learning-artifacts/{phase}-socratic-coaching-session.md
 ```
 
 Examples:
 
 ```text
-.agents/des-skill/output/learning/08-ingestion-socratic-coaching-session.md
-.agents/des-skill/output/learning/10-silver-layer-socratic-coaching-session.md
-.agents/des-skill/output/learning/14-data-quality-socratic-coaching-session.md
+_des-output/learning-artifacts/08-ingestion-socratic-coaching-session.md
+_des-output/learning-artifacts/10-silver-layer-socratic-coaching-session.md
+_des-output/learning-artifacts/14-data-quality-socratic-coaching-session.md
 ```
 
 ---

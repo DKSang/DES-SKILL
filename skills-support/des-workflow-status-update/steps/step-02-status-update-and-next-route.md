@@ -67,10 +67,10 @@ If story catalog exists but no sprint plan
   → next route = des-sprint-planning
 
 If epic catalog exists but no story catalog
-  → next route = des-create-stories
+  → next route = des-create-story
 
 If main DES artifacts exist but no epic catalog
-  → next route = des-create-epics
+  → next route = des-create-epic
 
 If main DES phase incomplete
   → next route = next incomplete DES main phase
@@ -107,7 +107,7 @@ What should be the next route?
 ### Options
 
 A. Next incomplete DES main phase
-B. des-create-epics
+B. des-create-epic
 C. des-create-story
 D. des-sprint-planning
 E. des-story-readiness-check
