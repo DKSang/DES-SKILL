@@ -1,0 +1,40 @@
+[skill]
+name = "des-explain-artifact"
+type = "learning"
+version = "0.1.0"
+
+[workflow]
+entry_step = "steps/step-01-context-and-scope.md"
+step_order = [
+  "steps/step-01-context-and-scope.md",
+  "steps/step-02-explain-artifact.md",
+  "steps/step-03-checklist-and-handoff.md"
+]
+
+[paths]
+soul_file = "SOUL.md"
+concept_map_file = "knowledge/FUNDAMENTALS-MAP.md"
+template_file = "templates/learning/artifact-explanation-template.md"
+checklist_file = "skills-learning/des-explain-artifact/checklist.md"
+output_dir = ".agents/des-skill/output/learning"
+
+[output]
+default_status = "Draft"
+file_suffix = "learning-notes.md"
+language = "follow-user-language"
+
+[teaching]
+depth = "fundamental"
+style = "textbook-like"
+include_examples = true
+include_tradeoffs = true
+include_reflection_questions = true
+max_reflection_questions = 5
+
+[guardrails]
+do_not_modify_source_artifact = true
+do_not_copy_long_source_passages = true
+do_not_invent_missing_artifact_content = true
+halt_on_missing_artifact = true
+halt_on_missing_soul = true
+halt_on_missing_concept_map = true

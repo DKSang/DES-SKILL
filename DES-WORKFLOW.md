@@ -2,6 +2,28 @@
 
 Sử dụng quy trình này khi bắt đầu, tiếp tục hoặc cải thiện một dự án data engineering.
 
+## Need Help Choosing a Skill?
+
+Use:
+
+```text
+des-wise
+```
+
+`des-wise` is the DES-SKILL router and advisor.
+
+It helps answer:
+
+* Which DES skill should I use next?
+* Where am I in the workflow?
+* Should I continue lifecycle design, learning, delivery planning, or review?
+* Which artifact is required before the next step?
+* Which status file should be updated?
+
+### Router Rule
+
+If the user intent is unclear, run `des-wise` before selecting a lifecycle, support, or learning skill.
+
 ## Hướng dẫn cho Agent (Agent Instruction)
 
 Bạn đang sử dụng DES-SKILL. Bắt đầu với `using-des-skill` đóng vai trò là bộ định tuyến quy trình (workflow router).
@@ -127,3 +149,121 @@ Skill `des-implementation-plan` thay thế `des-implementation-plan` cũ. Với 
 ## Khả năng tương thích ngược (Compatibility Skill)
 
 Các skill cũ đã được thay thế bằng bộ skill hỗ trợ mới để đảm bảo tính chặt chẽ của quy trình BMAD-style.
+
+## DES Learning Workflow
+
+DES Learning Skills are optional but recommended when the user wants to learn from DES artifacts.
+
+```text
+DES main artifact
+        ↓
+des-explain-artifact
+        ↓
+des-artifact-quiz
+        ↓
+des-learning-path, if broader roadmap is needed
+```
+
+### Learning Routes
+
+| User Intent                                     | Recommended Skill      |
+| ----------------------------------------------- | ---------------------- |
+| “Giải thích artifact này”                       | `des-explain-artifact` |
+| “Tôi học được gì từ phase này?”                 | `des-explain-artifact` |
+| “Tạo câu hỏi kiểm tra”                          | `des-artifact-quiz`    |
+| “Quiz tôi phase này”                            | `des-artifact-quiz`    |
+| “Lên lộ trình học 22 phase”                     | `des-learning-path`    |
+| “Tôi muốn học Data Engineering qua project này” | `des-learning-path`    |
+
+### Learning Handoff
+
+After any DES main phase completes, the agent may recommend:
+
+```text
+Run des-explain-artifact to learn from the artifact.
+```
+
+After `des-explain-artifact`, the agent may recommend:
+
+```text
+Run des-artifact-quiz to check understanding.
+```
+
+After several phases are complete, the agent may recommend:
+
+```text
+Run des-learning-path to build a broader study roadmap.
+```
+
+## Learning Diagnosis and Coaching Workflow
+
+```text
+des-explain-artifact
+        ↓
+des-artifact-quiz
+        ↓
+user answers quiz
+        ↓
+des-gap-teacher
+        ↓
+des-socratic-coach
+        ↓
+des-artifact-quiz retry
+        ↓
+continue next DES phase
+```
+
+### Diagnosis Routes
+
+| User Intent                                    | Recommended Skill    |
+| ---------------------------------------------- | -------------------- |
+| “Tôi hiểu vậy đúng không?”                     | `des-gap-teacher`    |
+| “Tôi đang thiếu gì?”                           | `des-gap-teacher`    |
+| “Chấm câu trả lời quiz của tôi”                | `des-gap-teacher`    |
+| “Hỏi tôi từng câu”                             | `des-socratic-coach` |
+| “Dạy tôi bằng Socratic”                        | `des-socratic-coach` |
+| “Tôi bị nhầm giữa A và B”                      | `des-socratic-coach` |
+| “Tôi cần bảo vệ artifact này khi thuyết trình” | `des-socratic-coach` |
+
+## Learning Status Workflow
+
+DES Learning Skills can track learning progress separately from project delivery progress.
+
+```text
+des-explain-artifact
+        ↓
+des-artifact-quiz
+        ↓
+des-gap-teacher
+        ↓
+des-socratic-coach
+        ↓
+des-learning-status-update
+        ↓
+des-learning-review
+```
+
+### Learning Status Routes
+
+| User Intent                            | Recommended Skill            |
+| -------------------------------------- | ---------------------------- |
+| “Cập nhật trạng thái học”              | `des-learning-status-update` |
+| “Tôi học đến đâu rồi?”                 | `des-learning-review`        |
+| “Phase nào còn gap?”                   | `des-learning-status-update` |
+| “Tôi yếu phần nào?”                    | `des-learning-review`        |
+| “Tôi đã sẵn sàng qua phase tiếp chưa?” | `des-learning-review`        |
+| “Tổng kết quá trình học”               | `des-learning-review`        |
+
+### Learning Readiness Rule
+
+A DES phase can be considered learning-ready only when:
+
+```text
+main artifact exists
+learning notes exist
+quiz is generated or answered if required
+no open High or Blocking gap remains
+readiness is not Unknown
+```
+
+Artifact completion and learning readiness are different states.

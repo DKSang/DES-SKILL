@@ -1,0 +1,48 @@
+[skill]
+name = "des-learning-path"
+type = "learning"
+version = "0.1.0"
+
+[workflow]
+entry_step = "steps/step-01-learning-context.md"
+step_order = [
+  "steps/step-01-learning-context.md",
+  "steps/step-02-build-learning-path.md",
+  "steps/step-03-checklist-and-handoff.md"
+]
+
+[paths]
+soul_file = "SOUL.md"
+concept_map_file = "knowledge/FUNDAMENTALS-MAP.md"
+template_file = "templates/learning/learning-path-template.md"
+checklist_file = "skills-learning/des-learning-path/checklist.md"
+source_artifact_dir = ".agents/des-skill/output"
+learning_output_dir = ".agents/des-skill/output/learning"
+status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+[output]
+output_file = ".agents/des-skill/output/learning/des-learning-path.md"
+language = "follow-user-language"
+default_status = "Draft"
+
+[learning_path]
+default_mode = "project-based"
+include_all_22_phases = true
+include_support_skills = true
+include_quiz_checkpoints = true
+include_artifact_exercises = true
+include_personalized_gaps = true
+
+[modules]
+module_1 = "Foundation and Business Context"
+module_2 = "Data Engineering Lifecycle Core"
+module_3 = "Modeling, Contracts, and Quality"
+module_4 = "Operations, Governance, and Reliability"
+module_5 = "Delivery, Review, and Portfolio Readiness"
+
+[guardrails]
+do_not_claim_completion_without_evidence = true
+do_not_copy_long_source_passages = true
+do_not_create_theory_only_plan = true
+halt_on_missing_soul = true
+halt_on_missing_concept_map = true

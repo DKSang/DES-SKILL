@@ -1,0 +1,52 @@
+[skill]
+name = "des-artifact-quiz"
+type = "learning"
+version = "0.1.0"
+
+[workflow]
+entry_step = "steps/step-01-context-and-scope.md"
+step_order = [
+  "steps/step-01-context-and-scope.md",
+  "steps/step-02-generate-quiz.md",
+  "steps/step-03-evaluate-and-handoff.md"
+]
+
+[paths]
+soul_file = "SOUL.md"
+concept_map_file = "knowledge/FUNDAMENTALS-MAP.md"
+template_file = "templates/learning/artifact-quiz-template.md"
+checklist_file = "skills-learning/des-artifact-quiz/checklist.md"
+learning_output_dir = ".agents/des-skill/output/learning"
+source_artifact_dir = ".agents/des-skill/output"
+
+[output]
+file_suffix = "artifact-quiz.md"
+language = "follow-user-language"
+default_status = "Draft"
+
+[quiz]
+default_question_count = 12
+include_answer_key = true
+include_explanations = true
+include_scoring_guide = true
+
+[quiz.mix]
+concept_check = 3
+artifact_understanding = 3
+applied_scenario = 3
+tradeoff = 2
+common_mistake = 1
+
+[difficulty_mix]
+beginner = 0.30
+intermediate = 0.40
+applied = 0.20
+challenge = 0.10
+
+[guardrails]
+do_not_modify_source_artifact = true
+do_not_create_trivia_only_questions = true
+do_not_invent_project_context = true
+halt_on_missing_artifact_or_phase = true
+halt_on_missing_soul = true
+halt_on_missing_concept_map = true

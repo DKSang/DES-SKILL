@@ -1,0 +1,51 @@
+[skill]
+name = "des-learning-review"
+type = "learning"
+version = "0.1.0"
+
+[workflow]
+entry_step = "steps/step-01-review-context.md"
+step_order = [
+  "steps/step-01-review-context.md",
+  "steps/step-02-evaluate-learning-progress.md",
+  "steps/step-03-summary-and-handoff.md"
+]
+
+[paths]
+soul_file = "SOUL.md"
+concept_map_file = "knowledge/FUNDAMENTALS-MAP.md"
+template_file = "templates/learning/learning-review-template.md"
+checklist_file = "skills-learning/des-learning-review/checklist.md"
+learning_status_file = ".agents/des-skill/learning-status/des-learning-status.md"
+learning_output_dir = ".agents/des-skill/output/learning"
+workflow_status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+[output]
+output_file = ".agents/des-skill/output/learning/des-learning-review.md"
+language = "follow-user-language"
+default_status = "Draft"
+
+[review]
+include_module_progress = true
+include_phase_readiness = true
+include_strengths = true
+include_weak_concepts = true
+include_open_gaps = true
+include_blockers = true
+include_review_plan = true
+include_next_lifecycle_action = true
+
+[modules]
+module_1 = "Foundation and Business Context"
+module_2 = "Data Engineering Lifecycle Core"
+module_3 = "Modeling, Contracts, and Quality"
+module_4 = "Operations, Governance, and Reliability"
+module_5 = "Delivery, Review, and Portfolio Readiness"
+
+[guardrails]
+do_not_claim_readiness_without_evidence = true
+do_not_ignore_high_or_blocking_gaps = true
+do_not_confuse_artifact_completion_with_learning_readiness = true
+halt_on_missing_soul = true
+halt_on_missing_concept_map = true
+halt_on_missing_learning_status_for_personalized_review = true

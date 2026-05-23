@@ -1,0 +1,77 @@
+[skill]
+name = "des-learning-status-update"
+type = "learning"
+version = "0.1.0"
+
+[workflow]
+entry_step = "steps/step-01-scan-learning-evidence.md"
+step_order = [
+  "steps/step-01-scan-learning-evidence.md",
+  "steps/step-02-update-learning-status.md",
+  "steps/step-03-checklist-and-handoff.md"
+]
+
+[paths]
+soul_file = "SOUL.md"
+concept_map_file = "knowledge/FUNDAMENTALS-MAP.md"
+template_file = "templates/learning/learning-status-template.md"
+checklist_file = "skills-learning/des-learning-status-update/checklist.md"
+source_artifact_dir = ".agents/des-skill/output"
+learning_output_dir = ".agents/des-skill/output/learning"
+learning_status_file = ".agents/des-skill/learning-status/des-learning-status.md"
+workflow_status_file = ".agents/des-skill/sprint-status/des-workflow-status.md"
+
+[output]
+language = "follow-user-language"
+default_status = "Draft"
+
+[tracking]
+include_all_22_phases = true
+include_learning_notes = true
+include_quiz_status = true
+include_gap_status = true
+include_coaching_status = true
+include_readiness_status = true
+include_open_blockers = true
+include_next_action = true
+
+[status_values]
+learning = [
+  "Not Started",
+  "Artifact Available",
+  "Explained",
+  "Quiz Generated",
+  "Quiz Answered",
+  "Gap Diagnosed",
+  "Coached",
+  "Ready",
+  "Ready with Caution",
+  "Needs Review",
+  "Blocked",
+  "Unknown"
+]
+
+readiness = [
+  "Ready for Next Phase",
+  "Ready with Caution",
+  "Needs Review",
+  "Blocked by Learning Gap",
+  "Unknown"
+]
+
+gap = [
+  "No Known Gap",
+  "Open Low Gap",
+  "Open Medium Gap",
+  "Open High Gap",
+  "Open Blocking Gap",
+  "Resolved",
+  "Unknown"
+]
+
+[guardrails]
+do_not_claim_ready_without_evidence = true
+do_not_claim_gap_resolved_without_evidence = true
+do_not_overwrite_history_silently = true
+halt_on_missing_soul = true
+halt_on_missing_concept_map = true

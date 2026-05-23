@@ -8,7 +8,8 @@ const workflowPath = path.join(root, "DES-WORKFLOW.md");
 
 const skillsDirs = [
   path.join(root, "skills"),
-  path.join(root, "skills-support")
+  path.join(root, "skills-support"),
+  path.join(root, "skills-learning")
 ];
 
 let failures = 0;
@@ -176,6 +177,112 @@ function validatePackage() {
   }
 }
 
+function validateLearningFoundation() {
+  const requiredFiles = [
+    "SOUL.md",
+    "knowledge/FUNDAMENTALS-MAP.md",
+    "templates/learning/artifact-explanation-template.md",
+    "templates/learning/artifact-quiz-template.md",
+    "templates/learning/learning-path-template.md",
+    "templates/learning/learning-gap-report-template.md",
+    "templates/learning/socratic-coaching-session-template.md",
+    "templates/learning/learning-status-template.md",
+    "templates/learning/learning-review-template.md"
+  ];
+
+  for (const file of requiredFiles) {
+    const filePath = path.join(root, file);
+    if (!fs.existsSync(filePath)) {
+      fail(`${file} is missing`);
+    }
+  }
+}
+
+function validateRequiredLearningSkills() {
+  const requiredLearningSkills = [
+    "des-explain-artifact",
+    "des-artifact-quiz",
+    "des-learning-path",
+    "des-gap-teacher",
+    "des-socratic-coach",
+    "des-learning-status-update",
+    "des-learning-review"
+  ];
+
+  for (const skill of requiredLearningSkills) {
+    const skillPath = path.join(root, "skills-learning", skill);
+    if (!fs.existsSync(skillPath)) {
+      fail(`Required learning skill is missing: ${skill}`);
+      continue;
+    }
+
+    const requiredPaths = [
+      "SKILL.md",
+      "customize.toml",
+      "checklist.md",
+      "steps"
+    ];
+
+    for (const requiredPath of requiredPaths) {
+      const fullPath = path.join(skillPath, requiredPath);
+      if (!fs.existsSync(fullPath)) {
+        fail(`${skill} is missing ${requiredPath}`);
+      }
+    }
+  }
+}
+
+function validateRequiredSupportSkills() {
+  const requiredSupportSkills = [
+    "des-create-epic",
+    "des-create-story",
+    "des-sprint-planning",
+    "des-story-readiness-check",
+    "des-dev-task-breakdown",
+    "des-implementation-plan",
+    "des-code-review",
+    "des-release-readiness-review",
+    "des-retrospective",
+    "des-correct-course",
+    "des-workflow-status-update",
+    "des-wise"
+  ];
+
+  for (const skill of requiredSupportSkills) {
+    const skillPath = path.join(root, "skills-support", skill);
+    if (!fs.existsSync(skillPath)) {
+      fail(`Required support skill is missing: ${skill}`);
+      continue;
+    }
+
+    const requiredPaths = [
+      "SKILL.md",
+      "customize.toml",
+      "steps"
+    ];
+
+    for (const requiredPath of requiredPaths) {
+      const fullPath = path.join(skillPath, requiredPath);
+      if (!fs.existsSync(fullPath)) {
+        fail(`${skill} is missing ${requiredPath}`);
+      }
+    }
+  }
+}
+
+function validateSupportTemplates() {
+  const requiredFiles = [
+    "templates/support/des-wise-response-template.md"
+  ];
+
+  for (const file of requiredFiles) {
+    const filePath = path.join(root, file);
+    if (!fs.existsSync(filePath)) {
+      fail(`${file} is missing`);
+    }
+  }
+}
+
 function main() {
   const skillPaths = listSkillPaths();
   const skillNames = skillPaths.map(p => path.basename(p));
@@ -186,6 +293,10 @@ function main() {
 
   validateWorkflow(skillNames);
   validatePackage();
+  validateLearningFoundation();
+  validateRequiredLearningSkills();
+  validateRequiredSupportSkills();
+  validateSupportTemplates();
 
   if (failures > 0) {
     console.error(`\n${failures} validation issue(s) found.`);

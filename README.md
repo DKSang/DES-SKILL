@@ -28,7 +28,7 @@ Trong nhiều dự án data engineering, agent thường mắc các lỗi như:
 - Không biết workflow đang ở phase nào
 - Không có epic/story/task rõ ràng để triển khai
 
-DES-SKILL giải quyết bằng cách chia workflow thành **22 main skills + 11 support skills**.
+DES-SKILL giải quyết bằng cách chia workflow thành **22 main skills + 12 support skills**.
 
 ---
 
@@ -247,6 +247,172 @@ Instructions:
 | 09 | `des-retrospective` | Tổng kết sprint/release cycle | `retrospective-report.md` |
 | 10 | `des-correct-course` | Điều hướng khi workflow bị lệch | `correct-course-plan.md` |
 | 11 | `des-workflow-status-update` | Cập nhật trạng thái workflow | `des-workflow-status.md` |
+| 12 | `des-wise` | Help users choose the right DES skill, understand workflow position, and get next-step recommendations | Direct response or `des-wise-recommendation.md` |
+
+---
+
+## DES Learning Skills
+
+DES-SKILL also supports a learning layer.
+
+Learning skills help users understand the Data Engineering concepts behind DES artifacts. Instead of only producing project documentation, DES-SKILL can explain why each artifact exists, which lifecycle concept it teaches, which decisions it forces, and what mistakes it helps prevent.
+
+The learning layer is guided by:
+
+```text
+SOUL.md
+knowledge/FUNDAMENTALS-MAP.md
+skills-learning/
+```
+
+### Learning Skills Catalog
+
+| Skill | Purpose | Output |
+|---|---|---|
+| `des-explain-artifact` | Explain a DES artifact as a learning object | `*-learning-notes.md` |
+| `des-artifact-quiz` | Generate a quiz from an artifact or learning notes | `*-artifact-quiz.md` |
+| `des-learning-path` | Build a structured learning path across 22 DES phases | `des-learning-path.md` |
+| `des-gap-teacher` | Diagnose the user's learning gaps from an artifact, quiz answer, or explanation | `*-learning-gap-report.md` |
+| `des-socratic-coach` | Teach a DES concept through guided Socratic questions | `*-socratic-coaching-session.md` |
+| `des-learning-status-update` | Update phase-by-phase learning progress and readiness | `des-learning-status.md` |
+| `des-learning-review` | Summarize learning progress, weak concepts, gaps, and next actions | `des-learning-review.md` |
+
+### Example — Generate Quiz
+
+```text
+Use DES learning skill: des-artifact-quiz
+
+Artifact:
+.agents/des-skill/output/08-ingestion-specification.md
+
+Objective:
+Create a quiz to check whether I understand ingestion design.
+
+Instructions:
+1. Read SOUL.md.
+2. Read knowledge/FUNDAMENTALS-MAP.md.
+3. Read skills-learning/des-artifact-quiz/SKILL.md.
+4. Load only step-01.
+5. Generate concept-check, applied, trade-off, and common-mistake questions.
+6. Include answer key and explanations.
+```
+
+### Example — Build Learning Path
+
+```text
+Use DES learning skill: des-learning-path
+
+Objective:
+Create a project-based Data Engineering learning path from the 22 DES phases.
+
+Instructions:
+1. Read SOUL.md.
+2. Read knowledge/FUNDAMENTALS-MAP.md.
+3. Read skills-learning/des-learning-path/SKILL.md.
+4. Scan available DES artifacts.
+5. Group phases into learning modules.
+6. Recommend next learning actions.
+```
+
+### Example — Diagnose Learning Gaps
+
+```text
+Use DES learning skill: des-gap-teacher
+
+Context:
+I answered the quiz for Phase 10 Silver Layer.
+
+Objective:
+Diagnose what I understand correctly, what I misunderstand, and what I should review before moving to Gold Layer.
+
+Instructions:
+1. Read SOUL.md.
+2. Read knowledge/FUNDAMENTALS-MAP.md.
+3. Read skills-learning/des-gap-teacher/SKILL.md.
+4. Load only step-01.
+5. Diagnose gaps from my answers.
+6. Recommend study actions and artifact corrections.
+```
+
+### Example — Socratic Coaching
+
+```text
+Use DES learning skill: des-socratic-coach
+
+Topic:
+Silver Layer vs Gold Layer
+
+Objective:
+Teach me through questions, one question at a time.
+
+Instructions:
+1. Read SOUL.md.
+2. Read knowledge/FUNDAMENTALS-MAP.md.
+3. Read skills-learning/des-socratic-coach/SKILL.md.
+4. Load only step-01.
+5. Use interactive Socratic mode.
+6. Do not give the final answer too early.
+```
+
+## DES Wise Help
+
+`des-wise` is the DES-SKILL help and routing assistant.
+
+Use it when you are not sure which skill to run next.
+
+Example:
+
+```text
+Use DES skill: des-wise
+
+Objective:
+Tôi không chắc nên dùng skill nào tiếp theo.
+
+Context:
+Tôi đã có Business Discovery và Data Source Inventory, nhưng chưa biết nên thiết kế architecture trước hay ingestion trước.
+
+Instructions:
+1. Read skills-support/des-wise/SKILL.md.
+2. Read DES-WORKFLOW.md.
+3. Inspect workflow status if available.
+4. Recommend one next skill.
+5. Explain why.
+6. Provide a copy-paste prompt.
+```
+
+### Example — Update Learning Status
+
+```text
+Use DES learning skill: des-learning-status-update
+
+Objective:
+Cập nhật trạng thái học tập của tôi qua các DES phases.
+
+Instructions:
+1. Read SOUL.md.
+2. Read knowledge/FUNDAMENTALS-MAP.md.
+3. Read skills-learning/des-learning-status-update/SKILL.md.
+4. Load only step-01.
+5. Scan .agents/des-skill/output and .agents/des-skill/output/learning.
+6. Create or update .agents/des-skill/learning-status/des-learning-status.md.
+```
+
+### Example — Review Learning Progress
+
+```text
+Use DES learning skill: des-learning-review
+
+Objective:
+Tổng kết tôi đã học đến đâu, còn yếu concept nào, và nên học gì tiếp.
+
+Instructions:
+1. Read SOUL.md.
+2. Read knowledge/FUNDAMENTALS-MAP.md.
+3. Read .agents/des-skill/learning-status/des-learning-status.md.
+4. Read skills-learning/des-learning-review/SKILL.md.
+5. Load only step-01.
+6. Summarize progress, weak concepts, gaps, and next actions.
+```
 
 ---
 
@@ -275,6 +441,14 @@ DES-SKILL sử dụng file trạng thái trung tâm:
 ```text
 .agents/des-skill/sprint-status/des-workflow-status.md
 ```
+
+Quy trình hỗ trợ bốn chế độ workflow thích ứng (workflow modes):
+- **Quick Fix**: Sửa đổi nhỏ, sửa tài liệu, thay đổi cấu hình hoặc dọn dẹp ít rủi ro.
+- **Standard Feature**: Một tính năng dữ liệu gắn kết, thay đổi pipeline, thay đổi model hoặc cập nhật hợp đồng/DQ.
+- **Enterprise Data Product**: Sản phẩm dữ liệu sản xuất mới, dữ liệu được quản lý, hoặc quyết định kiến trúc không thể đảo ngược.
+- **Correct Course**: Điều chỉnh khi artifact thực tế bị lệch so với thực tế repo, phát hiện qua review hoặc sự cố.
+
+Hệ thống cũng sử dụng các vai trò (personas) khác nhau để thực hiện các nhiệm vụ cụ thể, xem thêm chi tiết tại [docs/personas.md](docs/personas.md).
 
 File này giúp agent biết:
 
@@ -310,7 +484,7 @@ DES-SKILL/
 ├── skills-support/
 │   ├── des-create-epic/
 │   ├── des-create-story/
-│   └── ...  (11 support skills)
+│   └── ...  (12 support skills)
 ├── templates/
 ├── checklists/
 └── .agents/des-skill/

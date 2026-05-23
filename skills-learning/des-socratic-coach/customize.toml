@@ -1,0 +1,52 @@
+[skill]
+name = "des-socratic-coach"
+type = "learning"
+version = "0.1.0"
+
+[workflow]
+entry_step = "steps/step-01-coaching-context.md"
+step_order = [
+  "steps/step-01-coaching-context.md",
+  "steps/step-02-run-socratic-session.md",
+  "steps/step-03-summary-and-handoff.md"
+]
+
+[paths]
+soul_file = "SOUL.md"
+concept_map_file = "knowledge/FUNDAMENTALS-MAP.md"
+template_file = "templates/learning/socratic-coaching-session-template.md"
+checklist_file = "skills-learning/des-socratic-coach/checklist.md"
+learning_output_dir = ".agents/des-skill/output/learning"
+source_artifact_dir = ".agents/des-skill/output"
+
+[output]
+file_suffix = "socratic-coaching-session.md"
+language = "follow-user-language"
+default_status = "Draft"
+
+[coaching]
+default_mode = "Concept Discovery"
+interactive = true
+one_question_at_a_time = true
+include_hints = true
+include_misconception_checks = true
+include_final_synthesis = true
+max_questions_default = 7
+
+[coaching_modes]
+modes = [
+  "Concept Discovery",
+  "Trade-off Reasoning",
+  "Artifact Defense",
+  "Mistake Diagnosis",
+  "Design Decision Coaching",
+  "Quiz Recovery"
+]
+
+[guardrails]
+do_not_give_full_answer_too_early = true
+do_not_ask_many_questions_at_once = true
+do_not_pretend_user_answered = true
+halt_when_waiting_for_user_answer = true
+halt_on_missing_soul = true
+halt_on_missing_concept_map = true
