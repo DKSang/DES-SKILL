@@ -19,10 +19,35 @@ required_upstream_artifacts = [
   "_des-output/planning-artifacts/07-architecture-decision-record.md"
 ]
 
+# Phase-Orchestrated Support upstream inputs
+required_upstream_handoffs = [
+  "_des-output/phase-handoffs/phase-07-to-08-handoff.md"
+]
+
+recommended_upstream_evidence = [
+  "_des-output/evidence/phase-05/phase-05-evidence-pack.md",
+  "_des-output/evidence/phase-07/phase-07-evidence-pack.md",
+  "_des-output/implementation-artifacts/phase-07-done-gate.md"
+]
+
+# Phase-Orchestrated Support outputs
+phase_support_plan_file = "_des-output/phase-support-plans/phase-08-support-plan.md"
+phase_evidence_dir = "_des-output/evidence/phase-08"
+phase_evidence_pack_file = "_des-output/evidence/phase-08/phase-08-evidence-pack.md"
+phase_artifact_revision_file = "_des-output/implementation-artifacts/phase-08-artifact-revision.md"
+phase_done_gate_file = "_des-output/implementation-artifacts/phase-08-done-gate.md"
+phase_handoff_file = "_des-output/phase-handoffs/phase-08-to-09-handoff.md"
+
+phase_support_plan_template = "templates/phase/phase-08-support-plan-template.md"
+phase_evidence_pack_template = "templates/phase/phase-08-evidence-pack-template.md"
+phase_handoff_template = "templates/phase/phase-08-handoff-template.md"
+phase_done_gate_checklist = "checklists/phase-08-done-gate-checklist.md"
+
 required_sections = [
   "Ingestion Summary",
   "Ingestion Scope",
   "Source-to-Ingestion Mapping",
+  "Source-to-Requirement and Product Output Mapping",
   "Ingestion Pattern per Source",
   "Batch Streaming and Event Decision",
   "Frequency and Trigger",
@@ -42,25 +67,114 @@ required_sections = [
   "Ingestion Metadata Expectations",
   "Monitoring Evidence and Audit Expectations",
   "Operational Dependencies",
+  "Ingestion Evidence Summary",
   "Risks",
   "Assumptions",
   "Open Questions",
+  "Phase 08 Evidence Summary",
+  "Phase 08 Handoff Notes",
   "Next Skill Recommendation"
 ]
 
 halt_required_decisions = [
   "upstream_architecture_context",
+  "phase_07_handoff",
   "source_access_status",
+  "ingestion_scope",
   "ingestion_pattern",
   "batch_streaming_event_choice",
   "frequency_trigger",
   "incremental_checkpoint_strategy",
   "idempotency_strategy",
   "replay_backfill_strategy",
+  "late_arriving_data_handling",
+  "payload_serialization",
   "schema_drift_policy",
   "sensitive_data_handling",
   "error_handling_recovery",
-  "api_or_source_limit"
+  "api_or_source_limit",
+  "landing_metadata_expectation",
+  "monitoring_audit_expectation"
+]
+
+# Phase 08 support work validates ingestion design per source.
+# It does not design Bronze/Silver/Gold schemas or implementation code.
+required_support_work = [
+  "phase_07_handoff_review",
+  "source_to_ingestion_mapping_check",
+  "architecture_constraint_alignment_check",
+  "ingestion_pattern_fit_check",
+  "batch_streaming_event_alignment_check",
+  "frequency_and_trigger_check",
+  "access_and_extraction_check",
+  "incremental_checkpoint_check",
+  "idempotency_check",
+  "replay_backfill_check",
+  "schema_drift_policy_check",
+  "error_quarantine_recovery_check",
+  "security_credential_handling_check",
+  "source_impact_rate_limit_check",
+  "landing_metadata_expectation_check",
+  "monitoring_audit_expectation_check",
+  "phase_08_done_gate",
+  "phase_08_to_09_handoff"
+]
+
+optional_support_work = [
+  "api_ingestion_spike",
+  "file_ingestion_spike",
+  "database_ingestion_spike",
+  "cdc_feasibility_check",
+  "managed_connector_feasibility_check",
+  "secret_handling_review",
+  "retry_idempotency_review",
+  "schema_drift_review",
+  "des-wise",
+  "des-learning-status-update",
+  "des-explain-artifact",
+  "des-correct-course"
+]
+
+evidence_required = [
+  "phase_06_handoff_evidence",
+  "architecture_driver_traceability_evidence",
+  "option_comparison_evidence",
+  "platform_feasibility_evidence",
+  "environment_strategy_evidence",
+  "storage_compute_fit_evidence",
+  "batch_streaming_event_fit_evidence",
+  "layer_strategy_evidence",
+  "serving_strategy_evidence",
+  "security_privacy_evidence",
+  "governance_metadata_evidence",
+  "cost_operational_burden_evidence",
+  "reversibility_lock_in_evidence"
+]
+
+done_gate_required_checks = [
+  "Ingestion Specification exists",
+  "Phase 07 artifact and handoff are reviewed",
+  "Each P1 source has an ingestion pattern or is marked blocked/deferred",
+  "Each P1 source maps to product output, requirement, KPI, or source need",
+  "Batch/streaming/event choice aligns with architecture and freshness requirements",
+  "Frequency and trigger are documented",
+  "Access and extraction method are documented",
+  "Incremental/checkpoint strategy is documented or marked not applicable",
+  "Idempotency strategy is documented",
+  "Replay/backfill strategy is documented",
+  "Late-arriving data and ordering expectations are documented where relevant",
+  "Payload and serialization expectations are documented",
+  "Schema drift/evolution policy is documented",
+  "Error handling and quarantine expectations are documented",
+  "Security and credential handling are documented",
+  "Source impact, rate limits, throttling, quota, or CDC impact are documented",
+  "Landing target expectations are high-level only and do not define Bronze schema",
+  "Ingestion metadata expectations are documented",
+  "Monitoring/audit expectations are documented",
+  "Artifact does not design detailed Bronze/Silver/Gold schemas, transformations, dashboards, APIs, full orchestration workflows, CI/CD files, or code",
+  "Phase 08 evidence pack exists or evidence is waived with reason",
+  "Phase 08 handoff to Phase 09 exists",
+  "Workflow status is updated"
 ]
 
 [workflow]

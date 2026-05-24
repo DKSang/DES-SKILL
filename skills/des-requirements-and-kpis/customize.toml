@@ -14,6 +14,30 @@ required_upstream_artifacts = [
   "_des-output/planning-artifacts/02-business-question-catalog.md"
 ]
 
+# Phase-Orchestrated Support upstream inputs
+required_upstream_handoffs = [
+  "_des-output/phase-handoffs/phase-02-to-03-handoff.md"
+]
+
+recommended_upstream_evidence = [
+  "_des-output/evidence/phase-01/phase-01-evidence-pack.md",
+  "_des-output/evidence/phase-02/phase-02-evidence-pack.md",
+  "_des-output/implementation-artifacts/phase-02-done-gate.md"
+]
+
+# Phase-Orchestrated Support outputs
+phase_support_plan_file = "_des-output/phase-support-plans/phase-03-support-plan.md"
+phase_evidence_dir = "_des-output/evidence/phase-03"
+phase_evidence_pack_file = "_des-output/evidence/phase-03/phase-03-evidence-pack.md"
+phase_artifact_revision_file = "_des-output/implementation-artifacts/phase-03-artifact-revision.md"
+phase_done_gate_file = "_des-output/implementation-artifacts/phase-03-done-gate.md"
+phase_handoff_file = "_des-output/phase-handoffs/phase-03-to-04-handoff.md"
+
+phase_support_plan_template = "templates/phase/phase-03-support-plan-template.md"
+phase_evidence_pack_template = "templates/phase/phase-03-evidence-pack-template.md"
+phase_handoff_template = "templates/phase/phase-03-handoff-template.md"
+phase_done_gate_checklist = "checklists/phase-03-done-gate-checklist.md"
+
 required_sections = [
   "Requirement Summary",
   "Functional Requirements",
@@ -33,11 +57,14 @@ required_sections = [
   "Conflicts",
   "Assumptions",
   "Open Questions",
+  "Phase 03 Evidence Summary",
+  "Phase 03 Handoff Notes",
   "Next Skill Recommendation"
 ]
 
 halt_required_decisions = [
   "upstream_question_approval",
+  "phase_02_handoff",
   "functional_requirement_scope",
   "kpi_formula",
   "metric_grain",
@@ -45,6 +72,60 @@ halt_required_decisions = [
   "freshness_sla",
   "acceptance_criteria",
   "metric_conflict"
+]
+
+# Phase 03 support work is requirement and metric validation, not physical design.
+required_support_work = [
+  "phase_02_handoff_review",
+  "business_question_to_requirement_traceability_check",
+  "functional_requirement_testability_check",
+  "non_functional_requirement_measurability_check",
+  "kpi_formula_check",
+  "metric_grain_check",
+  "metric_owner_check",
+  "acceptance_criteria_check",
+  "freshness_sla_check",
+  "metric_conflict_check",
+  "phase_03_done_gate",
+  "phase_03_to_04_handoff"
+]
+
+optional_support_work = [
+  "des-wise",
+  "des-learning-status-update",
+  "des-explain-artifact",
+  "des-correct-course"
+]
+
+evidence_required = [
+  "phase_02_handoff_evidence",
+  "question_requirement_traceability_evidence",
+  "functional_requirement_testability_evidence",
+  "non_functional_requirement_measurability_evidence",
+  "kpi_formula_evidence",
+  "metric_grain_evidence",
+  "metric_owner_evidence",
+  "freshness_sla_evidence",
+  "acceptance_criteria_evidence",
+  "metric_conflict_evidence"
+]
+
+done_gate_required_checks = [
+  "Requirements and KPI Catalog exists",
+  "Phase 01 and Phase 02 artifacts are reviewed",
+  "Phase 02 handoff is reviewed",
+  "Each P1/P2 business question maps to at least one requirement or is explicitly deferred",
+  "Each P1 functional requirement has consumer, priority, status, and acceptance criteria",
+  "Each approved KPI has business meaning, formula, grain, owner, and approval status",
+  "Candidate metrics are clearly marked as Candidate or Draft",
+  "Freshness and SLA expectations are measurable or marked unresolved",
+  "Quality expectations are measurable or marked unresolved",
+  "Security/privacy constraints are documented when relevant",
+  "Cost/performance constraints are documented when relevant",
+  "Metric conflicts are documented and not silently resolved",
+  "Phase 03 evidence pack exists or evidence is waived with reason",
+  "Phase 03 handoff to Phase 04 exists",
+  "Workflow status is updated"
 ]
 
 [workflow]

@@ -20,11 +20,36 @@ required_upstream_artifacts = [
   "_des-output/planning-artifacts/08-ingestion-specification.md"
 ]
 
+# Phase-Orchestrated Support upstream inputs
+required_upstream_handoffs = [
+  "_des-output/phase-handoffs/phase-08-to-09-handoff.md"
+]
+
+recommended_upstream_evidence = [
+  "_des-output/evidence/phase-08/phase-08-evidence-pack.md",
+  "_des-output/implementation-artifacts/phase-08-done-gate.md"
+]
+
+# Phase-Orchestrated Support outputs
+phase_support_plan_file = "_des-output/phase-support-plans/phase-09-support-plan.md"
+phase_evidence_dir = "_des-output/evidence/phase-09"
+phase_evidence_pack_file = "_des-output/evidence/phase-09/phase-09-evidence-pack.md"
+phase_artifact_revision_file = "_des-output/implementation-artifacts/phase-09-artifact-revision.md"
+phase_done_gate_file = "_des-output/implementation-artifacts/phase-09-done-gate.md"
+phase_handoff_file = "_des-output/phase-handoffs/phase-09-to-10-handoff.md"
+
+phase_support_plan_template = "templates/phase/phase-09-support-plan-template.md"
+phase_evidence_pack_template = "templates/phase/phase-09-evidence-pack-template.md"
+phase_handoff_template = "templates/phase/phase-09-handoff-template.md"
+phase_done_gate_checklist = "checklists/phase-09-done-gate-checklist.md"
+
 required_sections = [
   "Bronze Layer Summary",
   "Bronze Scope",
+  "Bronze Non-Scope",
   "Bronze Design Principles",
   "Source to Bronze Mapping",
+  "Ingestion to Bronze Mapping",
   "Bronze Dataset Inventory",
   "Raw Preservation Strategy",
   "Storage Format Decision",
@@ -32,6 +57,7 @@ required_sections = [
   "Partitioning Strategy",
   "Mandatory Metadata Columns",
   "Ingestion Audit Metadata",
+  "Source Traceability Metadata",
   "Schema Drift and Evolution Handling",
   "Replay and Backfill Support",
   "Idempotency and Deduplication Boundary",
@@ -41,25 +67,118 @@ required_sections = [
   "Bronze Boundary Data Quality Expectations",
   "Lineage and Traceability Expectations",
   "Operational Evidence Requirements",
+  "Bronze Evidence Summary",
   "Risks",
   "Assumptions",
   "Open Questions",
+  "Phase 09 Evidence Summary",
+  "Phase 09 Handoff Notes",
   "Next Skill Recommendation"
 ]
 
 halt_required_decisions = [
   "upstream_ingestion_context",
+  "phase_08_handoff",
   "bronze_dataset_boundary",
   "raw_preservation_strategy",
   "storage_format",
+  "file_table_organization",
   "partitioning_strategy",
   "mandatory_metadata",
   "schema_drift_policy",
   "replay_backfill_support",
+  "idempotency_dedup_boundary",
   "retention_lifecycle_policy",
   "sensitive_raw_access_policy",
   "quarantine_policy",
-  "bronze_boundary_quality"
+  "bronze_boundary_quality",
+  "lineage_traceability_expectation"
+]
+
+# Phase 09 support work validates raw/Bronze design.
+# It does not design Silver/Gold transformations or business conformance.
+required_support_work = [
+  "phase_08_handoff_review",
+  "source_to_bronze_mapping_check",
+  "ingestion_to_bronze_alignment_check",
+  "bronze_dataset_boundary_check",
+  "raw_preservation_check",
+  "storage_format_check",
+  "file_table_organization_check",
+  "partitioning_strategy_check",
+  "mandatory_metadata_check",
+  "ingestion_audit_metadata_check",
+  "schema_drift_handling_check",
+  "replay_backfill_support_check",
+  "idempotency_dedup_boundary_check",
+  "quarantine_rejected_data_check",
+  "retention_lifecycle_check",
+  "access_sensitivity_check",
+  "bronze_boundary_quality_check",
+  "lineage_traceability_check",
+  "phase_09_done_gate",
+  "phase_09_to_10_handoff"
+]
+
+optional_support_work = [
+  "bronze_sample_load_review",
+  "raw_schema_capture_review",
+  "metadata_field_review",
+  "rescued_data_review",
+  "quarantine_design_review",
+  "partition_strategy_review",
+  "access_control_review",
+  "des-wise",
+  "des-learning-status-update",
+  "des-explain-artifact",
+  "des-correct-course"
+]
+
+evidence_required = [
+  "phase_08_handoff_evidence",
+  "source_to_bronze_mapping_evidence",
+  "ingestion_to_bronze_alignment_evidence",
+  "bronze_dataset_boundary_evidence",
+  "raw_preservation_evidence",
+  "storage_format_evidence",
+  "file_table_organization_evidence",
+  "partitioning_strategy_evidence",
+  "mandatory_metadata_evidence",
+  "ingestion_audit_metadata_evidence",
+  "schema_drift_handling_evidence",
+  "replay_backfill_support_evidence",
+  "idempotency_dedup_boundary_evidence",
+  "quarantine_rejected_data_evidence",
+  "retention_lifecycle_evidence",
+  "access_sensitivity_evidence",
+  "bronze_boundary_quality_evidence",
+  "lineage_traceability_evidence"
+]
+
+done_gate_required_checks = [
+  "Bronze Layer Specification exists",
+  "Phase 08 artifact and handoff are reviewed",
+  "Each P1 ingestion source maps to at least one Bronze dataset or is marked blocked/deferred",
+  "Bronze dataset boundary is documented",
+  "Raw preservation strategy is documented",
+  "Storage format is documented",
+  "File/table organization is documented",
+  "Partitioning strategy is documented or explicitly not applicable",
+  "Mandatory metadata columns are documented",
+  "Ingestion audit metadata is documented",
+  "Source traceability metadata is documented",
+  "Schema drift and evolution handling is documented",
+  "Replay and backfill support is documented",
+  "Idempotency and deduplication boundary is documented",
+  "Quarantine and rejected data handling is documented",
+  "Retention and lifecycle policy is documented",
+  "Access control and sensitivity classification is documented",
+  "Bronze boundary data quality expectations are documented",
+  "Lineage and traceability expectations are documented",
+  "Artifact does not design Silver conformance, Gold marts, semantic models, dashboards, APIs, transformations, orchestration implementation, CI/CD files, or code",
+  "Phase 09 evidence pack exists or evidence is waived with reason",
+  "Phase 09 handoff to Phase 10 exists",
+  "Workflow status is updated"
 ]
 
 [workflow]

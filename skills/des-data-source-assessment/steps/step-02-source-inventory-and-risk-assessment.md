@@ -1,22 +1,35 @@
-# Step 02 — Source Inventory and Risk Assessment
+# Step 02 — Source Inventory, Evidence Collection, and Risk Assessment
 
 ## Goal
 
-Inventory candidate source systems, map them to product needs, assess feasibility and risk, and identify source-of-truth, access, quality, freshness, security, and ownership decisions.
+Inventory candidate source systems, map them to product needs, collect or reference source evidence, assess feasibility and risk, and identify source-of-truth, access, quality, freshness, security, ownership, licensing, and schema decisions.
+
+This step prepares the Data Source Inventory and identifies which source decisions require evidence, support work, waiver, or accepted risk.
+
+---
 
 ## Required Inputs
 
 - Confirmed context from Step 01
 - Data Product Specification
+- Phase 04 to Phase 05 handoff, if available
 - Requirements and KPI Catalog
 - Business Question Catalog
 - User answers from HALT points
-- Existing source notes, documentation, samples, API docs, database schemas, file manifests, contracts, or data dictionaries if available
+- Existing source notes, documentation, samples, API docs, database schemas, file manifests, contracts, terms, licenses, or data dictionaries if available
+
+---
 
 ## Actions
 
 1. Create a candidate source inventory.
-2. For each source, classify:
+2. Map each source to:
+   - product outputs;
+   - source needs;
+   - business questions;
+   - requirements;
+   - KPIs/metrics.
+3. For each source, classify:
    - source type;
    - data generation pattern;
    - owner/contact;
@@ -24,6 +37,7 @@ Inventory candidate source systems, map them to product needs, assess feasibilit
    - permission status;
    - data format;
    - schema availability;
+   - sample/probe evidence;
    - update frequency;
    - history/retention;
    - expected volume;
@@ -33,20 +47,33 @@ Inventory candidate source systems, map them to product needs, assess feasibilit
    - security/privacy/compliance classification;
    - cost/licensing/usage limits;
    - operational dependencies.
-3. Map each source to:
-   - product outputs;
-   - business questions;
-   - requirements;
-   - KPIs/metrics.
-4. Identify source-of-truth candidates for each key business concept.
-5. Identify upstream contract or SLA expectations.
-6. Rate ingestion feasibility.
-7. Record risks, assumptions, and open questions.
-8. Use HALT checkpoints for decisions the agent cannot safely infer.
+4. For each P1 source, collect or reference evidence where possible:
+   - documentation;
+   - sample response;
+   - sample data;
+   - schema snapshot;
+   - API docs;
+   - data dictionary;
+   - profiling report;
+   - license/terms note;
+   - access test result.
+5. Identify source-of-truth candidates for each key business concept.
+6. Identify upstream contract or SLA expectations.
+7. Rate ingestion feasibility.
+8. Record risks, assumptions, and open questions.
+9. Map each critical source decision to evidence.
+10. Mark unsupported source claims as `Unknown`, `Risk`, `Blocked`, `Deferred`, or `Waived with reason`.
+11. Identify required Phase 05 support work.
+12. Use HALT checkpoints for decisions the agent cannot safely infer.
+13. Prepare draft content for the Data Source Inventory.
+14. Prepare content for the Phase 05 Support Plan.
+
+---
 
 ## Hints
 
-- Source assessment is not ingestion design.
+- Source assessment is not production ingestion design.
+- Source probing is allowed; production pipeline design is not.
 - Do not define pipeline steps, schedules, Bronze schema, or transformation logic yet.
 - For databases, assess read impact, CDC possibility, transaction patterns, ownership, schema stability, and access restrictions.
 - For APIs, assess authentication, rate limits, pagination, response schema, error behavior, terms of use, and freshness.
@@ -56,6 +83,9 @@ Inventory candidate source systems, map them to product needs, assess feasibilit
 - For manual/spreadsheet sources, assess ownership, validation, change process, and auditability.
 - Always separate source reliability from downstream pipeline reliability.
 - If source is outside data engineering control, capture communication and incident expectations.
+- If evidence cannot be collected, clearly mark the risk instead of guessing.
+
+---
 
 ## Source Types
 
@@ -76,6 +106,8 @@ Classify each source as one or more:
 | Sensor / IoT / device data | Device-generated events or telemetry |
 | Existing lakehouse/warehouse table | Internal curated or raw data source |
 
+---
+
 ## Source Generation Patterns
 
 Classify data creation/update pattern:
@@ -94,17 +126,81 @@ Classify data creation/update pattern:
 | Manual curation | Human-maintained reference or spreadsheet |
 | Unknown | Pattern not yet understood |
 
+---
+
+## Source Evidence Types
+
+For each P1 source, try to collect or reference at least one strong evidence type.
+
+| Evidence Type | Examples |
+|---|---|
+| Documentation | Official docs, README, source owner note, data dictionary |
+| Access Probe | API call result, database connection test, file listing, sample download |
+| Schema Evidence | JSON schema, database schema, inferred schema, sample columns |
+| Sample Data | API sample response, CSV/JSON sample, query sample, file sample |
+| Profiling Evidence | nulls, duplicates, row counts, freshness, value ranges, type checks |
+| Freshness Evidence | update schedule, timestamp field, API metadata, source owner statement |
+| License/Terms Evidence | license text, API terms, usage limits, quota, attribution requirement |
+| Security/Privacy Evidence | classification note, PII indicator, access policy, governance review |
+| Reliability Evidence | SLA/SLO, status page, owner statement, historical availability note |
+
+---
+
 ## Ingestion Feasibility Rating
 
 Use this rating:
 
 | Rating | Meaning |
 | --- | --- |
-| Ready | Owner, access, format, freshness, and risk are understood enough for ingestion design |
+| Ready | Owner, access, format/schema, freshness, and risk are understood enough for ingestion design |
 | Viable with risks | Source can likely be used, but risks need mitigation |
 | Blocked | Access, ownership, legal, quality, or reliability issue blocks use |
 | Unknown | Not enough evidence to decide |
 | Deferred | Not needed for first release |
+
+---
+
+## Source Evidence Mapping
+
+For every P1 source, capture the evidence status.
+
+| Source Field | Evidence Status | Allowed Output |
+|---|---|---|
+| Product/source need mapping | Confirmed / Assumed / Missing / Waived | Ready / Draft / Open / Blocked |
+| Owner/contact | Confirmed / Assumed / Missing / Waived | Approved / Risk / Blocked |
+| Access/permission | Tested / Approved / Pending / Missing / Waived | Ready / Risk / Blocked |
+| Schema/sample | Confirmed / Partial / Missing / Waived | Ready / Risk / Blocked |
+| Quality profile | Profiled / Known issues / Missing / Waived | Ready / Risk / Blocked |
+| Freshness/update pattern | Confirmed / Assumed / Missing / Waived | Ready / Risk / Blocked |
+| License/terms | Confirmed / Assumed / Missing / Waived | Ready / Risk / Blocked |
+| Security/privacy | Classified / Assumed / Missing / Waived | Ready / Risk / Blocked |
+| Source of truth | Approved / Draft / Conflict / Missing | Ready / Risk / Blocked |
+| Ingestion feasibility | Ready / Viable with risks / Blocked / Unknown / Deferred | Ready / Risk / Blocked |
+
+---
+
+## Phase 05 Required Support Work
+
+Based on the source inventory above, prepare a support plan using these categories:
+
+| Support Work | Required When | Output |
+|---|---|---|
+| Phase 04 Handoff Review | Always | Evidence pack |
+| Source Need Mapping Check | Always | Evidence pack |
+| Candidate Source Inventory Check | Always | Evidence pack |
+| Source Access Probe | P1 source has accessible endpoint/file/db/API | Evidence pack |
+| Schema Inspection | P1 source has schema or sample | Evidence pack |
+| Sample Data or Response Capture | P1 source supports sample/probe | Evidence pack |
+| Data Quality Profile or Sampling | P1 source sample is available | Evidence pack |
+| Freshness and Update Pattern Check | P1 output has freshness expectation | Evidence pack |
+| License/Terms and Usage Limit Review | External/vendor/API/open data source | Evidence pack |
+| Security/Privacy Classification Check | Always | Evidence pack |
+| Source of Truth Check | Multiple sources/concepts exist | Evidence pack |
+| Ingestion Feasibility Check | Always before Phase 06/08 | Evidence pack |
+| Done Gate | Always before marking Done | Done Gate result |
+| Handoff to Phase 06 | Always before Phase 06 | Handoff file |
+
+---
 
 ## Decision Area 1 - Source Ownership and Contacts
 
@@ -135,6 +231,8 @@ F. Unknown — mark source as risky or blocked
 
 Choose A/B/C/D/E/F and provide owner/contact if known.
 
+---
+
 ## Decision Area 2 - Source of Truth and Concept Mapping
 
 Determine which source is the authoritative source of truth for each key business concept.
@@ -162,6 +260,8 @@ E. Defer concept from first release
 #### Required response
 
 Choose A/B/C/D/E and explain the decision.
+
+---
 
 ## Decision Area 3 - Technical and Legal Access
 
@@ -191,6 +291,8 @@ F. Unknown
 #### Required response
 
 Choose A/B/C/D/E/F.
+
+---
 
 ## Decision Area 4 - Sensitive Data and Privacy Classification
 
@@ -222,6 +324,8 @@ G. Unknown — require governance review
 
 Choose A/B/C/D/E/F/G.
 
+---
+
 ## Decision Area 5 - Freshness and Reliability Expectations
 
 Identify upstream SLA/SLO or reliability expectations.
@@ -246,6 +350,8 @@ E. Not relevant for first release
 
 Choose A/B/C/D/E and specify freshness/reliability expectation if known.
 
+---
+
 ## Decision Area 6 - Source Quality and Profiling
 
 Evaluate known issues or determine if source data profiling is needed.
@@ -269,6 +375,8 @@ E. Replace with alternative source
 #### Required response
 
 Choose A/B/C/D/E.
+
+---
 
 ## Decision Area 7 - Upstream Schema Change Management
 
@@ -299,6 +407,8 @@ F. Not applicable
 
 Choose A/B/C/D/E/F.
 
+---
+
 ## Decision Area 8 - Cost, Licensing, and Usage Limits
 
 Confirm usage licensing, quotas, or pricing constraints.
@@ -323,6 +433,51 @@ E. Replace with alternative source
 
 Choose A/B/C/D/E.
 
+---
+
+## HALT — Probe Evidence Missing
+
+Stop if a P1 source has no documentation, sample, schema, probe result, or accepted evidence waiver.
+
+### Why this matters
+
+Phase 06 domain modeling and later ingestion design should not depend on source claims with no evidence.
+
+### Options
+
+A. Collect source documentation or sample now  
+B. Run a lightweight probe or sample inspection  
+C. Continue with explicit accepted risk  
+D. Mark source as Unknown or Blocked  
+E. Replace with alternative source  
+
+### Required response
+
+Choose A/B/C/D/E.
+
+---
+
+## HALT — Ingestion Feasibility Unknown
+
+Stop if a P1 source cannot be rated for ingestion feasibility.
+
+### Why this matters
+
+Later ingestion design depends on whether source access, format, freshness, volume, quality, and reliability are understood enough to define ingestion jobs.
+
+### Options
+
+A. Research source capabilities now
+B. Mark source as Unknown feasibility
+C. Route back to `des-data-product-definition` to revise outputs
+D. Stop workflow
+
+### Required response
+
+Choose A/B/C/D.
+
+---
+
 ## Completion Criteria
 
 This step is complete when:
@@ -336,6 +491,9 @@ This step is complete when:
 - freshness/reliability expectation is documented;
 - quality and schema change risks are documented;
 - ingestion feasibility is rated;
+- sample, schema, or probe evidence is documented or waived;
+- source-to-product mappings and feasibility are validated;
+- required support work is identified;
 - draft inventory content is ready.
 
 ## Next Step

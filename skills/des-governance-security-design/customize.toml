@@ -21,9 +21,33 @@ required_upstream_artifacts = [
   "_des-output/planning-artifacts/18-lineage-metadata-specification.md"
 ]
 
+# Phase-Orchestrated Support upstream inputs
+required_upstream_handoffs = [
+  "_des-output/phase-handoffs/phase-18-to-19-handoff.md"
+]
+
+recommended_upstream_evidence = [
+  "_des-output/evidence/phase-18/phase-18-evidence-pack.md",
+  "_des-output/implementation-artifacts/phase-18-done-gate.md"
+]
+
+# Phase-Orchestrated Support outputs
+phase_support_plan_file = "_des-output/phase-support-plans/phase-19-support-plan.md"
+phase_evidence_dir = "_des-output/evidence/phase-19"
+phase_evidence_pack_file = "_des-output/evidence/phase-19/phase-19-evidence-pack.md"
+phase_artifact_revision_file = "_des-output/implementation-artifacts/phase-19-artifact-revision.md"
+phase_done_gate_file = "_des-output/implementation-artifacts/phase-19-done-gate.md"
+phase_handoff_file = "_des-output/phase-handoffs/phase-19-to-20-handoff.md"
+
+phase_support_plan_template = "templates/phase/phase-19-support-plan-template.md"
+phase_evidence_pack_template = "templates/phase/phase-19-evidence-pack-template.md"
+phase_handoff_template = "templates/phase/phase-19-handoff-template.md"
+phase_done_gate_checklist = "checklists/phase-19-done-gate-checklist.md"
+
 required_sections = [
   "Governance and Security Summary",
   "Governance Scope",
+  "Governance Non-Scope",
   "Governance Design Principles",
   "Data Classification Policy",
   "Asset Sensitivity Inventory",
@@ -44,34 +68,143 @@ required_sections = [
   "Ownership Stewardship and Accountability",
   "Compliance and Regulatory Considerations",
   "Incident Response and Escalation",
+  "Governance and Security Evidence Summary",
   "Risks",
   "Assumptions",
   "Open Questions",
+  "Phase 19 Evidence Summary",
+  "Phase 19 Handoff Notes",
   "Next Skill Recommendation"
 ]
 
 halt_required_decisions = [
   "upstream_lineage_metadata_context",
+  "phase_18_handoff",
   "governance_scope",
   "data_classification",
+  "asset_sensitivity_inventory",
   "sensitive_field_handling",
   "access_control_model",
   "role_persona_access",
   "row_column_security",
   "masking_tokenization_policy",
+  "encryption_secret_handling",
+  "privacy_consent",
   "retention_deletion_policy",
   "external_sharing_policy",
-  "ai_agent_access_policy",
+  "api_application_ai_agent_access_policy",
   "reverse_etl_governance",
   "audit_monitoring_policy",
   "approval_exception_policy",
-  "compliance_requirement"
+  "ownership_accountability",
+  "compliance_requirement",
+  "incident_response_escalation"
+]
+
+# Phase 19 support work validates governance and security design.
+# It does not implement IAM, ACLs, RLS/CLS policies, masking logic, encryption config, governance tooling, policy engines, CI/CD, or infrastructure code.
+required_support_work = [
+  "phase_18_handoff_review",
+  "governance_scope_check",
+  "data_classification_check",
+  "asset_sensitivity_inventory_check",
+  "field_level_sensitivity_handling_check",
+  "access_control_model_check",
+  "role_persona_access_matrix_check",
+  "row_level_security_policy_check",
+  "column_level_security_policy_check",
+  "masking_tokenization_anonymization_check",
+  "encryption_secret_handling_check",
+  "privacy_consent_check",
+  "retention_lifecycle_deletion_check",
+  "data_sharing_external_access_check",
+  "api_application_ai_agent_access_check",
+  "reverse_etl_governance_check",
+  "audit_logging_access_monitoring_check",
+  "approval_exception_handling_check",
+  "ownership_stewardship_accountability_check",
+  "compliance_regulatory_check",
+  "incident_response_escalation_check",
+  "phase_19_done_gate",
+  "phase_19_to_20_handoff"
+]
+
+optional_support_work = [
+  "security_privacy_review",
+  "access_control_review",
+  "secret_handling_review",
+  "compliance_risk_review",
+  "privacy_posture_review",
+  "ai_agent_governance_review",
+  "reverse_etl_risk_review",
+  "external_sharing_review",
+  "des-wise",
+  "des-learning-status-update",
+  "des-explain-artifact",
+  "des-correct-course"
+]
+
+evidence_required = [
+  "phase_18_handoff_evidence",
+  "governance_scope_evidence",
+  "data_classification_evidence",
+  "asset_sensitivity_inventory_evidence",
+  "field_level_sensitivity_handling_evidence",
+  "access_control_model_evidence",
+  "role_persona_access_matrix_evidence",
+  "row_level_security_policy_evidence",
+  "column_level_security_policy_evidence",
+  "masking_tokenization_anonymization_evidence",
+  "encryption_secret_handling_evidence",
+  "privacy_consent_evidence",
+  "retention_lifecycle_deletion_evidence",
+  "data_sharing_external_access_evidence",
+  "api_application_ai_agent_access_evidence",
+  "reverse_etl_governance_evidence",
+  "audit_logging_access_monitoring_evidence",
+  "approval_exception_handling_evidence",
+  "ownership_stewardship_accountability_evidence",
+  "compliance_regulatory_evidence",
+  "incident_response_escalation_evidence"
+]
+
+done_gate_required_checks = [
+  "Governance and Security Specification exists",
+  "Phase 18 artifact and handoff are reviewed",
+  "Governance scope is documented",
+  "Governance non-scope is documented",
+  "Governance design principles are documented",
+  "Data classification policy is documented",
+  "Asset sensitivity inventory is documented",
+  "Field-level sensitivity handling is documented",
+  "Access control model is documented",
+  "Role and persona access matrix is documented",
+  "Row-level security policy is documented or marked not applicable",
+  "Column-level security policy is documented or marked not applicable",
+  "Masking/tokenization/anonymization policy is documented where needed",
+  "Encryption and secret handling expectations are documented",
+  "Privacy and consent considerations are documented",
+  "Retention lifecycle and deletion policy is documented",
+  "Data sharing and external access policy is documented",
+  "API/application and AI-agent access policy is documented",
+  "Reverse ETL governance is documented where relevant",
+  "Audit logging and access monitoring is documented",
+  "Approval workflow and exception handling is documented",
+  "Ownership, stewardship, and accountability are documented",
+  "Compliance and regulatory considerations are documented",
+  "Incident response and escalation are documented",
+  "Artifact does not implement IAM, ACLs, RLS/CLS policies, masking logic, encryption config, governance tooling, policy engines, CI/CD, or infrastructure code",
+  "Phase 19 evidence pack exists or evidence is waived with reason",
+  "Phase 19 handoff to Phase 20 exists",
+  "Workflow status is updated"
 ]
 
 [workflow]
 activation_steps_prepend = []
 activation_steps_append = []
+
 persistent_facts = [
   "file:{project-root}/**/project-context.md",
 ]
+
 on_complete = ""

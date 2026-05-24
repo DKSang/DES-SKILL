@@ -33,15 +33,42 @@ required_upstream_artifacts = [
   "_des-output/planning-artifacts/21-cicd-testing-specification.md"
 ]
 
+# Phase-Orchestrated Support upstream inputs
+required_upstream_handoffs = [
+  "_des-output/phase-handoffs/phase-21-to-22-handoff.md"
+]
+
+recommended_upstream_evidence = [
+  "_des-output/evidence/phase-21/phase-21-evidence-pack.md",
+  "_des-output/implementation-artifacts/phase-21-done-gate.md"
+]
+
+# Phase-Orchestrated Support outputs
+phase_support_plan_file = "_des-output/phase-support-plans/phase-22-support-plan.md"
+phase_evidence_dir = "_des-output/evidence/phase-22"
+phase_evidence_pack_file = "_des-output/evidence/phase-22/phase-22-evidence-pack.md"
+phase_artifact_revision_file = "_des-output/implementation-artifacts/phase-22-artifact-revision.md"
+phase_done_gate_file = "_des-output/implementation-artifacts/phase-22-done-gate.md"
+phase_closeout_file = "_des-output/phase-handoffs/phase-22-final-closeout.md"
+
+phase_support_plan_template = "templates/phase/phase-22-support-plan-template.md"
+phase_evidence_pack_template = "templates/phase/phase-22-evidence-pack-template.md"
+phase_closeout_template = "templates/phase/phase-22-closeout-template.md"
+phase_done_gate_checklist = "checklists/phase-22-done-gate-checklist.md"
+
 required_sections = [
   "Project Evaluation Summary",
   "Evaluation Scope",
+  "Evaluation Non-Scope",
   "Evaluation Design Principles",
+  "Evidence Availability Summary",
   "Business Goal Evaluation",
   "Business Question Coverage",
   "Requirement and KPI Evaluation",
   "Data Product Delivery Evaluation",
   "Source and Ingestion Evaluation",
+  "Domain Model Evaluation",
+  "Architecture Evaluation",
   "Bronze Silver Gold Layer Evaluation",
   "Contract Evaluation",
   "Transformation Evaluation",
@@ -58,11 +85,14 @@ required_sections = [
   "Risks and Known Limitations",
   "Lessons Learned",
   "Next Iteration Recommendations",
-  "Final Decision and Handoff"
+  "Final Decision and Handoff",
+  "Phase 22 Evidence Summary",
+  "Workflow Closeout"
 ]
 
 halt_required_decisions = [
   "upstream_artifact_completeness",
+  "phase_21_handoff",
   "evaluation_scope",
   "success_criteria_availability",
   "release_evidence_availability",
@@ -71,13 +101,133 @@ halt_required_decisions = [
   "usage_adoption_evidence",
   "readiness_decision",
   "blocking_risk_decision",
-  "next_iteration_priority"
+  "next_iteration_priority",
+  "workflow_closeout_decision"
+]
+
+# Phase 22 support work validates final evaluation.
+# It does not implement fixes, redesign phases, deploy releases, create production evidence, or claim results without evidence.
+required_support_work = [
+  "phase_21_handoff_review",
+  "upstream_artifact_completeness_check",
+  "evaluation_scope_check",
+  "success_criteria_check",
+  "business_goal_evaluation_check",
+  "business_question_coverage_check",
+  "requirement_kpi_evaluation_check",
+  "data_product_delivery_evaluation_check",
+  "source_ingestion_evaluation_check",
+  "domain_model_evaluation_check",
+  "architecture_evaluation_check",
+  "bronze_silver_gold_evaluation_check",
+  "contract_evaluation_check",
+  "transformation_evaluation_check",
+  "data_quality_evaluation_check",
+  "orchestration_observability_evaluation_check",
+  "semantic_serving_evaluation_check",
+  "lineage_metadata_evaluation_check",
+  "governance_security_evaluation_check",
+  "cost_performance_evaluation_check",
+  "cicd_testing_evaluation_check",
+  "stakeholder_feedback_check",
+  "usage_adoption_evidence_check",
+  "readiness_scorecard_check",
+  "risk_limitation_check",
+  "lessons_learned_check",
+  "next_iteration_recommendation_check",
+  "final_decision_check",
+  "phase_22_done_gate",
+  "phase_22_final_closeout"
+]
+
+optional_support_work = [
+  "release_readiness_review",
+  "retrospective_review",
+  "learning_review",
+  "stakeholder_feedback_review",
+  "adoption_evidence_review",
+  "risk_acceptance_review",
+  "des-wise",
+  "des-learning-status-update",
+  "des-explain-artifact",
+  "des-correct-course"
+]
+
+evidence_required = [
+  "phase_21_handoff_evidence",
+  "upstream_artifact_completeness_evidence",
+  "evaluation_scope_evidence",
+  "success_criteria_evidence",
+  "business_goal_evidence",
+  "business_question_coverage_evidence",
+  "requirement_kpi_evidence",
+  "data_product_delivery_evidence",
+  "source_ingestion_evidence",
+  "domain_model_evidence",
+  "architecture_evidence",
+  "bronze_silver_gold_evidence",
+  "contract_evidence",
+  "transformation_evidence",
+  "data_quality_evidence",
+  "orchestration_observability_evidence",
+  "semantic_serving_evidence",
+  "lineage_metadata_evidence",
+  "governance_security_evidence",
+  "cost_performance_evidence",
+  "cicd_testing_evidence",
+  "stakeholder_feedback_evidence",
+  "usage_adoption_evidence",
+  "readiness_scorecard_evidence",
+  "risk_limitation_evidence",
+  "lessons_learned_evidence",
+  "next_iteration_evidence",
+  "final_decision_evidence"
+]
+
+done_gate_required_checks = [
+  "Project Evaluation Report exists",
+  "Phase 21 artifact and handoff are reviewed",
+  "Evaluation scope is documented",
+  "Evaluation non-scope is documented",
+  "Evaluation principles are documented",
+  "Evidence availability summary is documented",
+  "Business goals are evaluated",
+  "Business questions are evaluated",
+  "Requirements and KPIs are evaluated",
+  "Data product delivery is evaluated",
+  "Sources and ingestion are evaluated",
+  "Domain model is evaluated",
+  "Architecture is evaluated",
+  "Bronze/Silver/Gold layers are evaluated",
+  "Contracts are evaluated",
+  "Transformations are evaluated",
+  "Data quality is evaluated",
+  "Orchestration and observability are evaluated",
+  "Semantic and serving readiness is evaluated",
+  "Lineage and metadata are evaluated",
+  "Governance and security are evaluated",
+  "Cost and performance are evaluated",
+  "CI/CD and testing are evaluated",
+  "Stakeholder feedback is documented or marked missing",
+  "Usage/adoption evidence is documented or marked missing",
+  "Readiness scorecard is documented",
+  "Risks and known limitations are documented",
+  "Lessons learned is documented",
+  "Next iteration recommendations are documented",
+  "Final decision is documented",
+  "Missing evidence is marked Unknown, not treated as success",
+  "Production readiness is not claimed without release/test/security evidence",
+  "Phase 22 evidence pack exists or evidence is waived with reason",
+  "Phase 22 final closeout exists",
+  "Workflow status is updated"
 ]
 
 [workflow]
 activation_steps_prepend = []
 activation_steps_append = []
+
 persistent_facts = [
   "file:{project-root}/**/project-context.md",
 ]
+
 on_complete = ""

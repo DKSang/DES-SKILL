@@ -24,9 +24,33 @@ required_upstream_artifacts = [
   "_des-output/planning-artifacts/12-data-contract-specification.md"
 ]
 
+# Phase-Orchestrated Support upstream inputs
+required_upstream_handoffs = [
+  "_des-output/phase-handoffs/phase-12-to-13-handoff.md"
+]
+
+recommended_upstream_evidence = [
+  "_des-output/evidence/phase-12/phase-12-evidence-pack.md",
+  "_des-output/implementation-artifacts/phase-12-done-gate.md"
+]
+
+# Phase-Orchestrated Support outputs
+phase_support_plan_file = "_des-output/phase-support-plans/phase-13-support-plan.md"
+phase_evidence_dir = "_des-output/evidence/phase-13"
+phase_evidence_pack_file = "_des-output/evidence/phase-13/phase-13-evidence-pack.md"
+phase_artifact_revision_file = "_des-output/implementation-artifacts/phase-13-artifact-revision.md"
+phase_done_gate_file = "_des-output/implementation-artifacts/phase-13-done-gate.md"
+phase_handoff_file = "_des-output/phase-handoffs/phase-13-to-14-handoff.md"
+
+phase_support_plan_template = "templates/phase/phase-13-support-plan-template.md"
+phase_evidence_pack_template = "templates/phase/phase-13-evidence-pack-template.md"
+phase_handoff_template = "templates/phase/phase-13-handoff-template.md"
+phase_done_gate_checklist = "checklists/phase-13-done-gate-checklist.md"
+
 required_sections = [
   "Transformation Summary",
   "Transformation Scope",
+  "Transformation Non-Scope",
   "Transformation Design Principles",
   "Transformation Inventory",
   "Layer to Layer Transformation Mapping",
@@ -49,18 +73,24 @@ required_sections = [
   "Performance and Cost Considerations",
   "Security and Privacy Handling",
   "Implementation Boundary",
+  "Transformation Evidence Summary",
   "Risks",
   "Assumptions",
   "Open Questions",
+  "Phase 13 Evidence Summary",
+  "Phase 13 Handoff Notes",
   "Next Skill Recommendation"
 ]
 
 halt_required_decisions = [
   "upstream_contract_context",
+  "phase_12_handoff",
   "transformation_scope",
   "input_output_mapping",
+  "dependency_graph",
   "transformation_grain",
   "business_rule_ambiguity",
+  "cleaning_conformance_rule",
   "join_relationship_rule",
   "metric_aggregation_rule",
   "dedup_survivorship_rule",
@@ -70,7 +100,110 @@ halt_required_decisions = [
   "late_corrected_data_behavior",
   "error_quarantine_behavior",
   "validation_test_expectation",
-  "contract_alignment"
+  "contract_alignment",
+  "lineage_metadata_expectation",
+  "performance_cost_expectation",
+  "security_privacy_handling"
+]
+
+# Phase 13 support work validates transformation logic design.
+# It does not implement SQL, Python, dbt, Spark, notebooks, orchestration, tests, CI/CD, dashboards, or APIs.
+required_support_work = [
+  "phase_12_handoff_review",
+  "contract_to_transformation_mapping_check",
+  "layer_to_layer_mapping_check",
+  "transformation_inventory_check",
+  "dependency_graph_check",
+  "input_output_mapping_check",
+  "transformation_grain_check",
+  "business_rule_check",
+  "cleaning_conformance_rule_check",
+  "join_relationship_rule_check",
+  "dedup_survivorship_rule_check",
+  "scd_history_behavior_check",
+  "aggregation_metric_rule_check",
+  "incremental_processing_check",
+  "backfill_replay_check",
+  "late_corrected_data_check",
+  "error_quarantine_check",
+  "validation_test_expectation_check",
+  "contract_alignment_check",
+  "lineage_metadata_check",
+  "performance_cost_check",
+  "security_privacy_check",
+  "implementation_boundary_check",
+  "phase_13_done_gate",
+  "phase_13_to_14_handoff"
+]
+
+optional_support_work = [
+  "dbt_model_spike",
+  "python_transform_spike",
+  "lineage_check",
+  "test_case_generation",
+  "metric_reconciliation_review",
+  "incremental_logic_review",
+  "join_cardinality_review",
+  "performance_risk_review",
+  "des-wise",
+  "des-learning-status-update",
+  "des-explain-artifact",
+  "des-correct-course"
+]
+
+evidence_required = [
+  "phase_12_handoff_evidence",
+  "contract_to_transformation_mapping_evidence",
+  "layer_to_layer_mapping_evidence",
+  "transformation_inventory_evidence",
+  "dependency_graph_evidence",
+  "input_output_mapping_evidence",
+  "transformation_grain_evidence",
+  "business_rule_evidence",
+  "cleaning_conformance_rule_evidence",
+  "join_relationship_rule_evidence",
+  "dedup_survivorship_rule_evidence",
+  "scd_history_behavior_evidence",
+  "aggregation_metric_rule_evidence",
+  "incremental_processing_evidence",
+  "backfill_replay_evidence",
+  "late_corrected_data_evidence",
+  "error_quarantine_evidence",
+  "validation_test_expectation_evidence",
+  "contract_alignment_evidence",
+  "lineage_metadata_evidence",
+  "performance_cost_evidence",
+  "security_privacy_evidence",
+  "implementation_boundary_evidence"
+]
+
+done_gate_required_checks = [
+  "Transformation Specification exists",
+  "Phase 12 artifact and handoff are reviewed",
+  "Each P1 contracted output has a transformation path or is marked deferred/blocked",
+  "Each P1 transformation has input/output mapping",
+  "Each P1 transformation has declared output grain",
+  "Each P1 transformation has dependency order",
+  "Business rules are named and testable",
+  "Cleaning and conformance rules are documented",
+  "Join and relationship rules are documented where joins exist",
+  "Deduplication and survivorship rules are documented where needed",
+  "SCD/history behavior is documented where relevant",
+  "Aggregation and metric rules align with Phase 03 and Phase 11",
+  "Incremental processing strategy is documented",
+  "Backfill and replay strategy is documented",
+  "Late-arriving and corrected data handling is documented",
+  "Error/quarantine behavior is documented",
+  "Validation and test expectations are documented",
+  "Contract alignment is documented",
+  "Lineage and metadata expectations are documented",
+  "Performance and cost considerations are documented",
+  "Security and privacy handling is documented",
+  "Implementation boundary is explicit",
+  "Artifact does not implement SQL, Python, dbt, Spark, notebooks, orchestration, tests, CI/CD, dashboards, APIs, or code",
+  "Phase 13 evidence pack exists or evidence is waived with reason",
+  "Phase 13 handoff to Phase 14 exists",
+  "Workflow status is updated"
 ]
 
 [workflow]

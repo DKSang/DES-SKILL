@@ -11,6 +11,19 @@ next_recommended_skill = "des-business-questions"
 
 required_upstream_artifacts = []
 
+# Phase-Orchestrated Support outputs
+phase_support_plan_file = "_des-output/phase-support-plans/phase-01-support-plan.md"
+phase_evidence_dir = "_des-output/evidence/phase-01"
+phase_evidence_pack_file = "_des-output/evidence/phase-01/phase-01-evidence-pack.md"
+phase_artifact_revision_file = "_des-output/implementation-artifacts/phase-01-artifact-revision.md"
+phase_done_gate_file = "_des-output/implementation-artifacts/phase-01-done-gate.md"
+phase_handoff_file = "_des-output/phase-handoffs/phase-01-to-02-handoff.md"
+
+phase_support_plan_template = "templates/phase/phase-01-support-plan-template.md"
+phase_evidence_pack_template = "templates/phase/phase-01-evidence-pack-template.md"
+phase_handoff_template = "templates/phase/phase-01-handoff-template.md"
+phase_done_gate_checklist = "checklists/phase-01-done-gate-checklist.md"
+
 required_sections = [
   "Project Intent",
   "Business Problem",
@@ -25,6 +38,8 @@ required_sections = [
   "Risks",
   "Initial Success Criteria",
   "Open Questions",
+  "Phase 01 Evidence Summary",
+  "Phase 01 Handoff Notes",
   "Next Skill Recommendation"
 ]
 
@@ -35,6 +50,46 @@ halt_required_decisions = [
   "target_decision_or_use_case",
   "mvp_scope",
   "success_criteria"
+]
+
+# Phase 01 support work is intentionally lightweight.
+# It validates business context rather than technical design.
+required_support_work = [
+  "context_source_review",
+  "business_intent_validation",
+  "stakeholder_consumer_check",
+  "scope_boundary_check",
+  "success_criteria_check",
+  "phase_01_done_gate",
+  "phase_01_to_02_handoff"
+]
+
+optional_support_work = [
+  "des-wise",
+  "des-learning-status-update",
+  "des-explain-artifact"
+]
+
+evidence_required = [
+  "project_intent_evidence",
+  "primary_consumer_evidence",
+  "target_use_case_evidence",
+  "mvp_scope_evidence",
+  "success_criteria_evidence"
+]
+
+done_gate_required_checks = [
+  "Business Discovery Brief exists",
+  "Project intent is clear or marked as open question",
+  "Primary consumer is clear or marked as open question",
+  "Target decision or use case is clear or marked as open question",
+  "Expected value is documented",
+  "MVP scope and non-scope are documented",
+  "Initial success criteria are documented",
+  "Assumptions, risks, and open questions are explicit",
+  "Phase 01 evidence pack exists or evidence is waived with reason",
+  "Phase 01 handoff to Phase 02 exists",
+  "Workflow status is updated"
 ]
 
 [workflow]

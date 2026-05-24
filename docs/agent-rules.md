@@ -182,3 +182,16 @@ Starting `des-business-questions` automatically...
 | 8 | Không skip phase | Giải quyết blocker trước khi tiến |
 | 9 | Không infer business decision | HALT và chờ human input |
 | 10 | Đề xuất, không tự chạy | Recommend next skill, wait for instruction |
+| 11 | Phase Execution Contract | Follow the Phase-Orchestrated Support Model (read docs/phase-execution-contract.md) |
+
+---
+
+## Quy tắc 11 — Phase Execution Contract
+
+Khi hoàn thành một phase, agent phải tuân thủ quy ước về Phase-Orchestrated Support Model (Model B).
+Quy tắc cốt lõi:
+1. Không đánh dấu một phase là Done chỉ vì artifact chính của phase đó đã được tạo.
+2. Xác định các support work cần thiết, thu thập evidence, cập nhật/revise artifact từ evidence đó, thực hiện Done Gate và tạo Validated Handoff trước khi chuyển sang phase sau.
+
+Chi tiết xem tại [docs/phase-execution-contract.md](file:///C:/Users/dksan/Code/data-engineer/data-engineering-superpowers/docs/phase-execution-contract.md).
+

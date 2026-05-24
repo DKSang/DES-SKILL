@@ -1,12 +1,18 @@
-# Step 02 — Quality Rules and Gates
+# Step 02 — Quality Rules, Gates, and Evidence
 
 ## Goal
 
-Define data quality dimensions, rules, thresholds, severity, quality gates, failure handling, ownership, evidence, and reporting expectations across Bronze, Silver, Gold, contracts, and transformations.
+Define data quality dimensions, rules, thresholds, severity, quality gates, failure handling, ownership, evidence, reporting, monitoring expectations, CI/CD gate candidates, and supporting evidence across Bronze, Silver, Gold, contracts, and transformations.
+
+This step prepares the Data Quality Specification and identifies which quality decisions require evidence, support work, waiver, or accepted risk.
+
+---
 
 ## Required Inputs
 
 - Confirmed context from Step 01
+- Phase 13 to Phase 14 handoff, if available
+- Phase 13 evidence pack, if available
 - Data Contract Specification
 - Transformation Specification
 - Bronze Layer Specification
@@ -15,6 +21,8 @@ Define data quality dimensions, rules, thresholds, severity, quality gates, fail
 - Requirements and KPI Catalog
 - User answers from HALT points
 - Existing quality reports, profiling results, test notes, or monitoring requirements if available
+
+---
 
 ## Actions
 
@@ -27,7 +35,7 @@ Define data quality dimensions, rules, thresholds, severity, quality gates, fail
    - Bronze;
    - Silver;
    - Gold;
-   - Contracted/serving outputs.
+   - contracted/serving outputs.
 7. Define freshness rules.
 8. Define completeness and volume rules.
 9. Define uniqueness and grain rules.
@@ -42,46 +50,40 @@ Define data quality dimensions, rules, thresholds, severity, quality gates, fail
 18. Define failure handling and quality gates.
 19. Define ownership and stewardship.
 20. Define evidence and reporting expectations.
-21. Use HALT checkpoints for unresolved decisions.
+21. Define monitoring and observability expectations for Phase 15.
+22. Define release and CI/CD gate candidates for Phase 21.
+23. Map each critical quality decision to evidence.
+24. Mark unsupported quality claims as `Draft`, `Risk`, `Blocked`, `Deferred`, `Unknown`, or `Waived with reason`.
+25. Identify required Phase 14 support work.
+26. Use HALT checkpoints for unresolved decisions.
+27. Prepare draft Data Quality Specification content.
+28. Prepare content for the Phase 14 Support Plan.
 
-## Hints
+---
 
-- Quality rules should be traceable to contracts, transformations, business questions, KPIs, or layer specs.
-- Avoid generic rules that nobody uses.
-- Distinguish P1 Blocking, P2 Warning, and P3 Info.
-- A Bronze rule may check load success and metadata, not business correctness.
-- A Silver rule may check conformance, identity, mapping, nulls, uniqueness, and valid domains.
-- A Gold rule may check metric correctness, freshness, reconciliation, and consumer readiness.
-- Contract rules should be strong candidates for release gates.
-- Thresholds should be approved by owner or based on profiling evidence.
-- When thresholds are unknown, mark as Draft and require profiling.
-- Record what happens when a rule fails.
+## Quality Design Principles
 
-## Quality Dimensions
+| Principle | Meaning |
+|---|---|
+| Risk-based | Focus rules on important failures, not rule spam |
+| Contract-aligned | Contract clauses become quality rules where applicable |
+| Transformation-aware | Transformation validation expectations feed DQ rules |
+| Layer-aware | Bronze, Silver, and Gold quality have different purposes |
+| Severity-explicit | Every rule needs P1/P2/P3/Draft/NA severity |
+| Actionable | Every failure needs handling and owner |
+| Evidence-producing | Rule results should produce audit/debug evidence |
+| Monitoring-ready | Rules should become observability signals where useful |
+| Gate-ready | Critical rules should become release/CI/CD gates later |
+| No implementation here | Design rules, do not write test code |
 
-Use these quality dimensions where relevant:
-
-| Dimension | Meaning |
-| --- | --- |
-| Freshness | Data is available within expected time/SLA |
-| Completeness | Expected data volume/coverage is present |
-| Validity | Values conform to allowed types, ranges, domains, formats |
-| Uniqueness | Records are unique at declared grain |
-| Consistency | Data agrees across datasets, sources, or time |
-| Accuracy | Data matches trusted reference or business expectation |
-| Integrity | Relationships and references are valid |
-| Timeliness | Data arrives and processes within required windows |
-| Reliability | Pipeline/rule produces stable expected results |
-| Schema compatibility | Structure matches expected contract/schema |
-| Reasonableness | Values are plausible and not anomalous |
-| Lineage completeness | Required metadata and traceability exist |
+---
 
 ## Quality Rule Standard
 
 Each quality rule must define:
 
 | Field | Required? |
-| --- | --- |
+|---|---|
 | Rule ID | Required |
 | Dataset/output | Required |
 | Layer | Required |
@@ -93,6 +95,8 @@ Each quality rule must define:
 | Owner/steward | Required or marked Draft |
 | Evidence | Required |
 | Related contract/transformation | Required where applicable |
+| Monitoring expectation | Required for P1/P2 |
+| CI/CD or release gate candidate | Required for P1 |
 | Status | Required |
 
 Allowed statuses:
@@ -101,25 +105,34 @@ Allowed statuses:
 Draft | Approved | Risk | Blocked | Deferred
 ```
 
-## Severity Classification
+---
 
-Use this severity model:
+## Quality Evidence Mapping
 
-| Severity       | Meaning                                                  |
-| -------------- | -------------------------------------------------------- |
-| P1 Blocking    | Failure blocks publish/release or downstream consumption |
-| P2 Warning     | Failure alerts owner but does not block by default       |
-| P3 Info        | Recorded for visibility and trend monitoring             |
-| Draft          | Severity not yet approved                                |
-| Not Applicable | Rule does not apply to this dataset/output               |
+For every P1 quality rule, capture evidence status.
+
+| Quality Field            | Evidence Status                                | Allowed Output                    |
+| ------------------------ | ---------------------------------------------- | --------------------------------- |
+| Scope                    | Confirmed / Partial / Missing / Waived         | Approved / Draft / Risk           |
+| Dimension                | Confirmed / Assumed / Missing / Waived         | Approved / Draft / Risk           |
+| Rule inventory           | Confirmed / Partial / Missing / Waived         | Approved / Draft / Risk           |
+| Dataset-to-rule mapping  | Confirmed / Partial / Missing / Waived         | Approved / Draft / Risk           |
+| Layer-specific rule      | Confirmed / Partial / Missing / Not applicable | Approved / Draft / Risk           |
+| Contract alignment       | Confirmed / Partial / Conflict / Missing       | Approved / Draft / Risk / Blocked |
+| Transformation alignment | Confirmed / Partial / Conflict / Missing       | Approved / Draft / Risk / Blocked |
+| Threshold/condition      | Confirmed / Assumed / Missing / Waived         | Approved / Draft / Risk           |
+| Severity                 | Confirmed / Assumed / Missing / Waived         | Approved / Draft / Risk           |
+| Failure handling/gate    | Confirmed / Assumed / Missing / Waived         | Approved / Draft / Risk           |
+| Owner/steward            | Confirmed / Assumed / Missing / Waived         | Approved / Draft / Risk / Blocked |
+| Evidence/reporting       | Confirmed / Partial / Missing / Waived         | Approved / Draft / Risk           |
+| Monitoring expectation   | Confirmed / Assumed / Missing / Waived         | Approved / Draft / Risk           |
+| CI/CD gate candidate     | Confirmed / Assumed / Missing / Not applicable | Approved / Draft / Risk           |
+
+---
 
 ## HALT - Quality Rule Required Outputs
 
 Stop if P1 datasets or contracted outputs lack quality rules.
-
-### Decision needed
-
-Which outputs must have quality rules?
 
 ### Options
 
@@ -134,13 +147,11 @@ F. Custom selection
 
 Choose one or more options.
 
+---
+
 ## HALT - Quality Threshold Approval
 
 Stop if threshold or pass/fail condition is unclear.
-
-### Decision needed
-
-Approve threshold for `<quality_rule>`.
 
 ### Options
 
@@ -155,13 +166,11 @@ F. Remove or defer rule
 
 Choose A/B/C/D/E/F and specify threshold if known.
 
+---
+
 ## HALT - Severity Classification
 
 Stop if severity is unclear.
-
-### Decision needed
-
-Approve severity for `<quality_rule>`.
 
 ### Options
 
@@ -175,13 +184,11 @@ E. Not applicable
 
 Choose A/B/C/D/E.
 
+---
+
 ## HALT - Blocking vs Warning Behavior
 
 Stop if failure behavior is unclear.
-
-### Decision needed
-
-What happens when `<quality_rule>` fails?
 
 ### Options
 
@@ -199,13 +206,11 @@ I. Custom behavior
 
 Choose one or more options.
 
+---
+
 ## HALT - Freshness SLA Quality Rule
 
 Stop if freshness rule is needed but SLA is unclear.
-
-### Decision needed
-
-Approve freshness quality rule.
 
 ### Required fields
 
@@ -229,13 +234,70 @@ E. Draft pending owner approval
 
 Choose A/B/C/D/E.
 
+---
+
+## HALT - Completeness and Volume Rule
+
+Stop if completeness/volume expectation is unclear.
+
+### Options
+
+A. Row/file/event count must match upstream control total
+B. Minimum completeness percentage
+C. Expected volume range from profiling baseline
+D. No strict volume guarantee; trend warning only
+E. Consumer acceptance required for partial publish
+F. Draft pending profiling
+G. Not applicable
+
+### Required response
+
+Choose A/B/C/D/E/F/G.
+
+---
+
+## HALT - Uniqueness and Grain Rule
+
+Stop if uniqueness at grain is unclear.
+
+### Options
+
+A. Unique by declared primary key
+B. Unique by natural/composite grain key
+C. Unique by contract grain
+D. Duplicate allowed but flagged
+E. Duplicate handling belongs to transformation design
+F. Draft pending grain clarification
+G. Not applicable
+
+### Required response
+
+Choose A/B/C/D/E/F/G.
+
+---
+
+## HALT - Referential Integrity Rule
+
+Stop if joins/relationships exist but referential integrity expectations are unclear.
+
+### Options
+
+A. Required match; missing reference blocks output
+B. Required match; missing reference quarantines records
+C. Optional match; missing reference allowed and flagged
+D. RI warning only
+E. Not applicable
+F. Draft pending join relationship clarification
+
+### Required response
+
+Choose A/B/C/D/E/F.
+
+---
+
 ## HALT - Metric Reconciliation Tolerance
 
 Stop if metric output needs reconciliation but tolerance is unclear.
-
-### Decision needed
-
-Approve reconciliation tolerance.
 
 ### Options
 
@@ -251,17 +313,50 @@ G. Not required
 
 Choose A/B/C/D/E/F/G and specify tolerance if known.
 
+---
+
+## HALT - Schema Compatibility Rule
+
+Stop if schema compatibility behavior is unclear.
+
+### Options
+
+A. Enforce contract schema exactly
+B. Allow additive optional fields
+C. Block breaking changes: remove/rename/type change
+D. Warn on non-breaking schema drift
+E. Route schema drift to contract versioning process
+F. Draft pending contract clarification
+
+### Required response
+
+Choose one or more options.
+
+---
+
+## HALT - Anomaly and Threshold Rule
+
+Stop if anomaly detection is needed but threshold logic is unclear.
+
+### Options
+
+A. Static threshold
+B. Rolling baseline
+C. Seasonal baseline
+D. Statistical anomaly detection
+E. Business calendar/event-aware threshold
+F. Draft pending profiling/history
+G. Not applicable
+
+### Required response
+
+Choose A/B/C/D/E/F/G.
+
+---
+
 ## HALT - Quality Owner Required
 
 Stop if a P1 quality rule has no owner/steward.
-
-### Why this matters
-
-A failed quality rule without an owner becomes noise.
-
-### Decision needed
-
-Who owns this quality rule?
 
 ### Options
 
@@ -277,13 +372,11 @@ G. Unknown — keep rule Draft/Risk
 
 Choose A/B/C/D/E/F/G.
 
+---
+
 ## HALT - Evidence and Reporting Expectation
 
 Stop if rule evidence or reporting is unclear.
-
-### Decision needed
-
-What evidence should be recorded?
 
 ### Options
 
@@ -300,13 +393,11 @@ H. Custom evidence
 
 Choose one or more options.
 
+---
+
 ## HALT - Consumer Acceptance Quality
 
-Stop if consumer acceptance depends on quality but acceptance criteria are unclear.
-
-### Decision needed
-
-What consumer acceptance quality criteria apply?
+Stop if consumer acceptance depends on quality but criteria are unclear.
 
 ### Options
 
@@ -321,6 +412,49 @@ F. Not applicable
 
 Choose A/B/C/D/E/F.
 
+---
+
+## HALT - Monitoring and Observability Expectation
+
+Stop if a P1/P2 quality rule should become an operational signal but monitoring behavior is unclear.
+
+### Options
+
+A. Emit rule result as pipeline metric
+B. Emit failed count and failure rate
+C. Emit freshness/status signal
+D. Emit contract compliance signal
+E. Alert on P1 only
+F. Alert on P1 and repeated P2 warnings
+G. Dashboard/report only
+H. Defer to Phase 15
+
+### Required response
+
+Choose one or more options.
+
+---
+
+## HALT - CI/CD or Release Gate Candidate
+
+Stop if a rule may block release but gate behavior is unclear.
+
+### Options
+
+A. Candidate for CI/CD schema gate
+B. Candidate for contract validation gate
+C. Candidate for transformation unit/integration test
+D. Candidate for deployment/release readiness gate
+E. Candidate for production runtime gate only
+F. Not a CI/CD gate
+G. Defer to Phase 21
+
+### Required response
+
+Choose one or more options.
+
+---
+
 ## Completion Criteria
 
 This step is complete when:
@@ -330,8 +464,10 @@ This step is complete when:
 * quality rule inventory is created;
 * P1 contracted outputs have rules;
 * Bronze/Silver/Gold quality boundaries are defined;
-* thresholds, severity, failure handling, owner, evidence, and status are documented;
+* thresholds, severity, failure handling, owner, evidence, monitoring expectation, gate candidate, and status are documented;
 * contract and transformation alignment are documented;
+* evidence mapping is prepared;
+* required support work is identified;
 * risks and assumptions are explicit;
 * draft quality specification content is ready.
 

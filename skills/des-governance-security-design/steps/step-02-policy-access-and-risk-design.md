@@ -1,20 +1,29 @@
-# Step 02 — Policy, Access, and Risk Design
+# Step 02 — Policy, Access, Risk, and Evidence Design
 
 ## Goal
 
-Define governance policy, classification, sensitivity handling, access control, security controls, privacy, retention, sharing, audit, approvals, accountability, compliance, incident response, and exception handling.
+Define governance policy, classification, sensitivity handling, access control, security controls, privacy, retention, sharing, audit, approvals, accountability, compliance, incident response, exception handling, and supporting evidence.
+
+This step prepares the Governance and Security Specification and identifies which governance/security decisions require evidence, support work, waiver, or accepted risk.
+
+---
 
 ## Required Inputs
 
 - Confirmed context from Step 01
+- Phase 18 to Phase 19 handoff, if available
+- Phase 18 evidence pack, if available
 - Lineage and Metadata Specification
 - Serving Layer Specification
 - Semantic Model Specification
 - Data Contract Specification
+- Data Quality Specification, if available
 - Bronze/Silver/Gold Layer Specifications
 - Data Source Inventory
 - User answers from HALT points
 - Existing security/governance standards if available
+
+---
 
 ## Actions
 
@@ -39,30 +48,40 @@ Define governance policy, classification, sensitivity handling, access control, 
 19. Define ownership, stewardship, and accountability.
 20. Define compliance and regulatory considerations.
 21. Define incident response and escalation.
-22. Use HALT checkpoints for unresolved decisions.
+22. Map each critical governance/security decision to evidence.
+23. Mark unsupported governance/security claims as `Draft`, `Risk`, `Blocked`, `Deferred`, `Unknown`, or `Waived with reason`.
+24. Identify required Phase 19 support work.
+25. Use HALT checkpoints for unresolved decisions.
+26. Prepare draft Governance and Security Specification content.
+27. Prepare content for the Phase 19 Support Plan.
+
+---
 
 ## Governance Design Principles
 
 Use these default principles unless overridden:
 
 | Principle | Meaning |
-| --- | --- |
+|---|---|
 | Least privilege | Grant only necessary access |
 | Purpose limitation | Access should match intended use |
 | Data minimization | Expose only fields needed |
-| Defense in depth | Combine access, masking, audit, and monitoring |
+| Defense in depth | Combine access, masking, audit, monitoring, and incident response |
 | Privacy by design | Handle privacy lifecycle from the start |
 | Govern raw data strictly | Raw data may contain sensitive or unstable fields |
 | Certify before broad serving | Trusted access requires quality/contract/lineage |
 | Review exceptions | Exceptions must expire or be reviewed |
 | Monitor access | Access should be auditable and reviewed |
+| No implementation here | Design policy and controls, do not implement IAM/security code |
+
+---
 
 ## Classification Levels
 
 Use these generic classification levels:
 
 | Classification | Meaning |
-| --- | --- |
+|---|---|
 | Public | Safe for open sharing |
 | Internal | Internal use, low sensitivity |
 | Confidential | Business-sensitive, restricted |
@@ -71,13 +90,41 @@ Use these generic classification levels:
 | Secret-bearing | Credentials, tokens, keys, or payloads containing secrets |
 | Unknown | Must be reviewed before broad access |
 
+---
+
+## Governance Evidence Mapping
+
+For every P1 governed asset, capture evidence status.
+
+| Governance Field | Evidence Status | Allowed Output |
+|---|---|---|
+| Phase 18 handoff | Confirmed / Partial / Missing / Waived | Approved / Draft / Risk |
+| Governance scope | Confirmed / Partial / Missing / Waived | Approved / Draft / Risk |
+| Data classification | Confirmed / Assumed / Unknown / Waived | Approved / Draft / Risk / Blocked |
+| Asset sensitivity inventory | Confirmed / Partial / Missing / Waived | Approved / Draft / Risk |
+| Field-level sensitivity handling | Confirmed / Partial / Missing / Not applicable | Approved / Draft / Risk / Blocked |
+| Access control model | Confirmed / Assumed / Missing / Waived | Approved / Draft / Risk |
+| Role/persona access matrix | Confirmed / Partial / Missing / Waived | Approved / Draft / Risk |
+| Row-level security | Confirmed / Assumed / Missing / Not applicable | Approved / Draft / Risk |
+| Column-level security | Confirmed / Assumed / Missing / Not applicable | Approved / Draft / Risk |
+| Masking/tokenization/anonymization | Confirmed / Assumed / Missing / Not applicable | Approved / Draft / Risk |
+| Encryption/secret handling | Confirmed / Assumed / Missing / Waived | Approved / Draft / Risk |
+| Privacy/consent | Confirmed / Assumed / Missing / Not applicable | Approved / Draft / Risk |
+| Retention/deletion | Confirmed / Assumed / Missing / Waived | Approved / Draft / Risk |
+| External sharing | Confirmed / Assumed / Missing / Not applicable | Approved / Draft / Risk / Blocked |
+| API/application/AI-agent access | Confirmed / Partial / Missing / Not applicable | Approved / Draft / Risk / Blocked |
+| Reverse ETL governance | Confirmed / Partial / Missing / Not applicable | Approved / Draft / Risk / Blocked |
+| Audit/access monitoring | Confirmed / Partial / Missing / Waived | Approved / Draft / Risk |
+| Approval/exception handling | Confirmed / Assumed / Missing / Waived | Approved / Draft / Risk |
+| Ownership/accountability | Confirmed / Assumed / Missing / Waived | Approved / Draft / Risk / Blocked |
+| Compliance/regulatory | Confirmed / Assumed / Unknown / Not applicable | Approved / Draft / Risk |
+| Incident response/escalation | Confirmed / Assumed / Missing / Waived | Approved / Draft / Risk |
+
+---
+
 ## HALT — Data Classification Approval
 
 Stop if classification is unclear.
-
-### Decision needed
-
-Approve classification for `<asset_or_field>`.
 
 ### Options
 
@@ -93,13 +140,31 @@ G. Unknown — block or restrict until reviewed
 
 Choose A/B/C/D/E/F/G.
 
+---
+
+## HALT — Asset Sensitivity Inventory
+
+Stop if asset-level classification is incomplete.
+
+### Options
+
+A. Classify all P1 datasets  
+B. Classify all P1 fields/columns  
+C. Classify all P1 metrics/KPIs  
+D. Classify all P1 semantic objects  
+E. Classify all P1 serving outputs  
+F. Classify API/export/data sharing/AI-agent outputs  
+G. Unknown assets remain restricted until reviewed  
+
+### Required response
+
+Choose one or more options.
+
+---
+
 ## HALT — Sensitive Field Handling
 
 Stop if sensitive fields exist but handling is unclear.
-
-### Decision needed
-
-How should sensitive fields be handled?
 
 ### Options
 
@@ -116,13 +181,11 @@ H. Custom handling
 
 Choose one or more options.
 
+---
+
 ## HALT — Access Control Model
 
 Stop if access model is unclear.
-
-### Decision needed
-
-Approve access control model.
 
 ### Options
 
@@ -140,13 +203,11 @@ I. Custom model
 
 Choose one or more options.
 
+---
+
 ## HALT — Role and Persona Access
 
 Stop if persona access is unclear.
-
-### Decision needed
-
-Approve persona access matrix.
 
 ### Required fields
 
@@ -172,13 +233,11 @@ H. Custom persona access
 
 Choose and define applicable personas.
 
+---
+
 ## HALT — Row and Column Security
 
 Stop if RLS/CLS may be required.
-
-### Decision needed
-
-Approve row/column security.
 
 ### Options
 
@@ -194,13 +253,11 @@ G. Custom policy
 
 Choose A/B/C/D/E/F/G.
 
+---
+
 ## HALT — Masking, Tokenization, and Anonymization Policy
 
 Stop if protected fields require transformation before exposure.
-
-### Decision needed
-
-Approve protection method.
 
 ### Options
 
@@ -218,13 +275,52 @@ I. Custom policy
 
 Choose one or more options.
 
+---
+
+## HALT — Encryption and Secret Handling
+
+Stop if encryption or secret-bearing data handling is unclear.
+
+### Options
+
+A. Encryption at rest required  
+B. Encryption in transit required  
+C. Managed secrets store required  
+D. Secret-bearing payloads blocked or quarantined  
+E. Credentials/tokens must never be persisted in data layers  
+F. Key rotation expectation documented  
+G. Platform default encryption accepted  
+H. Custom policy  
+
+### Required response
+
+Choose one or more options.
+
+---
+
+## HALT — Privacy and Consent
+
+Stop if personal data or consent-sensitive data may exist.
+
+### Options
+
+A. No known personal data  
+B. Personal data requires privacy review  
+C. Consent/purpose limitation required  
+D. Data minimization required  
+E. De-identification required before serving  
+F. Deletion/anonymization on privacy request required  
+G. Unknown — restrict until privacy review  
+
+### Required response
+
+Choose one or more options.
+
+---
+
 ## HALT — Retention Lifecycle and Deletion Policy
 
 Stop if retention or deletion is unclear.
-
-### Decision needed
-
-Approve retention/deletion policy.
 
 ### Options
 
@@ -241,13 +337,11 @@ H. Unknown — block production approval
 
 Choose one or more options and specify duration where relevant.
 
+---
+
 ## HALT — Data Sharing and External Access
 
 Stop if external sharing or partner/customer access is planned.
-
-### Decision needed
-
-Approve external sharing policy.
 
 ### Options
 
@@ -264,13 +358,11 @@ H. Custom policy
 
 Choose one or more options.
 
+---
+
 ## HALT — API Application and AI-Agent Access
 
 Stop if application/API/AI-agent access is planned.
-
-### Decision needed
-
-Approve non-human access governance.
 
 ### Options
 
@@ -287,13 +379,11 @@ H. Custom policy
 
 Choose one or more options.
 
+---
+
 ## HALT — Reverse ETL Governance
 
 Stop if reverse ETL or writeback is planned.
-
-### Decision needed
-
-Approve writeback governance.
 
 ### Options
 
@@ -310,13 +400,11 @@ H. Custom policy
 
 Choose one or more options.
 
+---
+
 ## HALT — Audit Logging and Access Monitoring
 
 Stop if audit monitoring is unclear.
-
-### Decision needed
-
-Approve audit and monitoring requirements.
 
 ### Options
 
@@ -333,13 +421,11 @@ H. Custom monitoring
 
 Choose one or more options.
 
+---
+
 ## HALT — Approval Workflow and Exceptions
 
 Stop if access/change/security exceptions are unclear.
-
-### Decision needed
-
-Approve approval and exception process.
 
 ### Options
 
@@ -355,13 +441,31 @@ G. Custom approval workflow
 
 Choose one or more options.
 
+---
+
+## HALT — Ownership, Stewardship, and Accountability
+
+Stop if governance ownership is unclear.
+
+### Options
+
+A. Data product owner approves product-level access  
+B. Data steward approves definitions and sensitive field handling  
+C. Data engineering owns technical enforcement design  
+D. Platform/security team owns platform controls  
+E. Governance owner approves exceptions and external sharing  
+F. Shared RACI required  
+G. Unknown — keep Draft/Risk/Blocked  
+
+### Required response
+
+Choose one or more options.
+
+---
+
 ## HALT — Compliance Requirement
 
 Stop if compliance/regulatory needs may apply but are unclear.
-
-### Decision needed
-
-What compliance requirements apply?
 
 ### Options
 
@@ -377,6 +481,29 @@ G. Unknown — keep governance status Risk/Blocked
 
 Choose A/B/C/D/E/F/G.
 
+---
+
+## HALT — Incident Response and Escalation
+
+Stop if misuse, breach, policy violation, or data exposure handling is unclear.
+
+### Options
+
+A. Security incident path required  
+B. Data breach escalation required  
+C. Access misuse review required  
+D. External sharing violation escalation required  
+E. AI-agent misuse review required  
+F. Reverse ETL writeback incident handling required  
+G. Post-incident review required  
+H. Custom incident response  
+
+### Required response
+
+Choose one or more options.
+
+---
+
 ## Completion Criteria
 
 This step is complete when:
@@ -384,9 +511,13 @@ This step is complete when:
 - governance scope and principles are defined;
 - data classification policy is defined;
 - asset sensitivity inventory is created;
+- field-level sensitivity handling is documented;
 - access model and persona matrix are documented;
 - RLS/CLS/masking/tokenization expectations are documented;
+- encryption and secret handling expectations are documented;
 - privacy, retention, deletion, sharing, API/AI, reverse ETL, audit, approval, compliance, incident response, and ownership policies are documented;
+- evidence mapping is prepared;
+- required support work is identified;
 - risks and assumptions are explicit;
 - draft governance/security specification content is ready.
 

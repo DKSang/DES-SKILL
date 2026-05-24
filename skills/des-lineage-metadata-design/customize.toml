@@ -28,9 +28,33 @@ required_upstream_artifacts = [
   "_des-output/planning-artifacts/17-serving-layer-specification.md"
 ]
 
+# Phase-Orchestrated Support upstream inputs
+required_upstream_handoffs = [
+  "_des-output/phase-handoffs/phase-17-to-18-handoff.md"
+]
+
+recommended_upstream_evidence = [
+  "_des-output/evidence/phase-17/phase-17-evidence-pack.md",
+  "_des-output/implementation-artifacts/phase-17-done-gate.md"
+]
+
+# Phase-Orchestrated Support outputs
+phase_support_plan_file = "_des-output/phase-support-plans/phase-18-support-plan.md"
+phase_evidence_dir = "_des-output/evidence/phase-18"
+phase_evidence_pack_file = "_des-output/evidence/phase-18/phase-18-evidence-pack.md"
+phase_artifact_revision_file = "_des-output/implementation-artifacts/phase-18-artifact-revision.md"
+phase_done_gate_file = "_des-output/implementation-artifacts/phase-18-done-gate.md"
+phase_handoff_file = "_des-output/phase-handoffs/phase-18-to-19-handoff.md"
+
+phase_support_plan_template = "templates/phase/phase-18-support-plan-template.md"
+phase_evidence_pack_template = "templates/phase/phase-18-evidence-pack-template.md"
+phase_handoff_template = "templates/phase/phase-18-handoff-template.md"
+phase_done_gate_checklist = "checklists/phase-18-done-gate-checklist.md"
+
 required_sections = [
   "Lineage and Metadata Summary",
   "Metadata Scope",
+  "Metadata Non-Scope",
   "Metadata Design Principles",
   "Metadata Categories",
   "Metadata Inventory",
@@ -53,31 +77,139 @@ required_sections = [
   "Audit and Compliance Metadata",
   "Metadata Capture Responsibilities",
   "Metadata Freshness and Maintenance Policy",
+  "Lineage and Metadata Evidence Summary",
   "Risks",
   "Assumptions",
   "Open Questions",
+  "Phase 18 Evidence Summary",
+  "Phase 18 Handoff Notes",
   "Next Skill Recommendation"
 ]
 
 halt_required_decisions = [
   "upstream_serving_context",
+  "phase_17_handoff",
   "metadata_scope",
   "metadata_category_coverage",
+  "metadata_asset_inventory",
   "dataset_catalog_fields",
   "business_definition_owner",
   "lineage_depth",
   "column_level_lineage",
   "operational_metadata_capture",
   "quality_trust_metadata",
+  "contract_metadata",
+  "semantic_serving_metadata",
   "usage_consumer_metadata",
   "audit_compliance_metadata",
+  "metadata_capture_responsibility",
   "metadata_maintenance_owner"
+]
+
+# Phase 18 support work validates lineage and metadata design.
+# It does not implement catalog tools, scanners, metadata crawlers, OpenLineage, Purview, DataHub, Collibra, dbt docs, or metadata pipeline code.
+required_support_work = [
+  "phase_17_handoff_review",
+  "metadata_scope_check",
+  "metadata_category_coverage_check",
+  "metadata_asset_inventory_check",
+  "business_metadata_check",
+  "technical_metadata_check",
+  "operational_metadata_check",
+  "reference_metadata_check",
+  "dataset_catalog_requirement_check",
+  "field_schema_metadata_check",
+  "metric_kpi_metadata_check",
+  "contract_metadata_check",
+  "transformation_lineage_check",
+  "dataset_lineage_check",
+  "column_level_lineage_expectation_check",
+  "semantic_serving_lineage_check",
+  "quality_trust_metadata_check",
+  "ownership_stewardship_metadata_check",
+  "usage_consumer_metadata_check",
+  "change_version_metadata_check",
+  "audit_compliance_metadata_check",
+  "metadata_capture_responsibility_check",
+  "metadata_freshness_maintenance_check",
+  "phase_18_done_gate",
+  "phase_18_to_19_handoff"
+]
+
+optional_support_work = [
+  "lineage_check",
+  "metadata_field_review",
+  "run_id_traceability_review",
+  "catalog_field_review",
+  "column_lineage_feasibility_review",
+  "ai_agent_metadata_readiness_review",
+  "des-wise",
+  "des-learning-status-update",
+  "des-explain-artifact",
+  "des-correct-course"
+]
+
+evidence_required = [
+  "phase_17_handoff_evidence",
+  "metadata_scope_evidence",
+  "metadata_category_coverage_evidence",
+  "metadata_asset_inventory_evidence",
+  "business_metadata_evidence",
+  "technical_metadata_evidence",
+  "operational_metadata_evidence",
+  "reference_metadata_evidence",
+  "dataset_catalog_requirement_evidence",
+  "field_schema_metadata_evidence",
+  "metric_kpi_metadata_evidence",
+  "contract_metadata_evidence",
+  "transformation_lineage_evidence",
+  "dataset_lineage_evidence",
+  "column_level_lineage_expectation_evidence",
+  "semantic_serving_lineage_evidence",
+  "quality_trust_metadata_evidence",
+  "ownership_stewardship_metadata_evidence",
+  "usage_consumer_metadata_evidence",
+  "change_version_metadata_evidence",
+  "audit_compliance_metadata_evidence",
+  "metadata_capture_responsibility_evidence",
+  "metadata_freshness_maintenance_evidence"
+]
+
+done_gate_required_checks = [
+  "Lineage and Metadata Specification exists",
+  "Phase 17 artifact and handoff are reviewed",
+  "Metadata scope is documented",
+  "Metadata non-scope is documented",
+  "Metadata design principles are documented",
+  "Business, technical, operational, and reference metadata are covered or explicitly waived",
+  "Metadata inventory exists",
+  "Dataset catalog requirements are documented",
+  "Field and schema metadata are documented",
+  "Metric and KPI metadata are documented",
+  "Contract metadata is documented",
+  "Transformation lineage is documented",
+  "Dataset lineage is documented",
+  "Column-level lineage expectations are documented and scoped",
+  "Semantic and serving lineage is documented",
+  "Quality and trust metadata is documented",
+  "Ownership and stewardship metadata is documented",
+  "Usage and consumer metadata is documented",
+  "Change and version metadata is documented",
+  "Audit and compliance metadata is documented",
+  "Metadata capture responsibilities are documented",
+  "Metadata freshness and maintenance policy is documented",
+  "Artifact does not implement catalog tools, scanners, metadata crawlers, OpenLineage, Purview, DataHub, Collibra, dbt docs, metadata pipelines, CI/CD, or code",
+  "Phase 18 evidence pack exists or evidence is waived with reason",
+  "Phase 18 handoff to Phase 19 exists",
+  "Workflow status is updated"
 ]
 
 [workflow]
 activation_steps_prepend = []
 activation_steps_append = []
+
 persistent_facts = [
   "file:{project-root}/**/project-context.md",
 ]
+
 on_complete = ""

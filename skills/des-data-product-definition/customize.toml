@@ -15,6 +15,31 @@ required_upstream_artifacts = [
   "_des-output/planning-artifacts/03-requirements-and-kpi-catalog.md"
 ]
 
+# Phase-Orchestrated Support upstream inputs
+required_upstream_handoffs = [
+  "_des-output/phase-handoffs/phase-03-to-04-handoff.md"
+]
+
+recommended_upstream_evidence = [
+  "_des-output/evidence/phase-01/phase-01-evidence-pack.md",
+  "_des-output/evidence/phase-02/phase-02-evidence-pack.md",
+  "_des-output/evidence/phase-03/phase-03-evidence-pack.md",
+  "_des-output/implementation-artifacts/phase-03-done-gate.md"
+]
+
+# Phase-Orchestrated Support outputs
+phase_support_plan_file = "_des-output/phase-support-plans/phase-04-support-plan.md"
+phase_evidence_dir = "_des-output/evidence/phase-04"
+phase_evidence_pack_file = "_des-output/evidence/phase-04/phase-04-evidence-pack.md"
+phase_artifact_revision_file = "_des-output/implementation-artifacts/phase-04-artifact-revision.md"
+phase_done_gate_file = "_des-output/implementation-artifacts/phase-04-done-gate.md"
+phase_handoff_file = "_des-output/phase-handoffs/phase-04-to-05-handoff.md"
+
+phase_support_plan_template = "templates/phase/phase-04-support-plan-template.md"
+phase_evidence_pack_template = "templates/phase/phase-04-evidence-pack-template.md"
+phase_handoff_template = "templates/phase/phase-04-handoff-template.md"
+phase_done_gate_checklist = "checklists/phase-04-done-gate-checklist.md"
+
 required_sections = [
   "Data Product Summary",
   "Product Intent",
@@ -37,11 +62,14 @@ required_sections = [
   "Assumptions",
   "Risks",
   "Open Questions",
+  "Phase 04 Evidence Summary",
+  "Phase 04 Handoff Notes",
   "Next Skill Recommendation"
 ]
 
 halt_required_decisions = [
   "upstream_requirements_context",
+  "phase_03_handoff",
   "primary_consumer",
   "product_boundary",
   "first_release_output",
@@ -49,6 +77,59 @@ halt_required_decisions = [
   "product_owner",
   "lifecycle_status",
   "trust_expectation"
+]
+
+# Phase 04 support work is data-product boundary validation, not source/table/pipeline design.
+required_support_work = [
+  "phase_03_handoff_review",
+  "product_boundary_check",
+  "consumer_and_use_case_alignment_check",
+  "product_output_check",
+  "service_expectation_check",
+  "trust_expectation_check",
+  "ownership_and_stewardship_check",
+  "lifecycle_status_check",
+  "phase_05_source_need_readiness_check",
+  "phase_04_done_gate",
+  "phase_04_to_05_handoff"
+]
+
+optional_support_work = [
+  "des-wise",
+  "des-learning-status-update",
+  "des-explain-artifact",
+  "des-correct-course"
+]
+
+evidence_required = [
+  "phase_03_handoff_evidence",
+  "product_boundary_evidence",
+  "consumer_use_case_alignment_evidence",
+  "product_output_evidence",
+  "service_expectation_evidence",
+  "trust_expectation_evidence",
+  "ownership_evidence",
+  "lifecycle_status_evidence",
+  "source_need_readiness_evidence"
+]
+
+done_gate_required_checks = [
+  "Data Product Specification exists",
+  "Phase 01, Phase 02, and Phase 03 artifacts are reviewed",
+  "Phase 03 handoff is reviewed",
+  "Data product name and intent are defined",
+  "Primary consumer and supported use case are defined",
+  "Product outputs and first release output are clear",
+  "Product boundary and non-scope are documented",
+  "Business question and requirement mapping is documented",
+  "Service, freshness, trust, and access expectations are documented",
+  "Owner, steward, and lifecycle status are defined or explicitly marked Draft",
+  "Data contract expectations are captured at high level only",
+  "Governance and security considerations are captured",
+  "Source needs for Phase 05 are explicit enough to assess candidate sources",
+  "Phase 04 evidence pack exists or evidence is waived with reason",
+  "Phase 04 handoff to Phase 05 exists",
+  "Workflow status is updated"
 ]
 
 [workflow]

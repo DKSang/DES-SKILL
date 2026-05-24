@@ -23,9 +23,33 @@ required_upstream_artifacts = [
   "_des-output/planning-artifacts/11-gold-layer-specification.md"
 ]
 
+# Phase-Orchestrated Support upstream inputs
+required_upstream_handoffs = [
+  "_des-output/phase-handoffs/phase-11-to-12-handoff.md"
+]
+
+recommended_upstream_evidence = [
+  "_des-output/evidence/phase-11/phase-11-evidence-pack.md",
+  "_des-output/implementation-artifacts/phase-11-done-gate.md"
+]
+
+# Phase-Orchestrated Support outputs
+phase_support_plan_file = "_des-output/phase-support-plans/phase-12-support-plan.md"
+phase_evidence_dir = "_des-output/evidence/phase-12"
+phase_evidence_pack_file = "_des-output/evidence/phase-12/phase-12-evidence-pack.md"
+phase_artifact_revision_file = "_des-output/implementation-artifacts/phase-12-artifact-revision.md"
+phase_done_gate_file = "_des-output/implementation-artifacts/phase-12-done-gate.md"
+phase_handoff_file = "_des-output/phase-handoffs/phase-12-to-13-handoff.md"
+
+phase_support_plan_template = "templates/phase/phase-12-support-plan-template.md"
+phase_evidence_pack_template = "templates/phase/phase-12-evidence-pack-template.md"
+phase_handoff_template = "templates/phase/phase-12-handoff-template.md"
+phase_done_gate_checklist = "checklists/phase-12-done-gate-checklist.md"
+
 required_sections = [
   "Data Contract Summary",
   "Contract Scope",
+  "Contract Non-Scope",
   "Contract Design Principles",
   "Contract Inventory",
   "Producer and Consumer Mapping",
@@ -46,26 +70,128 @@ required_sections = [
   "Incident and Escalation Policy",
   "Acceptance and Validation Criteria",
   "Contract Ownership and Approval",
+  "Contract Evidence Summary",
   "Risks",
   "Assumptions",
   "Open Questions",
+  "Phase 12 Evidence Summary",
+  "Phase 12 Handoff Notes",
   "Next Skill Recommendation"
 ]
 
 halt_required_decisions = [
   "upstream_gold_context",
+  "phase_11_handoff",
   "contract_required_outputs",
   "contract_level",
   "producer_consumer_owner",
   "schema_expectation",
   "grain_expectation",
+  "field_level_expectation",
+  "metric_definition_alignment",
   "freshness_sla",
   "quality_thresholds",
+  "volume_completeness_expectation",
   "security_access_policy",
-  "metric_definition_alignment",
+  "lineage_metadata_expectation",
   "versioning_change_policy",
+  "deprecation_policy",
   "incident_escalation_policy",
-  "acceptance_validation_criteria"
+  "acceptance_validation_criteria",
+  "ownership_approval"
+]
+
+# Phase 12 support work validates data contracts.
+# It does not implement tests, transformations, orchestration, CI/CD, dashboards, APIs, or code.
+required_support_work = [
+  "phase_11_handoff_review",
+  "contract_scope_check",
+  "contract_inventory_check",
+  "producer_consumer_owner_check",
+  "contract_level_check",
+  "dataset_output_identity_check",
+  "business_meaning_grain_check",
+  "schema_expectation_check",
+  "field_level_expectation_check",
+  "metric_kpi_expectation_check",
+  "freshness_sla_check",
+  "quality_expectation_check",
+  "volume_completeness_check",
+  "security_access_check",
+  "lineage_metadata_check",
+  "compatibility_versioning_check",
+  "change_management_check",
+  "deprecation_policy_check",
+  "incident_escalation_check",
+  "acceptance_validation_check",
+  "ownership_approval_check",
+  "phase_12_done_gate",
+  "phase_12_to_13_handoff"
+]
+
+optional_support_work = [
+  "contract_field_check",
+  "schema_contract_review",
+  "owner_sla_review",
+  "breaking_change_review",
+  "consumer_expectation_review",
+  "security_access_review",
+  "metric_contract_review",
+  "des-wise",
+  "des-learning-status-update",
+  "des-explain-artifact",
+  "des-correct-course"
+]
+
+evidence_required = [
+  "phase_11_handoff_evidence",
+  "contract_scope_evidence",
+  "contract_inventory_evidence",
+  "producer_consumer_owner_evidence",
+  "contract_level_evidence",
+  "dataset_output_identity_evidence",
+  "business_meaning_grain_evidence",
+  "schema_expectation_evidence",
+  "field_level_expectation_evidence",
+  "metric_kpi_expectation_evidence",
+  "freshness_sla_evidence",
+  "quality_expectation_evidence",
+  "volume_completeness_evidence",
+  "security_access_evidence",
+  "lineage_metadata_evidence",
+  "compatibility_versioning_evidence",
+  "change_management_evidence",
+  "deprecation_policy_evidence",
+  "incident_escalation_evidence",
+  "acceptance_validation_evidence",
+  "ownership_approval_evidence"
+]
+
+done_gate_required_checks = [
+  "Data Contract Specification exists",
+  "Phase 11 artifact and handoff are reviewed",
+  "Each contracted P1 Gold output has a contract or is marked deferred/blocked",
+  "Each contract has contract ID, dataset/output name, producer, consumer, owner, and approver where needed",
+  "Each contract has contract level",
+  "Each contract has dataset/output identity",
+  "Each contract has business meaning and grain",
+  "Each contract has schema expectations",
+  "Each contract has field-level expectations or accepted schema draft status",
+  "Each contract has metric/KPI expectations where metrics exist",
+  "Each contract has freshness/SLA expectations",
+  "Each contract has quality expectations",
+  "Each contract has volume/completeness expectations where relevant",
+  "Each contract has security/access expectations",
+  "Each contract has lineage/metadata expectations",
+  "Each contract has compatibility and versioning policy",
+  "Each contract has change management policy",
+  "Each Standard+ contract has incident/escalation policy",
+  "Each contract has acceptance and validation criteria",
+  "Contract ownership and approval are documented",
+  "Artifact does not implement tests, transformations, dashboards, APIs, orchestration, CI/CD files, or code",
+  "Phase 12 evidence pack exists or evidence is waived with reason",
+  "Phase 12 handoff to Phase 13 exists",
+  "Workflow status is updated"
 ]
 
 [workflow]

@@ -23,9 +23,33 @@ required_upstream_artifacts = [
   "_des-output/planning-artifacts/15-orchestration-observability-specification.md"
 ]
 
+# Phase-Orchestrated Support upstream inputs
+required_upstream_handoffs = [
+  "_des-output/phase-handoffs/phase-15-to-16-handoff.md"
+]
+
+recommended_upstream_evidence = [
+  "_des-output/evidence/phase-15/phase-15-evidence-pack.md",
+  "_des-output/implementation-artifacts/phase-15-done-gate.md"
+]
+
+# Phase-Orchestrated Support outputs
+phase_support_plan_file = "_des-output/phase-support-plans/phase-16-support-plan.md"
+phase_evidence_dir = "_des-output/evidence/phase-16"
+phase_evidence_pack_file = "_des-output/evidence/phase-16/phase-16-evidence-pack.md"
+phase_artifact_revision_file = "_des-output/implementation-artifacts/phase-16-artifact-revision.md"
+phase_done_gate_file = "_des-output/implementation-artifacts/phase-16-done-gate.md"
+phase_handoff_file = "_des-output/phase-handoffs/phase-16-to-17-handoff.md"
+
+phase_support_plan_template = "templates/phase/phase-16-support-plan-template.md"
+phase_evidence_pack_template = "templates/phase/phase-16-evidence-pack-template.md"
+phase_handoff_template = "templates/phase/phase-16-handoff-template.md"
+phase_done_gate_checklist = "checklists/phase-16-done-gate-checklist.md"
+
 required_sections = [
   "Semantic Model Summary",
   "Semantic Scope",
+  "Semantic Non-Scope",
   "Semantic Design Principles",
   "Semantic Model Inventory",
   "Consumer and Use Case Mapping",
@@ -46,16 +70,22 @@ required_sections = [
   "Freshness and Quality Display Expectations",
   "Lineage and Metadata Expectations",
   "Semantic Testing Expectations",
+  "Semantic Evidence Summary",
   "Risks",
   "Assumptions",
   "Open Questions",
+  "Phase 16 Evidence Summary",
+  "Phase 16 Handoff Notes",
   "Next Skill Recommendation"
 ]
 
 halt_required_decisions = [
   "upstream_gold_kpi_context",
+  "phase_15_handoff",
   "semantic_scope",
   "consumer_use_case_mapping",
+  "gold_to_semantic_mapping",
+  "business_glossary_alignment",
   "measure_kpi_definition",
   "aggregation_behavior",
   "relationship_join_behavior",
@@ -63,14 +93,116 @@ halt_required_decisions = [
   "time_intelligence",
   "security_access_model",
   "certification_trust_status",
+  "freshness_quality_display",
   "calculation_ownership",
-  "semantic_contract_quality_alignment"
+  "semantic_contract_quality_alignment",
+  "semantic_testing_expectation"
+]
+
+# Phase 16 support work validates semantic model design.
+# It does not implement DAX, SQL, LookML, Cube, dbt semantic model, Power BI model, dashboard, API, or deployment code.
+required_support_work = [
+  "phase_15_handoff_review",
+  "semantic_scope_check",
+  "consumer_use_case_mapping_check",
+  "gold_to_semantic_mapping_check",
+  "business_glossary_alignment_check",
+  "semantic_entity_check",
+  "measure_kpi_definition_check",
+  "dimension_attribute_check",
+  "hierarchy_check",
+  "relationship_join_behavior_check",
+  "grain_aggregation_behavior_check",
+  "filter_slicer_check",
+  "time_intelligence_check",
+  "calculation_ownership_check",
+  "naming_display_convention_check",
+  "security_access_model_check",
+  "certification_trust_status_check",
+  "freshness_quality_display_check",
+  "lineage_metadata_check",
+  "semantic_testing_expectation_check",
+  "contract_quality_alignment_check",
+  "phase_16_done_gate",
+  "phase_16_to_17_handoff"
+]
+
+optional_support_work = [
+  "semantic_metric_review",
+  "business_term_alignment",
+  "dashboard_consumption_check",
+  "relationship_cardinality_review",
+  "measure_reconciliation_review",
+  "security_model_review",
+  "ai_agent_semantic_readiness_review",
+  "des-wise",
+  "des-learning-status-update",
+  "des-explain-artifact",
+  "des-correct-course"
+]
+
+evidence_required = [
+  "phase_15_handoff_evidence",
+  "semantic_scope_evidence",
+  "consumer_use_case_mapping_evidence",
+  "gold_to_semantic_mapping_evidence",
+  "business_glossary_alignment_evidence",
+  "semantic_entity_evidence",
+  "measure_kpi_definition_evidence",
+  "dimension_attribute_evidence",
+  "hierarchy_evidence",
+  "relationship_join_behavior_evidence",
+  "grain_aggregation_behavior_evidence",
+  "filter_slicer_evidence",
+  "time_intelligence_evidence",
+  "calculation_ownership_evidence",
+  "naming_display_convention_evidence",
+  "security_access_model_evidence",
+  "certification_trust_status_evidence",
+  "freshness_quality_display_evidence",
+  "lineage_metadata_evidence",
+  "semantic_testing_expectation_evidence",
+  "contract_quality_alignment_evidence"
+]
+
+done_gate_required_checks = [
+  "Semantic Model Specification exists",
+  "Phase 15 artifact and handoff are reviewed",
+  "Semantic scope is documented",
+  "Semantic non-scope is documented",
+  "Semantic model inventory exists",
+  "Consumer and use-case mapping is documented",
+  "Gold-to-semantic mapping is documented",
+  "Business glossary alignment is documented",
+  "Semantic entities are documented",
+  "Measures and KPIs are documented",
+  "Measures trace to approved Phase 03 or Phase 11 definitions",
+  "Dimensions and attributes are documented",
+  "Hierarchies are documented where relevant",
+  "Relationships and join behavior are documented",
+  "Grain and aggregation behavior are documented",
+  "Filters and slicers are documented",
+  "Time intelligence expectations are documented",
+  "Calculation ownership is documented",
+  "Naming and display conventions are documented",
+  "Security and access model is documented",
+  "Certification and trust status is documented",
+  "Freshness and quality display expectations are documented",
+  "Lineage and metadata expectations are documented",
+  "Semantic testing expectations are documented",
+  "Contract and quality alignment is documented",
+  "Artifact does not implement DAX, SQL, LookML, Cube, dbt semantic model, Power BI model, dashboard, API, CI/CD, deployment, or code",
+  "Phase 16 evidence pack exists or evidence is waived with reason",
+  "Phase 16 handoff to Phase 17 exists",
+  "Workflow status is updated"
 ]
 
 [workflow]
 activation_steps_prepend = []
 activation_steps_append = []
+
 persistent_facts = [
   "file:{project-root}/**/project-context.md",
 ]
+
 on_complete = ""

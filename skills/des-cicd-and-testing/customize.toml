@@ -22,9 +22,33 @@ required_upstream_artifacts = [
   "_des-output/planning-artifacts/20-cost-performance-optimization-specification.md"
 ]
 
+# Phase-Orchestrated Support upstream inputs
+required_upstream_handoffs = [
+  "_des-output/phase-handoffs/phase-20-to-21-handoff.md"
+]
+
+recommended_upstream_evidence = [
+  "_des-output/evidence/phase-20/phase-20-evidence-pack.md",
+  "_des-output/implementation-artifacts/phase-20-done-gate.md"
+]
+
+# Phase-Orchestrated Support outputs
+phase_support_plan_file = "_des-output/phase-support-plans/phase-21-support-plan.md"
+phase_evidence_dir = "_des-output/evidence/phase-21"
+phase_evidence_pack_file = "_des-output/evidence/phase-21/phase-21-evidence-pack.md"
+phase_artifact_revision_file = "_des-output/implementation-artifacts/phase-21-artifact-revision.md"
+phase_done_gate_file = "_des-output/implementation-artifacts/phase-21-done-gate.md"
+phase_handoff_file = "_des-output/phase-handoffs/phase-21-to-22-handoff.md"
+
+phase_support_plan_template = "templates/phase/phase-21-support-plan-template.md"
+phase_evidence_pack_template = "templates/phase/phase-21-evidence-pack-template.md"
+phase_handoff_template = "templates/phase/phase-21-handoff-template.md"
+phase_done_gate_checklist = "checklists/phase-21-done-gate-checklist.md"
+
 required_sections = [
   "CI CD and Testing Summary",
   "CI CD Scope",
+  "CI CD Non-Scope",
   "CI CD Design Principles",
   "Repository and Artifact Inventory",
   "Branch and Review Strategy",
@@ -45,14 +69,19 @@ required_sections = [
   "Release Evidence and Audit Trail",
   "Test Data and Fixture Strategy",
   "Secrets and Environment Configuration Policy",
+  "Breaking Change Policy",
+  "CI CD and Testing Evidence Summary",
   "Risks",
   "Assumptions",
   "Open Questions",
+  "Phase 21 Evidence Summary",
+  "Phase 21 Handoff Notes",
   "Next Skill Recommendation"
 ]
 
 halt_required_decisions = [
   "upstream_release_context",
+  "phase_20_handoff",
   "cicd_scope",
   "repository_artifact_boundary",
   "branch_review_strategy",
@@ -60,20 +89,127 @@ halt_required_decisions = [
   "test_coverage_scope",
   "contract_test_gate",
   "quality_test_gate",
+  "transformation_test_gate",
+  "orchestration_test_gate",
+  "semantic_serving_test_gate",
   "security_governance_gate",
   "performance_cost_gate",
   "deployment_gate",
   "release_approval",
   "rollback_recovery",
+  "release_evidence_audit",
   "test_data_strategy",
   "secrets_config_policy",
   "breaking_change_policy"
 ]
 
+# Phase 21 support work validates CI/CD and Testing design.
+# It does not implement GitHub Actions, Azure DevOps, Fabric deployment pipelines, dbt, pytest, SQL tests, Spark tests, notebook tests, IaC, or deployment code.
+required_support_work = [
+  "phase_20_handoff_review",
+  "cicd_scope_check",
+  "repository_artifact_inventory_check",
+  "branch_review_strategy_check",
+  "environment_promotion_strategy_check",
+  "test_inventory_check",
+  "unit_test_expectation_check",
+  "integration_test_expectation_check",
+  "data_contract_test_gate_check",
+  "data_quality_test_gate_check",
+  "transformation_test_gate_check",
+  "orchestration_test_gate_check",
+  "semantic_serving_test_gate_check",
+  "security_governance_test_gate_check",
+  "cost_performance_test_gate_check",
+  "deployment_gate_check",
+  "release_approval_workflow_check",
+  "rollback_recovery_strategy_check",
+  "release_evidence_audit_trail_check",
+  "test_data_fixture_strategy_check",
+  "secrets_environment_config_policy_check",
+  "breaking_change_policy_check",
+  "phase_21_done_gate",
+  "phase_21_to_22_handoff"
+]
+
+optional_support_work = [
+  "test_evidence_check",
+  "ci_workflow_review",
+  "deployment_readiness_review",
+  "environment_promotion_review",
+  "release_gate_review",
+  "rollback_runbook_review",
+  "secret_handling_review",
+  "breaking_change_review",
+  "des-wise",
+  "des-learning-status-update",
+  "des-explain-artifact",
+  "des-correct-course"
+]
+
+evidence_required = [
+  "phase_20_handoff_evidence",
+  "cicd_scope_evidence",
+  "repository_artifact_inventory_evidence",
+  "branch_review_strategy_evidence",
+  "environment_promotion_strategy_evidence",
+  "test_inventory_evidence",
+  "unit_test_expectation_evidence",
+  "integration_test_expectation_evidence",
+  "data_contract_test_gate_evidence",
+  "data_quality_test_gate_evidence",
+  "transformation_test_gate_evidence",
+  "orchestration_test_gate_evidence",
+  "semantic_serving_test_gate_evidence",
+  "security_governance_test_gate_evidence",
+  "cost_performance_test_gate_evidence",
+  "deployment_gate_evidence",
+  "release_approval_workflow_evidence",
+  "rollback_recovery_strategy_evidence",
+  "release_evidence_audit_trail_evidence",
+  "test_data_fixture_strategy_evidence",
+  "secrets_environment_config_policy_evidence",
+  "breaking_change_policy_evidence"
+]
+
+done_gate_required_checks = [
+  "CI/CD and Testing Specification exists",
+  "Phase 20 artifact and handoff are reviewed",
+  "CI/CD scope is documented",
+  "CI/CD non-scope is documented",
+  "CI/CD design principles are documented",
+  "Repository and artifact inventory is documented",
+  "Branch and review strategy is documented",
+  "Environment and promotion strategy is documented",
+  "Test inventory is documented",
+  "Unit test expectations are documented",
+  "Integration test expectations are documented",
+  "Data contract test gates are documented",
+  "Data quality test gates are documented",
+  "Transformation test expectations are documented",
+  "Orchestration test expectations are documented",
+  "Semantic and serving test expectations are documented",
+  "Security and governance test gates are documented",
+  "Cost and performance test gates are documented",
+  "Deployment gates are documented",
+  "Release approval workflow is documented",
+  "Rollback and recovery strategy is documented",
+  "Release evidence and audit trail are documented",
+  "Test data and fixture strategy is documented",
+  "Secrets and environment configuration policy is documented",
+  "Breaking change policy is documented",
+  "Artifact does not implement GitHub Actions, Azure DevOps, Fabric deployment pipelines, dbt, pytest, SQL tests, Spark tests, notebook tests, IaC, or deployment code",
+  "Phase 21 evidence pack exists or evidence is waived with reason",
+  "Phase 21 handoff to Phase 22 exists",
+  "Workflow status is updated"
+]
+
 [workflow]
 activation_steps_prepend = []
 activation_steps_append = []
+
 persistent_facts = [
   "file:{project-root}/**/project-context.md",
 ]
+
 on_complete = ""

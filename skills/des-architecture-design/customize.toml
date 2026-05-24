@@ -18,6 +18,30 @@ required_upstream_artifacts = [
   "_des-output/planning-artifacts/06-conceptual-domain-model.md"
 ]
 
+# Phase-Orchestrated Support upstream inputs
+required_upstream_handoffs = [
+  "_des-output/phase-handoffs/phase-06-to-07-handoff.md"
+]
+
+recommended_upstream_evidence = [
+  "_des-output/evidence/phase-05/phase-05-evidence-pack.md",
+  "_des-output/evidence/phase-06/phase-06-evidence-pack.md",
+  "_des-output/implementation-artifacts/phase-06-done-gate.md"
+]
+
+# Phase-Orchestrated Support outputs
+phase_support_plan_file = "_des-output/phase-support-plans/phase-07-support-plan.md"
+phase_evidence_dir = "_des-output/evidence/phase-07"
+phase_evidence_pack_file = "_des-output/evidence/phase-07/phase-07-evidence-pack.md"
+phase_artifact_revision_file = "_des-output/implementation-artifacts/phase-07-artifact-revision.md"
+phase_done_gate_file = "_des-output/implementation-artifacts/phase-07-done-gate.md"
+phase_handoff_file = "_des-output/phase-handoffs/phase-07-to-08-handoff.md"
+
+phase_support_plan_template = "templates/phase/phase-07-support-plan-template.md"
+phase_evidence_pack_template = "templates/phase/phase-07-evidence-pack-template.md"
+phase_handoff_template = "templates/phase/phase-07-handoff-template.md"
+phase_done_gate_checklist = "checklists/phase-07-done-gate-checklist.md"
+
 required_sections = [
   "Architecture Summary",
   "Decision Context",
@@ -39,28 +63,112 @@ required_sections = [
   "DataOps and Software Engineering Direction",
   "Build Versus Buy Considerations",
   "Technology Constraints and Options",
+  "Architecture Options Considered",
   "Architecture Decisions",
   "Trade-Offs",
   "Reversibility Classification",
+  "Architecture Evidence Summary",
   "Risks",
   "Assumptions",
   "Open Questions",
+  "Phase 07 Evidence Summary",
+  "Phase 07 Handoff Notes",
   "Next Skill Recommendation"
 ]
 
 halt_required_decisions = [
   "upstream_architecture_context",
+  "phase_06_handoff",
   "architecture_scope",
   "target_platform",
   "environment_strategy",
   "storage_strategy",
   "compute_strategy",
   "batch_streaming_event_strategy",
+  "layer_strategy",
   "serving_direction",
+  "orchestration_boundary",
+  "observability_direction",
   "security_privacy_posture",
+  "governance_metadata_direction",
   "cost_constraint",
   "team_capability_constraint",
   "hard_to_reverse_decision"
+]
+
+# Phase 07 support work validates architecture decisions and trade-offs.
+# It does not design detailed ingestion, schemas, transformations, dashboards, APIs, or code.
+required_support_work = [
+  "phase_06_handoff_review",
+  "architecture_driver_traceability_check",
+  "architecture_option_comparison",
+  "platform_feasibility_check",
+  "environment_strategy_check",
+  "storage_compute_fit_check",
+  "batch_streaming_event_fit_check",
+  "layer_strategy_check",
+  "serving_strategy_check",
+  "security_privacy_architecture_check",
+  "governance_metadata_architecture_check",
+  "cost_and_operational_burden_check",
+  "reversibility_and_lock_in_check",
+  "phase_07_done_gate",
+  "phase_07_to_08_handoff"
+]
+
+optional_support_work = [
+  "fabric_feasibility_check",
+  "duckdb_local_first_feasibility_check",
+  "cloud_cost_probe",
+  "security_review",
+  "architecture_tradeoff_review",
+  "des-wise",
+  "des-learning-status-update",
+  "des-explain-artifact",
+  "des-correct-course"
+]
+
+evidence_required = [
+  "phase_06_handoff_evidence",
+  "architecture_driver_traceability_evidence",
+  "option_comparison_evidence",
+  "platform_feasibility_evidence",
+  "environment_strategy_evidence",
+  "storage_compute_fit_evidence",
+  "batch_streaming_event_fit_evidence",
+  "layer_strategy_evidence",
+  "serving_strategy_evidence",
+  "security_privacy_evidence",
+  "governance_metadata_evidence",
+  "cost_operational_burden_evidence",
+  "reversibility_lock_in_evidence"
+]
+
+done_gate_required_checks = [
+  "Architecture Decision Record exists",
+  "Phase 06 artifact and handoff are reviewed",
+  "Architecture scope is defined",
+  "Architecture drivers are traced to product, source, domain, requirement, trust, freshness, and serving needs",
+  "At least two options are considered for major decisions or single-option constraint is justified",
+  "Target platform direction is documented",
+  "Environment strategy is documented",
+  "Storage strategy is documented",
+  "Compute strategy is documented",
+  "Batch/streaming/event strategy is documented",
+  "Layer strategy is documented",
+  "Serving strategy is documented",
+  "Orchestration boundary is documented",
+  "Observability direction is documented",
+  "Security/privacy posture is documented",
+  "Governance/metadata direction is documented",
+  "DataOps/software engineering direction is documented",
+  "Cost and operational burden are documented",
+  "Hard-to-reverse decisions have explicit rationale or are deferred",
+  "Rejected options and trade-offs are documented",
+  "Artifact does not design detailed ingestion, physical schemas, transformations, dashboards, APIs, CI/CD files, or code",
+  "Phase 07 evidence pack exists or evidence is waived with reason",
+  "Phase 07 handoff to Phase 08 exists",
+  "Workflow status is updated"
 ]
 
 [workflow]

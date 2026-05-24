@@ -1,8 +1,12 @@
-# Step 02 — Architecture Options and Decisions
+# Step 02 — Architecture Options, Evidence, and Decisions
 
 ## Goal
 
-Evaluate architecture options, make explicit architecture decisions, document trade-offs, and classify decisions by reversibility and risk.
+Evaluate architecture options, make explicit architecture decisions, document trade-offs, classify decisions by reversibility and risk, and prepare architecture evidence for Phase 07 completion.
+
+This step prepares the Architecture Decision Record and identifies which architecture decisions require evidence, support work, waiver, or accepted risk.
+
+---
 
 ## Required Inputs
 
@@ -13,8 +17,12 @@ Evaluate architecture options, make explicit architecture decisions, document tr
 - Data Product Specification
 - Data Source Inventory
 - Conceptual Domain Model
+- Phase 06 to Phase 07 handoff, if available
+- Phase 06 do-not-assume list
 - User answers from HALT points
 - Existing architecture notes, diagrams, cloud constraints, platform standards, or legacy architecture if available
+
+---
 
 ## Actions
 
@@ -34,6 +42,7 @@ Evaluate architecture options, make explicit architecture decisions, document tr
 5. Evaluate options against requirements and constraints.
 6. Decide:
    - target platform/environment direction;
+   - environment strategy;
    - storage strategy;
    - compute strategy;
    - batch/streaming/event strategy;
@@ -48,8 +57,14 @@ Evaluate architecture options, make explicit architecture decisions, document tr
    - build-versus-buy direction.
 7. Record trade-offs and rejected options.
 8. Classify decisions by reversibility.
-9. Use HALT checkpoints for decisions the agent cannot safely infer.
-10. Prepare draft ADR content.
+9. Map each architecture decision to evidence.
+10. Mark unsupported architecture claims as `Proposed`, `Draft`, `Open`, `Risk`, `Deferred`, `Blocked`, or `Waived with reason`.
+11. Identify required Phase 07 support work.
+12. Use HALT checkpoints for decisions the agent cannot safely infer.
+13. Prepare draft ADR content.
+14. Prepare content for the Phase 07 Support Plan.
+
+---
 
 ## Hints
 
@@ -62,6 +77,11 @@ Evaluate architecture options, make explicit architecture decisions, document tr
 - Architecture should make later ingestion, storage, transformation, serving, testing, and operations easier.
 - When uncertain, prefer reversible decisions and staged rollout.
 - Tool choices can be captured as constraints or candidate options, but architecture decisions should explain why.
+- Local-first development may be part of the architecture if it reduces feedback-loop cost and risk.
+- Cloud platform choices should be justified by requirements, constraints, cost, governance, and team capability.
+- Do not design physical schemas, detailed ingestion pipelines, transformations, dashboards, APIs, CI/CD files, or code.
+
+---
 
 ## Architecture Option Types
 
@@ -84,6 +104,8 @@ Consider these generic option categories where relevant:
 | Brownfield migration | Incremental replacement of existing architecture |
 | Greenfield architecture | New design with fewer legacy constraints |
 
+---
+
 ## Decision Record Standard
 
 Each architecture decision should include:
@@ -96,6 +118,7 @@ Each architecture decision should include:
 | Options considered | Required |
 | Chosen option | Required |
 | Rationale | Required |
+| Evidence | Required |
 | Trade-offs | Required |
 | Reversibility | Required |
 | Impacted phases | Required |
@@ -112,6 +135,52 @@ Reversibility classes:
 ```text
 Easy to reverse | Moderate to reverse | Hard to reverse
 ```
+
+---
+
+## Architecture Evidence Mapping
+
+For every major ADR decision, capture the evidence status.
+
+| Architecture Field               | Evidence Status                        | Allowed Output                 |
+| -------------------------------- | -------------------------------------- | ------------------------------ |
+| Architecture driver traceability | Confirmed / Partial / Missing / Waived | Approved / Proposed / Risk     |
+| Option comparison                | Complete / Partial / Missing / Waived  | Approved / Proposed / Deferred |
+| Platform feasibility             | Confirmed / Assumed / Missing / Waived | Approved / Proposed / Risk     |
+| Environment strategy             | Confirmed / Assumed / Missing / Waived | Approved / Proposed / Risk     |
+| Storage/compute fit              | Confirmed / Assumed / Missing / Waived | Approved / Proposed / Risk     |
+| Batch/stream/event fit           | Confirmed / Assumed / Missing / Waived | Approved / Proposed / Risk     |
+| Layer strategy fit               | Confirmed / Assumed / Missing / Waived | Approved / Proposed / Risk     |
+| Serving strategy fit             | Confirmed / Assumed / Missing / Waived | Approved / Proposed / Risk     |
+| Security/privacy fit             | Confirmed / Assumed / Missing / Waived | Approved / Proposed / Risk     |
+| Cost/operational burden          | Confirmed / Assumed / Missing / Waived | Approved / Proposed / Risk     |
+| Reversibility/lock-in            | Confirmed / Partial / Missing / Waived | Approved / Proposed / Deferred |
+
+---
+
+## Phase 07 Required Support Work
+
+Based on the architecture decisions above, prepare a support plan using these categories:
+
+| Support Work                           | Required When                                          | Output           |
+| -------------------------------------- | ------------------------------------------------------ | ---------------- |
+| Phase 06 Handoff Review                | Always                                                 | Evidence pack    |
+| Architecture Driver Traceability Check | Always                                                 | Evidence pack    |
+| Architecture Option Comparison         | Major decisions exist                                  | Evidence pack    |
+| Platform Feasibility Check             | Platform direction is selected or constrained          | Evidence pack    |
+| Environment Strategy Check             | Always                                                 | Evidence pack    |
+| Storage/Compute Fit Check              | Storage or compute strategy is selected                | Evidence pack    |
+| Batch/Streaming/Event Fit Check        | Freshness/source patterns influence processing         | Evidence pack    |
+| Layer Strategy Check                   | Layered architecture is proposed                       | Evidence pack    |
+| Serving Strategy Check                 | P1 outputs require access/serving                      | Evidence pack    |
+| Security/Privacy Architecture Check    | Any source/product has security/privacy implications   | Evidence pack    |
+| Governance/Metadata Architecture Check | Product trust, lineage, contracts, or ownership matter | Evidence pack    |
+| Cost and Operational Burden Check      | Always                                                 | Evidence pack    |
+| Reversibility and Lock-In Check        | Major decisions exist                                  | Evidence pack    |
+| Done Gate                              | Always before marking Done                             | Done Gate result |
+| Handoff to Phase 08                    | Always before Phase 08                                 | Handoff file     |
+
+---
 
 ## Decision Area 1 - Target Platform and Deployment
 
@@ -131,17 +200,19 @@ Approve platform direction.
 
 #### Options
 
-A. Cloud-first managed platform  
-B. On-premises or self-managed platform  
-C. Hybrid cloud/on-prem  
-D. Multi-cloud  
-E. Local-first development with cloud deployment  
-F. Platform not yet selected — keep architecture vendor-neutral  
-G. Custom direction  
+A. Cloud-first managed platform
+B. On-premises or self-managed platform
+C. Hybrid cloud/on-prem
+D. Multi-cloud
+E. Local-first development with cloud deployment
+F. Platform not yet selected — keep architecture vendor-neutral
+G. Custom direction
 
 #### Required response
 
 Choose A/B/C/D/E/F/G.
+
+---
 
 ## Decision Area 2 - Environment Strategy
 
@@ -161,20 +232,22 @@ Approve environment strategy.
 
 #### Options
 
-A. Single environment for MVP  
-B. Dev and Prod only  
-C. Dev/Test/Prod  
-D. Feature/local → Dev → Test → Prod  
-E. Per-domain or per-product environments  
-F. Custom strategy  
+A. Single environment for MVP
+B. Dev and Prod only
+C. Dev/Test/Prod
+D. Feature/local → Dev → Test → Prod
+E. Per-domain or per-product environments
+F. Custom strategy
 
 #### Required response
 
 Choose A/B/C/D/E/F.
 
+---
+
 ## Decision Area 3 - Storage Strategy
 
-Decide the storage format, partitioning, and layout patterns for all logical layers.
+Decide the storage direction and layout pattern for all logical layers.
 
 ### HALT - Storage Strategy Decision
 
@@ -190,21 +263,23 @@ Approve storage strategy.
 
 #### Options
 
-A. Data warehouse-centered  
-B. Data lake-centered  
-C. Lakehouse-centered  
-D. Object storage + query engine  
-E. Existing platform storage  
-F. Hybrid storage strategy  
-G. Custom strategy  
+A. Data warehouse-centered
+B. Data lake-centered
+C. Lakehouse-centered
+D. Object storage + query engine
+E. Existing platform storage
+F. Hybrid storage strategy
+G. Custom strategy
 
 #### Required response
 
 Choose A/B/C/D/E/F/G.
 
+---
+
 ## Decision Area 4 - Compute Strategy
 
-Select the compute engine, scaling model, and library dependencies for transformation pipelines.
+Select the compute direction and scaling model for transformation pipelines.
 
 ### HALT - Compute Strategy Decision
 
@@ -220,17 +295,19 @@ Approve compute strategy.
 
 #### Options
 
-A. SQL warehouse compute  
-B. Spark/distributed compute  
-C. Python/local compute for development, cloud compute for integration  
-D. Stream processing compute  
-E. Serverless/managed compute  
-F. Containerized/custom compute  
-G. Hybrid compute strategy  
+A. SQL warehouse compute
+B. Spark/distributed compute
+C. Python/local compute for development, cloud compute for integration
+D. Stream processing compute
+E. Serverless/managed compute
+F. Containerized/custom compute
+G. Hybrid compute strategy
 
 #### Required response
 
 Choose A/B/C/D/E/F/G.
+
+---
 
 ## Decision Area 5 - Processing Latency and Event Strategy
 
@@ -250,21 +327,23 @@ Approve processing and event strategy.
 
 #### Options
 
-A. Batch-first  
-B. Streaming-first  
-C. Event-driven architecture  
-D. Hybrid batch + selected streaming/events  
-E. Manual/on-demand for MVP  
-F. Defer streaming/events until requirements justify it  
+A. Batch-first
+B. Streaming-first
+C. Event-driven architecture
+D. Hybrid batch + selected streaming/events
+E. Manual/on-demand for MVP
+F. Defer streaming/events until requirements justify it
 
 #### Recommendation
 
-Choose A or F when freshness requirements are daily/periodic.  
+Choose A or F when freshness requirements are daily/periodic.
 Choose D when only selected use cases require low latency or events.
 
 #### Required response
 
 Choose A/B/C/D/E/F.
+
+---
 
 ## Decision Area 6 - Logical Data Layer Strategy
 
@@ -284,16 +363,18 @@ Approve logical data layer strategy.
 
 #### Options
 
-A. Raw → Cleaned → Curated layers  
-B. Bronze → Silver → Gold / Medallion layers  
-C. Source-aligned → Domain-aligned → Product-aligned layers  
-D. Warehouse staging → marts pattern  
-E. Virtualized/federated access with limited materialization  
-F. Custom strategy  
+A. Raw → Cleaned → Curated layers
+B. Bronze → Silver → Gold / Medallion layers
+C. Source-aligned → Domain-aligned → Product-aligned layers
+D. Warehouse staging → marts pattern
+E. Virtualized/federated access with limited materialization
+F. Custom strategy
 
 #### Required response
 
 Choose A/B/C/D/E/F.
+
+---
 
 ## Decision Area 7 - Data Serving Architecture
 
@@ -313,20 +394,73 @@ Approve high-level serving direction.
 
 #### Options
 
-A. Direct curated tables/datasets  
-B. Semantic/metrics layer  
-C. Dashboard/reporting layer  
-D. API/application-facing serving  
-E. ML/AI feature or training dataset  
-F. Data sharing/export  
-G. Reverse ETL/operational activation  
-H. Multiple outputs by consumer  
+A. Direct curated tables/datasets
+B. Semantic/metrics layer
+C. Dashboard/reporting layer
+D. API/application-facing serving
+E. ML/AI feature or training dataset
+F. Data sharing/export
+G. Reverse ETL/operational activation
+H. Multiple outputs by consumer
 
 #### Required response
 
 Choose one or more options and mark P1 serving path.
 
-## Decision Area 8 - Security and Privacy Posture
+---
+
+## Decision Area 8 - Orchestration Boundary
+
+Define what should be orchestrated and what should remain manual/local/external for this phase.
+
+### HALT - Orchestration Boundary
+
+Stop if orchestration ownership is unclear.
+
+#### Why this matters
+
+Orchestration affects reliability, retries, monitoring, cost, dependencies, and incident handling.
+
+#### Options
+
+A. Managed cloud pipeline orchestration
+B. Notebook/job-based orchestration
+C. dbt/job scheduler orchestration
+D. External workflow orchestrator
+E. Local/manual orchestration for MVP
+F. Hybrid orchestration
+G. Defer detailed orchestration to Phase 15
+
+#### Required response
+
+Choose A/B/C/D/E/F/G.
+
+---
+
+## Decision Area 9 - Observability Direction
+
+Define the high-level monitoring and observability direction.
+
+### HALT - Observability Direction
+
+Stop if the product trust expectation requires monitoring but observability is unclear.
+
+#### Options
+
+A. Basic run status and error logs
+B. Pipeline metrics + freshness checks
+C. Data quality + freshness + lineage monitoring
+D. Production-grade monitoring and alerting
+E. Compliance/audit-grade observability
+F. Defer detailed design to Phase 15 with risks documented
+
+#### Required response
+
+Choose A/B/C/D/E/F.
+
+---
+
+## Decision Area 10 - Security and Privacy Posture
 
 Define security, privacy, and compliance guidelines for storage and transport.
 
@@ -344,18 +478,43 @@ Approve security/privacy posture.
 
 #### Options
 
-A. Public/non-sensitive data posture  
-B. Internal non-sensitive data posture  
-C. Confidential business data posture  
-D. PII/privacy-controlled posture  
-E. Regulated/compliance-grade posture  
-F. Unknown — route to governance/security before implementation  
+A. Public/non-sensitive data posture
+B. Internal non-sensitive data posture
+C. Confidential business data posture
+D. PII/privacy-controlled posture
+E. Regulated/compliance-grade posture
+F. Unknown — route to governance/security before implementation
 
 #### Required response
 
 Choose A/B/C/D/E/F.
 
-## Decision Area 9 - Cost and Operational Burden Constraints
+---
+
+## Decision Area 11 - Governance and Metadata Direction
+
+Define high-level governance, metadata, catalog, lineage, and ownership direction.
+
+### HALT - Governance and Metadata Direction
+
+Stop if product trust, lineage, ownership, or contracts matter but governance direction is unclear.
+
+#### Options
+
+A. Lightweight documentation and owner register
+B. Catalog + lineage + metadata conventions
+C. Contract-aware governance with owners and change process
+D. Enterprise governance platform direction
+E. Defer governance tooling but document metadata requirements
+F. Unknown — route to governance/security phase
+
+#### Required response
+
+Choose A/B/C/D/E/F.
+
+---
+
+## Decision Area 12 - Cost and Operational Burden Constraints
 
 Balance infrastructure budget limits and team maintenance overhead.
 
@@ -373,19 +532,23 @@ Approve cost posture.
 
 #### Options
 
-A. Lowest-cost MVP  
-B. Balanced cost and reliability  
-C. Performance-first, cost monitored  
-D. Enterprise governance/capacity-controlled  
-E. Unknown — capture as risk and require review  
+A. Lowest-cost MVP
+B. Balanced cost and reliability
+C. Performance-first, cost monitored
+D. Enterprise governance/capacity-controlled
+E. Unknown — capture as risk and require review
 
 #### Required response
 
 Choose A/B/C/D/E.
 
-### HALT - Team Capability and Operational Gate
+---
+
+## Decision Area 13 - Team Capability and Operational Gate
 
 Stop if the proposed architecture may exceed team capability.
+
+### HALT - Team Capability and Operational Gate
 
 #### Why this matters
 
@@ -397,17 +560,19 @@ Approve operational complexity level.
 
 #### Options
 
-A. Low-complexity managed services only  
-B. Moderate complexity with common components  
-C. Advanced architecture with explicit operational ownership  
-D. Experimental/learning architecture  
-E. Unknown — reduce complexity or keep as Draft  
+A. Low-complexity managed services only
+B. Moderate complexity with common components
+C. Advanced architecture with explicit operational ownership
+D. Experimental/learning architecture
+E. Unknown — reduce complexity or keep as Draft
 
 #### Required response
 
 Choose A/B/C/D/E.
 
-## Decision Area 10 - Hard-to-Reverse Architectural Commitments
+---
+
+## Decision Area 14 - Hard-to-Reverse Architectural Commitments
 
 Evaluate decisions with massive downstream lock-in or migration costs.
 
@@ -432,15 +597,17 @@ Should this decision be approved now?
 
 #### Options
 
-A. Approve hard-to-reverse decision with rationale  
-B. Choose more reversible interim decision  
-C. Defer decision until more evidence exists  
-D. Run spike/proof-of-concept first  
-E. Route back to requirements/source/product phase  
+A. Approve hard-to-reverse decision with rationale
+B. Choose more reversible interim decision
+C. Defer decision until more evidence exists
+D. Run spike/proof-of-concept first
+E. Route back to requirements/source/product phase
 
 #### Required response
 
 Choose A/B/C/D/E.
+
+---
 
 ## Completion Criteria
 
@@ -450,8 +617,10 @@ This step is complete when:
 * target architecture overview is drafted;
 * major decisions are captured in ADR format;
 * options and trade-offs are documented;
-* environment, storage, compute, layer, serving, security, governance, DataOps, and cost directions are documented;
+* environment, storage, compute, layer, serving, orchestration, observability, security, governance, DataOps, and cost directions are documented;
 * hard-to-reverse decisions are explicitly approved or deferred;
+* evidence mapping is prepared;
+* required support work is identified;
 * risks and assumptions are documented;
 * draft ADR content is ready.
 

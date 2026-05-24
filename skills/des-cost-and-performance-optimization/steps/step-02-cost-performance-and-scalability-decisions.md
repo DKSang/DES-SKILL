@@ -1,12 +1,18 @@
-# Step 02 — Cost, Performance, and Scalability Decisions
+# Step 02 — Cost, Performance, Scalability, and Evidence Decisions
 
 ## Goal
 
-Define workload priorities, cost drivers, performance drivers, baseline measurements, optimization strategies, monitoring, budget guardrails, scalability planning, and approved trade-offs.
+Define workload priorities, cost drivers, performance drivers, baseline measurements, storage/compute/ingestion/transformation/query/serving optimization strategies, monitoring, budget guardrails, scalability planning, trade-offs, and supporting evidence.
+
+This step prepares the Cost and Performance Optimization Specification and identifies which optimization decisions require evidence, support work, waiver, or accepted risk.
+
+---
 
 ## Required Inputs
 
 - Confirmed context from Step 01
+- Phase 19 to Phase 20 handoff, if available
+- Phase 19 evidence pack, if available
 - Architecture Decision Record
 - Ingestion Specification
 - Transformation Specification
@@ -17,53 +23,66 @@ Define workload priorities, cost drivers, performance drivers, baseline measurem
 - User answers from HALT points
 - Existing profiling, runtime logs, warehouse/lakehouse metrics, query plans, or cost reports if available
 
+---
+
 ## Actions
 
 1. Define optimization scope and non-scope.
 2. Define optimization design principles.
 3. Create workload inventory.
-4. Create cost driver inventory.
-5. Create performance driver inventory.
-6. Define baseline measurement plan.
-7. Define storage optimization strategy.
-8. Define compute optimization strategy.
-9. Define ingestion optimization strategy.
-10. Define transformation optimization strategy.
-11. Define query and semantic model optimization strategy.
-12. Define serving performance strategy.
-13. Define orchestration runtime optimization.
-14. Define data quality cost/performance considerations.
-15. Define caching and materialization strategy.
-16. Define partitioning, clustering, and file sizing expectations.
-17. Define incremental processing and recomputation strategy.
-18. Define retention lifecycle and storage tiering.
-19. Define cost monitoring and budget guardrails.
-20. Define performance monitoring and SLOs.
-21. Define scalability and capacity planning.
-22. Define trade-off decisions.
-23. Use HALT checkpoints for unresolved decisions.
+4. Prioritize workloads.
+5. Create cost driver inventory.
+6. Create performance driver inventory.
+7. Define baseline measurement plan.
+8. Define storage optimization strategy.
+9. Define compute optimization strategy.
+10. Define ingestion optimization strategy.
+11. Define transformation optimization strategy.
+12. Define query and semantic model optimization strategy.
+13. Define serving performance strategy.
+14. Define orchestration runtime optimization.
+15. Define data quality cost/performance considerations.
+16. Define caching and materialization strategy.
+17. Define partitioning, clustering, and file sizing expectations.
+18. Define incremental processing and recomputation strategy.
+19. Define retention lifecycle and storage tiering.
+20. Define cost monitoring and budget guardrails.
+21. Define performance monitoring and SLOs.
+22. Define scalability and capacity planning.
+23. Define trade-off decisions.
+24. Map each critical cost/performance decision to evidence.
+25. Mark unsupported optimization claims as `Draft`, `Risk`, `Blocked`, `Deferred`, `Unknown`, or `Waived with reason`.
+26. Identify required Phase 18 support work.
+27. Use HALT checkpoints for unresolved decisions.
+28. Prepare draft Cost and Performance Optimization Specification content.
+29. Prepare content for the Phase 20 Support Plan.
+
+---
 
 ## Optimization Principles
 
 Use these defaults unless overridden:
 
 | Principle | Meaning |
-| --- | --- |
+|---|---|
 | Measure first | Do not optimize without baseline evidence |
 | P1 first | Optimize business-critical workloads first |
 | Fit-for-workload | Match storage/compute/model to access pattern |
 | Incremental by default where safe | Avoid full refresh when incremental is correct |
-| Avoid hidden cost | Track query, compute, egress, storage, API, and quality costs |
+| Avoid hidden cost | Track query, compute, egress, storage, API, monitoring, and quality costs |
 | Optimize without breaking trust | Do not weaken contracts, quality, security, or lineage silently |
 | Make trade-offs explicit | Cost/performance/SLA/security trade-offs need approval |
 | Monitor continuously | Optimization is ongoing, not one-time |
+| No implementation here | Design strategy and targets, do not tune code or infrastructure |
+
+---
 
 ## Workload Types
 
 Classify workloads as:
 
 | Workload Type | Examples |
-| --- | --- |
+|---|---|
 | Ingestion | API pulls, file loads, CDC, streams |
 | Bronze storage | raw retention, metadata, partitioning |
 | Silver transformation | cleaning, conformance, dedup, identity, SCD |
@@ -76,13 +95,43 @@ Classify workloads as:
 | Export/reverse ETL | file delivery, SaaS writeback |
 | Monitoring/observability | logs, metrics, audit evidence |
 
+---
+
+## Cost and Performance Evidence Mapping
+
+For every P1 workload, capture evidence status.
+
+| Optimization Field | Evidence Status | Allowed Output |
+|---|---|---|
+| Phase 19 handoff | Confirmed / Partial / Missing / Waived | Approved / Draft / Risk |
+| Optimization scope | Confirmed / Partial / Missing / Waived | Approved / Draft / Risk |
+| Workload inventory | Confirmed / Partial / Missing / Waived | Approved / Draft / Risk |
+| Workload priority | Confirmed / Assumed / Missing / Waived | Approved / Draft / Risk |
+| Cost drivers | Confirmed / Assumed / Missing / Waived | Approved / Draft / Risk |
+| Performance drivers | Confirmed / Assumed / Missing / Waived | Approved / Draft / Risk |
+| Baseline measurement | Confirmed / Plan only / Missing / Waived | Approved / Draft / Risk |
+| Storage optimization | Confirmed / Assumed / Missing / Waived | Approved / Draft / Risk |
+| Compute optimization | Confirmed / Assumed / Missing / Waived | Approved / Draft / Risk |
+| Ingestion optimization | Confirmed / Assumed / Missing / Waived | Approved / Draft / Risk |
+| Transformation optimization | Confirmed / Assumed / Missing / Waived | Approved / Draft / Risk |
+| Query/semantic optimization | Confirmed / Assumed / Missing / Waived | Approved / Draft / Risk |
+| Serving performance | Confirmed / Assumed / Missing / Waived | Approved / Draft / Risk |
+| Orchestration runtime | Confirmed / Assumed / Missing / Waived | Approved / Draft / Risk |
+| Quality cost/performance | Confirmed / Assumed / Missing / Waived | Approved / Draft / Risk |
+| Caching/materialization | Confirmed / Assumed / Missing / Not applicable | Approved / Draft / Risk |
+| Partitioning/clustering/file sizing | Confirmed / Assumed / Missing / Not applicable | Approved / Draft / Risk |
+| Incremental/recomputation | Confirmed / Assumed / Missing / Waived | Approved / Draft / Risk |
+| Retention/storage tiering | Confirmed / Assumed / Missing / Waived | Approved / Draft / Risk |
+| Cost monitoring/budget guardrail | Confirmed / Assumed / Missing / Waived | Approved / Draft / Risk |
+| Performance monitoring/SLO | Confirmed / Assumed / Missing / Waived | Approved / Draft / Risk |
+| Scalability/capacity plan | Confirmed / Assumed / Missing / Waived | Approved / Draft / Risk |
+| Trade-off decision | Confirmed / Assumed / Missing / Waived | Approved / Draft / Risk / Blocked |
+
+---
+
 ## HALT — Workload Priority
 
 Stop if workload priority is unclear.
-
-### Decision needed
-
-Which workloads should be optimized first?
 
 ### Options
 
@@ -99,13 +148,11 @@ H. Custom priority
 
 Choose one or more options.
 
+---
+
 ## HALT — Baseline Measurement
 
 Stop if optimization lacks measurement baseline.
-
-### Decision needed
-
-What baseline should be captured before optimization?
 
 ### Options
 
@@ -124,13 +171,11 @@ J. No baseline yet — mark Draft and collect first
 
 Choose one or more options.
 
+---
+
 ## HALT — Cost and Budget Constraint
 
 Stop if budget or cost boundary is unclear.
-
-### Decision needed
-
-Approve cost constraint or FinOps guardrail.
 
 ### Options
 
@@ -147,13 +192,11 @@ H. Custom cost boundary
 
 Choose A/B/C/D/E/F/G/H and specify value if known.
 
+---
+
 ## HALT — Performance SLA Target
 
 Stop if performance target is unclear.
-
-### Decision needed
-
-Approve performance target.
 
 ### Options
 
@@ -171,13 +214,11 @@ I. Custom target
 
 Choose one or more options and specify target if known.
 
+---
+
 ## HALT — Storage Optimization Strategy
 
 Stop if storage optimization may affect retention, lineage, audit, or replay.
-
-### Decision needed
-
-Approve storage strategy.
 
 ### Options
 
@@ -194,13 +235,11 @@ H. Keep Draft pending governance/retention review
 
 Choose one or more options.
 
+---
+
 ## HALT — Compute Optimization Strategy
 
 Stop if compute optimization affects SLA, reliability, or cost.
-
-### Decision needed
-
-Approve compute strategy.
 
 ### Options
 
@@ -217,13 +256,52 @@ H. Keep Draft pending platform cost review
 
 Choose one or more options.
 
+---
+
+## HALT — Ingestion Optimization Strategy
+
+Stop if ingestion optimization is unclear or may affect source limits/freshness.
+
+### Options
+
+A. Incremental extraction where source supports it  
+B. Batch window tuning  
+C. Source rate-limit-aware scheduling  
+D. Parallelize source ingestion only where safe  
+E. Reduce redundant pulls through checkpointing  
+F. Use compression and efficient landing format  
+G. Keep full refresh only for small/static sources  
+H. Keep Draft pending source constraint review  
+
+### Required response
+
+Choose one or more options.
+
+---
+
+## HALT — Transformation Optimization Strategy
+
+Stop if transformation optimization is unclear.
+
+### Options
+
+A. Incremental transformations where safe  
+B. Recompute only affected partitions/windows  
+C. Materialize expensive intermediate results  
+D. Push filters/projections earlier where safe  
+E. Separate heavy batch transforms from interactive workloads  
+F. Optimize join strategy later using profiling/query plan evidence  
+G. Keep Draft pending profiling baseline  
+
+### Required response
+
+Choose one or more options.
+
+---
+
 ## HALT — Query and Serving Optimization
 
 Stop if query/serving performance is unclear.
-
-### Decision needed
-
-Approve query/serving optimization.
 
 ### Options
 
@@ -240,13 +318,31 @@ H. Keep Draft pending usage data
 
 Choose one or more options.
 
+---
+
+## HALT — Orchestration Runtime Optimization
+
+Stop if workflow runtime optimization is unclear.
+
+### Options
+
+A. Parallelize independent tasks  
+B. Sequence dependent tasks strictly  
+C. Separate critical path from non-critical monitoring/profiling tasks  
+D. Run expensive non-blocking checks asynchronously  
+E. Use retry/backoff according to Phase 15 policy  
+F. Avoid over-parallelization that increases cost/source pressure  
+G. Keep Draft pending runtime baseline  
+
+### Required response
+
+Choose one or more options.
+
+---
+
 ## HALT — Caching and Materialization
 
 Stop if caching/materialization may create stale or insecure outputs.
-
-### Decision needed
-
-Approve caching/materialization policy.
 
 ### Options
 
@@ -263,13 +359,11 @@ H. Keep Draft pending freshness/security review
 
 Choose one or more options.
 
+---
+
 ## HALT — Quality Cost Trade-Off
 
 Stop if quality checks are costly or slow.
-
-### Decision needed
-
-Approve quality optimization.
 
 ### Options
 
@@ -285,13 +379,11 @@ G. Keep Draft pending owner approval
 
 Choose one or more options.
 
+---
+
 ## HALT — Retention Lifecycle and Storage Tiering
 
 Stop if storage reduction affects audit, replay, privacy, or governance.
-
-### Decision needed
-
-Approve retention/storage tiering decision.
 
 ### Options
 
@@ -307,13 +399,11 @@ G. Keep Draft pending governance approval
 
 Choose one or more options.
 
+---
+
 ## HALT — Cost Monitoring and Budget Guardrails
 
 Stop if cost monitoring is missing.
-
-### Decision needed
-
-Approve cost monitoring signals.
 
 ### Options
 
@@ -331,13 +421,33 @@ I. Custom cost signal
 
 Choose one or more options.
 
+---
+
+## HALT — Performance Monitoring and SLOs
+
+Stop if performance monitoring is missing.
+
+### Options
+
+A. Workflow runtime SLO  
+B. Freshness SLO  
+C. Query latency SLO  
+D. Dashboard load SLO  
+E. API latency SLO  
+F. Export delivery SLO  
+G. Quality check runtime SLO  
+H. Capacity utilization SLO  
+I. Custom performance signal  
+
+### Required response
+
+Choose one or more options.
+
+---
+
 ## HALT — Scalability and Capacity Planning
 
 Stop if data growth or consumer growth is expected but planning is unclear.
-
-### Decision needed
-
-Approve scalability plan.
 
 ### Options
 
@@ -354,13 +464,11 @@ H. Custom plan
 
 Choose one or more options.
 
+---
+
 ## HALT — Trade-Off Approval
 
 Stop if optimization changes affect SLA, cost, security, quality, or user experience.
-
-### Decision needed
-
-Approve trade-off.
 
 ### Required fields
 
@@ -385,16 +493,22 @@ E. Keep Draft pending owner approval
 
 Choose A/B/C/D/E.
 
+---
+
 ## Completion Criteria
 
 This step is complete when:
 
 - optimization scope and principles are defined;
 - workload inventory is created;
+- workload priority is documented;
 - cost and performance drivers are documented;
 - baseline measurement plan is defined;
 - storage, compute, ingestion, transformation, query, serving, orchestration, quality, caching, retention, monitoring, and scalability strategies are documented;
 - trade-offs are explicit;
+- evidence mapping is prepared;
+- required support work is identified;
+- risks and assumptions are explicit;
 - draft cost/performance specification content is ready.
 
 ## Next Step

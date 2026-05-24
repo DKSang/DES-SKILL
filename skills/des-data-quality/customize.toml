@@ -25,9 +25,33 @@ required_upstream_artifacts = [
   "_des-output/planning-artifacts/13-transformation-specification.md"
 ]
 
+# Phase-Orchestrated Support upstream inputs
+required_upstream_handoffs = [
+  "_des-output/phase-handoffs/phase-13-to-14-handoff.md"
+]
+
+recommended_upstream_evidence = [
+  "_des-output/evidence/phase-13/phase-13-evidence-pack.md",
+  "_des-output/implementation-artifacts/phase-13-done-gate.md"
+]
+
+# Phase-Orchestrated Support outputs
+phase_support_plan_file = "_des-output/phase-support-plans/phase-14-support-plan.md"
+phase_evidence_dir = "_des-output/evidence/phase-14"
+phase_evidence_pack_file = "_des-output/evidence/phase-14/phase-14-evidence-pack.md"
+phase_artifact_revision_file = "_des-output/implementation-artifacts/phase-14-artifact-revision.md"
+phase_done_gate_file = "_des-output/implementation-artifacts/phase-14-done-gate.md"
+phase_handoff_file = "_des-output/phase-handoffs/phase-14-to-15-handoff.md"
+
+phase_support_plan_template = "templates/phase/phase-14-support-plan-template.md"
+phase_evidence_pack_template = "templates/phase/phase-14-evidence-pack-template.md"
+phase_handoff_template = "templates/phase/phase-14-handoff-template.md"
+phase_done_gate_checklist = "checklists/phase-14-done-gate-checklist.md"
+
 required_sections = [
   "Data Quality Summary",
   "Quality Scope",
+  "Quality Non-Scope",
   "Quality Design Principles",
   "Quality Dimensions",
   "Quality Rule Inventory",
@@ -49,25 +73,144 @@ required_sections = [
   "Failure Handling and Quality Gates",
   "Ownership and Stewardship",
   "Evidence and Reporting Expectations",
+  "Monitoring and Observability Expectations",
+  "Release and CI/CD Gate Candidates",
+  "Data Quality Evidence Summary",
   "Risks",
   "Assumptions",
   "Open Questions",
+  "Phase 14 Evidence Summary",
+  "Phase 14 Handoff Notes",
   "Next Skill Recommendation"
 ]
 
 halt_required_decisions = [
   "upstream_transformation_context",
+  "phase_13_handoff",
   "quality_scope",
   "quality_rule_required_outputs",
+  "quality_dimension_selection",
   "quality_threshold",
   "severity_classification",
   "blocking_warning_behavior",
   "freshness_sla_quality_rule",
+  "completeness_volume_rule",
+  "uniqueness_grain_rule",
+  "referential_integrity_rule",
   "metric_reconciliation_tolerance",
+  "schema_compatibility_rule",
+  "anomaly_threshold_rule",
   "quality_owner",
   "failure_handling",
   "evidence_reporting_expectation",
-  "consumer_acceptance_quality"
+  "consumer_acceptance_quality",
+  "monitoring_observability_expectation",
+  "cicd_gate_candidate"
+]
+
+# Phase 14 support work validates quality rule design.
+# It does not implement SQL, Python, dbt, Great Expectations, Spark, orchestration, monitoring, CI/CD, dashboards, or code.
+required_support_work = [
+  "phase_13_handoff_review",
+  "quality_scope_check",
+  "quality_dimension_check",
+  "quality_rule_inventory_check",
+  "dataset_to_rule_mapping_check",
+  "layer_specific_rule_check",
+  "contract_quality_alignment_check",
+  "transformation_validation_alignment_check",
+  "freshness_rule_check",
+  "completeness_volume_rule_check",
+  "uniqueness_grain_rule_check",
+  "validity_domain_rule_check",
+  "referential_integrity_rule_check",
+  "consistency_reconciliation_rule_check",
+  "accuracy_reasonableness_rule_check",
+  "schema_compatibility_rule_check",
+  "null_missing_rule_check",
+  "anomaly_threshold_rule_check",
+  "severity_classification_check",
+  "failure_handling_gate_check",
+  "ownership_stewardship_check",
+  "evidence_reporting_check",
+  "monitoring_observability_expectation_check",
+  "cicd_release_gate_candidate_check",
+  "phase_14_done_gate",
+  "phase_14_to_15_handoff"
+]
+
+optional_support_work = [
+  "dq_sampling_review",
+  "dq_rule_test",
+  "anomaly_threshold_review",
+  "quality_severity_review",
+  "profiling_review",
+  "metric_reconciliation_review",
+  "consumer_acceptance_review",
+  "des-wise",
+  "des-learning-status-update",
+  "des-explain-artifact",
+  "des-correct-course"
+]
+
+evidence_required = [
+  "phase_13_handoff_evidence",
+  "quality_scope_evidence",
+  "quality_dimension_evidence",
+  "quality_rule_inventory_evidence",
+  "dataset_to_rule_mapping_evidence",
+  "layer_specific_rule_evidence",
+  "contract_quality_alignment_evidence",
+  "transformation_validation_alignment_evidence",
+  "freshness_rule_evidence",
+  "completeness_volume_rule_evidence",
+  "uniqueness_grain_rule_evidence",
+  "validity_domain_rule_evidence",
+  "referential_integrity_rule_evidence",
+  "consistency_reconciliation_rule_evidence",
+  "accuracy_reasonableness_rule_evidence",
+  "schema_compatibility_rule_evidence",
+  "null_missing_rule_evidence",
+  "anomaly_threshold_rule_evidence",
+  "severity_classification_evidence",
+  "failure_handling_gate_evidence",
+  "ownership_stewardship_evidence",
+  "evidence_reporting_evidence",
+  "monitoring_observability_expectation_evidence",
+  "cicd_release_gate_candidate_evidence"
+]
+
+done_gate_required_checks = [
+  "Data Quality Specification exists",
+  "Phase 13 artifact and handoff are reviewed",
+  "Quality scope is documented",
+  "Quality non-scope is documented",
+  "Quality dimensions are documented",
+  "Quality rule inventory exists",
+  "P1 contracted outputs have quality rules or are marked deferred/blocked",
+  "P1 transformation outputs have validation rules or are marked deferred/blocked",
+  "Layer-specific rules are documented for relevant Bronze/Silver/Gold outputs",
+  "Contract quality alignment is documented",
+  "Transformation validation alignment is documented",
+  "Freshness rules are documented for P1 SLA-bound outputs",
+  "Completeness and volume rules are documented where relevant",
+  "Uniqueness and grain rules are documented where relevant",
+  "Validity and domain rules are documented",
+  "Referential integrity rules are documented where joins/relationships exist",
+  "Consistency and reconciliation rules are documented where metrics or cross-source outputs exist",
+  "Schema and compatibility rules are documented for contracted outputs",
+  "Null and missing value rules are documented",
+  "Anomaly and threshold rules are documented or marked Draft pending profiling",
+  "Each P1 rule has severity",
+  "Each P1 rule has failure handling",
+  "Each P1 rule has owner/steward or is marked Draft/Risk",
+  "Each P1 rule has evidence/reporting expectation",
+  "Monitoring/observability expectations are documented for Phase 15",
+  "CI/CD/release gate candidates are documented for Phase 21",
+  "Artifact does not implement SQL, Python, dbt, Great Expectations, Spark, orchestration, monitoring, CI/CD, dashboards, or code",
+  "Phase 14 evidence pack exists or evidence is waived with reason",
+  "Phase 14 handoff to Phase 15 exists",
+  "Workflow status is updated"
 ]
 
 [workflow]

@@ -22,9 +22,33 @@ required_upstream_artifacts = [
   "_des-output/planning-artifacts/16-semantic-model-specification.md"
 ]
 
+# Phase-Orchestrated Support upstream inputs
+required_upstream_handoffs = [
+  "_des-output/phase-handoffs/phase-16-to-17-handoff.md"
+]
+
+recommended_upstream_evidence = [
+  "_des-output/evidence/phase-16/phase-16-evidence-pack.md",
+  "_des-output/implementation-artifacts/phase-16-done-gate.md"
+]
+
+# Phase-Orchestrated Support outputs
+phase_support_plan_file = "_des-output/phase-support-plans/phase-17-support-plan.md"
+phase_evidence_dir = "_des-output/evidence/phase-17"
+phase_evidence_pack_file = "_des-output/evidence/phase-17/phase-17-evidence-pack.md"
+phase_artifact_revision_file = "_des-output/implementation-artifacts/phase-17-artifact-revision.md"
+phase_done_gate_file = "_des-output/implementation-artifacts/phase-17-done-gate.md"
+phase_handoff_file = "_des-output/phase-handoffs/phase-17-to-18-handoff.md"
+
+phase_support_plan_template = "templates/phase/phase-17-support-plan-template.md"
+phase_evidence_pack_template = "templates/phase/phase-17-evidence-pack-template.md"
+phase_handoff_template = "templates/phase/phase-17-handoff-template.md"
+phase_done_gate_checklist = "checklists/phase-17-done-gate-checklist.md"
+
 required_sections = [
   "Serving Layer Summary",
   "Serving Scope",
+  "Serving Non-Scope",
   "Serving Design Principles",
   "Consumer and Persona Mapping",
   "Serving Channel Inventory",
@@ -44,31 +68,135 @@ required_sections = [
   "Feedback Loop and Issue Reporting",
   "Usage Monitoring and Adoption Signals",
   "Ownership and Support Model",
+  "Serving Evidence Summary",
   "Risks",
   "Assumptions",
   "Open Questions",
+  "Phase 17 Evidence Summary",
+  "Phase 17 Handoff Notes",
   "Next Skill Recommendation"
 ]
 
 halt_required_decisions = [
   "upstream_semantic_serving_context",
+  "phase_16_handoff",
   "serving_scope",
   "consumer_persona",
   "serving_channel",
+  "gold_semantic_to_serving_mapping",
+  "serving_pattern",
   "access_security_model",
   "freshness_quality_visibility",
   "performance_latency_expectation",
+  "caching_materialization_expectation",
   "api_application_contract",
   "ml_ai_serving_expectation",
   "reverse_etl_guardrails",
   "data_sharing_federation_risk",
-  "feedback_support_owner"
+  "ai_data_agent_access",
+  "feedback_support_owner",
+  "usage_monitoring_expectation"
+]
+
+# Phase 17 support work validates serving design.
+# It does not implement dashboards, BI models, APIs, apps, ML jobs, reverse ETL jobs, exports, agents, caching, CI/CD, deployments, or code.
+required_support_work = [
+  "phase_16_handoff_review",
+  "serving_scope_check",
+  "consumer_persona_check",
+  "serving_channel_inventory_check",
+  "gold_semantic_to_serving_mapping_check",
+  "serving_pattern_check",
+  "dashboard_reporting_expectation_check",
+  "self_service_analytics_expectation_check",
+  "api_application_serving_expectation_check",
+  "ml_ai_dataset_serving_expectation_check",
+  "reverse_etl_export_expectation_check",
+  "data_sharing_federation_expectation_check",
+  "ai_data_agent_access_expectation_check",
+  "access_security_model_check",
+  "freshness_quality_visibility_check",
+  "performance_latency_check",
+  "caching_materialization_check",
+  "feedback_issue_reporting_check",
+  "usage_monitoring_adoption_check",
+  "ownership_support_model_check",
+  "phase_17_done_gate",
+  "phase_17_to_18_handoff"
+]
+
+optional_support_work = [
+  "serving_api_spike",
+  "dashboard_query_spike",
+  "access_pattern_review",
+  "permission_review",
+  "consumer_experience_review",
+  "reverse_etl_risk_review",
+  "ai_agent_access_review",
+  "des-wise",
+  "des-learning-status-update",
+  "des-explain-artifact",
+  "des-correct-course"
+]
+
+evidence_required = [
+  "phase_16_handoff_evidence",
+  "serving_scope_evidence",
+  "consumer_persona_evidence",
+  "serving_channel_inventory_evidence",
+  "gold_semantic_to_serving_mapping_evidence",
+  "serving_pattern_evidence",
+  "dashboard_reporting_expectation_evidence",
+  "self_service_analytics_expectation_evidence",
+  "api_application_serving_evidence",
+  "ml_ai_dataset_serving_evidence",
+  "reverse_etl_export_evidence",
+  "data_sharing_federation_evidence",
+  "ai_data_agent_access_evidence",
+  "access_security_model_evidence",
+  "freshness_quality_visibility_evidence",
+  "performance_latency_evidence",
+  "caching_materialization_evidence",
+  "feedback_issue_reporting_evidence",
+  "usage_monitoring_adoption_evidence",
+  "ownership_support_model_evidence"
+]
+
+done_gate_required_checks = [
+  "Serving Layer Specification exists",
+  "Phase 16 artifact and handoff are reviewed",
+  "Serving scope is documented",
+  "Serving non-scope is documented",
+  "Consumer and persona mapping is documented",
+  "Serving channel inventory exists",
+  "Gold/Semantic-to-serving mapping is documented",
+  "Serving pattern decision is documented per P1 output",
+  "Dashboard/reporting expectations are documented where relevant",
+  "Self-service analytics expectations are documented where relevant",
+  "API/application-serving expectations are documented where relevant",
+  "ML/AI dataset serving expectations are documented where relevant",
+  "Reverse ETL/export expectations are documented where relevant",
+  "Data sharing/federation expectations are documented where relevant",
+  "AI/data-agent access expectations are documented where relevant",
+  "Access control and security model is documented",
+  "Freshness and quality visibility is documented",
+  "Performance and latency expectations are documented for P1 outputs",
+  "Caching and materialization expectations are documented where relevant",
+  "Feedback loop and issue reporting are documented",
+  "Usage monitoring and adoption signals are documented",
+  "Ownership and support model is documented",
+  "Artifact does not implement dashboards, BI models, APIs, apps, ML jobs, reverse ETL jobs, exports, agents, caching, CI/CD, deployments, or code",
+  "Phase 17 evidence pack exists or evidence is waived with reason",
+  "Phase 17 handoff to Phase 18 exists",
+  "Workflow status is updated"
 ]
 
 [workflow]
 activation_steps_prepend = []
 activation_steps_append = []
+
 persistent_facts = [
   "file:{project-root}/**/project-context.md",
 ]
+
 on_complete = ""

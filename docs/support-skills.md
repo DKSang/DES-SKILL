@@ -1,9 +1,17 @@
 # Support Skill Catalog
 
-Support skills dùng để chuyển output của 22 main skills thành backlog, sprint, task, implementation plan, review, release readiness và retrospective.
+Support skills dùng để chuyển DES artifacts thành evidence, backlog, sprint, task, implementation plan, review, release readiness và retrospective.
 
-> **Không chạy support skills khi chưa có đủ main skill artifacts.**
-> Support skills cần main skill artifacts làm input.
+Support skills có hai chế độ sử dụng:
+
+1. **Post-planning implementation mode**  
+   Dùng sau khi đã có nhiều main artifacts để tạo epic, story, sprint, task, implementation plan, review và release readiness.
+
+2. **Inside-phase completion mode**  
+   Dùng bên trong một phase để kiểm chứng, triển khai thử, review, hoặc tạo evidence giúp phase đó thực sự Done trước khi handoff sang phase sau.
+
+> Không bắt buộc phải hoàn thành đủ 22 main skill artifacts mới được dùng support skills.
+> Tuy nhiên, support skills phải có đủ context từ phase artifact hiện tại, upstream handoff, workflow status, hoặc evidence liên quan.
 
 ---
 
@@ -55,6 +63,54 @@ des-workflow-status-update
         ↓
 [Next Sprint / End]
 ```
+
+---
+
+## Inside-Phase Completion Flow
+
+Support skills can be invoked inside a phase when the current phase needs evidence before it can safely hand off to the next phase.
+
+```text
+Phase Core Skill
+    ↓
+Initial Phase Artifact
+    ↓
+Phase Support Plan
+    ↓
+Support Skill(s)
+    ↓
+Evidence Pack
+    ↓
+Revised Phase Artifact
+    ↓
+Phase Done Gate
+    ↓
+Next Phase
+```
+
+Example for Phase 05:
+
+```text
+des-data-source-assessment
+    ↓
+05-data-source-inventory.md
+    ↓
+phase-05-support-plan.md
+    ↓
+source probe / schema inspection / profiling / license review
+    ↓
+_des-output/evidence/phase-05/
+    ↓
+revised 05-data-source-inventory.md
+    ↓
+phase-05-to-06-handoff.md
+    ↓
+des-domain-modeling
+```
+
+Support skills used inside a phase must not take over the whole phase.
+
+They should produce focused evidence, implementation notes, review findings, or validation results for the Phase Core Skill to use.
 
 ---
 

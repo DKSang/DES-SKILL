@@ -25,9 +25,33 @@ required_upstream_artifacts = [
   "_des-output/planning-artifacts/19-governance-security-specification.md"
 ]
 
+# Phase-Orchestrated Support upstream inputs
+required_upstream_handoffs = [
+  "_des-output/phase-handoffs/phase-19-to-20-handoff.md"
+]
+
+recommended_upstream_evidence = [
+  "_des-output/evidence/phase-19/phase-19-evidence-pack.md",
+  "_des-output/implementation-artifacts/phase-19-done-gate.md"
+]
+
+# Phase-Orchestrated Support outputs
+phase_support_plan_file = "_des-output/phase-support-plans/phase-20-support-plan.md"
+phase_evidence_dir = "_des-output/evidence/phase-20"
+phase_evidence_pack_file = "_des-output/evidence/phase-20/phase-20-evidence-pack.md"
+phase_artifact_revision_file = "_des-output/implementation-artifacts/phase-20-artifact-revision.md"
+phase_done_gate_file = "_des-output/implementation-artifacts/phase-20-done-gate.md"
+phase_handoff_file = "_des-output/phase-handoffs/phase-20-to-21-handoff.md"
+
+phase_support_plan_template = "templates/phase/phase-20-support-plan-template.md"
+phase_evidence_pack_template = "templates/phase/phase-20-evidence-pack-template.md"
+phase_handoff_template = "templates/phase/phase-20-handoff-template.md"
+phase_done_gate_checklist = "checklists/phase-20-done-gate-checklist.md"
+
 required_sections = [
   "Cost and Performance Summary",
   "Optimization Scope",
+  "Optimization Non-Scope",
   "Optimization Design Principles",
   "Workload Inventory",
   "Cost Driver Inventory",
@@ -49,14 +73,18 @@ required_sections = [
   "Performance Monitoring and SLOs",
   "Scalability and Capacity Planning",
   "Trade Off Decisions",
+  "Cost and Performance Evidence Summary",
   "Risks",
   "Assumptions",
   "Open Questions",
+  "Phase 20 Evidence Summary",
+  "Phase 20 Handoff Notes",
   "Next Skill Recommendation"
 ]
 
 halt_required_decisions = [
   "upstream_governance_operations_context",
+  "phase_19_handoff",
   "optimization_scope",
   "workload_priority",
   "baseline_measurement",
@@ -64,19 +92,129 @@ halt_required_decisions = [
   "performance_sla_target",
   "storage_optimization",
   "compute_optimization",
+  "ingestion_optimization",
+  "transformation_optimization",
   "query_serving_optimization",
-  "caching_materialization",
+  "orchestration_runtime_optimization",
   "quality_cost_tradeoff",
+  "caching_materialization",
   "retention_storage_tiering",
   "cost_monitoring_guardrails",
+  "performance_monitoring_slo",
   "scalability_capacity_plan",
   "tradeoff_approval"
+]
+
+# Phase 20 support work validates cost/performance design.
+# It does not implement Airflow, Fabric, Databricks, Dagster, Prefect, GitHub Actions, SQL, Python, monitoring dashboards, CI/CD, or infrastructure.
+required_support_work = [
+  "phase_19_handoff_review",
+  "optimization_scope_check",
+  "workload_inventory_check",
+  "workload_priority_check",
+  "cost_driver_inventory_check",
+  "performance_driver_inventory_check",
+  "baseline_measurement_plan_check",
+  "storage_optimization_check",
+  "compute_optimization_check",
+  "ingestion_optimization_check",
+  "transformation_optimization_check",
+  "query_semantic_optimization_check",
+  "serving_performance_check",
+  "orchestration_runtime_check",
+  "data_quality_cost_performance_check",
+  "caching_materialization_check",
+  "partitioning_clustering_file_sizing_check",
+  "incremental_processing_recomputation_check",
+  "retention_lifecycle_storage_tiering_check",
+  "cost_monitoring_budget_guardrail_check",
+  "performance_monitoring_slo_check",
+  "scalability_capacity_planning_check",
+  "tradeoff_decision_check",
+  "phase_20_done_gate",
+  "phase_20_to_21_handoff"
+]
+
+optional_support_work = [
+  "cost_probe",
+  "performance_spike",
+  "storage_layout_review",
+  "compute_choice_review",
+  "query_plan_review",
+  "dashboard_performance_review",
+  "capacity_planning_review",
+  "finops_review",
+  "des-wise",
+  "des-learning-status-update",
+  "des-explain-artifact",
+  "des-correct-course"
+]
+
+evidence_required = [
+  "phase_19_handoff_evidence",
+  "optimization_scope_evidence",
+  "workload_inventory_evidence",
+  "workload_priority_evidence",
+  "cost_driver_inventory_evidence",
+  "performance_driver_inventory_evidence",
+  "baseline_measurement_plan_evidence",
+  "storage_optimization_evidence",
+  "compute_optimization_evidence",
+  "ingestion_optimization_evidence",
+  "transformation_optimization_evidence",
+  "query_semantic_optimization_evidence",
+  "serving_performance_evidence",
+  "orchestration_runtime_evidence",
+  "data_quality_cost_performance_evidence",
+  "caching_materialization_evidence",
+  "partitioning_clustering_file_sizing_evidence",
+  "incremental_processing_recomputation_evidence",
+  "retention_lifecycle_storage_tiering_evidence",
+  "cost_monitoring_budget_guardrail_evidence",
+  "performance_monitoring_slo_evidence",
+  "scalability_capacity_planning_evidence",
+  "tradeoff_decision_evidence"
+]
+
+done_gate_required_checks = [
+  "Cost and Performance Optimization Specification exists",
+  "Phase 19 artifact and handoff are reviewed",
+  "Optimization scope is documented",
+  "Optimization non-scope is documented",
+  "Optimization design principles are documented",
+  "Workload inventory is documented",
+  "P1 workload priority is documented",
+  "Cost driver inventory is documented",
+  "Performance driver inventory is documented",
+  "Baseline measurement plan is documented",
+  "Storage optimization strategy is documented",
+  "Compute optimization strategy is documented",
+  "Ingestion optimization strategy is documented",
+  "Transformation optimization strategy is documented",
+  "Query and semantic model optimization strategy is documented",
+  "Serving performance strategy is documented",
+  "Orchestration runtime optimization is documented",
+  "Data quality cost/performance considerations are documented",
+  "Caching and materialization strategy is documented with freshness/security constraints",
+  "Partitioning/clustering/file sizing expectations are documented",
+  "Incremental processing and recomputation strategy is documented",
+  "Retention lifecycle and storage tiering follows Phase 19 governance constraints",
+  "Cost monitoring and budget guardrails are documented",
+  "Performance monitoring and SLOs are documented",
+  "Scalability and capacity planning is documented",
+  "Trade-off decisions are documented",
+  "Artifact does not rewrite SQL/Python/dbt code, tune indexes, resize clusters, configure autoscaling, deploy caching, change infrastructure, or implement cost controls",
+  "Phase 20 evidence pack exists or evidence is waived with reason",
+  "Phase 20 handoff to Phase 21 exists",
+  "Workflow status is updated"
 ]
 
 [workflow]
 activation_steps_prepend = []
 activation_steps_append = []
+
 persistent_facts = [
   "file:{project-root}/**/project-context.md",
 ]
+
 on_complete = ""

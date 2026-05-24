@@ -17,10 +17,34 @@ required_upstream_artifacts = [
   "_des-output/planning-artifacts/05-data-source-inventory.md"
 ]
 
+# Phase-Orchestrated Support upstream inputs
+required_upstream_handoffs = [
+  "_des-output/phase-handoffs/phase-05-to-06-handoff.md"
+]
+
+recommended_upstream_evidence = [
+  "_des-output/evidence/phase-05/phase-05-evidence-pack.md",
+  "_des-output/implementation-artifacts/phase-05-done-gate.md"
+]
+
+# Phase-Orchestrated Support outputs
+phase_support_plan_file = "_des-output/phase-support-plans/phase-06-support-plan.md"
+phase_evidence_dir = "_des-output/evidence/phase-06"
+phase_evidence_pack_file = "_des-output/evidence/phase-06/phase-06-evidence-pack.md"
+phase_artifact_revision_file = "_des-output/implementation-artifacts/phase-06-artifact-revision.md"
+phase_done_gate_file = "_des-output/implementation-artifacts/phase-06-done-gate.md"
+phase_handoff_file = "_des-output/phase-handoffs/phase-06-to-07-handoff.md"
+
+phase_support_plan_template = "templates/phase/phase-06-support-plan-template.md"
+phase_evidence_pack_template = "templates/phase/phase-06-evidence-pack-template.md"
+phase_handoff_template = "templates/phase/phase-06-handoff-template.md"
+phase_done_gate_checklist = "checklists/phase-06-done-gate-checklist.md"
+
 required_sections = [
   "Domain Model Summary",
   "Domain Scope",
   "Business Glossary",
+  "Ontology-Lite Concept Map",
   "Core Entities",
   "Domain Events",
   "Value Objects and Attributes",
@@ -30,19 +54,24 @@ required_sections = [
   "Source Alignment",
   "Source of Truth Mapping",
   "Terminology Conflicts",
+  "Synonyms and Controlled Vocabulary",
   "Domain Rules",
   "Lifecycle and State Definitions",
   "Temporal Concepts",
   "Ownership and Stewardship",
   "Downstream Use Case Mapping",
+  "Source Caveats and Data Reality Constraints",
   "Modeling Assumptions",
   "Risks",
   "Open Questions",
+  "Phase 06 Evidence Summary",
+  "Phase 06 Handoff Notes",
   "Next Skill Recommendation"
 ]
 
 halt_required_decisions = [
   "upstream_source_context",
+  "phase_05_handoff",
   "domain_scope",
   "business_term_ambiguity",
   "core_entity_identity",
@@ -51,7 +80,76 @@ halt_required_decisions = [
   "relationship_ambiguity",
   "domain_event_definition",
   "temporal_concept",
-  "lifecycle_state_definition"
+  "lifecycle_state_definition",
+  "source_concept_conflict",
+  "ontology_boundary"
+]
+
+# Phase 06 support work validates business concepts against source evidence.
+# It does not design physical schemas or implementation models.
+required_support_work = [
+  "phase_05_handoff_review",
+  "business_glossary_check",
+  "source_to_concept_mapping_check",
+  "ontology_lite_boundary_check",
+  "core_entity_identity_check",
+  "conceptual_grain_check",
+  "relationship_cardinality_check",
+  "source_of_truth_mapping_check",
+  "terminology_conflict_check",
+  "temporal_concept_check",
+  "lifecycle_state_check",
+  "source_caveat_propagation_check",
+  "phase_06_done_gate",
+  "phase_06_to_07_handoff"
+]
+
+optional_support_work = [
+  "ontology_lite_review",
+  "domain_term_review",
+  "source_schema_to_concept_review",
+  "concept_conflict_review",
+  "des-wise",
+  "des-learning-status-update",
+  "des-explain-artifact",
+  "des-correct-course"
+]
+
+evidence_required = [
+  "phase_05_handoff_evidence",
+  "business_glossary_evidence",
+  "source_to_concept_mapping_evidence",
+  "ontology_lite_boundary_evidence",
+  "entity_identity_evidence",
+  "conceptual_grain_evidence",
+  "relationship_evidence",
+  "source_of_truth_mapping_evidence",
+  "terminology_conflict_evidence",
+  "temporal_concept_evidence",
+  "lifecycle_state_evidence",
+  "source_caveat_evidence"
+]
+
+done_gate_required_checks = [
+  "Conceptual Domain Model exists",
+  "Phase 05 artifact and handoff are reviewed",
+  "Domain scope is defined",
+  "Business glossary exists",
+  "Ontology-lite concept map exists or is waived with reason",
+  "P1 entities have business definition, conceptual grain, identity rule, and source alignment",
+  "P1 events have subject, timing meaning, and mutability",
+  "Important relationships are documented",
+  "Source-to-concept mapping is documented",
+  "Source-of-truth mappings are documented or explicitly open",
+  "Terminology conflicts are documented and not silently resolved",
+  "Temporal concepts are documented",
+  "Lifecycle/state definitions are documented where relevant",
+  "Source caveats from Phase 05 are carried forward",
+  "Artifact does not copy source schema as domain model",
+  "Artifact does not design physical schemas, tables, Bronze/Silver/Gold layouts, star schemas, Data Vault models, semantic models, dashboards, APIs, transformations, orchestration, or code",
+  "Phase 06 evidence pack exists or evidence is waived with reason",
+  "Phase 06 handoff to Phase 07 exists",
+  "Workflow status is updated"
 ]
 
 [workflow]

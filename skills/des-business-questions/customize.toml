@@ -13,6 +13,29 @@ required_upstream_artifacts = [
   "_des-output/planning-artifacts/01-business-discovery-brief.md"
 ]
 
+# Phase-Orchestrated Support upstream inputs
+required_upstream_handoffs = [
+  "_des-output/phase-handoffs/phase-01-to-02-handoff.md"
+]
+
+recommended_upstream_evidence = [
+  "_des-output/evidence/phase-01/phase-01-evidence-pack.md",
+  "_des-output/implementation-artifacts/phase-01-done-gate.md"
+]
+
+# Phase-Orchestrated Support outputs
+phase_support_plan_file = "_des-output/phase-support-plans/phase-02-support-plan.md"
+phase_evidence_dir = "_des-output/evidence/phase-02"
+phase_evidence_pack_file = "_des-output/evidence/phase-02/phase-02-evidence-pack.md"
+phase_artifact_revision_file = "_des-output/implementation-artifacts/phase-02-artifact-revision.md"
+phase_done_gate_file = "_des-output/implementation-artifacts/phase-02-done-gate.md"
+phase_handoff_file = "_des-output/phase-handoffs/phase-02-to-03-handoff.md"
+
+phase_support_plan_template = "templates/phase/phase-02-support-plan-template.md"
+phase_evidence_pack_template = "templates/phase/phase-02-evidence-pack-template.md"
+phase_handoff_template = "templates/phase/phase-02-handoff-template.md"
+phase_done_gate_checklist = "checklists/phase-02-done-gate-checklist.md"
+
 required_sections = [
   "Question Summary",
   "Prioritized Business Questions",
@@ -28,16 +51,66 @@ required_sections = [
   "Out of Scope Questions",
   "Assumptions",
   "Open Questions",
+  "Phase 02 Evidence Summary",
+  "Phase 02 Handoff Notes",
   "Next Skill Recommendation"
 ]
 
 halt_required_decisions = [
   "phase_1_context",
+  "phase_1_handoff",
   "question_priority",
   "question_scope",
   "question_answerability",
   "consumer_mapping",
   "decision_mapping"
+]
+
+# Phase 02 support work is business-analysis validation, not technical design.
+required_support_work = [
+  "phase_01_handoff_review",
+  "question_quality_review",
+  "consumer_mapping_check",
+  "decision_mapping_check",
+  "scope_alignment_check",
+  "priority_validation",
+  "answerability_risk_check",
+  "phase_02_done_gate",
+  "phase_02_to_03_handoff"
+]
+
+optional_support_work = [
+  "des-wise",
+  "des-learning-status-update",
+  "des-explain-artifact",
+  "des-correct-course"
+]
+
+evidence_required = [
+  "phase_01_handoff_evidence",
+  "consumer_mapping_evidence",
+  "decision_mapping_evidence",
+  "priority_evidence",
+  "scope_alignment_evidence",
+  "answerability_risk_evidence"
+]
+
+done_gate_required_checks = [
+  "Business Question Catalog exists",
+  "Phase 01 artifact and handoff are reviewed",
+  "Each P1 question maps to a consumer",
+  "Each P1 question maps to a target decision or use case",
+  "Each P1 question has priority",
+  "Each P1 question is inside approved scope or marked as risk/open/deferred",
+  "Each P1 question has expected answer format",
+  "Candidate metrics are marked as candidates, not final KPI formulas",
+  "Freshness expectations and grain hints are captured where relevant",
+  "Source hints are marked as hints, not source decisions",
+  "Out-of-scope questions are separated",
+  "Assumptions, risks, and open questions are explicit",
+  "Phase 02 evidence pack exists or evidence is waived with reason",
+  "Phase 02 handoff to Phase 03 exists",
+  "Workflow status is updated"
 ]
 
 [workflow]

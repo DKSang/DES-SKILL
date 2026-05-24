@@ -16,16 +16,42 @@ required_upstream_artifacts = [
   "_des-output/planning-artifacts/04-data-product-specification.md"
 ]
 
+# Phase-Orchestrated Support upstream inputs
+required_upstream_handoffs = [
+  "_des-output/phase-handoffs/phase-04-to-05-handoff.md"
+]
+
+recommended_upstream_evidence = [
+  "_des-output/evidence/phase-03/phase-03-evidence-pack.md",
+  "_des-output/evidence/phase-04/phase-04-evidence-pack.md",
+  "_des-output/implementation-artifacts/phase-04-done-gate.md"
+]
+
+# Phase-Orchestrated Support outputs
+phase_support_plan_file = "_des-output/phase-support-plans/phase-05-support-plan.md"
+phase_evidence_dir = "_des-output/evidence/phase-05"
+phase_evidence_pack_file = "_des-output/evidence/phase-05/phase-05-evidence-pack.md"
+phase_artifact_revision_file = "_des-output/implementation-artifacts/phase-05-artifact-revision.md"
+phase_done_gate_file = "_des-output/implementation-artifacts/phase-05-done-gate.md"
+phase_handoff_file = "_des-output/phase-handoffs/phase-05-to-06-handoff.md"
+
+phase_support_plan_template = "templates/phase/phase-05-support-plan-template.md"
+phase_evidence_pack_template = "templates/phase/phase-05-evidence-pack-template.md"
+phase_handoff_template = "templates/phase/phase-05-handoff-template.md"
+phase_done_gate_checklist = "checklists/phase-05-done-gate-checklist.md"
+
 required_sections = [
   "Source Inventory Summary",
   "Source-to-Product Mapping",
   "Source-to-Requirement and KPI Mapping",
+  "Source-to-Source-Need Mapping",
   "Source System Inventory",
   "Source Type and Generation Pattern",
   "Ownership and Contacts",
   "Access Method and Permissions",
   "Source of Truth Decisions",
   "Data Format and Schema",
+  "Sample and Probe Evidence",
   "Update Frequency and Freshness",
   "Volume and Growth",
   "History and Retention",
@@ -41,11 +67,14 @@ required_sections = [
   "Risks",
   "Assumptions",
   "Open Questions",
+  "Phase 05 Evidence Summary",
+  "Phase 05 Handoff Notes",
   "Next Skill Recommendation"
 ]
 
 halt_required_decisions = [
   "upstream_product_context",
+  "phase_04_handoff",
   "candidate_source_mapping",
   "source_owner",
   "source_of_truth",
@@ -54,7 +83,76 @@ halt_required_decisions = [
   "freshness_reliability_expectation",
   "source_quality_unknown",
   "schema_change_behavior",
-  "cost_or_license_constraint"
+  "cost_or_license_constraint",
+  "probe_evidence_missing",
+  "ingestion_feasibility_unknown"
+]
+
+# Phase 05 support work includes real evidence collection.
+# It does not design production ingestion pipelines.
+required_support_work = [
+  "phase_04_handoff_review",
+  "source_need_mapping_check",
+  "candidate_source_inventory_check",
+  "source_access_probe",
+  "schema_inspection",
+  "sample_data_or_response_capture",
+  "data_quality_profile_or_sampling",
+  "freshness_and_update_pattern_check",
+  "license_terms_and_usage_limit_review",
+  "security_privacy_classification_check",
+  "source_of_truth_check",
+  "ingestion_feasibility_check",
+  "phase_05_done_gate",
+  "phase_05_to_06_handoff"
+]
+
+optional_support_work = [
+  "api_probe",
+  "file_sample_inspection",
+  "database_sample_query",
+  "schema_snapshot",
+  "duckdb_profile_spike",
+  "python_profile_spike",
+  "des-wise",
+  "des-learning-status-update",
+  "des-explain-artifact",
+  "des-correct-course"
+]
+
+evidence_required = [
+  "phase_04_handoff_evidence",
+  "source_need_mapping_evidence",
+  "candidate_source_evidence",
+  "access_probe_evidence",
+  "schema_inspection_evidence",
+  "sample_data_evidence",
+  "data_quality_profile_evidence",
+  "freshness_update_pattern_evidence",
+  "license_terms_evidence",
+  "security_privacy_evidence",
+  "source_of_truth_evidence",
+  "ingestion_feasibility_evidence"
+]
+
+done_gate_required_checks = [
+  "Data Source Inventory exists",
+  "Phase 04 artifact and handoff are reviewed",
+  "Each P1 product output maps to at least one candidate source or is marked blocked",
+  "Each P1 source maps to product output, requirement, KPI, or source need",
+  "Source access status is documented",
+  "Source owner/contact is documented or marked risk",
+  "Source of truth decisions are resolved or documented",
+  "Schema or sample evidence exists for P1 sources or is waived with reason",
+  "Quality profile or sampling evidence exists for P1 sources or is waived with reason",
+  "Freshness and update pattern are documented",
+  "Security/privacy classification is documented",
+  "Cost, licensing, and usage limits are documented",
+  "Schema change behavior is documented",
+  "Ingestion feasibility is rated",
+  "Phase 05 evidence pack exists or evidence is waived with reason",
+  "Phase 05 handoff to Phase 06 exists",
+  "Workflow status is updated"
 ]
 
 [workflow]

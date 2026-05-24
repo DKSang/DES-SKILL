@@ -1,0 +1,187 @@
+# DES Phase Execution Contract Configuration
+# This config defines recommended output locations, template paths,
+# status values, and required gate checks for phase-level execution.
+#
+# This file is additive. It does not replace existing skill customize.toml files.
+
+[paths]
+planning_artifacts_dir = "_des-output/planning-artifacts"
+phase_support_plans_dir = "_des-output/phase-support-plans"
+phase_evidence_dir = "_des-output/evidence"
+phase_handoffs_dir = "_des-output/phase-handoffs"
+implementation_artifacts_dir = "_des-output/implementation-artifacts"
+workflow_status_file = "_des-output/implementation-artifacts/des-workflow-status.md"
+
+[templates]
+phase_support_plan_template = "templates/phase/phase-support-plan-template.md"
+phase_evidence_pack_template = "templates/phase/phase-evidence-pack-template.md"
+phase_artifact_revision_template = "templates/phase/phase-artifact-revision-template.md"
+phase_done_gate_template = "templates/phase/phase-done-gate-template.md"
+phase_handoff_template = "templates/phase/phase-handoff-template.md"
+phase_execution_index_template = "templates/phase/phase-execution-index-template.md"
+
+[checklists]
+phase_support_plan_checklist = "checklists/phase-support-plan-checklist.md"
+phase_evidence_pack_checklist = "checklists/phase-evidence-pack-checklist.md"
+phase_artifact_revision_checklist = "checklists/phase-artifact-revision-checklist.md"
+phase_done_gate_checklist = "checklists/phase-done-gate-checklist.md"
+phase_handoff_checklist = "checklists/phase-handoff-checklist.md"
+
+[phase_status]
+allowed_values = [
+  "Not Started",
+  "Draft",
+  "Evidence Required",
+  "Evidence Collected",
+  "Validated",
+  "Done",
+  "Blocked",
+  "Skipped"
+]
+
+[support_requirement_status]
+allowed_values = [
+  "Required",
+  "Optional",
+  "Waived with reason",
+  "Not applicable",
+  "Deferred with accepted risk",
+  "Blocked"
+]
+
+[evidence_status]
+allowed_values = [
+  "Not Started",
+  "In Progress",
+  "Collected",
+  "Insufficient",
+  "Accepted",
+  "Rejected",
+  "Waived"
+]
+
+[gate_result]
+allowed_values = [
+  "Pass",
+  "Pass with risks",
+  "Fail",
+  "Blocked"
+]
+
+[handoff_status]
+allowed_values = [
+  "Ready",
+  "Ready with Risks",
+  "Not Ready",
+  "Blocked"
+]
+
+[done_gate]
+required_checks = [
+  "Initial artifact exists",
+  "Upstream inputs reviewed",
+  "Required support work identified",
+  "Required support skills executed or waived with reason",
+  "Evidence exists for critical decisions",
+  "Evidence stored or clearly referenced",
+  "Artifact revised using evidence",
+  "Decisions recorded",
+  "Assumptions documented",
+  "Risks documented",
+  "Open questions documented",
+  "Handoff created",
+  "Workflow status updated"
+]
+
+[handoff]
+required_sections = [
+  "Final Decisions",
+  "Approved Inputs for Next Phase",
+  "Evidence References",
+  "Constraints for Next Phase",
+  "Risks Carried Forward",
+  "Open Questions",
+  "Do Not Assume",
+  "Next Recommended Skill"
+]
+
+[output_naming]
+phase_support_plan = "phase-{{PHASE_NUMBER}}-support-plan.md"
+phase_evidence_pack = "phase-{{PHASE_NUMBER}}-evidence-pack.md"
+phase_artifact_revision = "phase-{{PHASE_NUMBER}}-artifact-revision.md"
+phase_done_gate = "phase-{{PHASE_NUMBER}}-done-gate.md"
+phase_handoff = "phase-{{PHASE_NUMBER}}-to-{{NEXT_PHASE_NUMBER}}-handoff.md"
+phase_execution_index = "phase-{{PHASE_NUMBER}}-execution-index.md"
+
+[workflow_status]
+template_file = "templates/00-workflow-status-template.md"
+runtime_file = "_des-output/implementation-artifacts/des-workflow-status.md"
+update_frequency = [
+  "after_initial_phase_artifact",
+  "after_phase_support_plan",
+  "after_support_skill_execution",
+  "after_evidence_pack_update",
+  "after_artifact_revision",
+  "after_done_gate",
+  "after_handoff",
+  "after_blocker_or_risk_change"
+]
+
+[workflow_status.required_sections]
+project = true
+workflow_mode_decision = true
+phase_artifact_progress = true
+phase_execution_status = true
+phase_support_plan_progress = true
+phase_evidence_pack_progress = true
+phase_artifact_revision_progress = true
+phase_done_gate_progress = true
+phase_handoff_register = true
+phase_dependency_and_readiness_matrix = true
+current_phase_operating_notes = true
+active_blockers = true
+risk_register = true
+key_decisions_log = true
+open_questions = true
+implementation_support_progress = true
+artifact_drift_log = true
+next_session_prompt = true
+
+[workflow_status.phase_execution_status_columns]
+columns = [
+  "Phase",
+  "Artifact Status",
+  "Support Plan",
+  "Evidence Pack",
+  "Artifact Revision",
+  "Done Gate",
+  "Handoff",
+  "Overall Phase Status"
+]
+
+[workflow_status.transition_rules]
+rules = [
+  "Do not mark Overall Phase Status as Done unless Done Gate is Pass or Pass with risks.",
+  "Do not start the next phase unless the previous handoff is Ready or Ready with Risks.",
+  "Do not mark Evidence Pack as Accepted if critical validation evidence is missing without waiver.",
+  "Do not mark Artifact Revision as Revised unless the phase artifact was updated from evidence.",
+  "If evidence contradicts the artifact, create an Artifact Drift Log entry or run des-correct-course.",
+  "If a required support skill is waived, record the waiver reason and accepted risk."
+]
+
+[workflow_status.next_phase_readiness]
+required_previous_done_gate_values = [
+  "Pass",
+  "Pass with risks"
+]
+
+required_previous_handoff_values = [
+  "Ready",
+  "Ready with Risks"
+]
+
+blocked_values = [
+  "Fail",
+  "Blocked",
+  "Not Ready"
+]

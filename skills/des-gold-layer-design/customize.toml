@@ -22,12 +22,37 @@ required_upstream_artifacts = [
   "_des-output/planning-artifacts/10-silver-layer-specification.md"
 ]
 
+# Phase-Orchestrated Support upstream inputs
+required_upstream_handoffs = [
+  "_des-output/phase-handoffs/phase-10-to-11-handoff.md"
+]
+
+recommended_upstream_evidence = [
+  "_des-output/evidence/phase-10/phase-10-evidence-pack.md",
+  "_des-output/implementation-artifacts/phase-10-done-gate.md"
+]
+
+# Phase-Orchestrated Support outputs
+phase_support_plan_file = "_des-output/phase-support-plans/phase-11-support-plan.md"
+phase_evidence_dir = "_des-output/evidence/phase-11"
+phase_evidence_pack_file = "_des-output/evidence/phase-11/phase-11-evidence-pack.md"
+phase_artifact_revision_file = "_des-output/implementation-artifacts/phase-11-artifact-revision.md"
+phase_done_gate_file = "_des-output/implementation-artifacts/phase-11-done-gate.md"
+phase_handoff_file = "_des-output/phase-handoffs/phase-11-to-12-handoff.md"
+
+phase_support_plan_template = "templates/phase/phase-11-support-plan-template.md"
+phase_evidence_pack_template = "templates/phase/phase-11-evidence-pack-template.md"
+phase_handoff_template = "templates/phase/phase-11-handoff-template.md"
+phase_done_gate_checklist = "checklists/phase-11-done-gate-checklist.md"
+
 required_sections = [
   "Gold Layer Summary",
   "Gold Scope",
+  "Gold Non-Scope",
   "Gold Design Principles",
   "Business Question to Gold Mapping",
   "Requirement and KPI to Gold Mapping",
+  "Data Product Output to Gold Mapping",
   "Silver to Gold Mapping",
   "Gold Dataset Inventory",
   "Gold Output Type",
@@ -43,25 +68,118 @@ required_sections = [
   "Contract Expectations",
   "Lineage and Traceability",
   "Performance and Cost Considerations",
+  "Gold Evidence Summary",
   "Risks",
   "Assumptions",
   "Open Questions",
+  "Phase 11 Evidence Summary",
+  "Phase 11 Handoff Notes",
   "Next Skill Recommendation"
 ]
 
 halt_required_decisions = [
   "upstream_silver_context",
+  "phase_10_handoff",
   "gold_dataset_boundary",
   "business_question_mapping",
+  "product_output_mapping",
   "consumer_serving_alignment",
   "metric_definition_alignment",
   "grain_aggregation_rule",
   "modeling_pattern",
+  "filtering_slicing_expectation",
   "history_scd_behavior",
   "freshness_sla",
   "gold_quality_rules",
   "access_security_policy",
-  "lineage_traceability"
+  "contract_expectation",
+  "lineage_traceability",
+  "performance_cost_expectation"
+]
+
+# Phase 11 support work validates product-ready Gold design.
+# It does not design semantic model internals, dashboards, APIs, orchestration implementation, contracts in full, or code.
+required_support_work = [
+  "phase_10_handoff_review",
+  "business_question_to_gold_mapping_check",
+  "kpi_requirement_to_gold_mapping_check",
+  "data_product_output_to_gold_mapping_check",
+  "silver_to_gold_mapping_check",
+  "gold_dataset_boundary_check",
+  "consumer_serving_alignment_check",
+  "grain_aggregation_check",
+  "metric_definition_alignment_check",
+  "modeling_pattern_check",
+  "filtering_slicing_check",
+  "history_scd_behavior_check",
+  "freshness_sla_check",
+  "gold_boundary_quality_check",
+  "access_security_check",
+  "contract_expectation_check",
+  "lineage_traceability_check",
+  "performance_cost_check",
+  "phase_11_done_gate",
+  "phase_11_to_12_handoff"
+]
+
+optional_support_work = [
+  "gold_grain_check",
+  "kpi_reproducibility_check",
+  "aggregation_spike",
+  "dashboard_query_spike",
+  "serving_query_spike",
+  "metric_reconciliation_review",
+  "privacy_security_review",
+  "des-wise",
+  "des-learning-status-update",
+  "des-explain-artifact",
+  "des-correct-course"
+]
+
+evidence_required = [
+  "phase_10_handoff_evidence",
+  "business_question_to_gold_mapping_evidence",
+  "kpi_requirement_to_gold_mapping_evidence",
+  "data_product_output_to_gold_mapping_evidence",
+  "silver_to_gold_mapping_evidence",
+  "gold_dataset_boundary_evidence",
+  "consumer_serving_alignment_evidence",
+  "grain_aggregation_evidence",
+  "metric_definition_alignment_evidence",
+  "modeling_pattern_evidence",
+  "filtering_slicing_evidence",
+  "history_scd_behavior_evidence",
+  "freshness_sla_evidence",
+  "gold_boundary_quality_evidence",
+  "access_security_evidence",
+  "contract_expectation_evidence",
+  "lineage_traceability_evidence",
+  "performance_cost_evidence"
+]
+
+done_gate_required_checks = [
+  "Gold Layer Specification exists",
+  "Phase 10 artifact and handoff are reviewed",
+  "Each P1 business question maps to at least one Gold output or is marked deferred/blocked",
+  "Each P1 data product output maps to at least one Gold dataset or is marked deferred/blocked",
+  "Each P1 KPI or metric used by Gold maps to approved Phase 03 definition",
+  "Each P1 Gold dataset has consumer and serving direction",
+  "Each P1 Gold dataset has Silver inputs",
+  "Each P1 Gold dataset has declared grain",
+  "Each P1 Gold dataset has aggregation rules where applicable",
+  "Gold output type/modeling pattern is documented",
+  "Filtering and slicing expectations are documented",
+  "History/SCD behavior is documented",
+  "Freshness/SLA expectations are documented",
+  "Gold boundary quality rules are documented",
+  "Access/security handling is documented",
+  "Contract expectations are documented",
+  "Lineage and traceability back to Silver/Bronze/source are documented",
+  "Performance and cost considerations are documented",
+  "Artifact does not design semantic model internals, dashboard visuals, API implementation, full data contracts, orchestration implementation, CI/CD files, or code",
+  "Phase 11 evidence pack exists or evidence is waived with reason",
+  "Phase 11 handoff to Phase 12 exists",
+  "Workflow status is updated"
 ]
 
 [workflow]

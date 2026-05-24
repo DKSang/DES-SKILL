@@ -26,9 +26,33 @@ required_upstream_artifacts = [
   "_des-output/planning-artifacts/14-data-quality-specification.md"
 ]
 
+# Phase-Orchestrated Support upstream inputs
+required_upstream_handoffs = [
+  "_des-output/phase-handoffs/phase-14-to-15-handoff.md"
+]
+
+recommended_upstream_evidence = [
+  "_des-output/evidence/phase-14/phase-14-evidence-pack.md",
+  "_des-output/implementation-artifacts/phase-14-done-gate.md"
+]
+
+# Phase-Orchestrated Support outputs
+phase_support_plan_file = "_des-output/phase-support-plans/phase-15-support-plan.md"
+phase_evidence_dir = "_des-output/evidence/phase-15"
+phase_evidence_pack_file = "_des-output/evidence/phase-15/phase-15-evidence-pack.md"
+phase_artifact_revision_file = "_des-output/implementation-artifacts/phase-15-artifact-revision.md"
+phase_done_gate_file = "_des-output/implementation-artifacts/phase-15-done-gate.md"
+phase_handoff_file = "_des-output/phase-handoffs/phase-15-to-16-handoff.md"
+
+phase_support_plan_template = "templates/phase/phase-15-support-plan-template.md"
+phase_evidence_pack_template = "templates/phase/phase-15-evidence-pack-template.md"
+phase_handoff_template = "templates/phase/phase-15-handoff-template.md"
+phase_done_gate_checklist = "checklists/phase-15-done-gate-checklist.md"
+
 required_sections = [
   "Orchestration and Observability Summary",
   "Orchestration Scope",
+  "Orchestration Non-Scope",
   "Orchestration Design Principles",
   "Workflow Inventory",
   "Dependency Graph",
@@ -41,7 +65,7 @@ required_sections = [
   "Retry and Timeout Policy",
   "Failure Handling and Recovery Policy",
   "Backfill and Replay Operations",
-  "Late Data and Correction Operations",
+  "Late Arriving and Corrected Data Handling",
   "Alerting and Notification Policy",
   "Incident and Escalation Policy",
   "Observability Signal Inventory",
@@ -52,17 +76,23 @@ required_sections = [
   "Cost and Usage Monitoring",
   "Run Evidence and Audit Metadata",
   "Operational Ownership",
+  "Operational Evidence Summary",
   "Risks",
   "Assumptions",
   "Open Questions",
+  "Phase 15 Evidence Summary",
+  "Phase 15 Handoff Notes",
   "Next Skill Recommendation"
 ]
 
 halt_required_decisions = [
   "upstream_quality_context",
+  "phase_14_handoff",
   "workflow_scope",
+  "workflow_inventory",
   "schedule_trigger_strategy",
   "dependency_order",
+  "source_readiness_check",
   "quality_gate_behavior",
   "publish_gate_behavior",
   "retry_timeout_policy",
@@ -72,13 +102,120 @@ halt_required_decisions = [
   "alerting_owner",
   "incident_escalation",
   "freshness_sla_monitoring",
-  "run_evidence_audit"
+  "observability_signal",
+  "run_evidence_audit",
+  "operational_ownership"
+]
+
+# Phase 15 support work validates operational design.
+# It does not implement Airflow, Fabric, Databricks, Dagster, Prefect, GitHub Actions, SQL, Python, monitoring dashboards, CI/CD, or infrastructure.
+required_support_work = [
+  "phase_14_handoff_review",
+  "workflow_scope_check",
+  "workflow_inventory_check",
+  "dependency_graph_check",
+  "schedule_trigger_check",
+  "source_readiness_check",
+  "ingestion_orchestration_check",
+  "transformation_orchestration_check",
+  "quality_gate_integration_check",
+  "publish_release_gate_check",
+  "retry_timeout_check",
+  "failure_recovery_check",
+  "backfill_replay_check",
+  "late_data_correction_check",
+  "alerting_notification_check",
+  "incident_escalation_check",
+  "observability_signal_check",
+  "freshness_sla_monitoring_check",
+  "volume_completeness_monitoring_check",
+  "quality_result_monitoring_check",
+  "runtime_performance_monitoring_check",
+  "cost_usage_monitoring_check",
+  "run_evidence_audit_check",
+  "operational_ownership_check",
+  "phase_15_done_gate",
+  "phase_15_to_16_handoff"
+]
+
+optional_support_work = [
+  "pipeline_dag_review",
+  "schedule_feasibility_review",
+  "monitoring_event_review",
+  "alert_routing_review",
+  "runbook_review",
+  "backfill_operation_review",
+  "platform_constraint_review",
+  "des-wise",
+  "des-learning-status-update",
+  "des-explain-artifact",
+  "des-correct-course"
+]
+
+evidence_required = [
+  "phase_14_handoff_evidence",
+  "workflow_scope_evidence",
+  "workflow_inventory_evidence",
+  "dependency_graph_evidence",
+  "schedule_trigger_evidence",
+  "source_readiness_evidence",
+  "ingestion_orchestration_evidence",
+  "transformation_orchestration_evidence",
+  "quality_gate_integration_evidence",
+  "publish_release_gate_evidence",
+  "retry_timeout_evidence",
+  "failure_recovery_evidence",
+  "backfill_replay_evidence",
+  "late_data_correction_evidence",
+  "alerting_notification_evidence",
+  "incident_escalation_evidence",
+  "observability_signal_evidence",
+  "freshness_sla_monitoring_evidence",
+  "volume_completeness_monitoring_evidence",
+  "quality_result_monitoring_evidence",
+  "runtime_performance_monitoring_evidence",
+  "cost_usage_monitoring_evidence",
+  "run_evidence_audit_evidence",
+  "operational_ownership_evidence"
+]
+
+done_gate_required_checks = [
+  "Orchestration and Observability Specification exists",
+  "Phase 14 artifact and handoff are reviewed",
+  "Workflow scope is documented",
+  "Workflow non-scope is documented",
+  "Workflow inventory exists",
+  "Dependency graph is documented",
+  "P1 workflows have schedule or trigger strategy",
+  "P1 workflows have dependency order",
+  "Source readiness checks are documented where needed",
+  "Ingestion orchestration is documented",
+  "Bronze/Silver/Gold transformation orchestration is documented",
+  "Quality gate integration is documented",
+  "Publish and release gates are documented for consumer-facing outputs",
+  "Retry and timeout policy is documented",
+  "Failure handling and recovery policy is documented",
+  "Backfill and replay operations are documented",
+  "Late-arriving and corrected data handling is documented",
+  "Error/quarantine behavior is documented",
+  "Validation and test expectations are documented",
+  "Contract alignment is documented",
+  "Lineage and metadata expectations are documented",
+  "Performance and cost considerations are documented",
+  "Security and privacy handling is documented",
+  "Implementation boundary is explicit",
+  "Artifact does not implement Airflow, Fabric, Databricks, Dagster, Prefect, GitHub Actions, SQL, Python, monitoring dashboards, CI/CD, or infrastructure code",
+  "Phase 15 evidence pack exists or evidence is waived with reason",
+  "Phase 15 handoff to Phase 16 exists",
+  "Workflow status is updated"
 ]
 
 [workflow]
 activation_steps_prepend = []
 activation_steps_append = []
+
 persistent_facts = [
   "file:{project-root}/**/project-context.md",
 ]
+
 on_complete = ""

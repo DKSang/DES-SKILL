@@ -21,9 +21,33 @@ required_upstream_artifacts = [
   "_des-output/planning-artifacts/09-bronze-layer-specification.md"
 ]
 
+# Phase-Orchestrated Support upstream inputs
+required_upstream_handoffs = [
+  "_des-output/phase-handoffs/phase-09-to-10-handoff.md"
+]
+
+recommended_upstream_evidence = [
+  "_des-output/evidence/phase-09/phase-09-evidence-pack.md",
+  "_des-output/implementation-artifacts/phase-09-done-gate.md"
+]
+
+# Phase-Orchestrated Support outputs
+phase_support_plan_file = "_des-output/phase-support-plans/phase-10-support-plan.md"
+phase_evidence_dir = "_des-output/evidence/phase-10"
+phase_evidence_pack_file = "_des-output/evidence/phase-10/phase-10-evidence-pack.md"
+phase_artifact_revision_file = "_des-output/implementation-artifacts/phase-10-artifact-revision.md"
+phase_done_gate_file = "_des-output/implementation-artifacts/phase-10-done-gate.md"
+phase_handoff_file = "_des-output/phase-handoffs/phase-10-to-11-handoff.md"
+
+phase_support_plan_template = "templates/phase/phase-10-support-plan-template.md"
+phase_evidence_pack_template = "templates/phase/phase-10-evidence-pack-template.md"
+phase_handoff_template = "templates/phase/phase-10-handoff-template.md"
+phase_done_gate_checklist = "checklists/phase-10-done-gate-checklist.md"
+
 required_sections = [
   "Silver Layer Summary",
   "Silver Scope",
+  "Silver Non-Scope",
   "Silver Design Principles",
   "Bronze to Silver Mapping",
   "Silver Dataset Inventory",
@@ -44,28 +68,131 @@ required_sections = [
   "Rejected and Quarantined Record Handling",
   "Privacy and Security Handling",
   "Lineage and Traceability",
+  "Metadata Inheritance from Bronze",
   "Refresh and Incremental Behavior",
+  "Silver Evidence Summary",
   "Risks",
   "Assumptions",
   "Open Questions",
+  "Phase 10 Evidence Summary",
+  "Phase 10 Handoff Notes",
   "Next Skill Recommendation"
 ]
 
 halt_required_decisions = [
   "upstream_bronze_context",
+  "phase_09_handoff",
   "silver_dataset_boundary",
   "domain_alignment",
   "grain_identity_rule",
   "key_strategy",
   "source_of_truth_reconciliation",
   "deduplication_survivorship",
+  "conformance_standardization",
   "timezone_temporal_mapping",
   "unit_currency_mapping",
   "code_status_mapping",
   "null_missing_handling",
+  "schema_evolution_handling",
   "silver_quality_rules",
+  "rejected_quarantine_handling",
   "sensitive_data_handling",
-  "lineage_traceability"
+  "lineage_traceability",
+  "metadata_inheritance"
+]
+
+# Phase 10 support work validates trusted/conformed Silver design.
+# It does not design Gold marts, semantic models, dashboards, APIs, orchestration implementation, or code.
+required_support_work = [
+  "phase_09_handoff_review",
+  "bronze_to_silver_mapping_check",
+  "domain_alignment_check",
+  "conceptual_to_logical_mapping_check",
+  "grain_identity_check",
+  "key_strategy_check",
+  "dedup_survivorship_check",
+  "conformance_standardization_check",
+  "data_type_normalization_check",
+  "timezone_temporal_normalization_check",
+  "unit_currency_normalization_check",
+  "code_status_category_mapping_check",
+  "null_missing_handling_check",
+  "schema_evolution_handling_check",
+  "source_of_truth_reconciliation_check",
+  "silver_boundary_quality_check",
+  "rejected_quarantine_handling_check",
+  "privacy_security_handling_check",
+  "lineage_traceability_check",
+  "metadata_inheritance_check",
+  "refresh_incremental_behavior_check",
+  "phase_10_done_gate",
+  "phase_10_to_11_handoff"
+]
+
+optional_support_work = [
+  "silver_transform_spike",
+  "profiling_review",
+  "dq_sampling_review",
+  "standardization_rule_review",
+  "schema_evolution_review",
+  "lineage_metadata_review",
+  "privacy_security_review",
+  "des-wise",
+  "des-learning-status-update",
+  "des-explain-artifact",
+  "des-correct-course"
+]
+
+evidence_required = [
+  "phase_09_handoff_evidence",
+  "bronze_to_silver_mapping_evidence",
+  "domain_alignment_evidence",
+  "conceptual_to_logical_mapping_evidence",
+  "grain_identity_evidence",
+  "key_strategy_evidence",
+  "dedup_survivorship_evidence",
+  "conformance_standardization_evidence",
+  "data_type_normalization_evidence",
+  "timezone_temporal_normalization_evidence",
+  "unit_currency_normalization_evidence",
+  "code_status_category_mapping_evidence",
+  "null_missing_handling_evidence",
+  "schema_evolution_handling_evidence",
+  "source_of_truth_reconciliation_evidence",
+  "silver_boundary_quality_evidence",
+  "rejected_quarantine_handling_evidence",
+  "privacy_security_handling_evidence",
+  "lineage_traceability_evidence",
+  "metadata_inheritance_evidence",
+  "refresh_incremental_behavior_evidence"
+]
+
+done_gate_required_checks = [
+  "Silver Layer Specification exists",
+  "Phase 09 artifact and handoff are reviewed",
+  "Each P1 Bronze dataset maps to a Silver dataset or is marked deferred/blocked",
+  "Each P1 Silver dataset has domain alignment",
+  "Each P1 Silver dataset has grain and identity rule",
+  "Each P1 Silver dataset has key strategy",
+  "Deduplication and survivorship rules are documented where needed",
+  "Conformance and standardization rules are documented",
+  "Data type normalization is documented",
+  "Timezone and temporal normalization are documented where relevant",
+  "Unit and currency normalization are documented where relevant",
+  "Code/status/category mapping is documented where relevant",
+  "Null and missing value handling is documented",
+  "Schema evolution handling is documented",
+  "Source-of-truth and cross-source reconciliation are documented",
+  "Silver boundary data quality rules are documented",
+  "Rejected/quarantined record handling is documented",
+  "Privacy and security handling is documented",
+  "Lineage and traceability back to Bronze/source are documented",
+  "Metadata inheritance from Bronze is documented",
+  "Refresh and incremental behavior is documented",
+  "Artifact does not design Gold marts, final metrics, semantic models, dashboards, APIs, orchestration implementation, CI/CD files, or code",
+  "Phase 10 evidence pack exists or evidence is waived with reason",
+  "Phase 10 handoff to Phase 11 exists",
+  "Workflow status is updated"
 ]
 
 [workflow]

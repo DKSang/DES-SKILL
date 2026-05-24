@@ -124,6 +124,448 @@ des-workflow-status.md
 
 ---
 
+## Phase-by-Phase Validated Delivery
+
+DES-SKILL does not require users to finish all 22 phase artifacts before doing any support work.
+
+The recommended practical workflow is:
+
+```text
+Phase Core Skill
+    ↓
+Initial Phase Artifact
+    ↓
+Phase Support Plan
+    ↓
+Run Required Support Skills
+    ↓
+Evidence Pack
+    ↓
+Revised Phase Artifact
+    ↓
+Phase Done Gate
+    ↓
+Validated Handoff to Next Phase
+```
+
+A phase artifact is not the final deliverable by itself.
+
+It is the execution contract used to activate the support skills needed to complete that phase.
+
+A phase is Done only when:
+
+```text
+artifact exists
++ required support work is identified
++ evidence exists or is waived with reason
++ artifact is revised from evidence
++ handoff exists for the next phase
+```
+
+See:
+
+[docs/phase-execution-contract.md](file:///C:/Users/dksan/Code/data-engineer/data-engineering-superpowers/docs/phase-execution-contract.md)
+
+for the full phase completion contract.
+
+### Phase 07 Reference Implementation
+
+`des-architecture-design` is the seventh reference implementation of the Phase-Orchestrated Support Model.
+
+It now supports:
+
+```text
+Architecture Decision Record
+→ Phase 07 Support Plan
+→ Architecture Option / Feasibility / Cost / Security / Reversibility Evidence
+→ Phase 07 Evidence Pack
+→ Artifact Revision
+→ Done Gate
+→ Phase 07 to Phase 08 Handoff
+```
+
+This means Phase 07 is not Done just because `07-architecture-decision-record.md` exists.
+
+Phase 07 is Done when its Done Gate passes and its handoff to `des-ingestion-design` is ready.
+
+Phase 07 may decide architecture direction, platform strategy, storage/compute direction, environment strategy, layer strategy, serving strategy, observability, security, governance, and reversibility.
+It must not design detailed ingestion pipelines, physical schemas, transformations, dashboards, APIs, CI/CD files, or code.
+
+### Phase 08 Reference Implementation
+
+`des-ingestion-design` is the eighth reference implementation of the Phase-Orchestrated Support Model.
+
+It now supports:
+
+```text
+Ingestion Specification
+→ Phase 08 Support Plan
+→ Ingestion Pattern / Idempotency / Replay / Schema Drift / Security / Observability Evidence
+→ Phase 08 Evidence Pack
+→ Artifact Revision
+→ Done Gate
+→ Phase 08 to Phase 09 Handoff
+```
+
+This means Phase 08 is not Done just because `08-ingestion-specification.md` exists.
+
+Phase 08 is Done when its Done Gate passes and its handoff to `des-bronze-layer-design` is ready.
+
+Phase 08 may define source-specific ingestion patterns, checkpointing, idempotency, replay/backfill, schema drift handling, error/quarantine, security/credential handling, landing expectations, and ingestion monitoring expectations.
+It must not design detailed Bronze/Silver/Gold schemas, transformations, dashboards, APIs, full orchestration workflows, CI/CD files, or implementation code.
+
+### Phase 09 Reference Implementation
+
+`des-bronze-layer-design` is the ninth reference implementation of the Phase-Orchestrated Support Model.
+
+It now supports:
+
+```text
+Bronze Layer Specification
+→ Phase 09 Support Plan
+→ Raw Preservation / Metadata / Schema Drift / Replay / Quarantine / Access Evidence
+→ Phase 09 Evidence Pack
+→ Artifact Revision
+→ Done Gate
+→ Phase 09 to Phase 10 Handoff
+```
+
+This means Phase 09 is not Done just because `09-bronze-layer-specification.md` exists.
+
+Phase 09 is Done when its Done Gate passes and its handoff to `des-silver-layer-design` is ready.
+
+Phase 09 may define Bronze dataset boundaries, raw preservation, storage format, file/table organization, partitioning, metadata columns, schema drift, replay, quarantine, retention, access, and traceability.
+It must not design Silver conformance, Gold marts, semantic models, dashboards, APIs, transformations, orchestration implementation, CI/CD files, or code.
+
+### Phase 10 Reference Implementation
+
+`des-silver-layer-design` is the tenth reference implementation of the Phase-Orchestrated Support Model.
+
+It now supports:
+
+```text
+Silver Layer Specification
+→ Phase 10 Support Plan
+→ Grain / Identity / Key / Conformance / DQ / Lineage Evidence
+→ Phase 10 Evidence Pack
+→ Artifact Revision
+→ Done Gate
+→ Phase 10 to Phase 11 Handoff
+```
+
+This means Phase 10 is not Done just because `10-silver-layer-specification.md` exists.
+
+Phase 10 is Done when its Done Gate passes and its handoff to `des-gold-layer-design` is ready.
+
+Phase 10 may define Silver datasets, grain, identity, keys, deduplication, survivorship, conformance, normalization, DQ rules, rejected record handling, privacy handling, lineage, metadata inheritance, and refresh behavior.
+It must not design Gold marts, final metrics, semantic models, dashboards, APIs, orchestration implementation, CI/CD files, or code.
+
+### Phase 11 Reference Implementation
+
+`des-gold-layer-design` is the eleventh reference implementation of the Phase-Orchestrated Support Model.
+
+It now supports:
+
+```text
+Gold Layer Specification
+→ Phase 11 Support Plan
+→ Business Question / KPI / Grain / Aggregation / Serving / Contract Evidence
+→ Phase 11 Evidence Pack
+→ Artifact Revision
+→ Done Gate
+→ Phase 11 to Phase 12 Handoff
+```
+
+This means Phase 11 is not Done just because `11-gold-layer-specification.md` exists.
+
+Phase 11 is Done when its Done Gate passes and its handoff to `des-data-contracts` is ready.
+
+Phase 11 may define Gold datasets, marts, metric-ready datasets, output types, grain, aggregation, modeling pattern, filtering/slicing, history behavior, freshness/SLA, quality rules, access/security, contract expectation, lineage, and performance/cost considerations.
+It must not design semantic model internals, dashboard visuals, API implementation, full data contracts, orchestration implementation, CI/CD files, or code.
+
+### Phase 12 Reference Implementation
+
+`des-data-contracts` is the twelfth reference implementation of the Phase-Orchestrated Support Model.
+
+It now supports:
+
+```text
+Data Contract Specification
+→ Phase 12 Support Plan
+→ Producer / Consumer / Schema / Grain / SLA / DQ / Versioning / Incident Evidence
+→ Phase 12 Evidence Pack
+→ Artifact Revision
+→ Done Gate
+→ Phase 12 to Phase 13 Handoff
+```
+
+This means Phase 12 is not Done just because `12-data-contract-specification.md` exists.
+
+Phase 12 is Done when its Done Gate passes and its handoff to `des-transformation-design` is ready.
+
+Phase 12 may define contract scope, inventory, producer/consumer/owner, contract level, dataset identity, business meaning, grain, schema, field expectations, KPI expectations, SLA, quality, volume, access, lineage, versioning, change, deprecation, incident, validation, and approval expectations.
+It must not implement tests, transformations, dashboards, APIs, orchestration, CI/CD files, or code.
+
+### Phase 13 Reference Implementation
+
+`des-transformation-design` is the thirteenth reference implementation of the Phase-Orchestrated Support Model.
+
+It now supports:
+
+```text
+Transformation Specification
+→ Phase 13 Support Plan
+→ Mapping / Rule / DAG / Incremental / Validation / Contract-Alignment Evidence
+→ Phase 13 Evidence Pack
+→ Artifact Revision
+→ Done Gate
+→ Phase 13 to Phase 14 Handoff
+```
+
+This means Phase 13 is not Done just because `13-transformation-specification.md` exists.
+
+Phase 13 is Done when its Done Gate passes and its handoff to `des-data-quality` is ready.
+
+Phase 13 may define transformation inventory, mappings, rules, dependencies, grain, incremental behavior, replay, error handling, validation expectations, contract alignment, lineage, performance, security, and implementation boundaries.
+It must not implement SQL, Python, dbt, Spark, notebooks, orchestration, tests, CI/CD files, dashboards, APIs, or code.
+
+### Phase 14 Reference Implementation
+
+`des-data-quality` is the fourteenth reference implementation of the Phase-Orchestrated Support Model.
+
+It now supports:
+
+```text
+Data Quality Specification
+→ Phase 14 Support Plan
+→ Rule / Threshold / Severity / Gate / Owner / Evidence Validation
+→ Phase 14 Evidence Pack
+→ Artifact Revision
+→ Done Gate
+→ Phase 14 to Phase 15 Handoff
+```
+
+This means Phase 14 is not Done just because `14-data-quality-specification.md` exists.
+
+Phase 14 is Done when its Done Gate passes and its handoff to `des-orchestration-observability` is ready.
+
+Phase 14 may define quality dimensions, rules, thresholds, severity, gates, owners, evidence, reporting, monitoring expectations, and release/CI/CD gate candidates.
+It must not implement SQL, Python, dbt, Great Expectations, Spark, orchestration, monitoring, CI/CD files, dashboards, APIs, or code.
+
+### Phase 15 Reference Implementation
+
+`des-orchestration-observability` is the fifteenth reference implementation of the Phase-Orchestrated Support Model.
+
+It now supports:
+
+```text
+Orchestration and Observability Specification
+→ Phase 15 Support Plan
+→ Workflow / Dependency / Gate / Retry / Alert / SLA / Evidence Validation
+→ Phase 15 Evidence Pack
+→ Artifact Revision
+→ Done Gate
+→ Phase 15 to Phase 16 Handoff
+```
+
+This means Phase 15 is not Done just because `15-orchestration-observability-specification.md` exists.
+
+Phase 15 is Done when its Done Gate passes and its handoff to `des-semantic-model-design` is ready.
+
+Phase 15 may define workflow inventory, triggers, schedules, dependencies, quality gate placement, publish gates, retry, recovery, backfill/replay, alerting, incident policy, observability signals, SLA monitoring, run evidence, and operational ownership.
+It must not implement Airflow, Fabric, Databricks, Dagster, Prefect, GitHub Actions, SQL, Python, monitoring dashboards, CI/CD workflows, or infrastructure code.
+
+### Phase 16 Reference Implementation
+
+`des-semantic-model-design` is the sixteenth reference implementation of the Phase-Orchestrated Support Model.
+
+It now supports:
+
+```text
+Semantic Model Specification
+→ Phase 16 Support Plan
+→ Metric / Dimension / Relationship / Security / Trust / Freshness Evidence
+→ Phase 16 Evidence Pack
+→ Artifact Revision
+→ Done Gate
+→ Phase 16 to Phase 17 Handoff
+```
+
+This means Phase 16 is not Done just because `16-semantic-model-specification.md` exists.
+
+Phase 16 is Done when its Done Gate passes and its handoff to `des-serving-layer-design` is ready.
+
+Phase 16 may define semantic models, entities, measures, KPIs, dimensions, hierarchies, relationships, aggregation behavior, filters, time intelligence, ownership, naming, security, trust status, freshness/quality display, lineage, and semantic testing expectations.
+It must not implement DAX, SQL, LookML, Cube, dbt semantic model, Power BI model, dashboards, APIs, CI/CD, deployment, or code.
+
+### Phase 17 Reference Implementation
+
+`des-serving-layer-design` is the seventeenth reference implementation of the Phase-Orchestrated Support Model.
+
+It now supports:
+
+```text
+Serving Layer Specification
+→ Phase 17 Support Plan
+→ Consumer / Channel / Access / Freshness / Performance / Feedback Evidence
+→ Phase 17 Evidence Pack
+→ Artifact Revision
+→ Done Gate
+→ Phase 17 to Phase 18 Handoff
+```
+
+This means Phase 17 is not Done just because `17-serving-layer-specification.md` exists.
+
+Phase 17 is Done when its Done Gate passes and its handoff to `des-lineage-metadata-design` is ready.
+
+Phase 17 may define consumer/persona mapping, serving channel inventory, serving patterns, BI/API/ML/export/reverse ETL/data sharing/agent expectations, access controls, freshness/quality visibility, latency, caching/materialization expectations, feedback loops, usage monitoring, and support ownership.
+It must not implement dashboards, APIs, apps, ML jobs, reverse ETL jobs, exports, agents, caching, CI/CD, deployments, or code.
+
+### Phase 18 Reference Implementation
+
+`des-lineage-metadata-design` is the eighteenth reference implementation of the Phase-Orchestrated Support Model.
+
+It now supports:
+
+```text
+Lineage and Metadata Specification
+→ Phase 18 Support Plan
+→ Asset / Catalog / Lineage / Ownership / Trust / Audit Evidence
+→ Phase 18 Evidence Pack
+→ Artifact Revision
+→ Done Gate
+→ Phase 18 to Phase 19 Handoff
+```
+
+This means Phase 18 is not Done just because `18-lineage-metadata-specification.md` exists.
+
+Phase 18 is Done when its Done Gate passes and its handoff to `des-governance-security-design` is ready.
+
+Phase 18 may define business, technical, operational, and reference metadata; catalog fields; field/schema metadata; metric/KPI metadata; contract metadata; dataset lineage; transformation lineage; column-level lineage expectations; semantic/serving lineage; quality/trust metadata; ownership metadata; usage metadata; audit metadata; capture responsibilities; and maintenance policy.
+It must not implement catalog tools, scanners, crawlers, OpenLineage, Purview, DataHub, Collibra, dbt docs, metadata pipelines, CI/CD, or code.
+
+### Phase 19 Reference Implementation
+
+`des-governance-security-design` is the nineteenth reference implementation of the Phase-Orchestrated Support Model.
+
+It now supports:
+
+```text
+Governance and Security Specification
+→ Phase 19 Support Plan
+→ Classification / Access / Privacy / Retention / Sharing / Audit / Exception Evidence
+→ Phase 19 Evidence Pack
+→ Artifact Revision
+→ Done Gate
+→ Phase 19 to Phase 20 Handoff
+```
+
+This means Phase 19 is not Done just because `19-governance-security-specification.md` exists.
+
+Phase 19 is Done when its Done Gate passes and its handoff to `des-cost-and-performance-optimization` is ready.
+
+Phase 19 may define governance policy, data classification, sensitivity handling, access control, RLS/CLS, masking/tokenization/anonymization, encryption expectations, secret handling, privacy, retention, deletion, sharing, API/AI access, reverse ETL governance, audit, approval, ownership, compliance, and incident response.
+It must not implement IAM, ACLs, RLS/CLS, masking logic, encryption config, governance tooling, policy engines, CI/CD, infrastructure, or code.
+
+### Phase 20 Reference Implementation
+
+`des-cost-and-performance-optimization` is the twentieth reference implementation of the Phase-Orchestrated Support Model.
+
+It now supports:
+
+```text
+Cost and Performance Optimization Specification
+→ Phase 20 Support Plan
+→ Workload / Baseline / Cost Driver / SLO / Trade-Off Evidence
+→ Phase 20 Evidence Pack
+→ Artifact Revision
+→ Done Gate
+→ Phase 20 to Phase 21 Handoff
+```
+
+This means Phase 20 is not Done just because `20-cost-performance-optimization-specification.md` exists.
+
+Phase 20 is Done when its Done Gate passes and its handoff to `des-cicd-and-testing` is ready.
+
+Phase 20 may define workload priorities, cost/performance drivers, baselines, storage/compute/ingestion/transformation/query/serving optimization strategies, caching/materialization rules, partitioning/clustering/file-size expectations, incremental recomputation, storage tiering, cost monitoring, SLOs, scalability planning, and trade-offs.
+It must not rewrite SQL/Python/dbt code, tune indexes, resize clusters, configure autoscaling, deploy caching, change infrastructure, implement cost controls, or write implementation code.
+
+### Phase 21 Reference Implementation
+
+`des-cicd-and-testing` is the twenty-first reference implementation of the Phase-Orchestrated Support Model.
+
+It now supports:
+
+```text
+CI/CD and Testing Specification
+→ Phase 21 Support Plan
+→ Repository / Test / Gate / Environment / Rollback / Release Evidence
+→ Phase 21 Evidence Pack
+→ Artifact Revision
+→ Done Gate
+→ Phase 21 to Phase 22 Handoff
+```
+
+This means Phase 21 is not Done just because `21-cicd-testing-specification.md` exists.
+
+Phase 21 is Done when its Done Gate passes and its handoff to `des-project-evaluation` is ready.
+
+Phase 21 may define repository/artifact inventory, branch strategy, environment promotion, test inventory, contract/DQ/transformation/orchestration/semantic/serving/security/cost-performance test gates, deployment gates, approval workflow, rollback/recovery, release evidence, test data strategy, secrets/config policy, and breaking change policy.
+It must not implement GitHub Actions, Azure DevOps pipelines, Fabric deployment pipelines, dbt tests, pytest, SQL/Spark/notebook tests, IaC, infrastructure, deployment scripts, or release execution code.
+
+### Phase 22 Reference Implementation
+
+`des-project-evaluation` is the twenty-second and final reference implementation of the Phase-Orchestrated Support Model.
+
+It now supports:
+
+```text
+Project Evaluation Report
+→ Phase 22 Support Plan
+→ Business / Readiness / Release / Adoption / Risk Evidence
+→ Phase 22 Evidence Pack
+→ Artifact Revision
+→ Done Gate
+→ Final Closeout
+→ Workflow Complete or Next Iteration
+```
+
+This means Phase 22 is not Done just because `22-project-evaluation-report.md` exists.
+
+Phase 22 is Done when its Done Gate passes and final closeout is documented.
+
+Phase 22 may evaluate business value, technical readiness, data trust, governance posture, cost/performance readiness, CI/CD readiness, release readiness, adoption, risks, lessons learned, and next priorities.
+It must not claim production readiness without evidence, hide missing evidence, implement fixes, deploy releases, or rewrite upstream phase artifacts.
+
+### Workflow Status v2
+
+DES-SKILL tracks phase completion through the workflow status file:
+
+```text
+_des-output/implementation-artifacts/des-workflow-status.md
+```
+
+The status file tracks not only phase artifacts, but also:
+
+```text
+support plan
+evidence pack
+artifact revision
+done gate
+handoff
+overall phase status
+```
+
+A phase should be marked `Done` only when its Done Gate passes and its handoff is ready for the next phase.
+
+Template:
+
+```text
+templates/00-workflow-status-template.md
+```
+
+---
+
 ## 4. Khi nào dùng DES-SKILL?
 
 Dùng DES-SKILL khi bạn muốn:

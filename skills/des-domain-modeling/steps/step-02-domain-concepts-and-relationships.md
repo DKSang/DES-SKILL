@@ -1,8 +1,12 @@
-# Step 02 — Domain Concepts and Relationships
+# Step 02 — Domain Concepts, Ontology-Lite, and Relationships
 
 ## Goal
 
-Define the conceptual domain model: glossary, entities, events, value objects, relationships, grains, identity rules, source alignment, domain rules, lifecycle states, and temporal concepts.
+Define the conceptual domain model: glossary, ontology-lite concept map, entities, events, value objects, relationships, grains, identity rules, source alignment, source caveats, domain rules, lifecycle states, and temporal concepts.
+
+This step prepares the Conceptual Domain Model and identifies which domain decisions require evidence, support work, waiver, or accepted risk.
+
+---
 
 ## Required Inputs
 
@@ -12,27 +16,45 @@ Define the conceptual domain model: glossary, entities, events, value objects, r
 - Requirements and KPI Catalog
 - Data Product Specification
 - Data Source Inventory
+- Phase 05 to Phase 06 handoff, if available
+- Phase 05 do-not-assume list
 - User answers from HALT points
 - Existing glossary, ontology, ERD, data dictionary, source schema, or business definitions if available
+
+---
 
 ## Actions
 
 1. Draft the domain scope.
 2. Build a business glossary of core terms.
-3. Identify core entities.
-4. Identify domain events.
-5. Identify value objects and important attributes at conceptual level.
-6. Define relationships between concepts.
-7. Define conceptual grains.
-8. Define identity and identifier rules.
-9. Map domain concepts to candidate sources.
-10. Map domain concepts to source-of-truth decisions.
-11. Identify terminology conflicts, synonyms, and ambiguous concepts.
-12. Define domain rules.
-13. Define lifecycle/state concepts.
-14. Define temporal concepts.
-15. Map domain concepts to downstream use cases, requirements, and product outputs.
-16. Use HALT checkpoints for decisions the agent cannot safely infer.
+3. Build an ontology-lite concept map:
+   - concept/class candidates;
+   - relationship candidates;
+   - controlled vocabulary candidates;
+   - synonym candidates;
+   - concept boundaries.
+4. Identify core entities.
+5. Identify domain events.
+6. Identify value objects and important attributes at conceptual level.
+7. Define relationships between concepts.
+8. Define conceptual grains.
+9. Define identity and identifier rules.
+10. Map domain concepts to candidate sources.
+11. Map domain concepts to source-of-truth decisions.
+12. Carry Phase 05 source caveats into the model.
+13. Identify terminology conflicts, synonyms, and ambiguous concepts.
+14. Define domain rules.
+15. Define lifecycle/state concepts.
+16. Define temporal concepts.
+17. Map domain concepts to downstream use cases, requirements, KPIs, and product outputs.
+18. Map each critical domain decision to evidence.
+19. Mark unsupported domain claims as `Ambiguous`, `Open`, `Risk`, `Deferred`, `Unknown`, or `Waived with reason`.
+20. Identify required Phase 06 support work.
+21. Use HALT checkpoints for decisions the agent cannot safely infer.
+22. Prepare draft content for the Conceptual Domain Model.
+23. Prepare content for the Phase 06 Support Plan.
+
+---
 
 ## Hints
 
@@ -43,10 +65,14 @@ Define the conceptual domain model: glossary, entities, events, value objects, r
 - Conceptual grain should answer “one instance of this concept represents what?”
 - Identity rules should answer “how do we know this is the same real-world thing?”
 - Source alignment should record where evidence comes from, not lock implementation.
+- Source caveats should remain visible for architecture, ingestion, Silver/Gold, semantic, quality, and governance phases.
 - Do not decide physical key strategy here.
 - Do not design physical schemas or database tables here.
 - Do not design star schema, Data Vault, normalized model, or wide table here.
 - Keep unresolved ambiguity visible instead of forcing a model.
+- Ontology-lite means glossary/classes/relationships/controlled vocabularies, not mandatory RDF/OWL implementation.
+
+---
 
 ## Concept Types
 
@@ -65,19 +91,22 @@ Classify each concept as one or more:
 | Relationship | Business association between concepts |
 | State / lifecycle | Status or stage that changes over time |
 
-## Core Entity Definition Standard
+---
 
-Each core entity must have:
+## Ontology-Lite Modeling Standard
+
+Each ontology-lite concept should have:
 
 | Field | Required? |
 | --- | --- |
-| Name | Required |
+| Concept name | Required |
+| Concept type | Required |
 | Business definition | Required |
-| Conceptual grain | Required |
-| Identity rule | Required for P1 |
+| Synonyms / aliases | Recommended |
+| Related concepts | Recommended |
+| Controlled vocabulary values | Required when statuses/categories/codes matter |
 | Source alignment | Required for P1 |
-| Source-of-truth status | Required for P1 |
-| Downstream use case mapping | Required for P1 |
+| Source caveats | Required when Phase 05 risk exists |
 | Owner/steward | Recommended |
 | Status | Required |
 
@@ -86,6 +115,74 @@ Allowed statuses:
 ```text
 Draft | Approved | Ambiguous | Deferred
 ```
+
+---
+
+## Core Entity Definition Standard
+
+Each core entity must have:
+
+| Field                       | Required?                          |
+| --------------------------- | ---------------------------------- |
+| Name                        | Required                           |
+| Business definition         | Required                           |
+| Conceptual grain            | Required                           |
+| Identity rule               | Required for P1                    |
+| Source alignment            | Required for P1                    |
+| Source-of-truth status      | Required for P1                    |
+| Downstream use case mapping | Required for P1                    |
+| Source caveats              | Required when Phase 05 risk exists |
+| Owner/steward               | Recommended                        |
+| Status                      | Required                           |
+
+Allowed statuses:
+
+```text
+Draft | Approved | Ambiguous | Deferred
+```
+
+---
+
+## Domain Evidence Mapping
+
+For every P1 concept, capture the evidence status.
+
+| Domain Field        | Evidence Status                        | Allowed Output               |
+| ------------------- | -------------------------------------- | ---------------------------- |
+| Business definition | Confirmed / Assumed / Missing / Waived | Approved / Draft / Ambiguous |
+| Source alignment    | Confirmed / Partial / Missing / Waived | Approved / Risk / Open       |
+| Source caveat       | Confirmed / None / Missing / Waived    | Carry forward / None / Risk  |
+| Identity rule       | Confirmed / Assumed / Missing / Waived | Approved / Draft / Ambiguous |
+| Conceptual grain    | Confirmed / Assumed / Missing / Waived | Approved / Draft / Ambiguous |
+| Relationship        | Confirmed / Assumed / Missing / Waived | Approved / Draft / Ambiguous |
+| Source of truth     | Approved / Draft / Conflict / Missing  | Approved / Risk / Open       |
+| Temporal meaning    | Confirmed / Assumed / Missing / Waived | Approved / Draft / Ambiguous |
+| Lifecycle/state     | Confirmed / Assumed / Missing / Waived | Approved / Draft / Ambiguous |
+
+---
+
+## Phase 06 Required Support Work
+
+Based on the domain model above, prepare a support plan using these categories:
+
+| Support Work                    | Required When                             | Output           |
+| ------------------------------- | ----------------------------------------- | ---------------- |
+| Phase 05 Handoff Review         | Always                                    | Evidence pack    |
+| Business Glossary Check         | Always                                    | Evidence pack    |
+| Source-to-Concept Mapping Check | Always                                    | Evidence pack    |
+| Ontology-Lite Boundary Check    | Ontology-lite concept map exists          | Evidence pack    |
+| Core Entity Identity Check      | P1 entities exist                         | Evidence pack    |
+| Conceptual Grain Check          | P1 entities/events/metrics exist          | Evidence pack    |
+| Relationship Cardinality Check  | Important relationships exist             | Evidence pack    |
+| Source-of-Truth Mapping Check   | P1 concepts map to sources                | Evidence pack    |
+| Terminology Conflict Check      | Ambiguous terms/synonyms exist            | Evidence pack    |
+| Temporal Concept Check          | Events, snapshots, or time concepts exist | Evidence pack    |
+| Lifecycle State Check           | Status/state concepts exist               | Evidence pack    |
+| Source Caveat Propagation Check | Phase 05 source risks exist               | Evidence pack    |
+| Done Gate                       | Always before marking Done                | Done Gate result |
+| Handoff to Phase 07             | Always before Phase 07                    | Handoff file     |
+
+---
 
 ## Decision Area 1 - Business Glossary and Terminology
 
@@ -106,6 +203,7 @@ Ambiguous terms create inconsistent metrics, schemas, contracts, dashboards, and
 * “Revenue” may mean gross, net, recognized, collected, or invoiced.
 * “Active” may mean logged in, purchased, subscribed, or not churned.
 * “Location” may mean address, region, coordinate, branch, site, or market.
+* “Region” may mean administrative region, sales territory, province, district, climate zone, or service area.
 
 #### Decision needed
 
@@ -123,7 +221,43 @@ E. Escalate to owner/steward
 
 Choose A/B/C/D/E and provide the definition if known.
 
-## Decision Area 2 - Core Entity Identity Rules
+---
+
+## Decision Area 2 - Ontology Boundary
+
+Stop if the ontology-lite boundary is unclear.
+
+### HALT — Ontology Boundary
+
+#### Why this matters
+
+If the ontology is too broad, it becomes academic and hard to implement.
+If it is too narrow, downstream semantic and Gold design may miss key concepts.
+
+#### Decision needed
+
+What should the ontology-lite layer include?
+
+#### Options
+
+A. Glossary only
+B. Glossary + core entities + relationships
+C. Glossary + entities + events + relationships + controlled vocabularies
+D. Product-bounded ontology-lite for first release only
+E. Defer ontology-lite and keep conceptual model only
+
+#### Recommendation
+
+Choose C for balanced DES usage.
+Choose D for MVP delivery.
+
+#### Required response
+
+Choose A/B/C/D/E.
+
+---
+
+## Decision Area 3 - Core Entity Identity Rules
 
 Establish the rules for identifying unique instances of core entities across source systems.
 
@@ -151,7 +285,9 @@ E. Identity unknown — keep entity as Ambiguous
 
 Choose A/B/C/D/E.
 
-## Decision Area 3 - Conceptual Grain Definition
+---
+
+## Decision Area 4 - Conceptual Grain Definition
 
 Formally define the grain of entities and metrics to prevent downstream fan-out issues.
 
@@ -180,7 +316,9 @@ F. Custom grain
 
 Choose A/B/C/D/E/F and describe the grain.
 
-## Decision Area 4 - Source of Truth Mapping Strategy
+---
+
+## Decision Area 5 - Source of Truth Mapping Strategy
 
 Establish which source system owns or acts as the source of truth for each core business concept.
 
@@ -208,7 +346,9 @@ E. Defer concept from first release
 
 Choose A/B/C/D/E.
 
-## Decision Area 5 - Concept Association and Cardinality
+---
+
+## Decision Area 6 - Concept Association and Cardinality
 
 Identify and define relationships between business concepts, avoiding physical key design.
 
@@ -237,7 +377,9 @@ F. Unknown — keep as open question
 
 Choose A/B/C/D/E/F.
 
-## Decision Area 6 - Domain Event Definition
+---
+
+## Decision Area 7 - Domain Event Definition
 
 Clarify domain events including subjects, timing, and mutability.
 
@@ -273,7 +415,9 @@ D. Defer event from first release
 
 Choose A/B/C/D.
 
-## Decision Area 7 - Temporal Definitions
+---
+
+## Decision Area 8 - Temporal Definitions
 
 Establish canonical definitions for key dates, timestamps, and business effective intervals.
 
@@ -308,7 +452,9 @@ G. Unknown — keep as risk
 
 Choose A/B/C/D/E/F/G.
 
-## Decision Area 8 - Entity State and Lifecycle States
+---
+
+## Decision Area 9 - Entity State and Lifecycle States
 
 Identify critical statuses or stages that describe how a business concept evolves.
 
@@ -336,18 +482,48 @@ E. Unknown — keep as open question
 
 Choose A/B/C/D/E.
 
+---
+
+## HALT — Source Concept Conflict
+
+Stop if source schema/sample evidence conflicts with business terminology or requirements.
+
+### Trigger examples
+
+* Source field name suggests one meaning but business glossary uses another.
+* Same concept appears under different names across sources.
+* Same source field is overloaded for multiple meanings.
+* Source uses codes without controlled vocabulary.
+* Business-needed concept has no source evidence.
+
+### Options
+
+A. Keep business concept and mark source mapping caveat
+B. Rename/split concept based on evidence
+C. Keep source-specific concepts
+D. Route back to Phase 05 source assessment
+E. Escalate to owner/steward
+
+### Required response
+
+Choose A/B/C/D/E.
+
+---
+
 ## Completion Criteria
 
 This step is complete when:
 
 * domain scope is drafted;
 * glossary terms are drafted;
-* P1 entities have definitions, grain, identity rule, source alignment, and status;
+* ontology-lite concept map is drafted or explicitly waived;
+* P1 entities have definitions, grain, identity rule, source alignment, source caveats, and status;
 * P1 events have definitions and temporal meaning;
 * important relationships are documented;
 * source-of-truth mappings are recorded or marked open;
 * domain rules and lifecycle states are captured where relevant;
 * downstream use-case mapping exists;
+* source caveats from Phase 05 are carried forward;
 * unresolved ambiguities are explicit;
 * draft conceptual model content is ready.
 
