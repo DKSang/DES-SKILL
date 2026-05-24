@@ -5,7 +5,10 @@ primary_stack = "dbt"
 
 [paths]
 steps_dir = "steps"
+<<<<<<< HEAD
 references_dir = "references"
+=======
+>>>>>>> 903800048bdd5063eed38441a6e571febb34ded2
 checklists_dir = "checklists"
 templates_dir = "templates"
 examples_dir = "examples"
@@ -19,6 +22,7 @@ evidence_pack = "_des-output/evidence/phase-XX/dbt-evidence-pack.md"
 
 [activation]
 phase_support = ["10", "11", "12", "13", "14", "15", "16"]
+<<<<<<< HEAD
 keywords = [
   "dbt",
   "dbt-core",
@@ -34,3 +38,6 @@ keywords = [
   "semantic layer",
   "mesh"
 ]
+=======
+keywords = ["dbt", "dbt-core", "dbt cloud", "dbt-duckdb", "dbt-fabric", "model", "source.yml", "schema.yml", "unit test", "semantic layer", "mesh"]
+>>>>>>> 903800048bdd5063eed38441a6e571febb34ded2
