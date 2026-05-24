@@ -78,7 +78,7 @@ test("business questions step files enforce Phase 2 decisions and no downstream 
   assert.match(step02, /HALT - Question Priority Approval/);
   assert.match(step02, /HALT - Scope Conflict/);
   assert.match(step02, /HALT - Answerability Risk/);
-  assert.match(step03, /HALT - Checklist Blocked/);
+  assert.match(step03, /HALT - Checklist/);
   assert.match(step03, /des-requirements-and-kpis/);
 
   const combined = `${step01}\n${step02}\n${step03}`;

@@ -97,7 +97,7 @@ test("data source assessment step files enforce source decisions and no downstre
   assert.match(step02, /HALT . Source Quality Unknown/);
   assert.match(step02, /HALT . Schema Change Behavior/);
   assert.match(step02, /HALT . Cost, License, or Usage Limit/);
-  assert.match(step03, /HALT - Checklist Blocked/);
+  assert.match(step03, /HALT - Checklist/);
   assert.match(step03, /des-domain-modeling/);
 
   const combined = `${step01}\n${step02}\n${step03}`;

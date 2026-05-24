@@ -257,6 +257,20 @@ If evidence is missing, mark the item as `Proposed`, `Draft`, `Open`, `Risk`, `D
 
 ---
 
+## HALT Policy
+
+This skill must stop when a required decision cannot be safely inferred.
+
+Stop especially when:
+
+* upstream domain or source realities are missing;
+* platform constraints are unknown;
+* the user asks for implementation before architecture decisions are made.
+
+Detailed HALT checkpoints are defined in steps/.
+
+---
+
 ## Guardrails
 
 The agent must not:

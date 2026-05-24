@@ -9,8 +9,8 @@ const repoRoot = path.resolve(__dirname, "..");
 const cliPath = path.join(repoRoot, "bin", "des-skill.js");
 const packageJson = require("../package.json");
 
-test("package version is 0.2.2", () => {
-  assert.equal(packageJson.version, "0.2.2");
+test("package version is 0.3.0", () => {
+  assert.equal(packageJson.version, "0.3.0");
 });
 
 test("prints help from the top-level help flag", () => {

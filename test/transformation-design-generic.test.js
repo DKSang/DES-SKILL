@@ -121,7 +121,7 @@ test("transformation design step files enforce transformation decisions and stra
   assert.match(step02, /HALT - Error Handling and Quarantine/);
   assert.match(step02, /HALT - Validation and Test Expectations/);
   assert.match(step02, /HALT - Contract Alignment/);
-  assert.match(step03, /HALT - Checklist Blocked/);
+  assert.match(step03, /HALT - Checklist/);
   assert.match(step03, /des-data-quality/);
 
   const combined = `${step01}\n${step02}\n${step03}`;

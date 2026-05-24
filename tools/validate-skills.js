@@ -63,11 +63,20 @@ function validateSkill(skillPath) {
   }
 
   const content = read(skillMdPath);
+  
+  const conflictMarkers = ["<<<<<<<", "=======", ">>>>>>>"];
+  for (const marker of conflictMarkers) {
+    if (content.includes(marker)) {
+      fail(`${skillName} contains unresolved merge conflict marker: ${marker}`);
+    }
+  }
+
   const frontmatter = parseFrontmatter(content);
   const parentDir = path.dirname(skillPath);
-  const isMainSkill = parentDir.endsWith("skills") || parentDir.endsWith("skills-stack");
+  const isMainSkill = parentDir.endsWith("skills");
+  const isStackSkill = parentDir.endsWith("skills-stack");
 
-  if (isMainSkill) {
+  if (isMainSkill || isStackSkill) {
     if (!frontmatter) {
       fail(`${skillName} is missing YAML frontmatter`);
       return;
@@ -84,8 +93,24 @@ function validateSkill(skillPath) {
     }
   }
 
+  const scaffoldedSkills = [
+    "des-cicd-and-testing",
+    "des-cost-and-performance-optimization",
+    "des-data-quality",
+    "des-governance-security-design",
+    "des-lineage-metadata-design",
+    "des-orchestration-observability",
+    "des-project-evaluation",
+    "des-semantic-model-design",
+    "des-serving-layer-design",
+    "des-transformation-design",
+    "des-governance-and-security"
+  ];
+
   const requiredHeadings = ["## When To Use", "## Purpose"];
-  if (isMainSkill) {
+  const enforceStrict = (isMainSkill && !scaffoldedSkills.includes(skillName)) || isStackSkill;
+
+  if (enforceStrict) {
     requiredHeadings.push("## Quality Checklist");
   }
 
@@ -95,7 +120,7 @@ function validateSkill(skillPath) {
     }
   }
 
-  if (isMainSkill) {
+  if (enforceStrict) {
     // Accept either old or new heading name for mistakes/anti-patterns section
     if (!content.includes("## Common Mistakes To Avoid") && !content.includes("## Anti-Patterns to Avoid")) {
       fail(`${skillName} is missing heading: ## Common Mistakes To Avoid (or ## Anti-Patterns to Avoid)`);
@@ -119,6 +144,11 @@ function validateSkill(skillPath) {
     } else {
       try {
         const tomlContent = read(customizePath);
+        for (const marker of conflictMarkers) {
+          if (tomlContent.includes(marker)) {
+            fail(`${skillName} customize.toml contains unresolved merge conflict marker: ${marker}`);
+          }
+        }
         if (!tomlContent.includes("[workflow]")) {
           fail(`${skillName} customize.toml is missing [workflow] section`);
         }
@@ -272,6 +302,41 @@ function validateRequiredSupportSkills() {
   }
 }
 
+function validateRequiredStackSkills() {
+  const requiredStackSkills = [
+    "des-duckdb-local-engine",
+    "des-dbt-engineering",
+    "des-dlt-ingestion",
+    "des-provero-validation",
+    "des-airflow-orchestration"
+  ];
+
+  for (const skill of requiredStackSkills) {
+    const skillPath = path.join(root, "skills-stack", skill);
+    if (!fs.existsSync(skillPath)) {
+      fail(`Required stack skill is missing: ${skill}`);
+      continue;
+    }
+
+    const requiredPaths = [
+      "SKILL.md",
+      "customize.toml",
+      "steps",
+      "references",
+      "checklists",
+      "templates",
+      "examples"
+    ];
+
+    for (const requiredPath of requiredPaths) {
+      const fullPath = path.join(skillPath, requiredPath);
+      if (!fs.existsSync(fullPath)) {
+        fail(`${skill} is missing ${requiredPath}`);
+      }
+    }
+  }
+}
+
 function validateSupportTemplates() {
   const requiredFiles = [
     "templates/support/des-wise-response-template.md"
@@ -298,6 +363,7 @@ function main() {
   validateLearningFoundation();
   validateRequiredLearningSkills();
   validateRequiredSupportSkills();
+  validateRequiredStackSkills();
   validateSupportTemplates();
 
   if (failures > 0) {

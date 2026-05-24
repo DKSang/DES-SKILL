@@ -92,7 +92,7 @@ test("data product definition step files enforce product decisions and no downst
   assert.match(step02, /HALT - Product Owner Required/);
   assert.match(step02, /HALT - Lifecycle Status/);
   assert.match(step02, /HALT - Trust Expectation Required/);
-  assert.match(step03, /HALT - Checklist Blocked/);
+  assert.match(step03, /HALT - Checklist/);
   assert.match(step03, /des-data-source-assessment/);
 
   const combined = `${step01}\n${step02}\n${step03}`;

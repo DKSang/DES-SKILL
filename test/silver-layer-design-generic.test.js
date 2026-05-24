@@ -113,7 +113,7 @@ test("silver layer design step files enforce conformance decisions and strategic
   assert.match(step02, /HALT - Silver Boundary Data Quality Rules/);
   assert.match(step02, /HALT - Sensitive Data Handling/);
   assert.match(step02, /HALT - Lineage and Traceability/);
-  assert.match(step03, /HALT - Checklist Blocked/);
+  assert.match(step03, /HALT - Checklist/);
   assert.match(step03, /des-gold-layer-design/);
 
   const combined = `${step01}\n${step02}\n${step03}`;

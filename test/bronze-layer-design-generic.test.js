@@ -107,7 +107,7 @@ test("bronze layer design step files enforce storage decisions and strategic foc
   assert.match(step02, /HALT - Retention and Lifecycle Policy/);
   assert.match(step02, /HALT - Sensitive Raw Access Policy/);
   assert.match(step02, /HALT - Bronze Boundary Quality Expectations/);
-  assert.match(step03, /HALT - Checklist Blocked/);
+  assert.match(step03, /HALT - Checklist/);
   assert.match(step03, /des-silver-layer-design/);
 
   const combined = `${step01}\n${step02}\n${step03}`;

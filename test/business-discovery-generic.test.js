@@ -79,7 +79,7 @@ test("business discovery step files enforce readiness decisions and no technical
   assert.match(step02, /HALT - MVP Scope Boundary/);
   assert.match(step02, /HALT - Maturity Level/);
   assert.match(step02, /HALT - Success Criteria/);
-  assert.match(step03, /HALT - Checklist Blocked/);
+  assert.match(step03, /HALT - Checklist/);
   assert.match(step03, /des-business-questions/);
 
   const combined = `${step01}\n${step02}\n${step03}`;

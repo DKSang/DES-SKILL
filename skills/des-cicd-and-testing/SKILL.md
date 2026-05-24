@@ -231,6 +231,19 @@ The purpose is not CI/CD implementation. The purpose is to make release safety e
 
 ---
 
+## HALT Policy
+
+This skill must stop when a required decision cannot be safely inferred.
+
+Stop especially when:
+
+* upstream contexts are unknown;
+* required inputs are missing.
+
+Detailed HALT checkpoints are defined in steps/.
+
+---
+
 ## Guardrails
 
 The agent must not:

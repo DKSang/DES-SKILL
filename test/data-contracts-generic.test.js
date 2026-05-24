@@ -117,7 +117,7 @@ test("data contracts step files enforce data contract decisions and strategic fo
   assert.match(step02, /HALT - Change Management Policy/);
   assert.match(step02, /HALT - Incident and Escalation Policy/);
   assert.match(step02, /HALT - Acceptance and Validation Criteria/);
-  assert.match(step03, /HALT - Checklist Blocked/);
+  assert.match(step03, /HALT - Checklist/);
   assert.match(step03, /des-transformation-design/);
 
   const combined = `${step01}\n${step02}\n${step03}`;

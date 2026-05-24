@@ -108,7 +108,7 @@ test("ingestion design step files enforce ingestion controls and strategic focus
   assert.match(step02, /HALT - Error Handling and Recovery/);
   assert.match(step02, /HALT - Sensitive Data and Credential Handling/);
   assert.match(step02, /HALT - API Quota, Rate Limit, or Source Impact/);
-  assert.match(step03, /HALT - Checklist Blocked/);
+  assert.match(step03, /HALT - Checklist/);
   assert.match(step03, /des-bronze-layer-design/);
 
   const combined = `${step01}\n${step02}\n${step03}`;

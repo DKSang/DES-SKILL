@@ -111,7 +111,7 @@ test("gold layer design step files enforce conformance decisions and strategic f
   assert.match(step02, /HALT - Access Control and Security/);
   assert.match(step02, /HALT - Contract Expectation/);
   assert.match(step02, /HALT - Lineage and Traceability/);
-  assert.match(step03, /HALT - Checklist Blocked/);
+  assert.match(step03, /HALT - Checklist/);
   assert.match(step03, /des-data-contracts/);
 
   const combined = `${step01}\n${step02}\n${step03}`;

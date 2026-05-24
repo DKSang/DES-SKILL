@@ -39,6 +39,7 @@ function printInstallSummary(result) {
     "│ ✓ DES Method                                           │",
     "│ ✓ Support Skills                                       │",
     "│ ✓ Learning Skills                                      │",
+    "│ ✓ Stack Skills                                         │",
     "│ ✓ Configurations                                       │",
     `│ ✓ codex (${result.skills.length} skills -> .agents/skills)`.padEnd(57, " ") + "│",
     "│                                                        │",
@@ -125,7 +126,7 @@ function packageRoot() {
 
 function discoverSkills(root) {
   const allSkills = [];
-  const dirs = ["skills", "skills-support", "skills-learning"];
+  const dirs = ["skills", "skills-support", "skills-learning", "skills-stack"];
 
   for (const dir of dirs) {
     const skillsRoot = path.join(root, dir);
@@ -245,6 +246,7 @@ function installSupportWorkspace(root, workspaceDir, force) {
     ["skills", "method"],
     ["skills-support", "support"],
     ["skills-learning", "learning"],
+    ["skills-stack", "stack"],
     ["templates", "templates"],
     ["checklists", "checklists"],
     ["docs", "docs"],

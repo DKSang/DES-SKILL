@@ -5,6 +5,8 @@
 [![Tests](https://img.shields.io/badge/tests-8%2F8%20pass-22c55e)](test/)
 [![Main Skills](https://img.shields.io/badge/main%20skills-22-7c3aed)](skills/)
 [![Support Skills](https://img.shields.io/badge/support%20skills-12-0ea5e9)](skills-support/)
+[![Learning Skills](https://img.shields.io/badge/learning%20skills-7-f59e0b)](skills-learning/)
+[![Stack Skills](https://img.shields.io/badge/stack%20skills-5-111827)](skills-stack/)
 
 **DES-SKILL** là bộ skill dành cho các AI agent như Codex, ChatGPT, Cursor, Claude Code hoặc các coding/data agent khác để hỗ trợ triển khai dự án **Data Engineering** theo quy trình có cấu trúc.
 
@@ -89,7 +91,7 @@ Xem chi tiết tại [docs/stack-skills.md](docs/stack-skills.md).
 
 ---
 
-## 3. Workflow tổng quan
+## 3. Support artifact outputs
 ```text
 epic-catalog.md
 story-catalog.md
@@ -106,7 +108,7 @@ des-workflow-status.md
 
 ---
 
-## 3. Workflow tổng quan
+## 4. Workflow tổng quan
 
 ```text
 22 DES Main Skills (phases 01–22)

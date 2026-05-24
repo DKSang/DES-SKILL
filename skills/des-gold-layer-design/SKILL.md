@@ -302,6 +302,19 @@ If evidence is missing, mark the item as `Draft`, `Open`, `Risk`, `Deferred`, `B
 
 ---
 
+## HALT Policy
+
+This skill must stop when a required decision cannot be safely inferred.
+
+Stop especially when:
+
+* upstream silver layers are unknown;
+* downstream contracts are unresolved.
+
+Detailed HALT checkpoints are defined in steps/.
+
+---
+
 ## Guardrails
 
 The agent must not:

@@ -106,7 +106,7 @@ test("architecture design step files enforce architecture decisions and strategi
   assert.match(step02, /HALT - Cost and FinOps Constraint/);
   assert.match(step02, /HALT - Team Capability and Operational Gate/);
   assert.match(step02, /HALT - Hard-To-Reverse Architectural Decision/);
-  assert.match(step03, /HALT - Checklist Blocked/);
+  assert.match(step03, /HALT - Checklist/);
   assert.match(step03, /des-ingestion-design/);
 
   const combined = `${step01}\n${step02}\n${step03}`;

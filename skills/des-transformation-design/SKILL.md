@@ -333,6 +333,19 @@ If evidence is missing, mark the item as `Draft`, `Risk`, `Blocked`, `Deferred`,
 
 ---
 
+## HALT Policy
+
+This skill must stop when a required decision cannot be safely inferred.
+
+Stop especially when:
+
+* upstream layer designs are unknown;
+* transformation logic is blocked.
+
+Detailed HALT checkpoints are defined in steps/.
+
+---
+
 ## Guardrails
 
 The agent must not:

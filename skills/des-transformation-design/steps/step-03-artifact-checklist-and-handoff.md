@@ -254,7 +254,7 @@ Stop if the Transformation Design checklist or Phase 13 Done Gate fails.
 * Contract alignment is missing.
 * Phase 13 evidence pack is missing and not waived.
 * Phase 13 handoff is missing.
-* Artifact contains implementation code prematurely.
+* Artifact contains implementation code prematurely or orchestration pipeline code (e.g. transformation SQL/Python/dbt/notebook code).
 * Phase 14 would rely on hidden transformation assumptions.
 
 ### Options

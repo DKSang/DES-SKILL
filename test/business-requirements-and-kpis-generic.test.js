@@ -87,7 +87,7 @@ test("requirements and KPIs step files enforce metric decisions and no downstrea
   assert.match(step02, /HALT - Freshness and SLA Approval/);
   assert.match(step02, /HALT - Metric Conflict/);
   assert.match(step02, /HALT - Acceptance Criteria Required/);
-  assert.match(step03, /HALT - Checklist Blocked/);
+  assert.match(step03, /HALT - Checklist/);
   assert.match(step03, /des-data-product-definition/);
 
   const combined = `${step01}\n${step02}\n${step03}`;

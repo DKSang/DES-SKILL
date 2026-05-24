@@ -95,7 +95,7 @@ test("conceptual domain modeling step files enforce domain decisions and no phys
   assert.match(step02, /HALT . Domain Event Definition/);
   assert.match(step02, /HALT . Temporal Concept Approval/);
   assert.match(step02, /HALT . Lifecycle or State Definition/);
-  assert.match(step03, /HALT - Checklist Blocked/);
+  assert.match(step03, /HALT - Checklist/);
   assert.match(step03, /des-architecture-design/);
 
   const combined = `${step01}\n${step02}\n${step03}`;

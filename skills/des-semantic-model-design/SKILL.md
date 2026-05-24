@@ -258,6 +258,19 @@ The purpose is not BI implementation. The purpose is to make metrics, dimensions
 
 ---
 
+## HALT Policy
+
+This skill must stop when a required decision cannot be safely inferred.
+
+Stop especially when:
+
+* upstream contexts are unknown;
+* required inputs are missing.
+
+Detailed HALT checkpoints are defined in steps/.
+
+---
+
 ## Guardrails
 
 The agent must not:

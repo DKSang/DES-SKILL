@@ -14,6 +14,27 @@ Versioning follows [Semantic Versioning](https://semver.org/): MAJOR.MINOR.PATCH
 ## [Unreleased]
 
 ### Added
+
+## [0.3.0] — 2026-05-24
+
+### Added
+- `skills-stack/` — New stack-specific implementation support layer.
+- `des-duckdb-local-engine` — DuckDB/DuckLake local-first profiling, validation, prototyping, and evidence support.
+- `des-dbt-engineering` — dbt modeling, tests, docs, contracts, selectors, and local-first dbt-duckdb support.
+- `des-dlt-ingestion` — dlt ingestion pipeline design, source/resource mapping, incremental state, schema evolution, and Bronze handoff.
+- `des-provero-validation` — Provero data quality checks, contract validation, reports, history, alerts, and evidence packs.
+- `des-airflow-orchestration` — Airflow Dag design, scheduling, retries, backfills, validation gates, lineage, and operational evidence.
+- `docs/stack-skills.md` — Catalog for stack-specific support skills.
+
+### Changed
+- `package.json` now includes `skills-stack/` in published package files.
+- `tools/validate-skills.js` now scans `skills-stack/`.
+- `bin/des-skill.js` installs stack skills into `.agents/skills` and `_des/stack`.
+- `docs/repo-structure.md` documents the stack skill layer.
+
+### Fixed
+- Removed unresolved merge conflict markers from `des-dbt-engineering`.
+- Added validation guard for unresolved merge conflict markers.
 - `docs/step-upgrade-backlog.md` — Backlog tracking 16 skills với scaffold steps cần nâng cấp lên chất lượng cao
 - `CONTRIBUTING.md` — Hướng dẫn đóng góp với tiêu chuẩn SKILL.md, step quality criteria, customize.toml template
 

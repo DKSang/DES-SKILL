@@ -116,6 +116,7 @@ DES-SKILL/
 |   +-- method/
 |   +-- support/
 |   +-- learning/
+|   +-- stack/
 |   +-- templates/
 |   +-- checklists/
 |   +-- docs/
