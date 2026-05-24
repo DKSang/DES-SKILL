@@ -67,6 +67,9 @@ DES-SKILL/
 â”‚   â”œâ”€â”€ des-learning-status-update/
 â”‚   â””â”€â”€ des-learning-review/
 â”‚
+â”œâ”€â”€ skills-stack/                    # Stack-specific implementation support skills
+â”‚   â””â”€â”€ des-dbt-engineering/
+â”‚
 â”œâ”€â”€ templates/                       # Output artifact templates
 â”‚   â”œâ”€â”€ 00-workflow-status-template.md
 â”‚   â”œâ”€â”€ 01-business-discovery-brief-template.md
@@ -145,6 +148,10 @@ Chá»©a 12 support skills (bao gá»“m cáº£ `des-wise`), cĂ¹ng cáº¥u
 ### `skills-learning/`
 
 Chá»©a 7 learning skills (coaching vĂ  há»c táº­p) giĂºp giáº£i thĂ­ch khĂ¡i niá»‡m, cháº©n Ä‘oĂ¡n lá»— há»•ng kiáº¿n thá»©c, táº¡o quiz tá»± Ä‘Ă¡nh giĂ¡ vĂ  dáº¡y báº±ng há»i Ä‘Ă¡p gá»£i má»Ÿ (Socratic coaching).
+
+### `skills-stack/`
+
+Chá»©a cĂ¡c stack-specific implementation support skills (vĂ­ dá»¥: dbt, Airflow, Spark). DĂ¹ng Ä‘á»ƒ há»— trá»£ triá»ƒn khai chi tiáº¿t sau khi cĂ³ cĂ¡c DES artifacts.
 
 ### `knowledge/` vĂ  `SOUL.md`
 

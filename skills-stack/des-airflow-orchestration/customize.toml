@@ -1,0 +1,46 @@
+[workflow]
+name = "des-airflow-orchestration"
+type = "stack-support"
+primary_stack = "apache-airflow"
+
+[paths]
+steps_dir = "steps"
+references_dir = "references"
+checklists_dir = "checklists"
+templates_dir = "templates"
+examples_dir = "examples"
+
+[outputs]
+dag_design = "_des-output/implementation-artifacts/airflow-dag-design.md"
+task_matrix = "_des-output/implementation-artifacts/airflow-task-matrix.md"
+operational_readiness = "_des-output/implementation-artifacts/airflow-operational-readiness.md"
+lineage_plan = "_des-output/implementation-artifacts/airflow-lineage-plan.md"
+orchestration_evidence = "_des-output/evidence/phase-14/airflow-orchestration-evidence.md"
+quality_gate_evidence = "_des-output/evidence/phase-16/airflow-quality-gate-evidence.md"
+monitoring_evidence = "_des-output/evidence/phase-17/airflow-monitoring-evidence.md"
+
+[activation]
+phase_support = ["08", "13", "14", "15", "16", "17", "18"]
+keywords = [
+  "airflow",
+  "apache airflow",
+  "astronomer",
+  "astro",
+  "dag",
+  "task",
+  "operator",
+  "schedule",
+  "retry",
+  "backfill",
+  "catchup",
+  "sensor",
+  "taskflow",
+  "lineage",
+  "openlineage",
+  "cosmos",
+  "provero airflow",
+  "dlt airflow",
+  "airflow mcp",
+  "dag testing",
+  "dag debugging"
+]

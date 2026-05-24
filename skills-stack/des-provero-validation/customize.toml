@@ -1,0 +1,46 @@
+[workflow]
+name = "des-provero-validation"
+type = "stack-support"
+primary_stack = "provero"
+
+[paths]
+steps_dir = "steps"
+references_dir = "references"
+checklists_dir = "checklists"
+templates_dir = "templates"
+examples_dir = "examples"
+
+[outputs]
+suite_plan = "_des-output/implementation-artifacts/provero-suite-plan.md"
+monitoring_plan = "_des-output/implementation-artifacts/provero-monitoring-plan.md"
+source_profile = "_des-output/evidence/phase-05/provero-source-profile.md"
+bronze_validation = "_des-output/evidence/phase-09/provero-bronze-validation.md"
+silver_validation = "_des-output/evidence/phase-10/provero-silver-validation.md"
+gold_validation = "_des-output/evidence/phase-11/provero-gold-validation.md"
+contract_validation = "_des-output/evidence/phase-12/provero-contract-validation.md"
+quality_evidence = "_des-output/evidence/phase-16/provero-quality-evidence-pack.md"
+
+[activation]
+phase_support = ["05", "09", "10", "11", "12", "13", "14", "16", "17"]
+keywords = [
+  "provero",
+  "data quality",
+  "quality checks",
+  "validation",
+  "contract validate",
+  "contract diff",
+  "provero.yaml",
+  "not_null",
+  "unique",
+  "accepted_values",
+  "row_count",
+  "freshness",
+  "latency",
+  "anomaly",
+  "custom_sql",
+  "referential_integrity",
+  "html report",
+  "webhook alert",
+  "airflow provider",
+  "dbt export"
+]

@@ -9,7 +9,8 @@ const workflowPath = path.join(root, "DES-WORKFLOW.md");
 const skillsDirs = [
   path.join(root, "skills"),
   path.join(root, "skills-support"),
-  path.join(root, "skills-learning")
+  path.join(root, "skills-learning"),
+  path.join(root, "skills-stack")
 ];
 
 let failures = 0;
@@ -63,7 +64,8 @@ function validateSkill(skillPath) {
 
   const content = read(skillMdPath);
   const frontmatter = parseFrontmatter(content);
-  const isMainSkill = path.dirname(skillPath).endsWith("skills");
+  const parentDir = path.dirname(skillPath);
+  const isMainSkill = parentDir.endsWith("skills") || parentDir.endsWith("skills-stack");
 
   if (isMainSkill) {
     if (!frontmatter) {
@@ -170,7 +172,7 @@ function validatePackage() {
     fail("package.json must expose des-skill binary");
   }
 
-  for (const required of ["skills/", "templates/", "DES-WORKFLOW.md", "README.md", "LICENSE"]) {
+  for (const required of ["skills/", "skills-stack/", "templates/", "DES-WORKFLOW.md", "README.md", "LICENSE"]) {
     if (!packageJson.files || !packageJson.files.includes(required)) {
       fail(`package.json files should include ${required}`);
     }

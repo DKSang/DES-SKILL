@@ -97,6 +97,17 @@ Trả lời câu hỏi: **Có đủ điều kiện release không?**
 
 ---
 
+## Stack-Specific Support Skills
+
+Ngoài 22 main lifecycle skills, DES-SKILL cung cấp các stack skills để hỗ trợ triển khai trên các công nghệ cụ thể:
+
+- `des-duckdb-local-engine` → Local profiling và prototyping
+- `des-dbt-engineering` → dbt implementation và best practices
+
+Xem chi tiết tại [docs/stack-skills.md](docs/stack-skills.md).
+
+---
+
 ## Thứ tự bắt buộc
 
 Main skills có dependency rõ ràng. Không nên chạy phase N nếu artifact của phase N-1 chưa được approve:

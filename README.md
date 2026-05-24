@@ -55,7 +55,6 @@ Main skills tạo ra các artifact thiết kế:
 ...
 22-project-evaluation-report.md
 ```
-
 ### 2.2. Support skills — Triển khai thực tế
 
 Support skills dùng sau khi đã có artifact thiết kế để chuyển sang backlog, sprint, task, review và release.
@@ -74,8 +73,23 @@ des-create-epic
 → des-workflow-status-update
 ```
 
-Support skills tạo ra các artifact:
+### 2.3. Stack-specific skills — Hỗ trợ kỹ thuật chuyên sâu
 
+Stack skills cung cấp hướng dẫn và công cụ cho các công nghệ cụ thể trong quy trình DES.
+
+```text
+des-duckdb-local-engine
+→ des-dlt-ingestion
+→ des-dbt-engineering
+→ des-provero-validation
+→ des-airflow-orchestration
+```
+
+Xem chi tiết tại [docs/stack-skills.md](docs/stack-skills.md).
+
+---
+
+## 3. Workflow tổng quan
 ```text
 epic-catalog.md
 story-catalog.md

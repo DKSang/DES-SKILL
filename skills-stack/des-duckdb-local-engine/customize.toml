@@ -1,0 +1,54 @@
+[workflow]
+name = "des-duckdb-local-engine"
+type = "stack-support"
+primary_stack = "duckdb"
+
+[paths]
+steps_dir = "steps"
+references_dir = "references"
+checklists_dir = "checklists"
+templates_dir = "templates"
+examples_dir = "examples"
+
+[outputs]
+source_profile = "_des-output/evidence/phase-05/duckdb-source-profile.md"
+ingestion_assessment = "_des-output/evidence/phase-08/duckdb-ingestion-assessment.md"
+silver_validation = "_des-output/evidence/phase-10/duckdb-silver-validation.md"
+gold_validation = "_des-output/evidence/phase-11/duckdb-gold-grain-validation.md"
+contract_evidence = "_des-output/evidence/phase-12/duckdb-contract-evidence.md"
+local_prototype_sql = "_des-output/implementation-artifacts/duckdb-local-prototype.sql"
+conversion_plan = "_des-output/implementation-artifacts/duckdb-file-conversion-plan.md"
+ducklake_design = "_des-output/implementation-artifacts/ducklake-local-lakehouse-design.md"
+ducklake_architecture_evidence = "_des-output/evidence/phase-07/ducklake-architecture-evidence.md"
+ducklake_bronze_evidence = "_des-output/evidence/phase-09/ducklake-bronze-evidence.md"
+ducklake_silver_evidence = "_des-output/evidence/phase-10/ducklake-silver-evidence.md"
+ducklake_gold_evidence = "_des-output/evidence/phase-11/ducklake-gold-evidence.md"
+
+[activation]
+phase_support = ["05", "07", "08", "09", "10", "11", "12", "16"]
+keywords = [
+  "duckdb",
+  "parquet",
+  "csv",
+  "json",
+  "jsonl",
+  "ndjson",
+  "xlsx",
+  "sqlite",
+  "geojson",
+  "gpkg",
+  "profile data",
+  "inspect data",
+  "local-first",
+  "dbt-duckdb",
+  "convert to parquet",
+  "ducklake",
+  "lakehouse",
+  "table format",
+  "catalog",
+  "snapshot",
+  "time travel",
+  "schema evolution",
+  "acid transaction",
+  "parquet catalog"
+]
