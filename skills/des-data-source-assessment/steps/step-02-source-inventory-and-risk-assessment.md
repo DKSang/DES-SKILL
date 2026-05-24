@@ -202,6 +202,89 @@ Based on the source inventory above, prepare a support plan using these categori
 
 ---
 
+## Probe Execution Guidance
+
+For each P1 source, choose the lightest safe probe method.
+
+| Source Type | Recommended Probe | Evidence |
+|---|---|---|
+| REST API | Python `requests.get()` with a small parameter set | status code, sample JSON, top-level keys, schema hints |
+| GraphQL API | Small introspection or sample query where allowed | response shape, fields, pagination behavior |
+| CSV / Excel file | Python `pandas.read_csv/read_excel()` with limited rows | columns, dtypes, null counts, sample rows |
+| Parquet / Delta / DuckDB-readable file | DuckDB or pandas sample read | schema, row count estimate, sample records |
+| Database table | Read-only `SELECT ... LIMIT` query | connection status, columns, sample rows |
+| SaaS export | Sample export or connector metadata | file format, fields, freshness |
+| Manual spreadsheet | Sample sheet inspection | owner, columns, validation issues |
+| Stream / queue | Metadata/topic/schema review or controlled sample | schema, retention, replay notes |
+
+Do not run destructive operations.
+Do not run full extraction.
+Do not stress source systems.
+Do not store credentials in artifacts.
+Do not design production ingestion here.
+
+---
+
+## Python Probe Evidence Pattern
+
+When Python is used for a probe, record:
+
+- script or notebook path, if saved;
+- source name;
+- endpoint, file, table, or query tested;
+- timestamp;
+- row/sample count;
+- status code or connection result;
+- schema/columns captured;
+- null/missing summary;
+- observed errors;
+- limitation of the probe.
+
+The probe result should be summarized in:
+
+```text
+_des-output/evidence/phase-05/phase-05-evidence-pack.md
+```
+
+Detailed outputs, if retained, should go under:
+
+```text
+_des-output/evidence/phase-05/code-verification/
+```
+
+---
+
+## Minimal API Probe Example
+
+```python
+import requests
+import pandas as pd
+
+url = "https://example.com/api/resource"
+params = {"limit": 100}
+
+response = requests.get(url, params=params, timeout=30)
+print("Status:", response.status_code)
+response.raise_for_status()
+
+payload = response.json()
+
+print("Top-level keys:", payload.keys())
+
+# Adjust according to response shape
+records = payload if isinstance(payload, list) else payload.get("data", [])
+df = pd.DataFrame(records)
+
+print(df.head())
+print(df.dtypes)
+print(df.isna().sum())
+```
+
+This code is only a probe.
+It is not production ingestion implementation.
+
+---
+
 ## Decision Area 1 - Source Ownership and Contacts
 
 Identify who owns and supports each candidate source system.

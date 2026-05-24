@@ -564,6 +564,55 @@ Template:
 templates/00-workflow-status-template.md
 ```
 
+### Code Verification Support
+
+DES-SKILL supports lightweight code verification for phases where technical evidence is needed.
+
+Code verification includes source probes, schema inspection, data profiling, DQ sampling, transformation spikes, contract validation, workflow dry-runs, serving smoke tests, performance baselines, cost probes, and CI test dry-runs.
+
+It is not production implementation.
+
+See:
+
+```text
+docs/code-verification-guidance.md
+configs/code-verification-matrix.toml
+templates/phase/code-verification-evidence-template.md
+checklists/code-verification-checklist.md
+```
+
+The main rule is:
+
+```text
+If a phase decision depends on technical evidence, run the smallest safe verification and record the result in the evidence pack.
+```
+
+Strongly required phases:
+
+```text
+Phase 05 — Data Source Assessment
+Phase 14 — Data Quality
+Phase 20 — Cost and Performance Optimization
+```
+
+Recommended phases:
+
+```text
+Phase 08, 09, 10, 11, 12, 13, 15, 16, 17, 21
+```
+
+Optional phases:
+
+```text
+Phase 03, 06, 07, 18, 19
+```
+
+Normally non-code phases:
+
+```text
+Phase 01, 02, 04, 22
+```
+
 ---
 
 ## 4. Khi nào dùng DES-SKILL?

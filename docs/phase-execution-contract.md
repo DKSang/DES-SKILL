@@ -446,6 +446,131 @@ Phase 05 is Done only when:
 
 ---
 
+## Code Verification Contract
+
+Some phases require lightweight code verification to collect evidence.
+
+Code verification may include:
+
+```text
+probe
+spike
+sample read
+schema inspection
+data profiling
+query validation
+contract validation
+DQ rule validation
+workflow dry run
+serving smoke test
+security scan
+performance baseline
+cost probe
+CI test dry-run
+```
+
+Code verification is governed by:
+
+```text
+docs/code-verification-guidance.md
+configs/code-verification-matrix.toml
+templates/phase/code-verification-evidence-template.md
+checklists/code-verification-checklist.md
+```
+
+A phase should use code verification only when the phase decision depends on technical evidence.
+
+Code verification must not become production implementation.
+
+### Phase Code Verification Levels
+
+| Level          | Meaning                                                                                         |
+| -------------- | ----------------------------------------------------------------------------------------------- |
+| required       | Phase should run code verification when the relevant source/data/workload is accessible         |
+| recommended    | Phase should run code verification if assumptions are uncertain or sample evidence is available |
+| optional       | Phase may run code verification for feasibility or risk reduction                               |
+| not_applicable | Phase should not use code verification by default                                               |
+
+### Required Code Verification Phases
+
+The strongest code verification requirements apply to:
+
+```text
+Phase 05 — Data Source Assessment
+Phase 14 — Data Quality
+Phase 20 — Cost and Performance Optimization
+```
+
+These phases must not claim readiness without evidence or explicit waiver.
+
+### Recommended Code Verification Phases
+
+Code verification is recommended for:
+
+```text
+Phase 08 — Ingestion Design
+Phase 09 — Bronze Layer Design
+Phase 10 — Silver Layer Design
+Phase 11 — Gold Layer Design
+Phase 12 — Data Contracts
+Phase 13 — Transformation Design
+Phase 15 — Orchestration and Observability
+Phase 16 — Semantic Model Design
+Phase 17 — Serving Layer Design
+Phase 21 — CI/CD and Testing
+```
+
+### Optional Code Verification Phases
+
+Code verification may be useful for:
+
+```text
+Phase 03 — Requirements and KPIs
+Phase 06 — Domain Modeling
+Phase 07 — Architecture Design
+Phase 18 — Lineage and Metadata Design
+Phase 19 — Governance and Security Design
+```
+
+### Non-Code Phases
+
+Code verification is not normally applicable for:
+
+```text
+Phase 01 — Business Discovery
+Phase 02 — Business Questions
+Phase 04 — Data Product Definition
+Phase 22 — Project Evaluation
+```
+
+Phase 22 evaluates existing evidence. It must not create new evidence to justify a conclusion unless the workflow routes back to the owning phase.
+
+### Evidence Rule
+
+If code verification is used, record it under:
+
+```text
+_des-output/evidence/phase-XX/code-verification/
+```
+
+and summarize it in:
+
+```text
+_des-output/evidence/phase-XX/phase-XX-evidence-pack.md
+```
+
+If code verification is required but not run, record:
+
+```text
+Not run
+Reason
+Risk
+Accepted by
+Impact on downstream phases
+```
+
+---
+
 ## Relationship With Existing DES-SKILL Workflow
 
 This contract is compatible with the current DES-SKILL system.

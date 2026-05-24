@@ -1,0 +1,395 @@
+# DES-SKILL Code Verification Matrix
+#
+# Purpose:
+# Define which phases may or should use lightweight code verification
+# as evidence collection.
+#
+# Code verification is not production implementation.
+
+[global]
+guidance_file = "docs/code-verification-guidance.md"
+evidence_template = "templates/phase/code-verification-evidence-template.md"
+checklist = "checklists/code-verification-checklist.md"
+default_output_dir_pattern = "_des-output/evidence/phase-{{PHASE_NUMBER}}/code-verification"
+
+allowed_status = [
+  "required",
+  "recommended",
+  "optional",
+  "not_applicable"
+]
+
+[phase_01]
+name = "Business Discovery"
+code_verification = "not_applicable"
+reason = "Business context phase. Use interviews, documents, and stakeholder evidence instead."
+
+[phase_02]
+name = "Business Questions"
+code_verification = "not_applicable"
+reason = "Question framing phase. Do not validate through code yet."
+
+[phase_03]
+name = "Requirements and KPIs"
+code_verification = "optional"
+recommended_when = [
+  "metric formula can be tested on known sample data",
+  "acceptance criteria require measurable feasibility",
+  "existing dataset is available for quick metric sanity check"
+]
+allowed_verification = [
+  "metric_formula_sanity_check",
+  "sample_kpi_calculation",
+  "acceptance_criteria_measurability_check"
+]
+must_not = [
+  "design Gold tables",
+  "implement metric layer",
+  "write production SQL"
+]
+
+[phase_04]
+name = "Data Product Definition"
+code_verification = "not_applicable"
+reason = "Product boundary phase. Do not test data sources here; define source needs for Phase 05."
+
+[phase_05]
+name = "Data Source Assessment"
+code_verification = "required"
+required_when = [
+  "P1 source is technically accessible",
+  "P1 source has API/file/database/sample endpoint",
+  "P1 source supports sample inspection"
+]
+allowed_verification = [
+  "api_probe",
+  "file_sample_inspection",
+  "database_sample_query",
+  "schema_inspection",
+  "data_quality_sampling",
+  "freshness_check",
+  "license_quota_check",
+  "ingestion_feasibility_spike"
+]
+evidence_output = "_des-output/evidence/phase-05/code-verification"
+must_not = [
+  "full extraction",
+  "production ingestion pipeline",
+  "source system mutation",
+  "Bronze/Silver/Gold design"
+]
+
+[phase_06]
+name = "Domain Modeling"
+code_verification = "optional"
+recommended_when = [
+  "source samples can validate grain, identity, and candidate entities",
+  "domain concept conflicts require sample evidence"
+]
+allowed_verification = [
+  "grain_sanity_check",
+  "identity_key_overlap_check",
+  "concept_to_source_sample_check"
+]
+must_not = [
+  "physical schema design",
+  "transformation implementation"
+]
+
+[phase_07]
+name = "Architecture Design"
+code_verification = "optional"
+recommended_when = [
+  "platform feasibility is uncertain",
+  "tool capability needs a small spike",
+  "storage/compute option requires quick benchmark"
+]
+allowed_verification = [
+  "platform_feasibility_spike",
+  "storage_read_write_smoke_test",
+  "tool_capability_probe",
+  "small_benchmark"
+]
+must_not = [
+  "choose architecture only from benchmark",
+  "deploy infrastructure",
+  "implement production pipeline"
+]
+
+[phase_08]
+name = "Ingestion Design"
+code_verification = "recommended"
+recommended_when = [
+  "checkpointing, pagination, incremental extraction, retry, or schema drift behavior is uncertain",
+  "source API/file/db access needs ingestion feasibility proof"
+]
+allowed_verification = [
+  "api_pagination_spike",
+  "incremental_checkpoint_spike",
+  "file_landing_spike",
+  "schema_drift_probe",
+  "retry_timeout_probe",
+  "idempotency_sample_check"
+]
+must_not = [
+  "build production ingestion",
+  "create orchestration workflow",
+  "create Bronze production tables"
+]
+
+[phase_09]
+name = "Bronze Layer Design"
+code_verification = "recommended"
+recommended_when = [
+  "raw preservation or file/table layout needs validation",
+  "schema capture/rescued data behavior needs proof",
+  "partition/file sizing assumptions are uncertain"
+]
+allowed_verification = [
+  "sample_landing_read",
+  "raw_payload_preservation_check",
+  "schema_capture_check",
+  "partition_layout_spike",
+  "rescued_data_behavior_probe"
+]
+must_not = [
+  "design Silver transformations",
+  "build production Bronze loader"
+]
+
+[phase_10]
+name = "Silver Layer Design"
+code_verification = "recommended"
+recommended_when = [
+  "grain, identity, dedup, conformance, null handling, or standardization rules need sample validation"
+]
+allowed_verification = [
+  "grain_check",
+  "identity_key_check",
+  "dedup_survivorship_spike",
+  "standardization_rule_spike",
+  "null_handling_profile",
+  "type_timezone_unit_check"
+]
+must_not = [
+  "implement full Silver pipeline",
+  "write production transformation code"
+]
+
+[phase_11]
+name = "Gold Layer Design"
+code_verification = "recommended"
+recommended_when = [
+  "aggregation logic, KPI reproducibility, or query pattern needs sample validation"
+]
+allowed_verification = [
+  "aggregation_spike",
+  "kpi_reproducibility_check",
+  "gold_query_spike",
+  "metric_reconciliation_check",
+  "slice_filter_sanity_check"
+]
+must_not = [
+  "implement final Gold marts",
+  "build dashboards"
+]
+
+[phase_12]
+name = "Data Contracts"
+code_verification = "recommended"
+recommended_when = [
+  "schema compatibility, contract examples, field requirements, or freshness checks can be validated on samples"
+]
+allowed_verification = [
+  "schema_contract_validation",
+  "json_schema_check",
+  "required_field_check",
+  "contract_example_validation",
+  "breaking_change_detection_spike"
+]
+must_not = [
+  "implement production tests",
+  "change transformation logic"
+]
+
+[phase_13]
+name = "Transformation Design"
+code_verification = "recommended"
+recommended_when = [
+  "source-to-target mapping, dependency ordering, incremental logic, or edge cases need proof"
+]
+allowed_verification = [
+  "source_to_target_mapping_spike",
+  "fixture_based_transform_spike",
+  "incremental_logic_spike",
+  "late_arriving_data_spike",
+  "dependency_order_check",
+  "reconciliation_query"
+]
+must_not = [
+  "build production transformation package",
+  "deploy transformation jobs"
+]
+
+[phase_14]
+name = "Data Quality"
+code_verification = "required"
+required_when = [
+  "sample data is available",
+  "P1 quality rules are defined",
+  "thresholds or severity need validation"
+]
+allowed_verification = [
+  "dq_rule_sampling",
+  "null_duplicate_validity_check",
+  "threshold_sanity_check",
+  "anomaly_profile",
+  "reconciliation_check",
+  "severity_gate_simulation"
+]
+must_not = [
+  "weaken quality rules to pass",
+  "implement production DQ framework without later phase approval"
+]
+
+[phase_15]
+name = "Orchestration and Observability"
+code_verification = "recommended"
+recommended_when = [
+  "workflow dependency graph, parameters, retry behavior, or monitoring signal format is uncertain"
+]
+allowed_verification = [
+  "dag_parse_check",
+  "config_validation",
+  "dry_run",
+  "retry_policy_simulation",
+  "alert_payload_sample",
+  "run_metadata_shape_check"
+]
+must_not = [
+  "deploy production orchestration",
+  "create production schedules"
+]
+
+[phase_16]
+name = "Semantic Model Design"
+code_verification = "recommended"
+recommended_when = [
+  "metric definitions, relationships, cardinality, filters, or semantic consistency need validation"
+]
+allowed_verification = [
+  "metric_query_check",
+  "relationship_cardinality_check",
+  "semantic_measure_reconciliation",
+  "filter_behavior_check",
+  "freshness_quality_display_check"
+]
+must_not = [
+  "build production semantic model",
+  "implement dashboard"
+]
+
+[phase_17]
+name = "Serving Layer Design"
+code_verification = "recommended"
+recommended_when = [
+  "API, dashboard, export, reverse ETL, or agent serving behavior needs smoke validation"
+]
+allowed_verification = [
+  "api_smoke_test",
+  "dashboard_query_smoke_test",
+  "export_sample_check",
+  "serving_latency_probe",
+  "access_policy_smoke_check",
+  "cache_freshness_probe"
+]
+must_not = [
+  "build production serving app",
+  "deploy API or dashboard"
+]
+
+[phase_18]
+name = "Lineage and Metadata Design"
+code_verification = "optional"
+recommended_when = [
+  "lineage extraction, metadata field capture, or catalog field generation needs feasibility proof"
+]
+allowed_verification = [
+  "metadata_field_extraction_spike",
+  "lineage_parse_spike",
+  "column_lineage_feasibility_check",
+  "catalog_payload_sample"
+]
+must_not = [
+  "deploy metadata platform",
+  "build production scanner"
+]
+
+[phase_19]
+name = "Governance and Security Design"
+code_verification = "optional"
+recommended_when = [
+  "secret scan, sensitive field detection, policy linting, or access configuration validation can reduce risk"
+]
+allowed_verification = [
+  "secret_scan",
+  "sensitive_field_detection_sample",
+  "policy_lint",
+  "access_matrix_validation",
+  "config_security_check"
+]
+must_not = [
+  "apply production IAM changes",
+  "change permissions",
+  "deploy security controls"
+]
+
+[phase_20]
+name = "Cost and Performance Optimization"
+code_verification = "required"
+required_when = [
+  "cost/performance target is claimed",
+  "baseline measurement is needed",
+  "optimization decision depends on runtime/query/storage evidence"
+]
+allowed_verification = [
+  "runtime_baseline",
+  "query_latency_baseline",
+  "storage_growth_profile",
+  "bytes_scanned_measurement",
+  "cost_probe",
+  "performance_spike",
+  "capacity_probe"
+]
+must_not = [
+  "resize production compute",
+  "deploy cache",
+  "change partitioning in production",
+  "claim savings without baseline"
+]
+
+[phase_21]
+name = "CI/CD and Testing"
+code_verification = "recommended"
+recommended_when = [
+  "test command, CI dry-run, config validation, or release gate behavior can be verified safely"
+]
+allowed_verification = [
+  "local_test_command",
+  "ci_dry_run",
+  "config_schema_validation",
+  "contract_test_dry_run",
+  "dq_test_dry_run",
+  "secret_scan_dry_run",
+  "smoke_test"
+]
+must_not = [
+  "deploy production release",
+  "write full CI/CD implementation without implementation phase",
+  "store secrets in repo"
+]
+
+[phase_22]
+name = "Project Evaluation"
+code_verification = "not_applicable"
+reason = "Evaluation consumes evidence. It must not create new production/test evidence unless routed back to the owning phase."
