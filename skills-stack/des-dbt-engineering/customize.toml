@@ -1,0 +1,21 @@
+[workflow]
+name = "des-dbt-engineering"
+type = "stack-support"
+primary_stack = "dbt"
+
+[paths]
+steps_dir = "steps"
+checklists_dir = "checklists"
+templates_dir = "templates"
+examples_dir = "examples"
+
+[outputs]
+implementation_plan = "_des-output/implementation-artifacts/dbt-implementation-plan.md"
+model_inventory = "_des-output/implementation-artifacts/dbt-model-inventory.md"
+test_matrix = "_des-output/implementation-artifacts/dbt-test-matrix.md"
+review_report = "_des-output/reviews/dbt-review-report.md"
+evidence_pack = "_des-output/evidence/phase-XX/dbt-evidence-pack.md"
+
+[activation]
+phase_support = ["10", "11", "12", "13", "14", "15", "16"]
+keywords = ["dbt", "dbt-core", "dbt cloud", "dbt-duckdb", "dbt-fabric", "model", "source.yml", "schema.yml", "unit test", "semantic layer", "mesh"]
